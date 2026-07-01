@@ -32,6 +32,7 @@ export default function MatrixClient({ product }) {
     return (
       <div className={styles.page}>
         <div className={styles.formSection}>
+          <p className={styles.eyebrow}>Эзотерический хаб</p>
           <h1 className={styles.headerTitle}>Матрица судьбы</h1>
           <ProductInputForm product={product} onSubmit={handleSubmit} />
         </div>
@@ -49,7 +50,9 @@ export default function MatrixClient({ product }) {
       />
 
       <div className={styles.matrixRow}>
-        <MatrixSVG nodes={matrixData.nodes} />
+        <div className={styles.diagramTile}>
+          <MatrixSVG nodes={matrixData.nodes} />
+        </div>
         <ChakraMap chakras={matrixData.chakras} />
       </div>
 

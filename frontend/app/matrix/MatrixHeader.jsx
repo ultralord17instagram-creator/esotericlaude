@@ -16,14 +16,18 @@ export default function MatrixHeader({ name, birthDate, age, personalNumber }) {
 
   return (
     <div className={styles.header}>
-      <h1 className={styles.headerTitle}>Матрица судьбы</h1>
-      <div className={styles.headerMeta}>
-        <span className={styles.headerName}>{name || 'Ваша матрица'}</span>
-        <span className={styles.headerDate}>Дата рождения: {displayDate}</span>
-        <span className={styles.headerAge}>
-          Возраст: {age}{' '}
-          <span className={styles.archetype}>({ARCHETYPES[personalNumber] || 'Исследователь'})</span>
-        </span>
+      <div className={styles.numberMedallion}>{personalNumber}</div>
+      <div>
+        <p className={styles.eyebrow}>Твоя матрица</p>
+        <h1 className={styles.headerTitle}>Матрица судьбы</h1>
+        <div className={styles.headerMeta}>
+          <span className={styles.headerName}>{name || 'Ваша матрица'}</span>
+          <span className={styles.headerDate}>Дата рождения: {displayDate}</span>
+          <span className={styles.headerAge}>
+            Возраст: {age}
+            <span className={styles.archetype}>{ARCHETYPES[personalNumber] || 'Исследователь'}</span>
+          </span>
+        </div>
       </div>
     </div>
   )
