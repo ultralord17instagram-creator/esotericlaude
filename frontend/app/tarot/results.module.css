@@ -1,0 +1,10 @@
+.title { font-size: var(--font-size-xl); font-weight: 600; margin-bottom: 16px; }
+.cardName { font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-accent); margin-bottom: 12px; }
+.preview { line-height: 1.7; margin-bottom: 12px; }
+.teaser { color: var(--color-text-secondary); font-size: var(--font-size-sm); font-style: italic; }
+.spread { display: flex; flex-direction: column; gap: 16px; }
+.posCard { }
+.position { font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.synthesisCard { background: var(--color-accent); color: #fff; border-color: transparent; }
+.synthTitle { color: #fff; font-size: var(--font-size-lg); font-weight: 600; margin-bottom: 8px; }
+.synthesisCard p { color: rgba(255,255,255,0.9); }

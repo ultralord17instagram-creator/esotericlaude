@@ -1,0 +1,104 @@
+/* Layout */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+/* Header */
+.header { margin-bottom: 32px; }
+.headerTitle { font-size: var(--font-size-xl); font-weight: 700; margin-bottom: 8px; }
+.headerMeta { display: flex; flex-direction: column; gap: 4px; }
+.headerName { font-weight: 600; }
+.headerDate, .headerAge { color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+.archetype { color: var(--color-accent); text-decoration: underline; cursor: default; }
+
+/* Matrix + chakra row */
+.matrixRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) {
+  .matrixRow { grid-template-columns: 1fr; }
+}
+
+/* Section titles */
+.sectionTitle { font-size: var(--font-size-lg); font-weight: 700; margin-bottom: 16px; }
+
+/* Chakra table */
+.chakraSection { }
+.chakraTable { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+.chakraTable th {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--color-border, #eee);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+.chakraTable td { padding: 10px 12px; border-bottom: 1px solid var(--color-border, #eee); }
+.chakraNum { color: var(--color-text-secondary); font-weight: 600; width: 24px; }
+.chakraName { font-weight: 600; }
+.chakraGeneral td { font-weight: 600; background: var(--color-surface); }
+
+/* Purpose grid */
+.purposeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) {
+  .purposeGrid { grid-template-columns: 1fr; }
+}
+.purposeBlock { }
+.purposeTitle { font-size: var(--font-size-base, 16px); font-weight: 700; margin-bottom: 8px; }
+.purposeDesc { color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.6; margin-bottom: 12px; }
+.purposeNumbers { display: flex; align-items: center; gap: 8px; font-size: var(--font-size-sm); margin-bottom: 4px; }
+.purposeNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  font-size: 13px;
+}
+.purposeAdult {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  font-weight: 700;
+}
+.purposeArrow { color: var(--color-text-secondary); }
+
+/* Interpretations */
+.interpretations { margin-bottom: 40px; }
+.interpretBlock { margin-bottom: 24px; }
+.interpretTitle { font-size: var(--font-size-base, 16px); font-weight: 700; margin-bottom: 8px; }
+.interpretText { color: var(--color-text-secondary); line-height: 1.7; }
+.interpretPreview { color: var(--color-text-secondary); line-height: 1.7; opacity: 0.5; }
+.paidInterpretations { position: relative; }
+.interpretPaywall { margin-top: 24px; }
+.paywallWrap { }
+
+/* Input form section */
+.formSection { max-width: 400px; margin: 0 auto 40px; }
+.resetBtn {
+  display: block;
+  margin: 32px auto 0;
+  background: none;
+  border: 1px solid var(--color-border, #ccc);
+  padding: 8px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}

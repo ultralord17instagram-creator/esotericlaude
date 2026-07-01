@@ -1,0 +1,429 @@
+/* ── Shared ─────────────────────────────────────────────── */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero ────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
+  overflow: hidden;
+  text-align: center;
+}
+
+.auroraWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.particlesWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 120px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.heroEyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  opacity: 0.9;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 8vw, var(--text-4xl));
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.heroTitle p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.heroSub {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 32px auto 48px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-accent);
+  padding: 14px 36px;
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.3s var(--ease-out), border-color 0.3s;
+  cursor: pointer;
+}
+
+.heroCta:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.heroScroll {
+  position: absolute;
+  z-index: 2;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.heroScrollLine {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ── Sections ────────────────────────────────────────────── */
+.section {
+  padding: var(--space-section) 0;
+  background: var(--bg-base);
+  position: relative;
+}
+
+.section::before,
+.sectionAlt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sectionAlt {
+  background: var(--bg-deep);
+  position: relative;
+}
+
+.sectionAlt > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 4vw, var(--text-2xl));
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 64px;
+}
+
+/* ── Product Cards ───────────────────────────────────────── */
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .productsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+.productsGrid > div {
+  display: flex;
+  width: 100%;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  padding: 48px 20px 36px;
+  transition: background 0.3s var(--ease-out), border-color 0.3s;
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-opacity: 0;
+}
+
+.productCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    200px circle at var(--glow-x) var(--glow-y),
+    rgba(56, 189, 248, calc(var(--glow-opacity) * 0.07)) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.productCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-accent);
+  text-decoration: none;
+}
+
+.productIcon {
+  color: var(--accent);
+  opacity: 0.8;
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.productCard:hover .productIcon {
+  opacity: 1;
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
+}
+
+.productName {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.productDesc {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.productCta {
+  font-family: var(--font-body);
+  color: var(--accent);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: auto;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.productCard:hover .productCta {
+  opacity: 1;
+}
+
+/* ── Steps ───────────────────────────────────────────────── */
+.stepsGrid {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.stepNumCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 56px;
+}
+
+.stepNum {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.stepConnector {
+  width: 1px;
+  flex: 1;
+  min-height: 36px;
+  margin: 8px 0;
+  background: linear-gradient(to bottom, rgba(56, 189, 248, 0.3), transparent);
+}
+
+.stepBody {
+  padding-bottom: 48px;
+  padding-top: 4px;
+}
+
+.stepTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.stepDesc {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ── Reviews ─────────────────────────────────────────────── */
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .reviewsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.review {
+  padding: 48px 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .review {
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+  }
+  .review:last-child {
+    border-right: none;
+  }
+}
+
+.reviewText {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+.reviewName {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.footer {
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+}
+
+.footer a {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: var(--text-primary);
+}
+
+/* ── Scroll Reveal overrides ─────────────────────────────── */
+.scroll-reveal-text {
+  font-family: var(--font-heading) !important;
+  font-size: clamp(1.6rem, 4vw, var(--text-2xl)) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text-primary) !important;
+}

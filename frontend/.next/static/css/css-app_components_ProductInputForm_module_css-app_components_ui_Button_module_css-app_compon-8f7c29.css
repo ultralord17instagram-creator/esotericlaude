@@ -1,0 +1,195 @@
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/components/ui/Input.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+.Input_group__Z_gDZ { display: flex; flex-direction: column; gap: 6px; }
+.Input_label__H9MpD { font-size: var(--font-size-sm); font-weight: 500; color: var(--color-text-primary); }
+.Input_input__5K65Z {
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.Input_input__5K65Z:focus { border-color: var(--color-accent); }
+.Input_inputError__miJCH { border-color: var(--color-error); }
+.Input_error__ILO9C { font-size: var(--font-size-xs); color: var(--color-error); }
+
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/components/ui/Button.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+.Button_btn__oRCS8 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.Button_btn__oRCS8:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.Button_primary__IHFdT { background: var(--color-accent); color: #fff; }
+.Button_primary__IHFdT:hover:not(:disabled) { background: var(--color-accent-hover); }
+
+.Button_secondary___qtLs { background: var(--color-surface); color: var(--color-text-primary); }
+.Button_secondary___qtLs:hover:not(:disabled) { background: var(--color-surface-hover); }
+
+.Button_ghost__YxjU1 { background: transparent; color: var(--color-accent); }
+.Button_ghost__YxjU1:hover:not(:disabled) { background: var(--color-surface); }
+
+.Button_sm__epdj3 { padding: 8px 16px; font-size: var(--font-size-sm); }
+.Button_md___av4P { padding: 12px 24px; font-size: var(--font-size-base); }
+.Button_lg__uBdOZ { padding: 16px 32px; font-size: var(--font-size-lg); }
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/components/ProductInputForm.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+.ProductInputForm_form__vF4k4 { display: flex; flex-direction: column; gap: 16px; max-width: 400px; margin: 0 auto; }
+.ProductInputForm_toggle__MfS7_ { display: flex; gap: 4px; background: var(--color-surface); border-radius: var(--radius-md); padding: 4px; }
+.ProductInputForm_tab__y_aEa {
+  flex: 1 1; padding: 8px; border: none; border-radius: var(--radius-sm);
+  background: transparent; cursor: pointer;
+  font-family: var(--font-sans); font-size: var(--font-size-sm);
+  color: var(--color-text-secondary); transition: all 0.15s;
+}
+.ProductInputForm_active__HYWSh { background: var(--color-bg); color: var(--color-text-primary); font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/matrix/matrix.module.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+/* Layout */
+.matrix_page__AwZh2 {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+/* Header */
+.matrix_header__XxXeV { margin-bottom: 32px; }
+.matrix_headerTitle__Eb2PT { font-size: var(--font-size-xl); font-weight: 700; margin-bottom: 8px; }
+.matrix_headerMeta__Bdc50 { display: flex; flex-direction: column; gap: 4px; }
+.matrix_headerName__jiMdn { font-weight: 600; }
+.matrix_headerDate__pnVR5, .matrix_headerAge__2_3Uq { color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+.matrix_archetype__2HGIC { color: var(--color-accent); text-decoration: underline; cursor: default; }
+
+/* Matrix + chakra row */
+.matrix_matrixRow__Qday0 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 32px;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) {
+  .matrix_matrixRow__Qday0 { grid-template-columns: 1fr; }
+}
+
+/* Section titles */
+.matrix_sectionTitle__UGYk8 { font-size: var(--font-size-lg); font-weight: 700; margin-bottom: 16px; }
+
+/* Chakra table */
+.matrix_chakraSection__3HzkT { }
+.matrix_chakraTable__bhcYZ { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+.matrix_chakraTable__bhcYZ th {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--color-border, #eee);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+.matrix_chakraTable__bhcYZ td { padding: 10px 12px; border-bottom: 1px solid var(--color-border, #eee); }
+.matrix_chakraNum__UZy62 { color: var(--color-text-secondary); font-weight: 600; width: 24px; }
+.matrix_chakraName__cq_RL { font-weight: 600; }
+.matrix_chakraGeneral__DoIav td { font-weight: 600; background: var(--color-surface); }
+
+/* Purpose grid */
+.matrix_purposeGrid__xEv49 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 24px;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) {
+  .matrix_purposeGrid__xEv49 { grid-template-columns: 1fr; }
+}
+.matrix_purposeBlock__pJCw8 { }
+.matrix_purposeTitle__eoEsG { font-size: var(--font-size-base, 16px); font-weight: 700; margin-bottom: 8px; }
+.matrix_purposeDesc__iERFR { color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.6; margin-bottom: 12px; }
+.matrix_purposeNumbers__MrEe7 { display: flex; align-items: center; gap: 8px; font-size: var(--font-size-sm); margin-bottom: 4px; }
+.matrix_purposeNum__moGhy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  font-size: 13px;
+}
+.matrix_purposeAdult__iufFB {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  font-weight: 700;
+}
+.matrix_purposeArrow__FGk9b { color: var(--color-text-secondary); }
+
+/* Interpretations */
+.matrix_interpretations__kMNlc { margin-bottom: 40px; }
+.matrix_interpretBlock__WSAWv { margin-bottom: 24px; }
+.matrix_interpretTitle__cjJzw { font-size: var(--font-size-base, 16px); font-weight: 700; margin-bottom: 8px; }
+.matrix_interpretText__CM58R { color: var(--color-text-secondary); line-height: 1.7; }
+.matrix_interpretPreview__MA5Mm { color: var(--color-text-secondary); line-height: 1.7; opacity: 0.5; }
+.matrix_paidInterpretations__weM6j { position: relative; }
+.matrix_interpretPaywall___ICj7 { margin-top: 24px; }
+.matrix_paywallWrap__RqUA2 { }
+
+/* Input form section */
+.matrix_formSection__jVUBs { max-width: 400px; margin: 0 auto 40px; }
+.matrix_resetBtn__G4HfT {
+  display: block;
+  margin: 32px auto 0;
+  background: none;
+  border: 1px solid var(--color-border, #ccc);
+  padding: 8px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/components/ui/Paywall.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+.Paywall_paywall__tfTfq { position: relative; margin-top: -80px; padding-top: 80px; }
+.Paywall_blur__2phJf {
+  position: absolute; top: 0; left: 0; right: 0; height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--color-bg) 80%);
+  pointer-events: none;
+}
+.Paywall_box__vCZI8 {
+  position: relative;
+  text-align: center;
+  padding: 40px 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg);
+  max-width: 480px;
+  margin: 0 auto;
+}
+.Paywall_title__CG5tw { font-size: var(--font-size-xl); font-weight: 600; margin-bottom: 8px; }
+.Paywall_sub__wMm_Q { color: var(--color-text-secondary); margin-bottom: 24px; }
+.Paywall_hint__oXfH4 { margin-top: 16px; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+

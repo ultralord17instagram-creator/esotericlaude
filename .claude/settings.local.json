@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run ruff format:*)",
+      "Bash(uv run ruff check:*)",
+      "Bash(uv run pytest:*)",
+      "Bash(cat:*)",
+      "Bash(xargs:*)",
+      "Bash(uv run:*)",
+      "Bash(dir:*)",
+      "WebFetch(domain:widget.cloudpayments.ru)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git -C \"D:/Dev/AffiliateService\" add backend/payment_service/app/api/dependencies.py backend/payment_service/app/api/v1/routers/webhooks.py)",
+      "Bash(git -C \"D:/Dev/AffiliateService\" commit -m \"refactor\\(payment\\): inject AuthServiceClient via Depends in webhook router\")",
+      "Skill(run)",
+      "Skill(run:*)"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+.scroll-reveal {
+  margin: 0 0 64px;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 40px);
+  line-height: 1.2;
+  font-weight: 400;
+  text-align: center;
+  color: #FAFAFA;
+  letter-spacing: 0.05em;
+}
+
+.word {
+  display: inline-block;
+}

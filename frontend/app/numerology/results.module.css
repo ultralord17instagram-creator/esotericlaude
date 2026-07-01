@@ -1,0 +1,7 @@
+.title { font-size: var(--font-size-xl); font-weight: 600; margin-bottom: 12px; }
+.bigNumber { font-size: 80px; font-weight: 800; color: var(--color-accent); line-height: 1; margin-bottom: 16px; }
+.preview { margin-bottom: 12px; line-height: 1.7; }
+.teaser { color: var(--color-text-secondary); font-size: var(--font-size-sm); font-style: italic; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+.cardTitle { font-size: var(--font-size-base); font-weight: 600; margin-bottom: 8px; }

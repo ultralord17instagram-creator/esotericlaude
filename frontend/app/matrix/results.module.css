@@ -1,0 +1,9 @@
+.resultTitle { font-size: var(--font-size-xl); font-weight: 600; margin-bottom: 16px; }
+.preview { color: var(--color-text-primary); margin-bottom: 12px; line-height: 1.7; }
+.teaser { color: var(--color-text-secondary); font-size: var(--font-size-sm); font-style: italic; }
+.paidGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .paidGrid { grid-template-columns: 1fr; } }
+.sectionCard { display: flex; flex-direction: column; gap: 8px; }
+.sectionNumber { font-size: 40px; font-weight: 700; color: var(--color-accent); }
+.sectionTitle { font-size: var(--font-size-lg); font-weight: 600; }
+.sectionText { color: var(--color-text-secondary); line-height: 1.7; }

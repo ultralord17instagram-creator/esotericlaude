@@ -1,0 +1,472 @@
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/landing.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+/* ── Shared ─────────────────────────────────────────────── */
+.landing_container__7U0_E {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero ────────────────────────────────────────────────── */
+.landing_hero__IFqnw {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
+  overflow: hidden;
+  text-align: center;
+}
+
+.landing_auroraWrap__ojQQv {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.landing_particlesWrap__p3xfE {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.landing_heroContent__4GtPC {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 120px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.landing_heroEyebrow__0kzRK {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  opacity: 0.9;
+}
+
+.landing_heroTitle__E6Dij {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 8vw, var(--text-4xl));
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.landing_heroTitle__E6Dij p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.landing_accent__M7BGR {
+  color: var(--accent);
+}
+
+.landing_heroSub__v9d08 {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 32px auto 48px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+.landing_heroCta__5jMJR {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-accent);
+  padding: 14px 36px;
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.3s var(--ease-out), border-color 0.3s;
+  cursor: pointer;
+}
+
+.landing_heroCta__5jMJR:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.landing_heroScroll__GwUR9 {
+  position: absolute;
+  z-index: 2;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.landing_heroScrollLine__ywZ7z {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: landing_scrollPulse__PMQxL 2s ease-in-out infinite;
+}
+
+@keyframes landing_scrollPulse__PMQxL {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ── Sections ────────────────────────────────────────────── */
+.landing_section__mWwzf {
+  padding: var(--space-section) 0;
+  background: var(--bg-base);
+  position: relative;
+}
+
+.landing_section__mWwzf::before,
+.landing_sectionAlt__13LwL::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.landing_section__mWwzf > * {
+  position: relative;
+  z-index: 1;
+}
+
+.landing_sectionAlt__13LwL {
+  background: var(--bg-deep);
+  position: relative;
+}
+
+.landing_sectionAlt__13LwL > * {
+  position: relative;
+  z-index: 1;
+}
+
+.landing_sectionTitle__2og5c {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 4vw, var(--text-2xl));
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 64px;
+}
+
+/* ── Product Cards ───────────────────────────────────────── */
+.landing_productsGrid__hTuRi {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 12px;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .landing_productsGrid__hTuRi {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+.landing_productsGrid__hTuRi > div {
+  display: flex;
+  width: 100%;
+}
+
+.landing_productCard__fsmei {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  padding: 48px 20px 36px;
+  transition: background 0.3s var(--ease-out), border-color 0.3s;
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-opacity: 0;
+}
+
+.landing_productCard__fsmei::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    200px circle at var(--glow-x) var(--glow-y),
+    rgba(56, 189, 248, calc(var(--glow-opacity) * 0.07)) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.landing_productCard__fsmei:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-accent);
+  text-decoration: none;
+}
+
+.landing_productIcon__8q81u {
+  color: var(--accent);
+  opacity: 0.8;
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.landing_productCard__fsmei:hover .landing_productIcon__8q81u {
+  opacity: 1;
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
+}
+
+.landing_productName__vts4m {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.landing_productDesc__xWGJJ {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  line-height: 1.6;
+  flex: 1 1;
+}
+
+.landing_productCta__yj9qb {
+  font-family: var(--font-body);
+  color: var(--accent);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: auto;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.landing_productCard__fsmei:hover .landing_productCta__yj9qb {
+  opacity: 1;
+}
+
+/* ── Steps ───────────────────────────────────────────────── */
+.landing_stepsGrid__9etdA {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.landing_step__XMaS_ {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.landing_stepNumCol__mVaE8 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 56px;
+}
+
+.landing_stepNum__IyUza {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.landing_stepConnector__HhaRL {
+  width: 1px;
+  flex: 1 1;
+  min-height: 36px;
+  margin: 8px 0;
+  background: linear-gradient(to bottom, rgba(56, 189, 248, 0.3), transparent);
+}
+
+.landing_stepBody__w4U_P {
+  padding-bottom: 48px;
+  padding-top: 4px;
+}
+
+.landing_stepTitle__GTT7p {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.landing_stepDesc__gtll2 {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ── Reviews ─────────────────────────────────────────────── */
+.landing_reviewsGrid__7AT8M {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 0;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .landing_reviewsGrid__7AT8M {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.landing_review__EYmKK {
+  padding: 48px 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .landing_review__EYmKK {
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+  }
+  .landing_review__EYmKK:last-child {
+    border-right: none;
+  }
+}
+
+.landing_reviewText__ccRqe {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+.landing_reviewName__GqREd {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.landing_footer__NntD6 {
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+}
+
+.landing_footer__NntD6 a {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.landing_footer__NntD6 a:hover {
+  color: var(--text-primary);
+}
+
+/* ── Scroll Reveal overrides ─────────────────────────────── */
+.landing_scroll-reveal-text__IE0Rn {
+  font-family: var(--font-heading) !important;
+  font-size: clamp(1.6rem, 4vw, var(--text-2xl)) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text-primary) !important;
+}
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[3]!./app/components/ui/Aurora.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.aurora-container {
+  width: 100%;
+  height: 100%;
+}
+
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[3]!./app/components/ui/Particles.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
+.particles-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[3]!./app/components/ui/ScrollReveal.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+.scroll-reveal {
+  margin: 0 0 64px;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 40px);
+  line-height: 1.2;
+  font-weight: 400;
+  text-align: center;
+  color: #FAFAFA;
+  letter-spacing: 0.05em;
+}
+
+.word {
+  display: inline-block;
+}
+

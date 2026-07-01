@@ -1,0 +1,113 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# docker-compose.prod.yml — продакшн-деплой
+#
+# НЕЛЬЗЯ МЕНЯТЬ:
+#   — имена сервисов (backend, postgres, nginx, certbot) — используются в скриптах
+#   — expose: 8000 для backend (не ports! — снаружи доступен только через Nginx)
+#   — volume-маппинги certbot (certbot пишет, nginx читает)
+#
+# МОЖНО МЕНЯТЬ:
+#   — количество gunicorn workers (-w 2)
+#   — POSTGRES_USER/POSTGRES_PASSWORD/POSTGRES_DB (и в DATABASE_URL тоже)
+#
+# Деплой: scripts/deploy.sh (запускать на сервере)
+# SSL: scripts/ssl_init.sh (один раз перед первым деплоем)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+services:
+  backend:
+    build:
+      context: ./backend
+    # expose вместо ports — порт 8000 открыт только внутри Docker-сети.
+    # Внешний трафик идёт через Nginx — backend напрямую недоступен снаружи.
+    expose:
+      - "8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://offer_user:${POSTGRES_PASSWORD:-secret}@postgres:5432/offer_db
+      DEBUG: "false"
+    # gunicorn с uvicorn workers — продакшн ASGI сервер
+    # -w 2: 2 воркера (для одного CPU; для 2+ CPU увеличь)
+    command: >
+      uv run gunicorn app.main:app
+      -k uvicorn.workers.UvicornWorker
+      -w 2
+      -b 0.0.0.0:8000
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: offer_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secret}
+      POSTGRES_DB: offer_db
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+    # ports не открываем: БД доступна только внутри Docker-сети
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U offer_user -d offer_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      # NEXT_PUBLIC_* встраиваются в бандл при сборке — передаём как build args.
+      # Значения берутся из корневого .env (docker-compose автоматически его читает).
+      args:
+        NEXT_PUBLIC_OFFER_ID: ${NEXT_PUBLIC_OFFER_ID}
+        NEXT_PUBLIC_REF_TTL_DAYS: ${NEXT_PUBLIC_REF_TTL_DAYS:-7}
+        NEXT_PUBLIC_CP_PUBLIC_ID: ${NEXT_PUBLIC_CP_PUBLIC_ID:-}
+        NEXT_PUBLIC_PAYMENT_BACK_URL: ${NEXT_PUBLIC_PAYMENT_BACK_URL:-}
+    expose:
+      - "3000"
+    environment:
+      # BACKEND_URL всегда http://backend:8000 внутри Docker-сети
+      BACKEND_URL: http://backend:8000
+      NODE_ENV: production
+    env_file:
+      # Серверные переменные: TS_API_KEY, PS_API_KEY, ADMIN_PASSWORD и т.д.
+      - ./frontend/.env
+    restart: always
+    depends_on:
+      - backend
+
+  nginx:
+    image: nginx:1.27
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf:ro
+      # certbot пишет сюда сертификаты, nginx читает
+      - ./certbot/conf:/etc/letsencrypt:ro
+      # certbot проверяет domain ownership через этот путь
+      - ./certbot/www:/var/www/certbot:ro
+    depends_on:
+      - backend
+      - frontend
+    restart: always
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      # Общие volumes с nginx — certbot пишет, nginx читает
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    # Автообновление сертификата. Запускается certbot renew раз в 12 часов.
+    # Перезапуск nginx после обновления — через scripts/deploy.sh или cron.
+    entrypoint: >
+      /bin/sh -c "trap exit TERM;
+      while :; do
+        certbot renew;
+        sleep 12h & wait $${!};
+      done"
+
+volumes:
+  postgres_prod_data:
