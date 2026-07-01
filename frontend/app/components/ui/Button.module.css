@@ -2,24 +2,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border: none;
-  border-radius: var(--radius-md);
-  font-family: var(--font-sans);
-  font-weight: 500;
+  border-radius: 999px;               /* pill */
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: background 0.15s, opacity 0.15s;
+  transition: opacity 0.2s, background 0.2s, border-color 0.2s;
 }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.primary { background: var(--color-accent); color: #fff; }
-.primary:hover:not(:disabled) { background: var(--color-accent-hover); }
+/* solid graphite — primary CTA */
+.primary { background: var(--bg-deep); color: var(--text-on-dark); }
+.primary:hover:not(:disabled) { opacity: 0.9; }
 
-.secondary { background: var(--color-surface); color: var(--color-text-primary); }
-.secondary:hover:not(:disabled) { background: var(--color-surface-hover); }
+/* parchment tile — secondary */
+.secondary { background: var(--bg-raised); color: var(--text-primary); border: 1px solid var(--border); }
+.secondary:hover:not(:disabled) { background: var(--bg-tile); }
 
-.ghost { background: transparent; color: var(--color-accent); }
-.ghost:hover:not(:disabled) { background: var(--color-surface); }
+/* outlined gold — ghost */
+.ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-accent); }
+.ghost:hover:not(:disabled) { background: var(--accent-dim); color: var(--text-primary); }
 
-.sm { padding: 8px 16px; font-size: var(--font-size-sm); }
-.md { padding: 12px 24px; font-size: var(--font-size-base); }
-.lg { padding: 16px 32px; font-size: var(--font-size-lg); }
+.sm { padding: 9px 18px;  font-size: var(--text-sm); }
+.md { padding: 13px 24px; font-size: var(--text-base); }
+.lg { padding: 16px 30px; font-size: var(--text-base); }
