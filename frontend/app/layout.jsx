@@ -1,10 +1,25 @@
 import { Suspense } from 'react'
 import { AuthProvider } from './context/AuthContext'
 import './styles/theme.css'
-import { Cinzel, Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 
-const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-cinzel' })
-const inter = Inter({ subsets: ['latin', 'cyrillic'], weight: ['300', '400', '500', '600'], variable: '--font-inter' })
+// Self-hosted variable fonts (full Unicode incl. Cyrillic) — no build-time
+// Google Fonts fetch, so compilation works without external connectivity.
+const serif = localFont({
+  src: [
+    { path: './fonts/SourceSerif4.ttf', weight: '200 900', style: 'normal' },
+    { path: './fonts/SourceSerif4-Italic.ttf', weight: '200 900', style: 'italic' },
+  ],
+  variable: '--font-serif',
+  display: 'swap',
+})
+const sans = localFont({
+  src: [
+    { path: './fonts/GolosText.ttf', weight: '400 900', style: 'normal' },
+  ],
+  variable: '--font-sans',
+  display: 'swap',
+})
 import RefTracker from './components/RefTracker'
 import AffiliateTracker from './components/AffiliateTracker'
 import Nav from './components/Nav'
@@ -18,7 +33,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ru" className={`${cinzel.variable} ${inter.variable}`}>
+    <html lang="ru" className={`${serif.variable} ${sans.variable}`}>
       <body>
         <AuthProvider>
           {/* RefTracker и AffiliateTracker нужны в Suspense из-за useSearchParams */}
