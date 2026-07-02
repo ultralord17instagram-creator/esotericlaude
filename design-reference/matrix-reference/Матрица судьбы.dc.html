@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#D8CEB9;font-family:'Golos Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+</style>
+</helmet>
+
+<div style="min-height:100%;display:flex;justify-content:center;padding:56px 32px">
+  <div style="width:760px;background:#FBF7EF;border:1px solid rgba(30,29,52,.09);border-radius:28px;box-shadow:0 40px 90px -46px rgba(27,26,48,.55);overflow:hidden">
+
+    <div style="padding:38px 44px 4px">
+      <div style="font:600 11.5px/1 'Golos Text',sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#9A8D72;margin-bottom:14px">Разбор даты рождения</div>
+      <h1 style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-weight:500;font-size:42px;letter-spacing:-.02em;color:#211F30">Матрица судьбы</h1>
+      <p style="margin:8px 0 0;font:400 14px/1.5 'Golos Text',sans-serif;color:#6E6551">Нумерологическая матрица — метод Наталии Ладини. 22 аркана, симметрия относительно центра.</p>
+    </div>
+
+    <svg viewBox="0 0 800 800" style="width:100%;display:block" font-family="'Golos Text',system-ui,sans-serif">
+
+      <!-- ===== КАРКАС ===== -->
+      <!-- внешний октагон -->
+      <polygon points="400,150 576.8,223.2 650,400 576.8,576.8 400,650 223.2,576.8 150,400 223.2,223.2"
+               fill="none" stroke="rgba(30,29,52,.26)" stroke-width="1.4"/>
+      <!-- внутренний ромб пунктиром -->
+      <polygon points="223.2,223.2 576.8,223.2 576.8,576.8 223.2,576.8"
+               fill="none" stroke="rgba(30,29,52,.30)" stroke-width="1.3" stroke-dasharray="6 7"/>
+      <!-- крест через центр (тонкий, под цветными линиями) -->
+      <line x1="150" y1="400" x2="650" y2="400" stroke="rgba(30,29,52,.20)" stroke-width="1.3"/>
+      <line x1="400" y1="150" x2="400" y2="650" stroke="rgba(30,29,52,.20)" stroke-width="1.3"/>
+
+      <!-- ===== СМЫСЛОВЫЕ ЛИНИИ ===== -->
+      <!-- мужская линия: Лево -> Центр -> Верх (холодная) -->
+      <path d="M150,400 L400,400 L400,150" fill="none" stroke="{{ maleColor }}" stroke-width="7"
+            stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+      <!-- женская линия: Низ -> Центр -> Право (тёплая) -->
+      <path d="M400,650 L400,400 L650,400" fill="none" stroke="{{ femaleColor }}" stroke-width="7"
+            stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+
+      <!-- подписи линий в зазорах между кругами -->
+      <text x="298" y="300" transform="rotate(-45 298 300)" text-anchor="middle"
+            fill="{{ maleColor }}" font-size="14" font-weight="600" letter-spacing="1.6" style="text-transform:uppercase">Мужская линия</text>
+      <text x="502" y="500" transform="rotate(-45 502 500)" text-anchor="middle"
+            fill="{{ femaleColor }}" font-size="14" font-weight="600" letter-spacing="1.6" style="text-transform:uppercase">Женская линия</text>
+
+      <!-- ===== ШКАЛА ВОЗРАСТА ===== -->
+      <g style="display:{{ ageDisplay }}" fill="#A99E86" font-size="11.5" font-weight="500">
+        <text x="79" y="404" text-anchor="middle">0 лет</text>
+        <text x="400" y="80" text-anchor="middle">20</text>
+        <text x="723" y="404" text-anchor="middle">40</text>
+        <text x="400" y="734" text-anchor="middle">60</text>
+        <text x="196" y="196" text-anchor="middle" opacity=".8">10</text>
+        <text x="604" y="196" text-anchor="middle" opacity=".8">30</text>
+        <text x="604" y="608" text-anchor="middle" opacity=".8">50</text>
+        <text x="196" y="608" text-anchor="middle" opacity=".8">70</text>
+      </g>
+
+      <!-- ===== ДИАГОНАЛЬНЫЕ ВЕРШИНЫ (средние, светлые) ===== -->
+      <g font-family="'Source Serif 4',Georgia,serif">
+        <circle cx="223.2" cy="223.2" r="30" fill="#FBF7EF" stroke="rgba(30,29,52,.28)" stroke-width="1.4"/>
+        <text x="223.2" y="233" text-anchor="middle" font-size="25" fill="#3A3550">4</text>
+        <circle cx="576.8" cy="223.2" r="30" fill="#FBF7EF" stroke="rgba(30,29,52,.28)" stroke-width="1.4"/>
+        <text x="576.8" y="233" text-anchor="middle" font-size="25" fill="#3A3550">9</text>
+        <circle cx="576.8" cy="576.8" r="30" fill="#FBF7EF" stroke="rgba(30,29,52,.28)" stroke-width="1.4"/>
+        <text x="576.8" y="586.8" text-anchor="middle" font-size="25" fill="#3A3550">18</text>
+        <circle cx="223.2" cy="576.8" r="30" fill="#FBF7EF" stroke="rgba(30,29,52,.28)" stroke-width="1.4"/>
+        <text x="223.2" y="586.8" text-anchor="middle" font-size="25" fill="#3A3550">6</text>
+      </g>
+
+      <!-- ===== ВНУТРЕННИЕ КРУГИ НА ЛИНИЯХ ===== -->
+      <g font-family="'Source Serif 4',Georgia,serif" fill="#FBF7EF">
+        <!-- мужская линия (холодные) -->
+        <circle cx="272" cy="400" r="26" fill="{{ maleColor }}" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+        <text x="272" y="408" text-anchor="middle" font-size="21" fill="#FBF7EF">3</text>
+        <circle cx="400" cy="272" r="26" fill="{{ maleColor }}" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+        <text x="400" y="280" text-anchor="middle" font-size="21" fill="#FBF7EF">15</text>
+        <!-- женская линия (тёплые) -->
+        <circle cx="528" cy="400" r="26" fill="{{ femaleColor }}" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+        <text x="528" y="408" text-anchor="middle" font-size="21" fill="#FBF7EF">20</text>
+        <circle cx="400" cy="528" r="26" fill="{{ femaleColor }}" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+        <text x="400" y="536" text-anchor="middle" font-size="21" fill="#FBF7EF">2</text>
+      </g>
+
+      <!-- ===== 4 ГЛАВНЫХ ПОРТРЕТА ===== -->
+      <g font-family="'Source Serif 4',Georgia,serif">
+        <!-- Лево — День рождения -->
+        <circle cx="150" cy="400" r="40" fill="#1B1A30"/>
+        <text x="150" y="413" text-anchor="middle" font-size="34" fill="#F3ECDB">15</text>
+        <!-- Верх — Месяц -->
+        <circle cx="400" cy="150" r="40" fill="#1B1A30"/>
+        <text x="400" y="163" text-anchor="middle" font-size="34" fill="#F3ECDB">20</text>
+        <!-- Право — Год -->
+        <circle cx="650" cy="400" r="40" fill="#1B1A30"/>
+        <text x="650" y="413" text-anchor="middle" font-size="34" fill="#F3ECDB">7</text>
+        <!-- Низ — Кармическая задача -->
+        <circle cx="400" cy="650" r="40" fill="#1B1A30"/>
+        <text x="400" y="663" text-anchor="middle" font-size="34" fill="#F3ECDB">11</text>
+      </g>
+
+      <!-- подписи портретов -->
+      <g font-family="'Golos Text',sans-serif" fill="#3A3550" font-size="14.5" font-weight="600">
+        <text x="150" y="342" text-anchor="middle">День рождения</text>
+        <text x="400" y="102" text-anchor="middle">Месяц</text>
+        <text x="650" y="342" text-anchor="middle">Год</text>
+        <text x="400" y="712" text-anchor="middle">Кармическая задача</text>
+      </g>
+
+      <!-- ===== ЦЕНТР — МЕДАЛЬОН ===== -->
+      <circle cx="400" cy="400" r="59" fill="none" stroke="#B9954F" stroke-width="2"/>
+      <circle cx="400" cy="400" r="52" fill="#1B1A30"/>
+      <text x="400" y="410" text-anchor="middle" font-family="'Source Serif 4',Georgia,serif" font-size="42" fill="#E9C877">13</text>
+      <text x="400" y="432" text-anchor="middle" font-family="'Golos Text',sans-serif" font-size="9.5" letter-spacing="1.4" fill="rgba(233,200,119,.75)" style="text-transform:uppercase">личность</text>
+
+      <!-- ===== ЗОНЫ-СИМВОЛЫ ===== -->
+      <g style="display:{{ zonesDisplay }}" font-family="'Golos Text',sans-serif">
+        <text x="120" y="132" text-anchor="middle" font-size="20" fill="#B9954F">✦</text>
+        <text x="120" y="150" text-anchor="middle" font-size="10.5" fill="#9A8D72">духовность</text>
+        <text x="688" y="132" text-anchor="middle" font-size="18" fill="#BC6B6B">♥</text>
+        <text x="688" y="150" text-anchor="middle" font-size="10.5" fill="#9A8D72">линия любви</text>
+        <text x="688" y="662" text-anchor="middle" font-size="19" font-weight="700" fill="#B9954F">$</text>
+        <text x="688" y="680" text-anchor="middle" font-size="10.5" fill="#9A8D72">денежный канал</text>
+      </g>
+    </svg>
+
+    <!-- ===== ЛЕГЕНДА ===== -->
+    <div style="padding:12px 44px 40px;display:grid;grid-template-columns:1fr 1fr;gap:12px 34px">
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="width:22px;height:6px;border-radius:3px;background:{{ maleColor }};flex:none"></span>
+        <span style="font:400 12.5px/1.35 'Golos Text',sans-serif;color:#6E6551"><b style="color:#3A3550">Мужская линия</b> — Лево → центр → Верх</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="width:22px;height:6px;border-radius:3px;background:{{ femaleColor }};flex:none"></span>
+        <span style="font:400 12.5px/1.35 'Golos Text',sans-serif;color:#6E6551"><b style="color:#3A3550">Женская линия</b> — Низ → центр → Право</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="width:16px;height:16px;border-radius:50%;background:#1B1A30;flex:none"></span>
+        <span style="font:400 12.5px/1.35 'Golos Text',sans-serif;color:#6E6551"><b style="color:#3A3550">Портреты</b> — день, месяц, год, задача</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="width:16px;height:16px;border-radius:50%;background:#FBF7EF;border:1.4px solid rgba(30,29,52,.28);flex:none"></span>
+        <span style="font:400 12.5px/1.35 'Golos Text',sans-serif;color:#6E6551"><b style="color:#3A3550">Диагонали</b> — суммы соседних порталов</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;grid-column:1 / -1">
+        <span style="width:16px;height:16px;border-radius:50%;background:#1B1A30;border:2px solid #B9954F;flex:none"></span>
+        <span style="font:400 12.5px/1.35 'Golos Text',sans-serif;color:#6E6551"><b style="color:#3A3550">Центр</b> — Число личности, зона комфорта · шкала по периметру: возраст 0–80 лет</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 824, &quot;height&quot;: 980 },
+  &quot;maleColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#4C6E7B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#4C6E7B&quot;, &quot;#3E6F8E&quot;, &quot;#5B7A73&quot;], &quot;section&quot;: &quot;Линии&quot; },
+  &quot;femaleColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#C0764E&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#C0764E&quot;, &quot;#B9954F&quot;, &quot;#BC6B6B&quot;], &quot;section&quot;: &quot;Линии&quot; },
+  &quot;showAgeScale&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Отображение&quot; },
+  &quot;showZones&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Отображение&quot; }
+}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props || {};
+    return {
+      maleColor: p.maleColor ?? '#4C6E7B',
+      femaleColor: p.femaleColor ?? '#C0764E',
+      ageDisplay: (p.showAgeScale ?? true) ? 'block' : 'none',
+      zonesDisplay: (p.showZones ?? true) ? 'block' : 'none',
+    };
+  }
+}
+</script>
+</body>
+</html>

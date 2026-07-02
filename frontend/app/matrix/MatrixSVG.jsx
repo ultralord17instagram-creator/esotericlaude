@@ -1,54 +1,45 @@
 'use client'
+import styles from './matrix.module.css'
 
-const SIZE = 500
-const CX = SIZE / 2
-const CY = SIZE / 2
-const OUTER_R = 200   // outer octagon radius
-const INNER_R = 110   // inner square radius
-const NODE_R = 22     // circle radius for main nodes
-const SMALL_R = 16    // circle radius for diagonal nodes
-const INNER_NODE_R = 18 // for inner line nodes
+// Geometry & styling ported 1:1 from the Claude Design mockup
+// (design-reference/matrix-reference). viewBox 800×800, centre at 400,400.
+// Node → value mapping matches calculateMatrix():
+//   left=day, top=month, right=year, bottom=karma, centre=personality,
+//   diagonals=sums of neighbours, inner nodes=on male/female lines.
 
-// Octagon positions (clockwise from top = 12 o'clock)
-function octPoint(index, r) {
-  const angle = (index * 45 - 90) * (Math.PI / 180)
-  return { x: CX + r * Math.cos(angle), y: CY + r * Math.sin(angle) }
-}
+const MALE = '#4C6E7B'    // male line — cool
+const FEMALE = '#C0764E'  // female line — warm
+const GRAPHITE = '#1B1A30'
+const PARCH = '#FBF7EF'
+const CREAM = '#F3ECDB'
+const INK = '#3A3550'
+const GOLD = '#B9954F'
+const GOLD_TEXT = '#E9C877'
+const MUTED = '#9A8D72'
+const AGE = '#A99E86'
 
-// index 0=top, 1=NE, 2=right, 3=SE, 4=bottom, 5=SW, 6=left, 7=NW
+// Circle positions (viewBox 800)
 const POS = {
-  top:       octPoint(0, OUTER_R),
-  top_right: octPoint(1, OUTER_R),
-  right:     octPoint(2, OUTER_R),
-  bot_right: octPoint(3, OUTER_R),
-  bottom:    octPoint(4, OUTER_R),
-  bot_left:  octPoint(5, OUTER_R),
-  left:      octPoint(6, OUTER_R),
-  top_left:  octPoint(7, OUTER_R),
-  center:    { x: CX, y: CY },
-  male1:     { x: CX + (octPoint(6, OUTER_R).x - CX) * 0.5, y: CY + (octPoint(6, OUTER_R).y - CY) * 0.5 },
-  male2:     { x: CX + (octPoint(0, OUTER_R).x - CX) * 0.5, y: CY + (octPoint(0, OUTER_R).y - CY) * 0.5 },
-  female1:   { x: CX + (octPoint(2, OUTER_R).x - CX) * 0.5, y: CY + (octPoint(2, OUTER_R).y - CY) * 0.5 },
-  female2:   { x: CX + (octPoint(4, OUTER_R).x - CX) * 0.5, y: CY + (octPoint(4, OUTER_R).y - CY) * 0.5 },
+  left:   { x: 150, y: 400 },  // day
+  top:    { x: 400, y: 150 },  // month
+  right:  { x: 650, y: 400 },  // year
+  bottom: { x: 400, y: 650 },  // karma
+  tl: { x: 223.2, y: 223.2 },  // top_left
+  tr: { x: 576.8, y: 223.2 },  // top_right
+  br: { x: 576.8, y: 576.8 },  // bot_right
+  bl: { x: 223.2, y: 576.8 },  // bot_left
+  male1:   { x: 272, y: 400 }, // left ↔ centre
+  male2:   { x: 400, y: 272 }, // top ↔ centre
+  female1: { x: 528, y: 400 }, // right ↔ centre
+  female2: { x: 400, y: 528 }, // bottom ↔ centre
+  centre:  { x: 400, y: 400 },
 }
 
-function Node({ pos, value, fill = '#fff', textFill = '#333', r = NODE_R, stroke = '#333' }) {
+function NodeNum({ pos, value, size, fill }) {
   return (
-    <g>
-      <circle cx={pos.x} cy={pos.y} r={r} fill={fill} stroke={stroke} strokeWidth="2" />
-      <text x={pos.x} y={pos.y} textAnchor="middle" dominantBaseline="central"
-        fontSize={r > 20 ? 14 : 12} fontWeight="700" fill={textFill}>
-        {value}
-      </text>
-    </g>
-  )
-}
-
-function AgeLabel({ pos, age, offset }) {
-  return (
-    <text x={pos.x + offset.x} y={pos.y + offset.y}
-      textAnchor="middle" fontSize="10" fill="#999">
-      {age} лет
+    <text x={pos.x} y={pos.y} textAnchor="middle" dominantBaseline="central"
+      fontFamily="var(--font-heading)" fontSize={size} fill={fill}>
+      {value}
     </text>
   )
 }
@@ -56,79 +47,129 @@ function AgeLabel({ pos, age, offset }) {
 export default function MatrixSVG({ nodes }) {
   const { d, m, y, k, center, top_left, top_right, bot_right, bot_left, male1, male2, female1, female2 } = nodes
 
-  const outerPoints = [
-    POS.top, POS.top_right, POS.right, POS.bot_right,
-    POS.bottom, POS.bot_left, POS.left, POS.top_left,
-  ].map(p => `${p.x},${p.y}`).join(' ')
-
-  const innerSquarePoints = [
-    POS.top_left, POS.top_right, POS.bot_right, POS.bot_left,
-  ].map(p => `${p.x},${p.y}`).join(' ')
-
   return (
-    <svg viewBox={`0 0 ${SIZE} ${SIZE}`} width="100%" style={{ maxWidth: 500 }}>
-      {/* Outer octagon */}
-      <polygon points={outerPoints} fill="none" stroke="#333" strokeWidth="1.5" />
+    <div className={styles.diagram}>
+      <svg viewBox="0 0 800 800" width="100%" style={{ display: 'block' }}
+        fontFamily="var(--font-body)">
 
-      {/* Inner diamond (connecting diagonals) */}
-      <polygon points={innerSquarePoints} fill="none" stroke="#333" strokeWidth="1" strokeDasharray="4 2" />
+        {/* ===== Каркас ===== */}
+        <polygon
+          points="400,150 576.8,223.2 650,400 576.8,576.8 400,650 223.2,576.8 150,400 223.2,223.2"
+          fill="none" stroke="rgba(30,29,52,.26)" strokeWidth="1.4" />
+        <polygon
+          points="223.2,223.2 576.8,223.2 576.8,576.8 223.2,576.8"
+          fill="none" stroke="rgba(30,29,52,.30)" strokeWidth="1.3" strokeDasharray="6 7" />
+        <line x1="150" y1="400" x2="650" y2="400" stroke="rgba(30,29,52,.20)" strokeWidth="1.3" />
+        <line x1="400" y1="150" x2="400" y2="650" stroke="rgba(30,29,52,.20)" strokeWidth="1.3" />
 
-      {/* Cross lines: top-bottom, left-right */}
-      <line x1={POS.top.x} y1={POS.top.y} x2={POS.bottom.x} y2={POS.bottom.y} stroke="#333" strokeWidth="1.5" />
-      <line x1={POS.left.x} y1={POS.left.y} x2={POS.right.x} y2={POS.right.y} stroke="#333" strokeWidth="1.5" />
+        {/* ===== Смысловые линии ===== */}
+        <path d="M150,400 L400,400 L400,150" fill="none" stroke={MALE} strokeWidth="7"
+          strokeLinecap="round" strokeLinejoin="round" opacity=".85" />
+        <path d="M400,650 L400,400 L650,400" fill="none" stroke={FEMALE} strokeWidth="7"
+          strokeLinecap="round" strokeLinejoin="round" opacity=".85" />
 
-      {/* Male line (blue): left → male1 → center → male2 → top */}
-      <polyline
-        points={`${POS.left.x},${POS.left.y} ${POS.male1.x},${POS.male1.y} ${POS.center.x},${POS.center.y} ${POS.male2.x},${POS.male2.y} ${POS.top.x},${POS.top.y}`}
-        fill="none" stroke="#3498db" strokeWidth="2"
-      />
+        {/* Подписи линий (в зазорах между кругами) */}
+        <text x="298" y="300" transform="rotate(-45 298 300)" textAnchor="middle"
+          fill={MALE} fontSize="14" fontWeight="600" letterSpacing="1.6"
+          style={{ textTransform: 'uppercase' }}>Мужская линия</text>
+        <text x="502" y="500" transform="rotate(-45 502 500)" textAnchor="middle"
+          fill={FEMALE} fontSize="14" fontWeight="600" letterSpacing="1.6"
+          style={{ textTransform: 'uppercase' }}>Женская линия</text>
 
-      {/* Female line (red): bottom → female2 → center → female1 → right */}
-      <polyline
-        points={`${POS.bottom.x},${POS.bottom.y} ${POS.female2.x},${POS.female2.y} ${POS.center.x},${POS.center.y} ${POS.female1.x},${POS.female1.y} ${POS.right.x},${POS.right.y}`}
-        fill="none" stroke="#e74c3c" strokeWidth="2"
-      />
+        {/* ===== Шкала возраста ===== */}
+        <g fill={AGE} fontSize="11.5" fontWeight="500">
+          <text x="79" y="404" textAnchor="middle">0 лет</text>
+          <text x="400" y="80" textAnchor="middle">20</text>
+          <text x="723" y="404" textAnchor="middle">40</text>
+          <text x="400" y="734" textAnchor="middle">60</text>
+          <text x="196" y="196" textAnchor="middle" opacity=".8">10</text>
+          <text x="604" y="196" textAnchor="middle" opacity=".8">30</text>
+          <text x="604" y="608" textAnchor="middle" opacity=".8">50</text>
+          <text x="196" y="608" textAnchor="middle" opacity=".8">70</text>
+        </g>
 
-      {/* Male/Female line labels — placed alongside their segments, clear of nodes */}
-      <text x={CX - 12} y={CY - 102} fontSize="10" fill="#3498db" textAnchor="middle"
-        transform={`rotate(-90 ${CX - 12} ${CY - 102})`}>
-        Мужская линия
-      </text>
-      <text x={CX + 102} y={CY - 12} fontSize="10" fill="#e74c3c" textAnchor="middle">
-        Женская линия
-      </text>
+        {/* ===== Диагональные вершины ===== */}
+        <g>
+          {[[POS.tl, top_left], [POS.tr, top_right], [POS.br, bot_right], [POS.bl, bot_left]].map(([p, v], i) => (
+            <g key={i}>
+              <circle cx={p.x} cy={p.y} r="30" fill={PARCH} stroke="rgba(30,29,52,.28)" strokeWidth="1.4" />
+              <NodeNum pos={p} value={v} size="25" fill={INK} />
+            </g>
+          ))}
+        </g>
 
-      {/* Age markers on outer ring (approximate positions) */}
-      <AgeLabel pos={POS.left}    age={0}  offset={{ x: -30, y: 0 }} />
-      <AgeLabel pos={POS.top}     age={20} offset={{ x: 0, y: -30 }} />
-      <AgeLabel pos={POS.right}   age={40} offset={{ x: 30, y: 0 }} />
-      <AgeLabel pos={POS.bottom}  age={60} offset={{ x: 0, y: 30 }} />
+        {/* ===== Внутренние круги на линиях ===== */}
+        <g>
+          <circle cx={POS.male1.x} cy={POS.male1.y} r="26" fill={MALE} stroke="rgba(255,255,255,.35)" strokeWidth="1" />
+          <NodeNum pos={POS.male1} value={male1} size="21" fill={CREAM} />
+          <circle cx={POS.male2.x} cy={POS.male2.y} r="26" fill={MALE} stroke="rgba(255,255,255,.35)" strokeWidth="1" />
+          <NodeNum pos={POS.male2} value={male2} size="21" fill={CREAM} />
+          <circle cx={POS.female1.x} cy={POS.female1.y} r="26" fill={FEMALE} stroke="rgba(255,255,255,.35)" strokeWidth="1" />
+          <NodeNum pos={POS.female1} value={female1} size="21" fill={CREAM} />
+          <circle cx={POS.female2.x} cy={POS.female2.y} r="26" fill={FEMALE} stroke="rgba(255,255,255,.35)" strokeWidth="1" />
+          <NodeNum pos={POS.female2} value={female2} size="21" fill={CREAM} />
+        </g>
 
-      {/* Symbols */}
-      <text x={CX - 15} y={CY - 10} fontSize="18" textAnchor="middle">★</text>
-      <text x={CX + 15} y={CY + 15} fontSize="16" textAnchor="middle">♥</text>
-      <text x={CX + 40} y={CY + 5}  fontSize="16" textAnchor="middle">$</text>
+        {/* ===== Главные портреты ===== */}
+        <g>
+          {[[POS.left, d], [POS.top, m], [POS.right, y], [POS.bottom, k]].map(([p, v], i) => (
+            <g key={i}>
+              <circle cx={p.x} cy={p.y} r="40" fill={GRAPHITE} />
+              <NodeNum pos={p} value={v} size="34" fill={CREAM} />
+            </g>
+          ))}
+        </g>
 
-      {/* Main 4 corner nodes */}
-      <Node pos={POS.left}    value={d} fill="#9b59b6" textFill="#fff" />
-      <Node pos={POS.top}     value={m} fill="#9b59b6" textFill="#fff" />
-      <Node pos={POS.right}   value={y} fill="#e74c3c" textFill="#fff" />
-      <Node pos={POS.bottom}  value={k} fill="#e74c3c" textFill="#fff" />
+        {/* Подписи портретов */}
+        <g fill={INK} fontSize="14.5" fontWeight="600">
+          <text x="150" y="342" textAnchor="middle">День рождения</text>
+          <text x="400" y="102" textAnchor="middle">Месяц</text>
+          <text x="650" y="342" textAnchor="middle">Год</text>
+          <text x="400" y="712" textAnchor="middle">Кармическая задача</text>
+        </g>
 
-      {/* Diagonal outer nodes */}
-      <Node pos={POS.top_left}  value={top_left}  fill="#fff" r={SMALL_R} />
-      <Node pos={POS.top_right} value={top_right} fill="#fff" r={SMALL_R} />
-      <Node pos={POS.bot_right} value={bot_right} fill="#fff" r={SMALL_R} />
-      <Node pos={POS.bot_left}  value={bot_left}  fill="#fff" r={SMALL_R} />
+        {/* ===== Центр — медальон ===== */}
+        <circle cx="400" cy="400" r="59" fill="none" stroke={GOLD} strokeWidth="2" />
+        <circle cx="400" cy="400" r="52" fill={GRAPHITE} />
+        <text x="400" y="400" textAnchor="middle" dominantBaseline="central"
+          fontFamily="var(--font-heading)" fontSize="42" fill={GOLD_TEXT}>{center}</text>
+        <text x="400" y="432" textAnchor="middle" fontSize="9.5" letterSpacing="1.4"
+          fill="rgba(233,200,119,.75)" style={{ textTransform: 'uppercase' }}>личность</text>
 
-      {/* Center node */}
-      <Node pos={POS.center} value={center} fill="#f1c40f" textFill="#333" r={26} />
+        {/* ===== Зоны-символы ===== */}
+        <g>
+          <text x="120" y="132" textAnchor="middle" fontSize="20" fill={GOLD}>✦</text>
+          <text x="120" y="150" textAnchor="middle" fontSize="10.5" fill={MUTED}>духовность</text>
+          <text x="688" y="132" textAnchor="middle" fontSize="18" fill="#BC6B6B">♥</text>
+          <text x="688" y="150" textAnchor="middle" fontSize="10.5" fill={MUTED}>линия любви</text>
+          <text x="688" y="662" textAnchor="middle" fontSize="19" fontWeight="700" fill={GOLD}>$</text>
+          <text x="688" y="680" textAnchor="middle" fontSize="10.5" fill={MUTED}>денежный канал</text>
+        </g>
+      </svg>
 
-      {/* Inner line nodes */}
-      <Node pos={POS.male1}   value={male1}   fill="#3498db" textFill="#fff" r={INNER_NODE_R} />
-      <Node pos={POS.male2}   value={male2}   fill="#3498db" textFill="#fff" r={INNER_NODE_R} />
-      <Node pos={POS.female1} value={female1} fill="#e67e22" textFill="#fff" r={INNER_NODE_R} />
-      <Node pos={POS.female2} value={female2} fill="#e67e22" textFill="#fff" r={INNER_NODE_R} />
-    </svg>
+      {/* ===== Легенда ===== */}
+      <div className={styles.diagramLegend}>
+        <div className={styles.legendItem}>
+          <span className={styles.legendBar} style={{ background: MALE }} />
+          <span><b>Мужская линия</b> — Лево → центр → Верх</span>
+        </div>
+        <div className={styles.legendItem}>
+          <span className={styles.legendBar} style={{ background: FEMALE }} />
+          <span><b>Женская линия</b> — Низ → центр → Право</span>
+        </div>
+        <div className={styles.legendItem}>
+          <span className={styles.legendDot} style={{ background: GRAPHITE }} />
+          <span><b>Портреты</b> — день, месяц, год, задача</span>
+        </div>
+        <div className={styles.legendItem}>
+          <span className={styles.legendDot} style={{ background: PARCH, border: '1.4px solid rgba(30,29,52,.28)' }} />
+          <span><b>Диагонали</b> — суммы соседних</span>
+        </div>
+        <div className={`${styles.legendItem} ${styles.legendWide}`}>
+          <span className={styles.legendDot} style={{ background: GRAPHITE, border: `2px solid ${GOLD}` }} />
+          <span><b>Центр</b> — Число личности, зона комфорта · шкала по периметру 0–80 лет</span>
+        </div>
+      </div>
+    </div>
   )
 }

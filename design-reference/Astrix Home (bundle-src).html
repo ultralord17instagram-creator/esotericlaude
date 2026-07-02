@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#D8CEB9;-webkit-font-smoothing:antialiased;font-family:'Golos Text',system-ui,sans-serif}
+.hscroll{scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.optw:target [data-badge]{background:#B9954F!important;color:#fff!important}
+</style>
+</helmet>
+
+<section style='padding:40px 44px 40px;border-bottom:1px solid rgba(30,29,52,.08)'>
+  <div style='display:flex;align-items:baseline;gap:10px;margin:0 0 8px'>
+    <a href='#t2' style='font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px;text-decoration:none'>2</a>
+    <span style='font:600 13px/1.2 "Golos Text",system-ui,sans-serif;color:#1B1A30'>Риффы на <a href='#1a' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">1a</a> — карточки из <a href='#1b' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">1b</a></span>
+  </div>
+  <p style='margin:0 0 26px;font:400 12.5px/1.6 "Golos Text",sans-serif;color:rgba(30,29,52,.58);max-width:64ch'>«Пергамент» без изменений — светлый hero, светлые шаги, отзывы и футер как в 1a. Заменён только блок карточек продуктов: тёмный медальон-иконка, blush-чип «Демо» и акцентная полоса сверху из «Ночной сферы».</p>
+  <div style='display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start'>
+    <div class='optw' id='2a' style='scroll-margin-top:24px;display:flex;flex-direction:column;gap:12px'>
+      <div style='display:flex;align-items:baseline;gap:9px'>
+        <a data-badge href='#2a' style='font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none'>2a</a>
+        <span style='font:400 12px/1.3 "Golos Text",sans-serif;color:rgba(30,29,52,.62)'>«Пергамент» + карточки продуктов из «Ночной сферы»</span>
+      </div>
+
+      <div style='--serif:"Source Serif 4",Georgia,serif;--sans:"Golos Text",system-ui,sans-serif;width:390px;background:#EAE0CE;border-radius:36px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);font-family:var(--sans);color:#26243A'>
+
+        <div style='height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px'>
+          <span style='font-weight:600;letter-spacing:.02em'>9:41</span>
+          <div style='display:flex;align-items:center;gap:8px'>
+            <div style='display:flex;align-items:flex-end;gap:2px;height:11px'>
+              <div style='width:3px;height:5px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:7px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:9px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:11px;background:#26243A;border-radius:1px'></div>
+            </div>
+            <div style='display:flex;align-items:center;gap:2px'>
+              <div style='width:22px;height:11px;border:1px solid #26243A;border-radius:3px;padding:1.5px'><div style='width:72%;height:100%;background:#26243A;border-radius:1px'></div></div>
+              <div style='width:1.5px;height:4px;background:#26243A;border-radius:1px'></div>
+            </div>
+          </div>
+        </div>
+
+        <header style='display:flex;align-items:center;justify-content:space-between;padding:4px 24px 16px'>
+          <div style='display:flex;align-items:center;gap:9px'>
+            <svg width='26' height='26' viewBox='0 0 26 26'><circle cx='12' cy='13' r='8.5' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><circle cx='15.5' cy='11' r='8.5' style='fill:#EAE0CE'/><path d='M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z' style='fill:#B9954F'/></svg>
+            <span style='font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.02em;color:#211F30'>Astrix</span>
+          </div>
+          <button style='height:38px;padding:0 16px;border-radius:999px;border:1px solid rgba(30,29,52,.22);background:transparent;color:#26243A;font-family:var(--sans);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer'>Войти</button>
+        </header>
+
+        <section style='padding:10px 24px 28px'>
+          <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:16px'>Эзотерический хаб</div>
+          <h1 style='font-family:var(--serif);font-weight:500;font-size:38px;line-height:1.07;letter-spacing:-.015em;margin:0 0 16px;color:#211F30'>Древняя мудрость для современных вопросов</h1>
+          <p style='margin:0 0 24px;font-size:15.5px;line-height:1.55;color:#6E6551;max-width:33ch'>Матрица судьбы, Таро, гороскоп и нумерология — попробуй бесплатно, прежде чем открыть полный разбор.</p>
+          <div style='display:flex;flex-direction:column;gap:14px'>
+            <a style='height:56px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer'>Попробовать бесплатно <span style='font-size:18px'>→</span></a>
+            <a style='align-self:center;color:#6E6551;font-size:14px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:7px;cursor:pointer'>Как это работает <span style='font-size:13px'>↓</span></a>
+          </div>
+
+          <div style='margin-top:26px;position:relative;height:230px;border-radius:24px;overflow:hidden;background:#1B1A30;border:1px solid rgba(198,166,103,.2)'>
+            <svg width='342' height='230' viewBox='0 0 342 230' style='position:absolute;inset:0;display:block'>
+              <circle cx='194' cy='96' r='78' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.2'/>
+              <circle cx='194' cy='96' r='56' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.32'/>
+              <ellipse cx='194' cy='96' rx='118' ry='46' transform='rotate(-18 194 96)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.18'/>
+              <rect x='170' y='72' width='48' height='48' style='fill:none;stroke:#C6A667;stroke-width:1.1;opacity:.62'/>
+              <rect x='170' y='72' width='48' height='48' transform='rotate(45 194 96)' style='fill:none;stroke:#C6A667;stroke-width:1.1;opacity:.62'/>
+              <circle cx='194' cy='96' r='2.3' style='fill:#E4CB98'/>
+              <circle cx='306' cy='58' r='2' style='fill:#E4CB98'/>
+              <circle cx='250' cy='150' r='1.3' style='fill:#C6A667;opacity:.6'/>
+              <circle cx='120' cy='150' r='1.2' style='fill:#C6A667;opacity:.55'/>
+              <g transform='translate(64,50)'><circle cx='0' cy='0' r='11' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.7'/><circle cx='4.5' cy='-2.5' r='11' style='fill:#1B1A30'/></g>
+              <path d='M304 146 l1.6 4 4 1.6 -4 1.6 -1.6 4 -1.6 -4 -4 -1.6 4 -1.6 z' style='fill:#E4CB98;opacity:.85'/>
+              <path d='M52 168 l1.1 2.9 2.9 1.1 -2.9 1.1 -1.1 2.9 -1.1 -2.9 -2.9 -1.1 2.9 -1.1 z' style='fill:#C6A667;opacity:.5'/>
+            </svg>
+            <div style='position:relative;height:100%;padding:18px;display:flex;flex-direction:column'>
+              <span style='align-self:flex-start;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#D8B884;border:1px solid rgba(216,184,132,.4);border-radius:999px;padding:6px 12px'>Матрица дня</span>
+              <div style='margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between'>
+                <div>
+                  <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B99B62;margin-bottom:4px'>Аркан дня</div>
+                  <div style='font-family:var(--serif);font-size:24px;font-weight:500;color:#F3ECDB'>Луна · XVIII</div>
+                </div>
+                <div style='width:42px;height:42px;border-radius:50%;border:1px solid rgba(216,184,132,.5);display:flex;align-items:center;justify-content:center;color:#E4CB98;font-size:17px'>→</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section style='padding:6px 24px 30px'>
+          <div style='display:flex;align-items:center;gap:12px;margin:2px 0 18px'><div style='flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(185,149,79,.45))'></div><svg width='11' height='11' viewBox='0 0 11 11' style='opacity:.75'><path d='M5.5 0 l1 3.5 3.5 1 -3.5 1 -1 3.5 -1 -3.5 -3.5 -1 3.5 -1 z' style='fill:#B9954F'/></svg><div style='flex:1;height:1px;background:linear-gradient(90deg,rgba(185,149,79,.45),transparent)'></div></div>
+          <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:8px'>Сервисы</div>
+          <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0 0 6px'>Четыре пути к себе</h2>
+          <p style='margin:0 0 22px;font-size:14px;line-height:1.55;color:#6E6551'>Начни с бесплатного демо — подписка открывает полный разбор.</p>
+
+          <div style='display:grid;grid-template-columns:1fr;gap:16px'>
+            <sc-for list='{{ products }}' as='p' hint-placeholder-count='4'>
+              <div style='position:relative;background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:15px;box-shadow:0 16px 34px -24px rgba(27,26,48,.55);overflow:hidden'>
+                <div style='position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E7CFC9,#B9954F)'></div>
+                <div style='display:flex;align-items:flex-start;justify-content:space-between'>
+                  <div style='width:60px;height:60px;border-radius:17px;background:#1B1A30;display:flex;align-items:center;justify-content:center'>
+                    <sc-if value='{{ p.is_matrix }}' hint-placeholder-val='{{ true }}'><svg width='28' height='28' viewBox='0 0 28 28'><rect x='6' y='6' width='16' height='16' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><rect x='6' y='6' width='16' height='16' transform='rotate(45 14 14)' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><circle cx='14' cy='14' r='1.5' style='fill:#D8B884'/></svg></sc-if>
+                    <sc-if value='{{ p.is_taro }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><rect x='9' y='4' width='10' height='20' rx='2.5' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><path d='M14 8.5 l1.1 2.9 2.9 1.1 -2.9 1.1 -1.1 2.9 -1.1 -2.9 -2.9 -1.1 2.9 -1.1 z' style='fill:none;stroke:#D8B884;stroke-width:1.2'/></svg></sc-if>
+                    <sc-if value='{{ p.is_horo }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14' r='4' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><ellipse cx='14' cy='14' rx='10.5' ry='5.5' transform='rotate(-22 14 14)' style='fill:none;stroke:#D8B884;stroke-width:1.2'/><circle cx='22.5' cy='10.5' r='1.4' style='fill:#D8B884'/></svg></sc-if>
+                    <sc-if value='{{ p.is_numo }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14.5' r='8.5' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><path d='M14 6.5 L21 20 L7 20 Z' style='fill:none;stroke:#D8B884;stroke-width:1.2'/><circle cx='14' cy='15.5' r='1.3' style='fill:#D8B884'/></svg></sc-if>
+                  </div>
+                  <span style='font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8A544C;background:#E8CFC9;border-radius:999px;padding:6px 12px'>Демо</span>
+                </div>
+                <div>
+                  <div style='font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#A08A5E;margin-bottom:5px'>{{ p.tag }}</div>
+                  <h3 style='font-family:var(--serif);font-weight:600;font-size:22px;margin:0;color:#211F30'>{{ p.name }}</h3>
+                </div>
+                <p style='margin:0;font-size:14px;line-height:1.55;color:#6E6551'>{{ p.desc }}</p>
+                <div style='display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(30,29,52,.09)'>
+                  <span style='font-size:14px;font-weight:600;color:#211F30;display:flex;align-items:center;gap:7px;cursor:pointer'>Открыть демо →</span>
+                  <span style='display:flex;align-items:center;gap:5px;font-size:11.5px;color:#9A8D72'><svg width='11' height='12' viewBox='0 0 11 12' style='display:block'><rect x='1.5' y='5' width='8' height='6' rx='1.4' style='fill:none;stroke:#9A8D72;stroke-width:1.1'/><path d='M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5' style='fill:none;stroke:#9A8D72;stroke-width:1.1'/></svg>Подписка</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style='padding:6px 24px 30px'>
+          <div style='display:flex;align-items:center;gap:12px;margin:2px 0 18px'><div style='flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(185,149,79,.45))'></div><svg width='11' height='11' viewBox='0 0 11 11' style='opacity:.75'><path d='M5.5 0 l1 3.5 3.5 1 -3.5 1 -1 3.5 -1 -3.5 -3.5 -1 3.5 -1 z' style='fill:#B9954F'/></svg><div style='flex:1;height:1px;background:linear-gradient(90deg,rgba(185,149,79,.45),transparent)'></div></div>
+          <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:8px'>Как это работает</div>
+          <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0 0 20px'>Три шага до полного разбора</h2>
+          <div style='display:flex;flex-direction:column'>
+            <sc-for list='{{ steps }}' as='s' hint-placeholder-count='3'>
+              <div style='display:flex;gap:16px;padding-bottom:20px'>
+                <div style='display:flex;flex-direction:column;align-items:center'>
+                  <div style='width:44px;height:44px;flex:none;border-radius:50%;border:1px solid rgba(185,149,79,.5);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;color:#B9954F;background:#F3ECDD'>{{ s.no }}</div>
+                  <div style='flex:1;width:1px;background:linear-gradient(rgba(185,149,79,.4),rgba(185,149,79,0));margin-top:4px'></div>
+                </div>
+                <div style='padding-top:8px'>
+                  <h3 style='font-family:var(--serif);font-weight:500;font-size:19px;margin:0 0 5px;color:#211F30'>{{ s.title }}</h3>
+                  <p style='margin:0;font-size:13.5px;line-height:1.55;color:#6E6551'>{{ s.desc }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+        <section style='padding:6px 0 30px'>
+          <div style='padding:0 24px'>
+            <div style='display:flex;align-items:center;gap:12px;margin:2px 0 18px'><div style='flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(185,149,79,.45))'></div><svg width='11' height='11' viewBox='0 0 11 11' style='opacity:.75'><path d='M5.5 0 l1 3.5 3.5 1 -3.5 1 -1 3.5 -1 -3.5 -3.5 -1 3.5 -1 z' style='fill:#B9954F'/></svg><div style='flex:1;height:1px;background:linear-gradient(90deg,rgba(185,149,79,.45),transparent)'></div></div>
+            <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:8px'>Отзывы</div>
+            <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0'>Им откликнулось</h2>
+          </div>
+          <div id='astrix-rev-2a' class='hscroll' style='margin-top:18px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 6px;scroll-padding-left:24px'>
+            <sc-for list='{{ reviews }}' as='r' hint-placeholder-count='3'>
+              <div data-card style='scroll-snap-align:start;flex:0 0 300px;background:#FBF7EF;border:1px solid rgba(185,149,79,.3);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px'>
+                <div style='font-family:var(--serif);font-size:44px;line-height:.5;color:#B9954F;height:22px'>“</div>
+                <p style='margin:0;font-family:var(--serif);font-size:16.5px;line-height:1.5;color:#3A3550'>{{ r.text }}</p>
+                <div style='margin-top:auto;display:flex;align-items:center;gap:12px'>
+                  <div style='width:40px;height:40px;flex:none;border-radius:50%;background:#E7CFC9;display:flex;align-items:center;justify-content:center'><svg width='16' height='16' viewBox='0 0 16 16'><path d='M8 1 l1.4 4.6 4.6 1.4 -4.6 1.4 -1.4 4.6 -1.4 -4.6 -4.6 -1.4 4.6 -1.4 z' style='fill:#B9954F'/></svg></div>
+                  <div>
+                    <div style='font-family:var(--serif);font-size:15px;font-weight:600;color:#211F30'>{{ r.name }}</div>
+                    <div style='font-size:11.5px;color:#9A8D72'>{{ r.meta }}</div>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div id='astrix-dots-2a' style='display:flex;gap:6px;justify-content:center;margin-top:16px'>
+            <sc-for list='{{ reviews }}' as='r' hint-placeholder-count='3'><span data-dot style='width:6px;height:6px;border-radius:999px;background:rgba(30,29,52,.22);transition:width .25s,background .25s'></span></sc-for>
+          </div>
+        </section>
+
+        <footer style='background:#1B1A30;color:#D9CFB9;padding:32px 24px 26px;position:relative;overflow:hidden'>
+          <svg width='200' height='200' viewBox='0 0 200 200' style='position:absolute;top:-50px;right:-60px;opacity:.4'><circle cx='100' cy='100' r='78' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.4'/><ellipse cx='100' cy='100' rx='92' ry='38' transform='rotate(-20 100 100)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.3'/></svg>
+          <div style='position:relative'>
+            <div style='display:flex;align-items:center;gap:9px;margin-bottom:12px'>
+              <svg width='26' height='26' viewBox='0 0 26 26'><circle cx='12' cy='13' r='8.5' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><circle cx='15.5' cy='11' r='8.5' style='fill:#1B1A30'/><path d='M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z' style='fill:#D8B884'/></svg>
+              <span style='font-family:var(--serif);font-size:22px;font-weight:600;color:#F3ECDB'>Astrix</span>
+            </div>
+            <p style='font-size:13.5px;line-height:1.6;color:#948A73;max-width:34ch;margin:0 0 24px'>Древние практики простым языком. Пробуй бесплатно — открывай полный разбор по подписке.</p>
+            <div style='display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin-bottom:24px'>
+              <div>
+                <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B9954F;margin-bottom:12px'>Сервисы</div>
+                <div style='display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#C6BCA6'><span>Матрица судьбы</span><span>Таро</span><span>Гороскоп</span><span>Нумерология</span></div>
+              </div>
+              <div>
+                <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B9954F;margin-bottom:12px'>Компания</div>
+                <div style='display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#C6BCA6'><span>О проекте</span><span>Как это работает</span><span>Отзывы</span><span>Поддержка</span></div>
+              </div>
+            </div>
+            <div style='height:1px;background:rgba(198,166,103,.2);margin-bottom:16px'></div>
+            <div style='display:flex;align-items:center;justify-content:space-between'>
+              <span style='font-size:11.5px;color:#7C725D'>© 2026 Astrix</span>
+              <div style='display:flex;gap:8px'>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>TG</span>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>VK</span>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>YT</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+  <p style='margin:24px 0 0;font:12.5px/1.7 "Golos Text",sans-serif;color:rgba(30,29,52,.55)'>Дальше: «<a href='#2a' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">2a</a>, но hero тёмный как в 1b» · «<a href='#2a' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">2a</a> с 8 продуктами» · «новые направления»</p>
+</section>
+
+<section style='padding:40px 44px 40px;border-bottom:1px solid rgba(30,29,52,.08)'>
+  <div style='display:flex;align-items:baseline;gap:10px;margin:0 0 8px'>
+    <a href='#t1' style='font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px;text-decoration:none'>1</a>
+    <span style='font:600 13px/1.2 "Golos Text",system-ui,sans-serif;color:#1B1A30'>Astrix — мобильная главная</span>
+  </div>
+  <p style='margin:0 0 26px;font:400 12.5px/1.6 "Golos Text",sans-serif;color:rgba(30,29,52,.58);max-width:64ch'>Единая дизайн-система: кремовый фон, тёмно-графитовые блоки, тонкие золотые линии, мотивы сакральной геометрии. Переходный serif (Source Serif 4) для заголовков + гуманистический sans (Golos Text) для текста. Карточки продуктов — один шаблон на data-массиве: сейчас 4 сервиса, тот же список аккуратно тянется до 6–10. Ниже две визуальные линии одного языка — выбери базу, детали смешаем.</p>
+  <div style='display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start'>
+
+    <div class='optw' id='1a' style='scroll-margin-top:24px;display:flex;flex-direction:column;gap:12px'>
+      <div style='display:flex;align-items:baseline;gap:9px'>
+        <a data-badge href='#1a' style='font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none'>1a</a>
+        <span style='font:400 12px/1.3 "Golos Text",sans-serif;color:rgba(30,29,52,.62)'>«Пергамент» — светлая, воздушная, редакционная</span>
+      </div>
+
+      <div style='--serif:"Source Serif 4",Georgia,serif;--sans:"Golos Text",system-ui,sans-serif;width:390px;background:#EAE0CE;border-radius:36px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);font-family:var(--sans);color:#26243A'>
+
+        <div style='height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px'>
+          <span style='font-weight:600;letter-spacing:.02em'>9:41</span>
+          <div style='display:flex;align-items:center;gap:8px'>
+            <div style='display:flex;align-items:flex-end;gap:2px;height:11px'>
+              <div style='width:3px;height:5px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:7px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:9px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:11px;background:#26243A;border-radius:1px'></div>
+            </div>
+            <div style='display:flex;align-items:center;gap:2px'>
+              <div style='width:22px;height:11px;border:1px solid #26243A;border-radius:3px;padding:1.5px'><div style='width:72%;height:100%;background:#26243A;border-radius:1px'></div></div>
+              <div style='width:1.5px;height:4px;background:#26243A;border-radius:1px'></div>
+            </div>
+          </div>
+        </div>
+
+        <header style='display:flex;align-items:center;justify-content:space-between;padding:4px 24px 16px'>
+          <div style='display:flex;align-items:center;gap:9px'>
+            <svg width='26' height='26' viewBox='0 0 26 26'><circle cx='12' cy='13' r='8.5' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><circle cx='15.5' cy='11' r='8.5' style='fill:#EAE0CE'/><path d='M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z' style='fill:#B9954F'/></svg>
+            <span style='font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.02em;color:#211F30'>Astrix</span>
+          </div>
+          <button style='height:38px;padding:0 16px;border-radius:999px;border:1px solid rgba(30,29,52,.22);background:transparent;color:#26243A;font-family:var(--sans);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer'>Войти</button>
+        </header>
+
+        <section style='padding:10px 24px 28px'>
+          <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:16px'>Эзотерический хаб</div>
+          <h1 style='font-family:var(--serif);font-weight:500;font-size:38px;line-height:1.07;letter-spacing:-.015em;margin:0 0 16px;color:#211F30'>Древняя мудрость для современных вопросов</h1>
+          <p style='margin:0 0 24px;font-size:15.5px;line-height:1.55;color:#6E6551;max-width:33ch'>Матрица судьбы, Таро, гороскоп и нумерология — попробуй бесплатно, прежде чем открыть полный разбор.</p>
+          <div style='display:flex;flex-direction:column;gap:14px'>
+            <a style='height:56px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer'>Попробовать бесплатно <span style='font-size:18px'>→</span></a>
+            <a style='align-self:center;color:#6E6551;font-size:14px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:7px;cursor:pointer'>Как это работает <span style='font-size:13px'>↓</span></a>
+          </div>
+
+          <div style='margin-top:26px;position:relative;height:230px;border-radius:24px;overflow:hidden;background:#1B1A30;border:1px solid rgba(198,166,103,.2)'>
+            <svg width='342' height='230' viewBox='0 0 342 230' style='position:absolute;inset:0;display:block'>
+              <circle cx='194' cy='96' r='78' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.2'/>
+              <circle cx='194' cy='96' r='56' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.32'/>
+              <ellipse cx='194' cy='96' rx='118' ry='46' transform='rotate(-18 194 96)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.18'/>
+              <rect x='170' y='72' width='48' height='48' style='fill:none;stroke:#C6A667;stroke-width:1.1;opacity:.62'/>
+              <rect x='170' y='72' width='48' height='48' transform='rotate(45 194 96)' style='fill:none;stroke:#C6A667;stroke-width:1.1;opacity:.62'/>
+              <circle cx='194' cy='96' r='2.3' style='fill:#E4CB98'/>
+              <circle cx='306' cy='58' r='2' style='fill:#E4CB98'/>
+              <circle cx='250' cy='150' r='1.3' style='fill:#C6A667;opacity:.6'/>
+              <circle cx='120' cy='150' r='1.2' style='fill:#C6A667;opacity:.55'/>
+              <g transform='translate(64,50)'><circle cx='0' cy='0' r='11' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.7'/><circle cx='4.5' cy='-2.5' r='11' style='fill:#1B1A30'/></g>
+              <path d='M304 146 l1.6 4 4 1.6 -4 1.6 -1.6 4 -1.6 -4 -4 -1.6 4 -1.6 z' style='fill:#E4CB98;opacity:.85'/>
+              <path d='M52 168 l1.1 2.9 2.9 1.1 -2.9 1.1 -1.1 2.9 -1.1 -2.9 -2.9 -1.1 2.9 -1.1 z' style='fill:#C6A667;opacity:.5'/>
+            </svg>
+            <div style='position:relative;height:100%;padding:18px;display:flex;flex-direction:column'>
+              <span style='align-self:flex-start;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#D8B884;border:1px solid rgba(216,184,132,.4);border-radius:999px;padding:6px 12px'>Матрица дня</span>
+              <div style='margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between'>
+                <div>
+                  <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B99B62;margin-bottom:4px'>Аркан дня</div>
+                  <div style='font-family:var(--serif);font-size:24px;font-weight:500;color:#F3ECDB'>Луна · XVIII</div>
+                </div>
+                <div style='width:42px;height:42px;border-radius:50%;border:1px solid rgba(216,184,132,.5);display:flex;align-items:center;justify-content:center;color:#E4CB98;font-size:17px'>→</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style='padding:6px 24px 30px'>
+          <div style='display:flex;align-items:center;gap:12px;margin:2px 0 18px'><div style='flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(185,149,79,.45))'></div><svg width='11' height='11' viewBox='0 0 11 11' style='opacity:.75'><path d='M5.5 0 l1 3.5 3.5 1 -3.5 1 -1 3.5 -1 -3.5 -3.5 -1 3.5 -1 z' style='fill:#B9954F'/></svg><div style='flex:1;height:1px;background:linear-gradient(90deg,rgba(185,149,79,.45),transparent)'></div></div>
+          <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:8px'>Сервисы</div>
+          <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0 0 6px'>Четыре пути к себе</h2>
+          <p style='margin:0 0 22px;font-size:14px;line-height:1.55;color:#6E6551'>Начни с бесплатного демо — подписка открывает полный разбор.</p>
+
+          <div style='display:grid;grid-template-columns:1fr;gap:16px'>
+            <sc-for list='{{ products }}' as='p' hint-placeholder-count='4'>
+              <div style='background:#FBF7EF;border:1px solid rgba(185,149,79,.3);border-radius:22px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:15px'>
+                <div style='display:flex;align-items:flex-start;justify-content:space-between'>
+                  <div style='width:60px;height:60px;border-radius:50%;border:1px solid rgba(185,149,79,.5);background:rgba(185,149,79,.07);display:flex;align-items:center;justify-content:center'>
+                    <sc-if value='{{ p.is_matrix }}' hint-placeholder-val='{{ true }}'><svg width='28' height='28' viewBox='0 0 28 28'><rect x='6' y='6' width='16' height='16' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><rect x='6' y='6' width='16' height='16' transform='rotate(45 14 14)' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><circle cx='14' cy='14' r='1.5' style='fill:#B9954F'/></svg></sc-if>
+                    <sc-if value='{{ p.is_taro }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><rect x='9' y='4' width='10' height='20' rx='2.5' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><path d='M14 8.5 l1.1 2.9 2.9 1.1 -2.9 1.1 -1.1 2.9 -1.1 -2.9 -2.9 -1.1 2.9 -1.1 z' style='fill:none;stroke:#B9954F;stroke-width:1.2'/></svg></sc-if>
+                    <sc-if value='{{ p.is_horo }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14' r='4' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><ellipse cx='14' cy='14' rx='10.5' ry='5.5' transform='rotate(-22 14 14)' style='fill:none;stroke:#B9954F;stroke-width:1.2'/><circle cx='22.5' cy='10.5' r='1.4' style='fill:#B9954F'/></svg></sc-if>
+                    <sc-if value='{{ p.is_numo }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14.5' r='8.5' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><path d='M14 6.5 L21 20 L7 20 Z' style='fill:none;stroke:#B9954F;stroke-width:1.2'/><circle cx='14' cy='15.5' r='1.3' style='fill:#B9954F'/></svg></sc-if>
+                  </div>
+                  <span style='font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#B9954F;border:1px solid rgba(185,149,79,.4);border-radius:999px;padding:5px 11px'>Демо</span>
+                </div>
+                <div>
+                  <div style='font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#A08A5E;margin-bottom:5px'>{{ p.tag }}</div>
+                  <h3 style='font-family:var(--serif);font-weight:600;font-size:22px;margin:0;color:#211F30'>{{ p.name }}</h3>
+                </div>
+                <p style='margin:0;font-size:14px;line-height:1.55;color:#6E6551'>{{ p.desc }}</p>
+                <div style='display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(30,29,52,.09)'>
+                  <span style='font-size:14px;font-weight:600;color:#211F30;display:flex;align-items:center;gap:7px;cursor:pointer'>Открыть демо →</span>
+                  <span style='display:flex;align-items:center;gap:5px;font-size:11.5px;color:#9A8D72'><svg width='11' height='12' viewBox='0 0 11 12' style='display:block'><rect x='1.5' y='5' width='8' height='6' rx='1.4' style='fill:none;stroke:#9A8D72;stroke-width:1.1'/><path d='M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5' style='fill:none;stroke:#9A8D72;stroke-width:1.1'/></svg>Подписка</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style='padding:6px 24px 30px'>
+          <div style='display:flex;align-items:center;gap:12px;margin:2px 0 18px'><div style='flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(185,149,79,.45))'></div><svg width='11' height='11' viewBox='0 0 11 11' style='opacity:.75'><path d='M5.5 0 l1 3.5 3.5 1 -3.5 1 -1 3.5 -1 -3.5 -3.5 -1 3.5 -1 z' style='fill:#B9954F'/></svg><div style='flex:1;height:1px;background:linear-gradient(90deg,rgba(185,149,79,.45),transparent)'></div></div>
+          <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:8px'>Как это работает</div>
+          <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0 0 20px'>Три шага до полного разбора</h2>
+          <div style='display:flex;flex-direction:column'>
+            <sc-for list='{{ steps }}' as='s' hint-placeholder-count='3'>
+              <div style='display:flex;gap:16px;padding-bottom:20px'>
+                <div style='display:flex;flex-direction:column;align-items:center'>
+                  <div style='width:44px;height:44px;flex:none;border-radius:50%;border:1px solid rgba(185,149,79,.5);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;color:#B9954F;background:#F3ECDD'>{{ s.no }}</div>
+                  <div style='flex:1;width:1px;background:linear-gradient(rgba(185,149,79,.4),rgba(185,149,79,0));margin-top:4px'></div>
+                </div>
+                <div style='padding-top:8px'>
+                  <h3 style='font-family:var(--serif);font-weight:500;font-size:19px;margin:0 0 5px;color:#211F30'>{{ s.title }}</h3>
+                  <p style='margin:0;font-size:13.5px;line-height:1.55;color:#6E6551'>{{ s.desc }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style='padding:6px 0 30px'>
+          <div style='padding:0 24px'>
+            <div style='display:flex;align-items:center;gap:12px;margin:2px 0 18px'><div style='flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(185,149,79,.45))'></div><svg width='11' height='11' viewBox='0 0 11 11' style='opacity:.75'><path d='M5.5 0 l1 3.5 3.5 1 -3.5 1 -1 3.5 -1 -3.5 -3.5 -1 3.5 -1 z' style='fill:#B9954F'/></svg><div style='flex:1;height:1px;background:linear-gradient(90deg,rgba(185,149,79,.45),transparent)'></div></div>
+            <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:8px'>Отзывы</div>
+            <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0'>Им откликнулось</h2>
+          </div>
+          <div id='astrix-rev-a' class='hscroll' style='margin-top:18px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 6px;scroll-padding-left:24px'>
+            <sc-for list='{{ reviews }}' as='r' hint-placeholder-count='3'>
+              <div data-card style='scroll-snap-align:start;flex:0 0 300px;background:#FBF7EF;border:1px solid rgba(185,149,79,.3);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px'>
+                <div style='font-family:var(--serif);font-size:44px;line-height:.5;color:#B9954F;height:22px'>“</div>
+                <p style='margin:0;font-family:var(--serif);font-size:16.5px;line-height:1.5;color:#3A3550'>{{ r.text }}</p>
+                <div style='margin-top:auto;display:flex;align-items:center;gap:12px'>
+                  <div style='width:40px;height:40px;flex:none;border-radius:50%;background:#E7CFC9;display:flex;align-items:center;justify-content:center'><svg width='16' height='16' viewBox='0 0 16 16'><path d='M8 1 l1.4 4.6 4.6 1.4 -4.6 1.4 -1.4 4.6 -1.4 -4.6 -4.6 -1.4 4.6 -1.4 z' style='fill:#B9954F'/></svg></div>
+                  <div>
+                    <div style='font-family:var(--serif);font-size:15px;font-weight:600;color:#211F30'>{{ r.name }}</div>
+                    <div style='font-size:11.5px;color:#9A8D72'>{{ r.meta }}</div>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div id='astrix-dots-a' style='display:flex;gap:6px;justify-content:center;margin-top:16px'>
+            <sc-for list='{{ reviews }}' as='r' hint-placeholder-count='3'><span data-dot style='width:6px;height:6px;border-radius:999px;background:rgba(30,29,52,.22);transition:width .25s,background .25s'></span></sc-for>
+          </div>
+        </section>
+
+        <footer style='background:#1B1A30;color:#D9CFB9;padding:32px 24px 26px;position:relative;overflow:hidden'>
+          <svg width='200' height='200' viewBox='0 0 200 200' style='position:absolute;top:-50px;right:-60px;opacity:.4'><circle cx='100' cy='100' r='78' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.4'/><ellipse cx='100' cy='100' rx='92' ry='38' transform='rotate(-20 100 100)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.3'/></svg>
+          <div style='position:relative'>
+            <div style='display:flex;align-items:center;gap:9px;margin-bottom:12px'>
+              <svg width='26' height='26' viewBox='0 0 26 26'><circle cx='12' cy='13' r='8.5' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><circle cx='15.5' cy='11' r='8.5' style='fill:#1B1A30'/><path d='M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z' style='fill:#D8B884'/></svg>
+              <span style='font-family:var(--serif);font-size:22px;font-weight:600;color:#F3ECDB'>Astrix</span>
+            </div>
+            <p style='font-size:13.5px;line-height:1.6;color:#948A73;max-width:34ch;margin:0 0 24px'>Древние практики простым языком. Пробуй бесплатно — открывай полный разбор по подписке.</p>
+            <div style='display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin-bottom:24px'>
+              <div>
+                <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B9954F;margin-bottom:12px'>Сервисы</div>
+                <div style='display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#C6BCA6'><span>Матрица судьбы</span><span>Таро</span><span>Гороскоп</span><span>Нумерология</span></div>
+              </div>
+              <div>
+                <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B9954F;margin-bottom:12px'>Компания</div>
+                <div style='display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#C6BCA6'><span>О проекте</span><span>Как это работает</span><span>Отзывы</span><span>Поддержка</span></div>
+              </div>
+            </div>
+            <div style='height:1px;background:rgba(198,166,103,.2);margin-bottom:16px'></div>
+            <div style='display:flex;align-items:center;justify-content:space-between'>
+              <span style='font-size:11.5px;color:#7C725D'>© 2026 Astrix</span>
+              <div style='display:flex;gap:8px'>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>TG</span>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>VK</span>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>YT</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+
+    <div class='optw' id='1b' style='scroll-margin-top:24px;display:flex;flex-direction:column;gap:12px'>
+      <div style='display:flex;align-items:baseline;gap:9px'>
+        <a data-badge href='#1b' style='font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none'>1b</a>
+        <span style='font:400 12px/1.3 "Golos Text",sans-serif;color:rgba(30,29,52,.62)'>«Ночная сфера» — контраст, тёмные панели, blush-акцент</span>
+      </div>
+
+      <div style='--serif:"Source Serif 4",Georgia,serif;--sans:"Golos Text",system-ui,sans-serif;width:390px;background:#EAE0CE;border-radius:36px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);font-family:var(--sans);color:#26243A'>
+
+        <div style='height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px'>
+          <span style='font-weight:600;letter-spacing:.02em'>9:41</span>
+          <div style='display:flex;align-items:center;gap:8px'>
+            <div style='display:flex;align-items:flex-end;gap:2px;height:11px'>
+              <div style='width:3px;height:5px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:7px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:9px;background:#26243A;border-radius:1px'></div>
+              <div style='width:3px;height:11px;background:#26243A;border-radius:1px'></div>
+            </div>
+            <div style='display:flex;align-items:center;gap:2px'>
+              <div style='width:22px;height:11px;border:1px solid #26243A;border-radius:3px;padding:1.5px'><div style='width:72%;height:100%;background:#26243A;border-radius:1px'></div></div>
+              <div style='width:1.5px;height:4px;background:#26243A;border-radius:1px'></div>
+            </div>
+          </div>
+        </div>
+
+        <header style='display:flex;align-items:center;justify-content:space-between;padding:4px 24px 12px'>
+          <div style='display:flex;align-items:center;gap:9px'>
+            <svg width='26' height='26' viewBox='0 0 26 26'><circle cx='12' cy='13' r='8.5' style='fill:none;stroke:#B9954F;stroke-width:1.3'/><circle cx='15.5' cy='11' r='8.5' style='fill:#EAE0CE'/><path d='M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z' style='fill:#B9954F'/></svg>
+            <span style='font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.02em;color:#211F30'>Astrix</span>
+          </div>
+          <button style='height:38px;padding:0 16px;border-radius:999px;border:1px solid rgba(30,29,52,.22);background:transparent;color:#26243A;font-family:var(--sans);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer'>Войти</button>
+        </header>
+
+        <section style='padding:14px 24px 28px;position:relative;overflow:hidden'>
+          <svg width='320' height='320' viewBox='0 0 320 320' style='position:absolute;top:-70px;right:-120px;opacity:.55;pointer-events:none'><circle cx='160' cy='160' r='128' style='fill:none;stroke:#B9954F;stroke-width:1;opacity:.3'/><ellipse cx='160' cy='160' rx='150' ry='62' transform='rotate(-24 160 160)' style='fill:none;stroke:#B9954F;stroke-width:1;opacity:.22'/><circle cx='32' cy='160' r='2' style='fill:#B9954F;opacity:.5'/></svg>
+          <div style='position:relative'>
+            <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:16px'>Эзотерический хаб</div>
+            <h1 style='font-family:var(--serif);font-weight:500;font-size:39px;line-height:1.05;letter-spacing:-.015em;margin:0 0 16px;color:#211F30'>Твоя карта судьбы — в звёздах и числах</h1>
+            <p style='margin:0 0 24px;font-size:15.5px;line-height:1.55;color:#6E6551;max-width:33ch'>Четыре сервиса под одной луной. Загляни бесплатно — полный разбор открой по подписке.</p>
+          </div>
+
+          <div style='margin-top:6px;position:relative;height:300px;border-radius:26px;overflow:hidden;background:#171630;border:1px solid rgba(198,166,103,.22)'>
+            <svg width='342' height='300' viewBox='0 0 342 300' style='position:absolute;inset:0;display:block'>
+              <circle cx='176' cy='150' r='104' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.16'/>
+              <circle cx='176' cy='150' r='76' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.26'/>
+              <circle cx='176' cy='150' r='50' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.4'/>
+              <ellipse cx='176' cy='150' rx='140' ry='56' transform='rotate(-16 176 150)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.2'/>
+              <ellipse cx='176' cy='150' rx='140' ry='56' transform='rotate(42 176 150)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.16'/>
+              <rect x='150' y='124' width='52' height='52' style='fill:none;stroke:#C6A667;stroke-width:1.1;opacity:.6'/>
+              <rect x='150' y='124' width='52' height='52' transform='rotate(45 176 150)' style='fill:none;stroke:#C6A667;stroke-width:1.1;opacity:.6'/>
+              <circle cx='176' cy='150' r='2.6' style='fill:#E4CB98'/>
+              <polyline points='54,58 92,44 120,72 150,52' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.45'/>
+              <circle cx='54' cy='58' r='1.8' style='fill:#E4CB98'/>
+              <circle cx='92' cy='44' r='1.6' style='fill:#E4CB98'/>
+              <circle cx='120' cy='72' r='1.6' style='fill:#E4CB98'/>
+              <circle cx='150' cy='52' r='1.8' style='fill:#E4CB98'/>
+              <circle cx='300' cy='210' r='1.4' style='fill:#C6A667;opacity:.6'/>
+              <circle cx='60' cy='232' r='1.3' style='fill:#C6A667;opacity:.55'/>
+              <g transform='translate(286,66)'><circle cx='0' cy='0' r='13' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.7'/><circle cx='5' cy='-3' r='13' style='fill:#171630'/></g>
+              <path d='M300 244 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7 z' style='fill:#E4CB98;opacity:.85'/>
+              <path d='M46 200 l1.2 3.1 3.1 1.2 -3.1 1.2 -1.2 3.1 -1.2 -3.1 -3.1 -1.2 3.1 -1.2 z' style='fill:#C6A667;opacity:.55'/>
+            </svg>
+            <div style='position:relative;height:100%;padding:20px;display:flex;flex-direction:column'>
+              <span style='align-self:flex-start;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#D8B884;border:1px solid rgba(216,184,132,.4);border-radius:999px;padding:6px 12px'>Небо сегодня</span>
+              <div style='margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between'>
+                <div>
+                  <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B99B62;margin-bottom:4px'>Фаза луны</div>
+                  <div style='font-family:var(--serif);font-size:25px;font-weight:500;color:#F3ECDB'>Полнолуние в Тельце</div>
+                </div>
+                <div style='width:44px;height:44px;flex:none;border-radius:50%;border:1px solid rgba(216,184,132,.5);display:flex;align-items:center;justify-content:center;color:#E4CB98;font-size:18px'>→</div>
+              </div>
+            </div>
+          </div>
+
+          <a style='margin-top:22px;height:56px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer'>Попробовать бесплатно <span style='font-size:18px'>→</span></a>
+        </section>
+
+        <section style='padding:4px 24px 12px'>
+          <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A8D72;margin-bottom:8px'>Сервисы</div>
+          <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0 0 6px'>Четыре пути к себе</h2>
+          <p style='margin:0 0 22px;font-size:14px;line-height:1.55;color:#6E6551'>Один шаблон карточки на все сервисы — добавляй новые без изменения макета.</p>
+
+          <div style='display:grid;grid-template-columns:1fr;gap:16px'>
+            <sc-for list='{{ products }}' as='p' hint-placeholder-count='4'>
+              <div style='position:relative;background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:15px;box-shadow:0 16px 34px -24px rgba(27,26,48,.55);overflow:hidden'>
+                <div style='position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E7CFC9,#B9954F)'></div>
+                <div style='display:flex;align-items:flex-start;justify-content:space-between'>
+                  <div style='width:60px;height:60px;border-radius:17px;background:#1B1A30;display:flex;align-items:center;justify-content:center'>
+                    <sc-if value='{{ p.is_matrix }}' hint-placeholder-val='{{ true }}'><svg width='28' height='28' viewBox='0 0 28 28'><rect x='6' y='6' width='16' height='16' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><rect x='6' y='6' width='16' height='16' transform='rotate(45 14 14)' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><circle cx='14' cy='14' r='1.5' style='fill:#D8B884'/></svg></sc-if>
+                    <sc-if value='{{ p.is_taro }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><rect x='9' y='4' width='10' height='20' rx='2.5' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><path d='M14 8.5 l1.1 2.9 2.9 1.1 -2.9 1.1 -1.1 2.9 -1.1 -2.9 -2.9 -1.1 2.9 -1.1 z' style='fill:none;stroke:#D8B884;stroke-width:1.2'/></svg></sc-if>
+                    <sc-if value='{{ p.is_horo }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14' r='4' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><ellipse cx='14' cy='14' rx='10.5' ry='5.5' transform='rotate(-22 14 14)' style='fill:none;stroke:#D8B884;stroke-width:1.2'/><circle cx='22.5' cy='10.5' r='1.4' style='fill:#D8B884'/></svg></sc-if>
+                    <sc-if value='{{ p.is_numo }}' hint-placeholder-val='{{ false }}'><svg width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14.5' r='8.5' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><path d='M14 6.5 L21 20 L7 20 Z' style='fill:none;stroke:#D8B884;stroke-width:1.2'/><circle cx='14' cy='15.5' r='1.3' style='fill:#D8B884'/></svg></sc-if>
+                  </div>
+                  <span style='font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8A544C;background:#E8CFC9;border-radius:999px;padding:6px 12px'>Демо</span>
+                </div>
+                <div>
+                  <div style='font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#A08A5E;margin-bottom:5px'>{{ p.tag }}</div>
+                  <h3 style='font-family:var(--serif);font-weight:600;font-size:22px;margin:0;color:#211F30'>{{ p.name }}</h3>
+                </div>
+                <p style='margin:0;font-size:14px;line-height:1.55;color:#6E6551'>{{ p.desc }}</p>
+                <div style='display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(30,29,52,.09)'>
+                  <span style='font-size:14px;font-weight:600;color:#211F30;display:flex;align-items:center;gap:7px;cursor:pointer'>Открыть демо →</span>
+                  <span style='display:flex;align-items:center;gap:5px;font-size:11.5px;color:#9A8D72'><svg width='11' height='12' viewBox='0 0 11 12' style='display:block'><rect x='1.5' y='5' width='8' height='6' rx='1.4' style='fill:none;stroke:#9A8D72;stroke-width:1.1'/><path d='M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5' style='fill:none;stroke:#9A8D72;stroke-width:1.1'/></svg>Подписка</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style='margin-top:12px;background:#171630;padding:34px 24px 30px;position:relative;overflow:hidden'>
+          <svg width='240' height='240' viewBox='0 0 240 240' style='position:absolute;top:-60px;right:-70px;opacity:.5'><circle cx='120' cy='120' r='92' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.32'/><ellipse cx='120' cy='120' rx='110' ry='44' transform='rotate(-20 120 120)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.22'/><circle cx='120' cy='28' r='2' style='fill:#E4CB98'/><path d='M40 176 l1.2 3.1 3.1 1.2 -3.1 1.2 -1.2 3.1 -1.2 -3.1 -3.1 -1.2 3.1 -1.2 z' style='fill:#C6A667;opacity:.55'/></svg>
+          <div style='position:relative'>
+            <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B9954F;margin-bottom:10px'>Как это работает</div>
+            <h2 style='font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.1;letter-spacing:-.01em;color:#F3ECDB;margin:0 0 24px'>Три шага до полного разбора</h2>
+            <div style='display:flex;flex-direction:column;gap:22px'>
+              <sc-for list='{{ steps }}' as='s' hint-placeholder-count='3'>
+                <div style='display:flex;gap:18px;align-items:flex-start'>
+                  <div style='font-family:var(--serif);font-size:32px;font-weight:500;color:#B9954F;line-height:1;min-width:42px'>{{ s.no }}</div>
+                  <div style='padding-top:2px'>
+                    <h3 style='font-family:var(--serif);font-weight:500;font-size:19px;color:#F3ECDB;margin:0 0 5px'>{{ s.title }}</h3>
+                    <p style='margin:0;font-size:13.5px;line-height:1.55;color:#A69C86'>{{ s.desc }}</p>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+
+        <section style='background:#F1DDD7;padding:26px 0 30px'>
+          <div style='padding:0 24px'>
+            <div style='font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#9A6E66;margin-bottom:8px'>Отзывы</div>
+            <h2 style='font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.01em;color:#211F30;margin:0'>Им откликнулось</h2>
+          </div>
+          <div id='astrix-rev-b' class='hscroll' style='margin-top:18px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 6px;scroll-padding-left:24px'>
+            <sc-for list='{{ reviews }}' as='r' hint-placeholder-count='3'>
+              <div data-card style='scroll-snap-align:start;flex:0 0 300px;background:#FDFAF3;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 16px 32px -24px rgba(27,26,48,.4)'>
+                <div style='width:36px;height:36px;border-radius:50%;background:#1B1A30;display:flex;align-items:center;justify-content:center'><span style='font-family:var(--serif);font-size:26px;color:#D8B884;line-height:0;margin-top:8px'>“</span></div>
+                <p style='margin:0;font-family:var(--serif);font-size:16.5px;line-height:1.5;color:#3A3550'>{{ r.text }}</p>
+                <div style='margin-top:auto;display:flex;align-items:center;gap:12px'>
+                  <div style='width:40px;height:40px;flex:none;border-radius:50%;background:#EAD7D1;display:flex;align-items:center;justify-content:center'><svg width='16' height='16' viewBox='0 0 16 16'><path d='M8 1 l1.4 4.6 4.6 1.4 -4.6 1.4 -1.4 4.6 -1.4 -4.6 -4.6 -1.4 4.6 -1.4 z' style='fill:#B9954F'/></svg></div>
+                  <div>
+                    <div style='font-family:var(--serif);font-size:15px;font-weight:600;color:#211F30'>{{ r.name }}</div>
+                    <div style='font-size:11.5px;color:#9A8D72'>{{ r.meta }}</div>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div id='astrix-dots-b' style='display:flex;gap:6px;justify-content:center;margin-top:16px'>
+            <sc-for list='{{ reviews }}' as='r' hint-placeholder-count='3'><span data-dot style='width:6px;height:6px;border-radius:999px;background:rgba(30,29,52,.22);transition:width .25s,background .25s'></span></sc-for>
+          </div>
+        </section>
+
+        <footer style='background:#171630;color:#D9CFB9;padding:32px 24px 26px;position:relative;overflow:hidden'>
+          <svg width='220' height='220' viewBox='0 0 220 220' style='position:absolute;bottom:-70px;left:-50px;opacity:.4'><circle cx='110' cy='110' r='84' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.4'/><ellipse cx='110' cy='110' rx='100' ry='40' transform='rotate(24 110 110)' style='fill:none;stroke:#C6A667;stroke-width:1;opacity:.28'/></svg>
+          <div style='position:relative'>
+            <div style='display:flex;align-items:center;gap:9px;margin-bottom:12px'>
+              <svg width='26' height='26' viewBox='0 0 26 26'><circle cx='12' cy='13' r='8.5' style='fill:none;stroke:#D8B884;stroke-width:1.3'/><circle cx='15.5' cy='11' r='8.5' style='fill:#171630'/><path d='M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z' style='fill:#D8B884'/></svg>
+              <span style='font-family:var(--serif);font-size:22px;font-weight:600;color:#F3ECDB'>Astrix</span>
+            </div>
+            <p style='font-size:13.5px;line-height:1.6;color:#948A73;max-width:34ch;margin:0 0 24px'>Древние практики простым языком. Пробуй бесплатно — открывай полный разбор по подписке.</p>
+            <div style='display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin-bottom:24px'>
+              <div>
+                <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B9954F;margin-bottom:12px'>Сервисы</div>
+                <div style='display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#C6BCA6'><span>Матрица судьбы</span><span>Таро</span><span>Гороскоп</span><span>Нумерология</span></div>
+              </div>
+              <div>
+                <div style='font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#B9954F;margin-bottom:12px'>Компания</div>
+                <div style='display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#C6BCA6'><span>О проекте</span><span>Как это работает</span><span>Отзывы</span><span>Поддержка</span></div>
+              </div>
+            </div>
+            <div style='height:1px;background:rgba(198,166,103,.2);margin-bottom:16px'></div>
+            <div style='display:flex;align-items:center;justify-content:space-between'>
+              <span style='font-size:11.5px;color:#7C725D'>© 2026 Astrix</span>
+              <div style='display:flex;gap:8px'>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>TG</span>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>VK</span>
+                <span style='width:30px;height:30px;border-radius:50%;border:1px solid rgba(198,166,103,.35);display:flex;align-items:center;justify-content:center;font-size:11px;color:#C6BCA6'>YT</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+
+  </div>
+  <p style='margin:24px 0 0;font:12.5px/1.7 "Golos Text",sans-serif;color:rgba(30,29,52,.55)'>Дальше можно: «<a href='#1a' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">1a</a> с карточками из <a href='#1b' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">1b</a>» · «покажи <a href='#1a' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">1a</a> с 8 продуктами» · «добавь десктопную раскладку для <a href='#1b' style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:4px;text-decoration:none">1b</a>» · «новые направления»</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const products = [
+      { name: 'Матрица судьбы', tag: 'Психокарта личности', desc: 'Разбор даты рождения по 22 арканам: сильные стороны, задачи и линия отношений.', is_matrix: true, is_taro: false, is_horo: false, is_numo: false },
+      { name: 'Таро', tag: 'Расклад на вопрос', desc: 'Ответы на конкретные вопросы через классические расклады на картах Таро.', is_matrix: false, is_taro: true, is_horo: false, is_numo: false },
+      { name: 'Гороскоп', tag: 'Ежедневный прогноз', desc: 'Персональный прогноз по знаку и дате: любовь, дела и самочувствие на день.', is_matrix: false, is_taro: false, is_horo: true, is_numo: false },
+      { name: 'Нумерология', tag: 'Число судьбы', desc: 'Число жизненного пути и его влияние на характер, циклы и важные решения.', is_matrix: false, is_taro: false, is_horo: false, is_numo: true },
+    ];
+    const steps = [
+      { no: '01', title: 'Попробуй', desc: 'Открой демо любого сервиса бесплатно — без регистрации и обязательств.' },
+      { no: '02', title: 'Убедись', desc: 'Получи живой фрагмент разбора под свой личный запрос.' },
+      { no: '03', title: 'Открой полный доступ', desc: 'Подписка раскрывает полные расклады сразу во всех сервисах.' },
+    ];
+    const reviews = [
+      { text: 'Демо Матрицы попало прямо в точку. Оформила подписку в тот же вечер и не жалею.', name: 'Алина', meta: '29 лет · Матрица судьбы' },
+      { text: 'Утренний гороскоп стал ритуалом. Коротко, тепло и по делу — без пугающих прогнозов.', name: 'Марина', meta: '34 года · Гороскоп' },
+      { text: 'Расклад Таро помог решиться на переезд. Формулировки бережные, без давления.', name: 'Ксения', meta: '41 год · Таро' },
+    ];
+    return { products, steps, reviews };
+  }
+
+  componentDidMount() {
+    this._setup('astrix-rev-a', 'astrix-dots-a');
+    this._setup('astrix-rev-b', 'astrix-dots-b');
+    this._setup('astrix-rev-2a', 'astrix-dots-2a');
+  }
+
+  _setup(scId, dotsId) {
+    const sc = document.getElementById(scId);
+    const dotsWrap = document.getElementById(dotsId);
+    if (!sc || !dotsWrap) return;
+    const dots = () => Array.from(dotsWrap.querySelectorAll('[data-dot]'));
+    const update = () => {
+      const card = sc.querySelector('[data-card]');
+      const cw = card ? card.offsetWidth : 1;
+      const idx = Math.round(sc.scrollLeft / (cw + 14));
+      dots().forEach((d, i) => {
+        const on = i === idx;
+        d.style.width = on ? '20px' : '6px';
+        d.style.background = on ? '#B9954F' : 'rgba(30,29,52,.22)';
+      });
+    };
+    sc.addEventListener('scroll', () => window.requestAnimationFrame(update), { passive: true });
+    update();
+  }
+}
+</script>
+<template id="__bundler_thumbnail" data-bg-color="#1B1A30">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#1B1A30"/>
+    <circle cx="600" cy="332" r="120" fill="none" stroke="#D8B884" stroke-width="6"/>
+    <circle cx="652" cy="300" r="120" fill="#1B1A30"/>
+    <path d="M760 372 l17 46 46 17 -46 17 -17 46 -17 -46 -46 -17 46 -17 z" fill="#D8B884"/>
+    <text x="600" y="570" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="104" fill="#F3ECDB" letter-spacing="3">Astrix</text>
+  </svg>
+</template>
+</body>
+</html>
