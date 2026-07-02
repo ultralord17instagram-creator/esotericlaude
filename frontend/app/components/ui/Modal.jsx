@@ -19,7 +19,11 @@ export default function Modal({ open, onClose, children }) {
   return (
     <div className={styles.overlay} onClick={onClose} role="dialog" aria-modal="true">
       <div className={styles.content} onClick={e => e.stopPropagation()}>
-        <button className={styles.close} onClick={onClose} aria-label="Закрыть">×</button>
+        <button className={styles.close} onClick={onClose} aria-label="Закрыть">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
+            <path d="M1 1 L13 13 M13 1 L1 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          </svg>
+        </button>
         {children}
       </div>
     </div>
