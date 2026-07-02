@@ -45,12 +45,28 @@
 }
 @media (max-width: 760px) { .matrixRow { grid-template-columns: 1fr; } }
 
-/* tile wrapper for the (unchanged) MatrixSVG diagram */
+/* tile wrapper for the MatrixSVG diagram */
 .diagramTile {
   background: var(--bg-raised); border: 1px solid var(--border); border-radius: 22px;
   padding: 20px; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 16px 34px -26px rgba(27,26,48,.5);
 }
+.diagram { width: 100%; display: flex; flex-direction: column; gap: 18px; }
+
+/* Diagram legend (ported from mockup) */
+.diagramLegend {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px;
+  padding-top: 4px; border-top: 1px solid var(--border);
+}
+.legendItem {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12.5px; line-height: 1.35; color: var(--text-secondary);
+}
+.legendItem b { color: var(--text-primary); font-weight: 600; }
+.legendWide { grid-column: 1 / -1; }
+.legendBar { width: 22px; height: 6px; border-radius: 3px; flex: none; }
+.legendDot { width: 16px; height: 16px; border-radius: 50%; flex: none; }
+@media (max-width: 480px) { .diagramLegend { grid-template-columns: 1fr; } }
 
 /* ── Chakra table ───────────────────────────────────────── */
 .chakraSection {
@@ -93,15 +109,35 @@
 }
 .purposeArrow { color: var(--text-muted); }
 
-/* ── Interpretations ────────────────────────────────────── */
+/* ── Interpretations (accordion) ────────────────────────── */
 .interpretations { margin-bottom: 40px; }
-.interpretBlock { padding: 16px 0; border-bottom: 1px solid var(--border); }
-.interpretTitle { font-family: var(--font-heading); font-weight: 500; font-size: 18px; color: var(--text-primary); margin-bottom: 6px; }
-.interpretText { color: var(--text-secondary); line-height: 1.7; }
-.interpretPreview { color: var(--text-secondary); line-height: 1.7; opacity: 0.5; }
-.paidInterpretations { position: relative; }
-.interpretPaywall { margin-top: 24px; }
-.paywallWrap { }
+.interpretBlock {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: 18px; padding: 2px 22px; margin-bottom: 12px;
+  box-shadow: 0 14px 32px -26px rgba(27,26,48,.5);
+}
+
+/* Clickable header row (title + chevron) */
+.interpretHeader {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 18px 0; background: transparent; border: none;
+  text-align: left; cursor: pointer; color: inherit;
+}
+.interpretTitle {
+  font-family: var(--font-heading); font-weight: 500; font-size: 18px;
+  color: var(--text-primary); margin-bottom: 0;
+}
+.chevron {
+  flex: none; color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+.chevron[data-open='true'] { transform: rotate(180deg); }
+
+.interpretText { color: var(--text-secondary); line-height: 1.7; padding: 0 0 18px; }
+.interpretPreview { color: var(--text-secondary); line-height: 1.7; opacity: 0.55; margin-bottom: 14px; }
+
+/* Paid block reveal: preview + unlock button */
+.paidReveal { padding-bottom: 18px; }
 
 /* ── Reset button (Astrix ghost pill) ───────────────────── */
 .formSection {

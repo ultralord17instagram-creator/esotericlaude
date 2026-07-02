@@ -25,6 +25,10 @@
 .ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-accent); }
 .ghost:hover:not(:disabled) { background: var(--accent-dim); color: var(--text-primary); }
 
+/* solid gold — subscription/unlock CTA */
+.unlock { background: linear-gradient(180deg, var(--accent-light), var(--accent)); color: var(--bg-deep); }
+.unlock:hover:not(:disabled) { opacity: 0.92; }
+
 .sm { padding: 9px 18px;  font-size: var(--text-sm); }
 .md { padding: 13px 24px; font-size: var(--text-base); }
 .lg { padding: 16px 30px; font-size: var(--text-base); }
