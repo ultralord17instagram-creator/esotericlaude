@@ -82,7 +82,8 @@
 .chakraTable td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
 .chakraNum { color: var(--text-muted); font-weight: 600; width: 24px; }
 .chakraName { font-weight: 600; }                 /* color comes from inline chakra color */
-.chakraGeneral td { font-weight: 600; background: var(--bg-tile); color: var(--text-primary); }
+.chakraGeneral td { font-weight: 500; background: var(--bg-tile); color: var(--text-primary); }
+.chakraGeneral strong { font-weight: 600; }
 
 /* ── Purpose grid ───────────────────────────────────────── */
 .purposeGrid {
