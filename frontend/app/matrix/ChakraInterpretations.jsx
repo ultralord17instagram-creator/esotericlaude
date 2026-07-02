@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { CHAKRA_CONTENT, CHAKRA_LABELS } from '../content/matrix-content'
 import Paywall from '../components/ui/Paywall'
 import Modal from '../components/ui/Modal'
@@ -36,7 +37,7 @@ export default function ChakraInterpretations({ chakras, isSubscribed }) {
               <span className={styles.interpretTitle} style={{ color: label.color }}>
                 {label.ru}
               </span>
-              <span className={styles.chevron} data-open={open}>⌄</span>
+              <ChevronDown className={styles.chevron} data-open={open} size={18} aria-hidden />
             </button>
             {open && (
               isSubscribed ? (
@@ -44,7 +45,7 @@ export default function ChakraInterpretations({ chakras, isSubscribed }) {
               ) : (
                 <div className={styles.paidReveal}>
                   <p className={styles.interpretPreview}>{text.slice(0, 60)}…</p>
-                  <Button size="sm" onClick={() => setPayOpen(true)}>
+                  <Button variant="unlock" size="sm" onClick={() => setPayOpen(true)}>
                     Смотреть полный разбор
                   </Button>
                 </div>
