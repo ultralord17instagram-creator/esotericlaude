@@ -35,6 +35,9 @@ from app.infrastructure.sql.models.base import Base  # noqa: E402
 #
 # При добавлении новой модели добавь её импорт здесь:
 from app.infrastructure.sql.models.user_models import UserModel  # noqa: E402, F401
+from app.infrastructure.sql.models.tarot_usage_model import (  # noqa: E402, F401
+    TarotUsageModel,
+)
 
 # ─────────────────────────────────────────────────────────────────────────────
 
