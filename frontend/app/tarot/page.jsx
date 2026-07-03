@@ -1,12 +1,10 @@
-import { getProduct } from '../products.config'
 import TarotClient from './TarotClient'
 
 export const metadata = {
-  title: 'Расклад Таро — послание карт для тебя',
-  description: 'Персональный расклад Таро онлайн. Получи ответ на свой вопрос через символизм карт.',
+  title: 'Расклад Таро — карта дня, три карты, да/нет',
+  description: 'Три сценария гадания на картах Таро: карта дня, расклад из трёх карт и ответ да/нет на твой вопрос.',
 }
 
 export default function TarotPage() {
-  const product = getProduct('tarot')
-  return <TarotClient product={product} />
+  return <TarotClient />
 }
