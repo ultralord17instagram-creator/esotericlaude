@@ -24,3 +24,6 @@ router.include_router(users_router)
 # ── Добавляй свои роутеры ниже ───────────────────────────────────────────────
 from app.api.v1.routes.profile import router as profile_router
 router.include_router(profile_router)
+
+from app.api.v1.routes.tarot import router as tarot_router
+router.include_router(tarot_router)

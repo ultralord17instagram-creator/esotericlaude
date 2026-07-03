@@ -54,6 +54,10 @@ class S2SAuthMiddleware(BaseHTTPMiddleware):
             "/api/v1/subscriptions/start",
             # Тариф оффера — публично, нужен до регистрации (лендинг)
             "/api/v1/subscriptions/tariff",
+            # Таро: токен есть, но подписка НЕ обязательна (бесплатные лимиты
+            # для залогиненных без подписки). Токен верифицируется внутри роутов.
+            "/api/v1/tarot/limits",
+            "/api/v1/tarot/usage",
         }
     )
 
