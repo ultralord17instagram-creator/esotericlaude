@@ -4,7 +4,7 @@ import { YESNO_TEXTS } from './texts/yesno'
 import { THREE_TEXTS } from './texts/three'
 
 // Сид от даты в TZ проекта (Europe/Moscow) — совпадает с логикой суток на бэкенде.
-function moscowDayKey(date = new Date()) {
+export function moscowDayKey(date = new Date()) {
   // en-CA даёт формат YYYY-MM-DD
   const s = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Europe/Moscow',
