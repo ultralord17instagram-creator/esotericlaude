@@ -2,6 +2,7 @@ import { DECK } from './deck'
 import { DAY_TEXTS } from './texts/day'
 import { YESNO_TEXTS } from './texts/yesno'
 import { THREE_TEXTS } from './texts/three'
+import { ADVICE_TEXTS } from './texts/advice'
 
 // Сид от даты в TZ проекта (Europe/Moscow) — совпадает с логикой суток на бэкенде.
 export function moscowDayKey(date = new Date()) {
@@ -33,10 +34,22 @@ export function assignRandomCards(count, exclude = []) {
   return picked
 }
 
+// Косметическая «уверенность» для сценария Да/Нет — выводится из полюса карты
+// детерминированно (у одной карты всегда одинаково). «да» → 58–77%, «нет» → 23–42%.
+// Это презентационный приём (шкала в макете), а не измеряемая метрика.
+export function yesNoConfidence(card) {
+  const yes = card.yesno === 'yes'
+  const base = yes ? 68 : 32
+  const spread = ((card.number * 7) % 20) - 10 // -10..+9, стабильно по номеру аркана
+  const pct = base + (yes ? spread : -spread)
+  return Math.min(92, Math.max(8, pct))
+}
+
 // Единая точка доступа к заготовкам текстов.
 export function getText({ scenario, number, themeId, intro = false }) {
   if (scenario === 'day') return DAY_TEXTS[number]
   if (scenario === 'yesno') return YESNO_TEXTS[number]
+  if (scenario === 'advice') return ADVICE_TEXTS[number]
   if (scenario === 'three') {
     const theme = THREE_TEXTS[themeId]
     if (!theme) return ''
