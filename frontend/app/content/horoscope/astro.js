@@ -22,3 +22,17 @@ export function sign(birthDate) {
   const [, m, d] = String(birthDate).split('-').map(Number)
   return SIGNS.find(s => (m === s.dates[0] && d >= s.dates[1]) || (m === s.dates[2] && d <= s.dates[3])) ?? SIGNS[0]
 }
+
+// ── «Сегодня» в TZ проекта (Europe/Moscow). Дублируется намеренно. ───────────
+export function moscowDayKey(date = new Date()) {
+  const s = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Moscow', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(date)
+  const [y, m, d] = s.split('-').map(Number)
+  return y * 10000 + m * 100 + d
+}
+
+// Детерминированный выбор варианта дневного текста: стабилен в течение дня.
+export function dayVariantIndex(today = new Date(), count = 1) {
+  return count > 0 ? moscowDayKey(today) % count : 0
+}
