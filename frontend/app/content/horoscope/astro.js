@@ -36,3 +36,36 @@ export function moscowDayKey(date = new Date()) {
 export function dayVariantIndex(today = new Date(), count = 1) {
   return count > 0 ? moscowDayKey(today) % count : 0
 }
+
+// ── Луна: возраст, фаза (8), лунный день (1..30) ─────────────────────────────
+// Опорное новолуние (UTC) и синодический месяц как константы (дизайн §5.2, §17.1).
+export const REF_NEW_MOON = Date.UTC(2000, 0, 6, 18, 14) // 2000-01-06 18:14 UTC
+export const SYNODIC = 29.530588853                       // средний синодический месяц, дней
+
+// Порядок фаз важен: индекс 0..7 соответствует долям возраста (дизайн, Прил. B).
+export const PHASES = [
+  { name: 'Новолуние',        emoji: '🌑' },
+  { name: 'Растущий серп',    emoji: '🌒' },
+  { name: 'Первая четверть',  emoji: '🌓' },
+  { name: 'Растущая Луна',    emoji: '🌔' },
+  { name: 'Полнолуние',       emoji: '🌕' },
+  { name: 'Убывающая Луна',   emoji: '🌖' },
+  { name: 'Последняя четверть', emoji: '🌗' },
+  { name: 'Старая Луна',      emoji: '🌘' },
+]
+
+export function moonAge(date = new Date()) {
+  const days = (date.getTime() - REF_NEW_MOON) / 86400000
+  let age = days % SYNODIC
+  if (age < 0) age += SYNODIC
+  return age // [0, SYNODIC)
+}
+
+export function moonPhase(date = new Date()) {
+  const idx = Math.floor((moonAge(date) / SYNODIC) * 8 + 0.5) % 8
+  return PHASES[idx]
+}
+
+export function lunarDay(date = new Date()) {
+  return Math.min(30, Math.floor(moonAge(date)) + 1) // 1..30
+}
