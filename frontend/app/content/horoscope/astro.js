@@ -69,3 +69,14 @@ export function moonPhase(date = new Date()) {
 export function lunarDay(date = new Date()) {
   return Math.min(30, Math.floor(moonAge(date)) + 1) // 1..30
 }
+
+// ── Планетарный день недели (Europe/Moscow) ──────────────────────────────────
+const WEEKDAY_PLANET = {
+  Mon: 'Луна', Tue: 'Марс', Wed: 'Меркурий', Thu: 'Юпитер',
+  Fri: 'Венера', Sat: 'Сатурн', Sun: 'Солнце',
+}
+
+export function planetaryDay(date = new Date()) {
+  const wd = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Moscow', weekday: 'short' }).format(date)
+  return { planet: WEEKDAY_PLANET[wd] ?? 'Солнце', weekday: wd }
+}

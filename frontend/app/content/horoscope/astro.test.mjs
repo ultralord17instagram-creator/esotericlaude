@@ -42,3 +42,12 @@ test('lunarDay всегда в диапазоне 1..30', () => {
     assert.ok(ld >= 1 && ld <= 30, `лунный день ${ld} вне диапазона для ${iso}`)
   }
 })
+
+import { planetaryDay } from './astro.js'
+
+test('planetaryDay: управитель по дню недели в TZ Москвы', () => {
+  // 2026-01-05 понедельник, 2026-01-04 воскресенье
+  assert.equal(planetaryDay(new Date('2026-01-05T12:00:00Z')).planet, 'Луна')
+  assert.equal(planetaryDay(new Date('2026-01-04T12:00:00Z')).planet, 'Солнце')
+  assert.equal(planetaryDay(new Date('2026-01-09T12:00:00Z')).planet, 'Венера') // пятница
+})
