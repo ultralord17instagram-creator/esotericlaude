@@ -1,12 +1,10 @@
-import { getProduct } from '../products.config'
 import HoroscopeClient from './HoroscopeClient'
 
 export const metadata = {
-  title: 'Гороскоп — персональный прогноз по знаку зодиака',
-  description: 'Гороскоп по дате рождения с прогнозом на месяц, совместимостью и советами звёзд.',
+  title: 'Гороскоп: знак, живое небо и лунный календарь',
+  description: 'Гороскоп на сегодня по знаку зодиака, реальное состояние неба и лунный календарь.',
 }
 
 export default function HoroscopePage() {
-  const product = getProduct('horoscope')
-  return <HoroscopeClient product={product} />
+  return <HoroscopeClient />
 }
