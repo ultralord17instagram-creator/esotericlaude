@@ -70,3 +70,37 @@ export function getToday(signId, today = new Date()) {
 
   return { sky, blocks }
 }
+
+// ── Раздел «Портрет знака» ───────────────────────────────────────────────────
+export function getPortrait(signId) {
+  const blocks = SCENARIOS.portrait.blocks.map(b => {
+    const raw = PORTRAIT_TEXTS[b.id]?.[signId]
+    const label = `portrait.${b.id}.${signId}`
+    if (b.free) {
+      return { id: b.id, name: b.name, free: true, text: (typeof raw === 'string' && raw) ? raw : phFree(label) }
+    }
+    const text = (raw && typeof raw === 'object')
+      ? { teaser: raw.teaser || phPaid(label).teaser, body: raw.body || phPaid(label).body }
+      : phPaid(label)
+    return { id: b.id, name: b.name, free: false, text, bait: getBait('portrait', b.id, signId) }
+  })
+  return { blocks }
+}
+
+// ── Раздел «Лунный календарь» ────────────────────────────────────────────────
+export function getLunar(today = new Date()) {
+  const ld = A.lunarDay(today)
+  const phase = A.moonPhase(today)
+  const spheres = SCENARIOS.lunar.spheres.map(id => ({
+    id,
+    overview: LUNAR_TEXTS.spheres[id] || phFree(`lunar.spheres.${id}`),
+    ratings: Array.from({ length: 30 }, (_, i) => LUNAR_RATINGS[id]?.[i + 1] || 'neutral'),
+  }))
+  return {
+    lunarDay: ld,
+    phase,
+    todayMeaning: LUNAR_TEXTS.days[ld] || phFree(`lunar.days.${ld}`),
+    spheres,
+    bait: getBait('lunar', 'calendar', ld),
+  }
+}

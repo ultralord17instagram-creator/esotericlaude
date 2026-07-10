@@ -42,3 +42,27 @@ test('getToday: собирает живое небо и блоки, платны
   assert.equal(typeof love.bait, 'string')        // платный несёт байт
   assert.equal(mood.bait, undefined)               // бесплатный без байта
 })
+
+import { getPortrait, getLunar } from './index.js'
+
+test('getPortrait: 6 блоков, core бесплатный (строка), остальные платные', () => {
+  const r = getPortrait('leo')
+  assert.equal(r.blocks.length, 6)
+  const core = r.blocks.find(b => b.id === 'core')
+  assert.equal(core.free, true)
+  assert.equal(typeof core.text, 'string')
+  const power = r.blocks.find(b => b.id === 'power')
+  assert.equal(power.free, false)
+  assert.equal(typeof power.text.teaser, 'string')
+  assert.equal(typeof power.bait, 'string')
+})
+
+test('getLunar: сегодняшний день, сферы с рейтингами по 30 дней', () => {
+  const r = getLunar(new Date('2026-07-09T12:00:00Z'))
+  assert.ok(r.lunarDay >= 1 && r.lunarDay <= 30)
+  assert.equal(typeof r.todayMeaning, 'string')
+  assert.equal(r.spheres.length, 5)
+  const beauty = r.spheres.find(s => s.id === 'beauty')
+  assert.equal(beauty.ratings.length, 30)
+  assert.ok(['good', 'neutral', 'bad'].includes(beauty.ratings[0])) // валидный рейтинг
+})
