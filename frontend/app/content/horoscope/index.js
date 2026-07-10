@@ -22,3 +22,51 @@ export function getBait(section, block, seed) {
   if (!Array.isArray(variants) || variants.length === 0) return phBait(`${section}.${block}`)
   return variants[seedNum(seed) % variants.length]
 }
+
+// Выбор варианта дня: бесплатный -> строка, платный -> { teaser, body }.
+function pickFree(arr, today, label) {
+  if (!Array.isArray(arr) || arr.length === 0) return phFree(label)
+  const v = arr[A.dayVariantIndex(today, arr.length)]
+  return typeof v === 'string' && v ? v : phFree(label)
+}
+function pickPaid(arr, today, label) {
+  if (!Array.isArray(arr) || arr.length === 0) return phPaid(label)
+  const v = arr[A.dayVariantIndex(today, arr.length)]
+  if (v && typeof v === 'object') {
+    return { teaser: v.teaser || phPaid(label).teaser, body: v.body || phPaid(label).body }
+  }
+  return phPaid(label)
+}
+
+// ── Раздел «Сегодня» + живое небо ────────────────────────────────────────────
+export function getToday(signId, today = new Date()) {
+  const phase = A.moonPhase(today)
+  const ld = A.lunarDay(today)
+  const planetary = A.planetaryDay(today)
+  const retro = A.retrogrades(today)
+
+  const sky = {
+    phase, lunarDay: ld, planetary, retro,
+    texts: {
+      phase: SKY_TEXTS.phases[phase.name] || phFree(`sky.phase.${phase.name}`),
+      lunarDay: LUNAR_TEXTS.days[ld] || phFree(`lunar.days.${ld}`),
+      planetary: SKY_TEXTS.planetaryDays[planetary.planet] || phFree(`sky.planet.${planetary.planet}`),
+      retro: retro.map(p => ({ planet: p, text: SKY_TEXTS.retro[p] || phFree(`sky.retro.${p}`) })),
+    },
+  }
+
+  const blocks = SCENARIOS.today.blocks.map(b => {
+    const arr = TODAY_TEXTS[b.id]?.[signId]
+    const label = `today.${b.id}.${signId}`
+    if (b.free) {
+      return { id: b.id, name: b.name, free: true, text: pickFree(arr, today, label) }
+    }
+    return {
+      id: b.id, name: b.name, free: false,
+      text: pickPaid(arr, today, label),
+      bait: getBait('today', b.id, signId),
+    }
+  })
+
+  return { sky, blocks }
+}
