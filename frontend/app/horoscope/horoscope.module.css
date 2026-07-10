@@ -1,0 +1,52 @@
+/* Структурный каркас продукта «Гороскоп». Визуальную полировку делает владелец. */
+.page { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+
+/* Шапка знака + вкладки */
+.header { margin-bottom: 20px; }
+.signRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.signName { font-size: 22px; font-weight: 600; }
+.signRange { opacity: 0.7; font-size: 14px; }
+.changeBtn { background: none; border: 1px solid currentColor; border-radius: 999px; padding: 6px 12px; cursor: pointer; font-size: 13px; opacity: 0.8; }
+.tabs { display: flex; gap: 6px; margin-top: 16px; }
+.tab { flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: transparent; cursor: pointer; font-size: 14px; }
+.tabOn { background: rgba(255,255,255,0.1); font-weight: 600; }
+
+/* Форма ввода даты */
+.form { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.label { font-size: 13px; opacity: 0.75; }
+.input { padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: inherit; }
+.btnPrimary { padding: 12px 18px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; }
+.btnPrimary:disabled { opacity: 0.5; cursor: default; }
+
+/* Живое небо */
+.sky { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
+.skyFact { padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+.skyIcon { font-size: 22px; }
+.skyLabel { font-size: 12px; opacity: 0.7; margin-top: 6px; }
+.skyValue { font-weight: 600; }
+.skyText { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+.retroBadges { display: flex; gap: 6px; flex-wrap: wrap; }
+.retroBadge { font-size: 12px; padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(255,180,0,0.5); }
+
+/* Карточка блока */
+.block { padding: 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 12px; }
+.blockName { font-weight: 600; margin-bottom: 8px; }
+.blockText { line-height: 1.6; }
+.locked { display: flex; flex-direction: column; gap: 10px; }
+.lockedTeaser { line-height: 1.6; }
+.bait { opacity: 0.9; }
+.lockCta { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; align-self: flex-start; }
+.lockNote { font-size: 12px; opacity: 0.6; }
+
+/* Совет дня */
+.advice { margin-top: 8px; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.06); font-style: italic; }
+
+/* Лунная сетка */
+.lunarGrid { overflow-x: auto; }
+.lunarTable { border-collapse: collapse; width: 100%; font-size: 12px; }
+.lunarTable th, .lunarTable td { padding: 4px 6px; text-align: center; border: 1px solid rgba(255,255,255,0.08); }
+.lunarSphere { text-align: left; white-space: nowrap; }
+.rGood { color: #6ee787; }
+.rNeutral { opacity: 0.5; }
+.rBad { color: #ff7b72; }
