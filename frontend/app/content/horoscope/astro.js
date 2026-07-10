@@ -80,3 +80,20 @@ export function planetaryDay(date = new Date()) {
   const wd = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Moscow', weekday: 'short' }).format(date)
   return { planet: WEEKDAY_PLANET[wd] ?? 'Солнце', weekday: wd }
 }
+
+// ── Ретрограды: статическая таблица периодов (дизайн §5.4, §16) ───────────────
+// ПЛЕЙСХОЛДЕР: реальные периоды Меркурия/Венеры/Марса на 2026-2028+ берутся из
+// открытых эфемерид при наполнении контента. Продлевается вручную раз в год.
+export const RETROGRADES = [
+  { planet: 'Меркурий', from: '2026-02-25', to: '2026-03-20' },
+]
+
+function isoKey(iso) {
+  const [y, m, d] = iso.split('-').map(Number)
+  return y * 10000 + m * 100 + d
+}
+
+export function retrogrades(date = new Date()) {
+  const k = moscowDayKey(date)
+  return RETROGRADES.filter(r => k >= isoKey(r.from) && k <= isoKey(r.to)).map(r => r.planet)
+}

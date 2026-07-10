@@ -51,3 +51,12 @@ test('planetaryDay: управитель по дню недели в TZ Моск
   assert.equal(planetaryDay(new Date('2026-01-04T12:00:00Z')).planet, 'Солнце')
   assert.equal(planetaryDay(new Date('2026-01-09T12:00:00Z')).planet, 'Венера') // пятница
 })
+
+import { retrogrades } from './astro.js'
+
+test('retrogrades: планеты, ретроградные на дату (по seed-таблице)', () => {
+  const inside = retrogrades(new Date('2026-03-01T12:00:00Z'))
+  assert.ok(inside.includes('Меркурий'))
+  const outside = retrogrades(new Date('2026-07-01T12:00:00Z'))
+  assert.deepEqual(outside, [])
+})
