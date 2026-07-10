@@ -104,3 +104,41 @@ export function getLunar(today = new Date()) {
     bait: getBait('lunar', 'calendar', ld),
   }
 }
+
+// ── Память даты рождения (дизайн §14) ────────────────────────────────────────
+// Валидная ISO-дата 'YYYY-MM-DD' или null.
+export function normalizeBirth(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(value)) ? String(value) : null
+}
+
+const LS_KEY = 'horoscope.birth'
+export function loadBirthLocal() {
+  try { return normalizeBirth(localStorage.getItem(LS_KEY)) } catch { return null }
+}
+export function saveBirthLocal(date) {
+  try { const d = normalizeBirth(date); if (d) localStorage.setItem(LS_KEY, d) } catch {}
+}
+
+// Профиль залогиненного (существующий эндпоинт, дизайн §3). null если не залогинен/нет даты.
+export async function fetchBirthFromProfile() {
+  try {
+    const res = await fetch('/api/v1/profile/me')
+    if (!res.ok) return null
+    const data = await res.json()
+    return normalizeBirth(data?.birth_date)
+  } catch { return null }
+}
+
+// Сохранение в профиль: читаем текущий, мержим только birth_date (форма тела как в LKClient).
+export async function saveBirthToProfile(date) {
+  const d = normalizeBirth(date)
+  if (!d) return
+  try {
+    const cur = await fetch('/api/v1/profile/me').then(r => r.ok ? r.json() : {}).catch(() => ({}))
+    await fetch('/api/v1/profile/me', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: cur?.name ?? null, birth_date: d, gender: cur?.gender ?? null }),
+    })
+  } catch {}
+}

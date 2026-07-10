@@ -66,3 +66,12 @@ test('getLunar: сегодняшний день, сферы с рейтинга�
   assert.equal(beauty.ratings.length, 30)
   assert.ok(['good', 'neutral', 'bad'].includes(beauty.ratings[0])) // валидный рейтинг
 })
+
+import { normalizeBirth } from './index.js'
+
+test('normalizeBirth: принимает валидную ISO-дату, отбрасывает мусор', () => {
+  assert.equal(normalizeBirth('1990-11-29'), '1990-11-29')
+  assert.equal(normalizeBirth(''), null)
+  assert.equal(normalizeBirth('не дата'), null)
+  assert.equal(normalizeBirth(null), null)
+})
