@@ -5,10 +5,12 @@ import { COMPATIBILITY_TEXTS } from './texts/compatibility.js'
 import { FORECAST_DAY_TEXTS } from './texts/forecast_day.js'
 import { FORECAST_MONTH_TEXTS } from './texts/forecast_month.js'
 import { FORECAST_YEAR_TEXTS } from './texts/forecast_year.js'
+import { BAIT } from './bait.js'
 
 const PLACEHOLDER_TEASER = (label) => `[тизер: ${label}]`
 const PLACEHOLDER_BODY = (label) => `[текст: ${label}]`
 const PLACEHOLDER_FREE = (label) => `[текст: ${label}]`
+const PLACEHOLDER_BAIT = (label) => `[байт: ${label}]`
 
 // Считает число блока по его basis из конфига.
 function blockNumber(basis, ctx) {
@@ -50,6 +52,19 @@ export function getText({ scenario, block, key, free = false, group }) {
   return { teaser: PLACEHOLDER_TEASER(label), body: PLACEHOLDER_BODY(label) }
 }
 
+// Детерминированный «сид» из числа (int) или ключа пары ('5-8') для выбора варианта.
+function baitSeed(number) {
+  return String(number).split('').reduce((a, ch) => a + ch.charCodeAt(0), 0)
+}
+
+// Байт-текст платного раздела для гостя. Несколько общих вариантов на раздел,
+// вариант стабилен для конкретного числа. Нет вариантов -> видимый плейсхолдер.
+export function getBait({ scenario, block, number }) {
+  const variants = BAIT[scenario]?.[block]
+  if (!Array.isArray(variants) || variants.length === 0) return PLACEHOLDER_BAIT(`${scenario}.${block}`)
+  return variants[baitSeed(number) % variants.length]
+}
+
 // ── Сборка результатов сценариев ─────────────────────────────────────────────
 export function buildBreakdown({ date, name }) {
   const ctx = { date, name }
@@ -58,6 +73,7 @@ export function buildBreakdown({ date, name }) {
     return {
       id: b.id, name: b.name, number, free: !!b.free,
       text: getText({ scenario: 'breakdown', block: b.id, key: number, free: b.free }),
+      bait: b.free ? undefined : getBait({ scenario: 'breakdown', block: b.id, number }),
     }
   })
   return { blocks }
@@ -72,6 +88,7 @@ export function buildCompatibility({ date, name, date2, name2 }) {
     const block = {
       id: b.id, name: b.name, number, free: !!b.free, hot: !!b.hot, showcase: !!b.showcase,
       text: getText({ scenario: 'compatibility', block: b.id, key: number, free: b.free }),
+      bait: b.free ? undefined : getBait({ scenario: 'compatibility', block: b.id, number }),
     }
     if (b.nameTouch) {
       block.nameTouch = getText({
@@ -97,6 +114,7 @@ export function buildForecast({ date, horizon, today = new Date() }) {
   const blocks = conf.blocks.map(b => ({
     id: b.id, name: b.name, number, free: !!b.free,
     text: getText({ scenario: horizon, block: b.id, key: number, free: b.free }),
+    bait: b.free ? undefined : getBait({ scenario: `forecast_${horizon}`, block: b.id, number }),
   }))
   return { horizon, number, blocks }
 }
@@ -111,4 +129,23 @@ export function saveProfile(profile) {
 }
 export function clearProfile() {
   try { localStorage.removeItem(PROFILE_KEY) } catch {}
+}
+
+// Валидная ISO-дата 'YYYY-MM-DD' или null (дизайн §6).
+export function normalizeBirth(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(value)) ? String(value) : null
+}
+
+// Профиль залогиненного как источник правды. { date, name } или null.
+// Тот же существующий эндпоинт, что у гороскопа и LKClient (дизайн §3, §6.2).
+export async function fetchProfileNumerology() {
+  try {
+    const res = await fetch('/api/v1/profile/me')
+    if (!res.ok) return null
+    const data = await res.json()
+    const date = normalizeBirth(data?.birth_date)
+    const name = typeof data?.name === 'string' ? data.name : ''
+    if (!date && !name) return null
+    return { date, name }
+  } catch { return null }
 }
