@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../../context/AuthContext'
 import { buildForecast, loadProfile, saveProfile, fetchProfileNumerology } from '../../content/numerology'
+import { markOpened } from '../../lk/dayProgress'
 import { FORECAST_HORIZONS, FORECAST_DIRECTIONS } from '../directions'
 import { SCENARIO_ICONS, DIRECTION_ICONS, Sparkle, Arrow, Calendar } from '../components/icons'
 import ScenarioHeader from '../components/ScenarioHeader'
@@ -32,6 +33,11 @@ export default function ForecastClient() {
     })()
     return () => { alive = false }
   }, [user])
+
+  // Показан бесплатный прогноз на день -> отметить блок «число» (дизайн §5.5).
+  useEffect(() => {
+    if (step !== 'input' && horizon === 'day') markOpened('number')
+  }, [step, horizon])
 
   const submitInput = (e) => {
     e.preventDefault()
