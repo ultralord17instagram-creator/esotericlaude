@@ -29,3 +29,34 @@
   font-family: var(--font-sans); font-size: var(--font-size-base);
   background: var(--color-bg); color: var(--color-text-primary);
 }
+
+/* ── Дашборд дня ─────────────────────────────────────────────────────────── */
+.dashHeader { display: flex; flex-direction: column; gap: 2px; }
+.dashGreeting { font-size: var(--font-size-lg); font-weight: 600; }
+.dashDate { color: var(--color-text-secondary); font-size: var(--font-size-sm); text-transform: capitalize; }
+
+.progressWrap { display: flex; flex-direction: column; gap: 6px; }
+.progressLabel { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.progressBar { height: 8px; border-radius: 999px; background: var(--color-border); overflow: hidden; }
+.progressFill { height: 100%; border-radius: 999px; background: var(--accent); transition: width 0.3s var(--ease-out); }
+.progressDone { font-size: var(--font-size-sm); color: var(--accent); }
+
+.dashGrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 500px) { .dashGrid { grid-template-columns: repeat(2, 1fr); } }
+
+.dashCard {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 16px; border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md); background: var(--color-bg);
+}
+.dashCardOpen { border-style: solid; border-color: var(--border-accent); background: var(--bg-raised); }
+.dashCardLocked { opacity: 0.85; }
+.dashCardHead { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.dashCardTitle { font-weight: 600; }
+.dashStatusOpen { font-size: var(--font-size-xs); color: var(--accent); white-space: nowrap; }
+.dashStatusClosed { font-size: var(--font-size-xs); color: var(--color-text-muted); white-space: nowrap; }
+.dashCardText { color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.6; }
+.dashCardBody { display: flex; flex-direction: column; gap: 8px; }
+.dashCardValue { font-weight: 600; }
+.dashProductLink { color: var(--accent); font-size: var(--font-size-sm); font-weight: 500; }
+.dashProfileLink { color: var(--accent); font-size: var(--font-size-sm); font-weight: 500; align-self: flex-start; }
