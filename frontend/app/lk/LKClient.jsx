@@ -8,13 +8,17 @@ import Input from '../components/ui/Input'
 import Card from '../components/ui/Card'
 import Link from 'next/link'
 import { PRODUCTS } from '../products.config'
+import DayDashboard from './components/DayDashboard'
+import { saveBirthLocal } from '../content/horoscope'
+import { saveProfile } from '../content/numerology'
 import styles from './lk.module.css'
 
 function LKContent() {
-  const { user, logout, refetchUser } = useAuth()
+  const { user, logout, logoutAll, refetchUser } = useAuth()
   const { startPayment } = usePayment()
   const [payLoading, setPayLoading] = useState(false)
   const [cancelLoading, setCancelLoading] = useState(false)
+  const [logoutAllLoading, setLogoutAllLoading] = useState(false)
   const [error, setError] = useState('')
 
   const [profile, setProfile] = useState({ name: '', birth_date: '', gender: '' })
@@ -47,6 +51,13 @@ function LKContent() {
     finally { setCancelLoading(false) }
   }
 
+  const handleLogoutAll = async () => {
+    if (!confirm('Выйти со всех устройств?')) return
+    setLogoutAllLoading(true)
+    try { await logoutAll() }
+    finally { setLogoutAllLoading(false) }
+  }
+
   const handleProfileSave = async (e) => {
     e.preventDefault()
     setProfileLoading(true)
@@ -62,6 +73,12 @@ function LKContent() {
         }),
       })
       if (!res.ok) throw new Error('Ошибка сохранения')
+      // Единый источник правды: синхронизируем кэши продуктов от профиля (дизайн §6.3),
+      // чтобы гороскоп и нумерология сразу считали по новой дате.
+      if (profile.birth_date) {
+        saveBirthLocal(profile.birth_date)
+        saveProfile({ date: profile.birth_date, name: profile.name })
+      }
       setProfileSaved(true)
     } catch (err) { setError(err.message) }
     finally { setProfileLoading(false) }
@@ -72,30 +89,8 @@ function LKContent() {
       <div className={styles.container}>
         <h1 className={styles.title}>Личный кабинет</h1>
 
-        {/* Подписка */}
-        <Card className={styles.section}>
-          <h2 className={styles.sectionTitle}>Подписка</h2>
-          <p className={styles.email}>{user?.email}</p>
-          <p className={user?.subscribed ? styles.statusActive : styles.statusInactive}>
-            {user?.subscribed
-              ? `Активна до ${new Date(user.subscribed_until).toLocaleDateString('ru-RU')}`
-              : 'Не активна'}
-          </p>
-          {error && <p className={styles.error}>{error}</p>}
-          <div className={styles.actions}>
-            {!user?.subscribed && (
-              <Button onClick={handlePayment} disabled={payLoading}>
-                {payLoading ? 'Переходим...' : 'Оформить за 9 ₽'}
-              </Button>
-            )}
-            {user?.subscribed && (
-              <Button variant="ghost" onClick={handleCancel} disabled={cancelLoading}>
-                {cancelLoading ? 'Отменяем...' : 'Отменить подписку'}
-              </Button>
-            )}
-            <Button variant="ghost" onClick={logout}>Выйти</Button>
-          </div>
-        </Card>
+        {/* Дашборд дня */}
+        <DayDashboard birth={profile.birth_date || null} name={profile.name} />
 
         {/* Продукты */}
         <section className={styles.section}>
@@ -112,7 +107,7 @@ function LKContent() {
 
         {/* Профиль */}
         <Card className={styles.section}>
-          <h2 className={styles.sectionTitle}>Профиль</h2>
+          <h2 id="profile" className={styles.sectionTitle}>Профиль</h2>
           <form onSubmit={handleProfileSave} className={styles.profileForm}>
             <Input
               label="Имя"
@@ -144,6 +139,41 @@ function LKContent() {
               {profileLoading ? 'Сохраняем...' : profileSaved ? 'Сохранено ✓' : 'Сохранить'}
             </Button>
           </form>
+        </Card>
+
+        {/* Подписка (существующий блок, по сути не меняем) */}
+        <Card className={styles.section}>
+          <h2 className={styles.sectionTitle}>Подписка</h2>
+          <p className={user?.subscribed ? styles.statusActive : styles.statusInactive}>
+            {user?.subscribed
+              ? `Активна до ${new Date(user.subscribed_until).toLocaleDateString('ru-RU')}`
+              : 'Не активна'}
+          </p>
+          {error && <p className={styles.error}>{error}</p>}
+          <div className={styles.actions}>
+            {!user?.subscribed && (
+              <Button onClick={handlePayment} disabled={payLoading}>
+                {payLoading ? 'Переходим...' : 'Оформить за 9 ₽'}
+              </Button>
+            )}
+            {user?.subscribed && (
+              <Button variant="ghost" onClick={handleCancel} disabled={cancelLoading}>
+                {cancelLoading ? 'Отменяем...' : 'Отменить подписку'}
+              </Button>
+            )}
+          </div>
+        </Card>
+
+        {/* Аккаунт */}
+        <Card className={styles.section}>
+          <h2 className={styles.sectionTitle}>Аккаунт</h2>
+          <p className={styles.email}>{user?.email}</p>
+          <div className={styles.actions}>
+            <Button variant="ghost" onClick={logout}>Выйти</Button>
+            <Button variant="ghost" onClick={handleLogoutAll} disabled={logoutAllLoading}>
+              {logoutAllLoading ? 'Выходим...' : 'Выйти со всех устройств'}
+            </Button>
+          </div>
         </Card>
       </div>
     </main>
