@@ -1,8 +1,8 @@
-import { DECK } from './deck'
-import { DAY_TEXTS } from './texts/day'
-import { YESNO_TEXTS } from './texts/yesno'
-import { THREE_TEXTS } from './texts/three'
-import { ADVICE_TEXTS } from './texts/advice'
+import { DECK } from './deck.js'
+import { DAY_TEXTS } from './texts/day.js'
+import { YESNO_TEXTS } from './texts/yesno.js'
+import { THREE_TEXTS } from './texts/three.js'
+import { ADVICE_TEXTS } from './texts/advice.js'
 
 // Сид от даты в TZ проекта (Europe/Moscow) — совпадает с логикой суток на бэкенде.
 export function moscowDayKey(date = new Date()) {
