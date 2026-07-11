@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { DEV_ENABLED, devUser } from '../devConfig'
 
 const AuthContext = createContext(null)
 
@@ -91,7 +92,11 @@ export function AuthProvider({ children }) {
     }
   }, [_applySubData])
 
-  useEffect(() => { fetchMe() }, [fetchMe])
+  useEffect(() => {
+    // DEV: имитация сессии без реальной авторизации (см. devConfig.js).
+    if (DEV_ENABLED) { setUser(devUser()); setLoading(false); return }
+    fetchMe()
+  }, [fetchMe])
 
   const register = async ({ email, password, refCode }) => {
     const res = await fetch('/api/v1/auth/register', {
@@ -129,8 +134,16 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
+  const logoutAll = async () => {
+    try {
+      await fetch('/api/v1/auth/logout-all', { method: 'POST' })
+    } catch {}
+    _clearUserInfo()
+    setUser(null)
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, register, login, logout, refetchUser: fetchMe }}>
+    <AuthContext.Provider value={{ user, loading, register, login, logout, logoutAll, refetchUser: fetchMe }}>
       {children}
     </AuthContext.Provider>
   )
