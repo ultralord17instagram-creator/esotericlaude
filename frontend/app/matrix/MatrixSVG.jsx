@@ -44,7 +44,7 @@ function NodeNum({ pos, value, size, fill }) {
   )
 }
 
-export default function MatrixSVG({ nodes }) {
+export default function MatrixSVG({ nodes, highlight = [] }) {
   const { d, m, y, k, center, top_left, top_right, bot_right, bot_left, male1, male2, female1, female2 } = nodes
 
   return (
@@ -144,6 +144,16 @@ export default function MatrixSVG({ nodes }) {
           <text x="688" y="150" textAnchor="middle" fontSize="10.5" fill={MUTED}>линия любви</text>
           <text x="688" y="662" textAnchor="middle" fontSize="19" fontWeight="700" fill={GOLD}>$</text>
           <text x="688" y="680" textAnchor="middle" fontSize="10.5" fill={MUTED}>денежный канал</text>
+        </g>
+
+        {/* ===== Подсветка узлов (проп highlight, лендинги) ===== */}
+        <g fill="none" stroke={GOLD_TEXT} strokeWidth="3" opacity="0.95">
+          {highlight.map((key) => {
+            const p = POS[key === 'center' ? 'centre' : key]
+            if (!p) return null
+            const r = key === 'center' ? 64 : 32
+            return <circle key={key} cx={p.x} cy={p.y} r={r} />
+          })}
         </g>
       </svg>
 
