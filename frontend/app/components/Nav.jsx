@@ -1,10 +1,16 @@
 'use client'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useAuth } from '../context/AuthContext'
+import { useAuthModal } from '../context/AuthModalContext'
 import styles from './Nav.module.css'
 
 export default function Nav() {
+  const pathname = usePathname()
   const { user, loading } = useAuth()
+  const { openAuth } = useAuthModal()
+
+  if (pathname?.startsWith('/lp/')) return null
 
   return (
     <nav className={styles.nav}>
@@ -22,8 +28,8 @@ export default function Nav() {
             user
               ? <Link href="/lk" className={styles.link}>Кабинет</Link>
               : <>
-                  <Link href="/login" className={styles.link}>Войти</Link>
-                  <Link href="/register" className={styles.cta}><span>Попробовать</span></Link>
+                  <button type="button" className={styles.link} onClick={() => openAuth('login')}>Войти</button>
+                  <button type="button" className={styles.cta} onClick={() => openAuth('register')}><span>Попробовать</span></button>
                 </>
           )}
         </div>
