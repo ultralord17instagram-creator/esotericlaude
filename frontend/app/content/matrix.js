@@ -6,7 +6,7 @@ function digitSum(n) {
   return String(n).split('').reduce((a, c) => a + Number(c), 0)
 }
 
-function reduce(n) {
+export function reduce(n) {
   if (n <= 0) return 1
   while (n > 22) n = digitSum(n)
   return n
