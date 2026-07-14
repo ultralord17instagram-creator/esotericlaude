@@ -7,6 +7,7 @@ import { loadQuiz, saveQuiz } from '../logic/quizStorage.js'
 import Hero from '../components/Hero'
 import Quiz from '../components/Quiz'
 import Calculating from '../components/Calculating'
+import Verdict from '../components/Verdict'
 import Teaser from '../components/Teaser'
 
 export default function LandingClient({ landing }) {
@@ -49,6 +50,11 @@ export default function LandingClient({ landing }) {
 
   const handleCalculated = () => {
     setMatrixData(calculateMatrix(answers.birth_date))
+    track('verdict_view', { slug: landing.slug })
+    setPhase('verdict')
+  }
+
+  const handleVerdictNext = () => {
     if (!isSubscribed) track('paywall_view', { slug: landing.slug })
     setPhase('result')
   }
@@ -56,5 +62,7 @@ export default function LandingClient({ landing }) {
   if (phase === 'hero') return <Hero hero={landing.hero} onStart={handleStart} />
   if (phase === 'quiz') return <Quiz steps={landing.quiz.steps} onComplete={handleComplete} />
   if (phase === 'calculating') return <Calculating onDone={handleCalculated} />
+  if (phase === 'verdict')
+    return <Verdict answers={answers} matrixData={matrixData} onNext={handleVerdictNext} />
   return <Teaser landing={landing} answers={answers} matrixData={matrixData} isSubscribed={isSubscribed} />
 }
