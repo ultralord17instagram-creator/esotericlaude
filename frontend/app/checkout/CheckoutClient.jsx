@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../context/AuthContext'
+import { safeReturnPath } from '../lp/logic/returnPath.js'
 
 const CP_PUBLIC_ID = process.env.NEXT_PUBLIC_CP_PUBLIC_ID
 const OFFER_ID = process.env.NEXT_PUBLIC_OFFER_ID
@@ -77,7 +78,12 @@ export default function CheckoutClient() {
         () => {
           // Успех
           setStatus('success')
-          setTimeout(() => router.push('/lk'), 1500)
+          let dest = '/lk'
+          try {
+            const safe = safeReturnPath(localStorage.getItem('post_checkout_return'))
+            if (safe) { dest = safe; localStorage.removeItem('post_checkout_return') }
+          } catch {}
+          setTimeout(() => router.push(dest), 1500)
         },
         (reason) => {
           // Ошибка / отмена
