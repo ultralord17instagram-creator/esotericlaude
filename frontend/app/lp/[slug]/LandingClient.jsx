@@ -9,6 +9,7 @@ import Quiz from '../components/Quiz'
 import Calculating from '../components/Calculating'
 import Verdict from '../components/Verdict'
 import Teaser from '../components/Teaser'
+import Result from '../components/Result'
 
 export default function LandingClient({ landing }) {
   const { user } = useAuth()
@@ -64,5 +65,7 @@ export default function LandingClient({ landing }) {
   if (phase === 'calculating') return <Calculating onDone={handleCalculated} />
   if (phase === 'verdict')
     return <Verdict answers={answers} matrixData={matrixData} onNext={handleVerdictNext} />
-  return <Teaser landing={landing} answers={answers} matrixData={matrixData} isSubscribed={isSubscribed} />
+  if (isSubscribed)
+    return <Result answers={answers} matrixData={matrixData} />
+  return <Teaser landing={landing} matrixData={matrixData} />
 }

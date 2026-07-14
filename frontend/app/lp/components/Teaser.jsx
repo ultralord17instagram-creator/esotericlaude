@@ -1,44 +1,41 @@
 'use client'
-import MatrixHeader from '../../matrix/MatrixHeader'
 import MatrixSVG from '../../matrix/MatrixSVG'
-import MatrixInterpretations from '../../matrix/MatrixInterpretations'
-import Paywall from '../../components/ui/Paywall'
-import { MATRIX_CONTENT, ASPECT_LABELS } from '../../content/matrix-content'
-import { resolveFocusAspect } from '../logic/focus.js'
+import LovePaywall from './LovePaywall'
+import { resolveCopy, LOCKED_QUESTIONS_TAIL } from '../../content/landings/love-copy.js'
+import { relationshipPoint } from '../logic/compat.js'
 import styles from '../lp.module.css'
 
-export default function Teaser({ landing, answers, matrixData, isSubscribed }) {
+export default function Teaser({ landing, matrixData }) {
   const center = matrixData.nodes.center
-  const content = MATRIX_CONTENT[center] || MATRIX_CONTENT[1]
-  const focusAspect = resolveFocusAspect(landing, answers.focus)
+  const copy = resolveCopy(center)
+  const point = relationshipPoint(matrixData.nodes)
+  const questions = [copy.hookQuestion, ...LOCKED_QUESTIONS_TAIL]
 
   return (
     <div className={styles.page}>
-      <MatrixHeader
-        name={answers.name || ''}
-        birthDate={matrixData.birthDate}
-        age={matrixData.age}
-        personalNumber={center}
-      />
-      <MatrixSVG nodes={matrixData.nodes} />
+      {/* Диаграмма как пруф + залоченное «замочное место» */}
+      <div className={styles.diagramWrap}>
+        <MatrixSVG nodes={matrixData.nodes} highlight={['female1']} />
+        <span className={styles.compatLock} aria-label="Число совместимости заблокировано">🔒</span>
+      </div>
 
-      {isSubscribed ? (
-        <MatrixInterpretations centerNumber={center} isSubscribed />
-      ) : (
-        <>
-          {/* Бесплатный блок */}
-          <div>
-            <h3 className={styles.title}>{ASPECT_LABELS.personality}</h3>
-            <p>{content.personality}</p>
-          </div>
-          {/* Заблюренный блок под запрос пользователя */}
-          <div>
-            <h3 className={styles.title}>{ASPECT_LABELS[focusAspect]}</h3>
-            <p className={styles.locked}>{content[focusAspect]}</p>
-          </div>
-          <Paywall />
-        </>
-      )}
+      {/* Точка отношений реальна и показана бесплатно (пруф расчёта) */}
+      <div className={styles.pointChip}>точка отношений <b>{point}</b></div>
+
+      <p className={styles.subtitle}>
+        Три вопроса, ответы на которые уже посчитаны в твоей матрице:
+      </p>
+
+      <ul className={styles.lockList}>
+        {questions.map((q) => (
+          <li key={q} className={styles.lockRow}>
+            <span className={styles.lockRowIcon} aria-hidden>🔒</span>
+            <span>{q}</span>
+          </li>
+        ))}
+      </ul>
+
+      <LovePaywall slug={landing.slug} />
     </div>
   )
 }
