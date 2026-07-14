@@ -2,20 +2,25 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { getLanding } from './index.js'
 
-test('getLanding возвращает конфиг для существующего slug', () => {
-  const l = getLanding('matrix')
-  assert.equal(l.slug, 'matrix')
-  assert.equal(l.quiz.steps.length, 5)
+test('getLanding отдаёт конфиг love', () => {
+  const l = getLanding('love')
+  assert.equal(l.slug, 'love')
+  assert.equal(l.quiz.steps.length, 9)
 })
 
-test('getLanding возвращает null для неизвестного slug', () => {
+test('в квизе love нет шагов пол и focus', () => {
+  const l = getLanding('love')
+  const ids = l.quiz.steps.map(s => s.id)
+  assert.ok(!ids.includes('gender'))
+  assert.ok(!ids.includes('focus'))
+  assert.ok(ids.includes('birth_date'))
+  assert.ok(ids.includes('name'))
+})
+
+test('старый matrix удалён из реестра', () => {
+  assert.equal(getLanding('matrix'), null)
+})
+
+test('неизвестный slug это null', () => {
   assert.equal(getLanding('nope'), null)
-})
-
-test('каждый focus-вариант имеет маппинг в аспект', () => {
-  const l = getLanding('matrix')
-  const focusStep = l.quiz.steps.find(s => s.id === 'focus')
-  for (const opt of focusStep.options) {
-    assert.ok(l.focusToAspect[opt.value], `нет аспекта для focus=${opt.value}`)
-  }
 })

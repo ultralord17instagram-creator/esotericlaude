@@ -1,0 +1,82 @@
+// Конфиг моно-лендинга «Отношения». Тема одна, focus-развилки нет.
+// Тексты пользовательские: без длинного тире.
+export const loveLanding = {
+  slug: 'love',
+  product: 'matrix',
+  theme: 'relationships',
+  meta: {
+    title: 'Почему ты выбираешь не тех: разбор по дате рождения',
+    description: 'Пройди короткий тест и узнай, какой сценарий в отношениях зашит в твоей матрице по дате рождения.',
+  },
+  hero: {
+    eyebrow: 'Матрица отношений',
+    title: 'Твоя дата рождения знает, почему ты выбираешь не тех',
+    subtitle: 'И почему это повторяется из раза в раз.',
+    cta: 'Узнать свой паттерн',
+  },
+  quiz: {
+    steps: [
+      { id: 'mirror', type: 'choice', required: true,
+        question: 'Что из этого больше всего про тебя?',
+        options: [
+          { value: 'fast', label: 'Влюбляюсь быстро, а потом разочаровываюсь' },
+          { value: 'hold', label: 'Держусь за того, кто меня не выбирает' },
+          { value: 'closed', label: 'Закрываюсь первой, чтобы не сделали больно' },
+          { value: 'empty', label: 'Вроде всё нормально, но внутри пусто' },
+        ] },
+      { id: 'situation', type: 'choice', required: true,
+        question: 'Что у тебя сейчас?',
+        options: [
+          { value: 'in_bad', label: 'В отношениях, но что-то не так' },
+          { value: 'alone', label: 'Одна, и это уже давит' },
+          { value: 'unwanted', label: 'Люблю того, кому я не нужна' },
+          { value: 'onoff', label: 'То вместе, то нет, полная неясность' },
+          { value: 'ended', label: 'Недавно всё закончилось' },
+        ] },
+      { id: 'repeat', type: 'choice', required: true,
+        question: 'Замечала, что твои истории заканчиваются примерно одинаково?',
+        options: [
+          { value: 'always', label: 'Да, почти каждый раз' },
+          { value: 'why', label: 'Да, но не понимаю почему' },
+          { value: 'sometimes', label: 'Иногда' },
+          { value: 'no', label: 'Нет, все разные' },
+        ] },
+      { id: 'emotion', type: 'choice', required: true,
+        question: 'Что ты чаще всего чувствуешь в отношениях?',
+        options: [
+          { value: 'abandon', label: 'Тревогу, что бросят' },
+          { value: 'undervalued', label: 'Что меня недооценивают' },
+          { value: 'lose_self', label: 'Что теряю себя' },
+          { value: 'boredom', label: 'Скуку' },
+        ] },
+      { id: 'giving', type: 'choice', required: true,
+        question: 'Как часто ты даёшь больше, чем получаешь?',
+        options: [
+          { value: 'never', label: 'Никогда' },
+          { value: 'rarely', label: 'Редко' },
+          { value: 'sometimes', label: 'Иногда' },
+          { value: 'often', label: 'Часто' },
+          { value: 'always', label: 'Постоянно' },
+        ] },
+      { id: 'desire', type: 'choice', required: true,
+        question: 'Чего хочешь на самом деле?',
+        options: [
+          { value: 'calm', label: 'Спокойных, взрослых отношений' },
+          { value: 'understand', label: 'Понять, что со мной не так' },
+          { value: 'meet', label: 'Встретить своего человека' },
+          { value: 'stop_circle', label: 'Перестать ходить по кругу' },
+        ] },
+      { id: 'yes_ladder', type: 'choice', required: true,
+        question: 'Если в твоей матрице записано, с каким человеком круг наконец обрывается, хочешь узнать?',
+        options: [
+          { value: 'yes', label: 'Да, конечно' },
+          { value: 'doubt', label: 'Да, но не верю, что это реально' },
+          { value: 'badly', label: 'Очень хочу' },
+        ] },
+      { id: 'birth_date', type: 'date', required: true,
+        question: 'Теперь дата рождения, чтобы построить твою матрицу отношений' },
+      { id: 'name', type: 'text', required: true, placeholder: 'Имя',
+        question: 'Как тебя зовут?' },
+    ],
+  },
+}

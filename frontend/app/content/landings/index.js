@@ -1,6 +1,6 @@
-import { matrixLanding } from './matrix.js'
+import { loveLanding } from './love.js'
 
-export const LANDINGS = { matrix: matrixLanding }
+export const LANDINGS = { love: loveLanding }
 
 export function getLanding(slug) {
   return LANDINGS[slug] ?? null
