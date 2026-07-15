@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { getLanding } from '../../content/landings/index.js'
 import LandingClient from './LandingClient'
+import CompatClient from './CompatClient'
+import RevealClient from './RevealClient'
 
 export function generateMetadata({ params }) {
   const l = getLanding(params.slug)
@@ -11,5 +13,9 @@ export function generateMetadata({ params }) {
 export default function LandingPage({ params }) {
   const landing = getLanding(params.slug)
   if (!landing) notFound()
-  return <LandingClient landing={landing} />
+  const Client =
+    landing.engine === 'compat-jealous' ? CompatClient :
+    landing.engine === 'live-reveal' ? RevealClient :
+    LandingClient
+  return <Client landing={landing} />
 }
