@@ -24,3 +24,11 @@ test('старый matrix удалён из реестра', () => {
 test('неизвестный slug это null', () => {
   assert.equal(getLanding('nope'), null)
 })
+
+test('getLanding отдаёт конфиг taro-him на движке live-reveal', () => {
+  const l = getLanding('taro-him')
+  assert.equal(l.slug, 'taro-him')
+  assert.equal(l.engine, 'live-reveal')
+  assert.equal(l.product, 'tarot')
+  assert.equal(l.questions.length, 4)
+})
