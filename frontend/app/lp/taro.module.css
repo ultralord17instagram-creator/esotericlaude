@@ -1,0 +1,334 @@
+/* =====================================================================
+   Лендинг «Расклад Таро на него» (движок live-reveal, дизайн design_handoff_tarot).
+   Самодостаточная фиолетовая мистическая тема, скоуплена на .root.
+   Шрифты: Playfair Display / Manrope из глобальных --font-cosmic-* (self-host,
+   полная кириллица, офлайн-сборка). Не переиспользует бордово-золотую .cosmic Astrix.
+   ===================================================================== */
+
+.root {
+  --ink: #ece7f6;
+  --muted: #a99ec6;
+  --line: rgba(185, 170, 225, .24);
+  --cream: #f3eee4;
+  --accent: #8f6ff0;
+  --serif: var(--font-cosmic-serif), Georgia, serif;
+  --sans: var(--font-cosmic-sans), system-ui, sans-serif;
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: clip;
+  background: radial-gradient(130% 100% at 50% -6%, #2c1b52 0%, #170e30 46%, #0c0720 100%);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------- Фоновый слой (звёзды, веер, свечение) ------------- */
+.backdrop { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.glowBlob {
+  position: absolute; width: 460px; height: 460px; right: -120px; bottom: -200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 70, 220, .42), rgba(150, 50, 200, 0) 62%); filter: blur(26px);
+}
+.fan {
+  position: absolute; top: -30px; left: 50%; width: 520px; height: 480px;
+  transform-origin: 50% 92%; animation: sway 11s ease-in-out infinite; opacity: .1;
+}
+.fanCard {
+  position: absolute; bottom: 0; left: 50%; margin-left: -75px; width: 150px; height: 234px; border-radius: 15px;
+  background: linear-gradient(160deg, #efeaf7, #d3c8ea);
+  box-shadow: inset 0 0 0 2px rgba(90, 70, 140, .4), inset 0 0 0 7px rgba(255, 255, 255, .4);
+}
+.star {
+  position: absolute; background: rgba(236, 231, 246, .9);
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  filter: drop-shadow(0 0 3px rgba(180, 160, 255, .8));
+  animation: twinkle 3.6s ease-in-out infinite;
+}
+
+/* ------------- Верхний бренд ------------- */
+.topbar { position: absolute; top: 26px; left: 24px; z-index: 20; display: flex; align-items: center; gap: 12px; }
+.brandMark {
+  position: relative; width: 22px; height: 29px; border-radius: 5px; flex-shrink: 0;
+  background: linear-gradient(160deg, #f3eee4, #ddd3ef); box-shadow: inset 0 0 0 1px rgba(90, 70, 140, .4);
+  display: flex; align-items: center; justify-content: center;
+}
+.brandMark::before { content: ''; width: 9px; height: 9px; border-radius: 50%; box-shadow: inset -3px -1px 0 0 rgba(110, 88, 168, .9); }
+.brandName { font-family: var(--serif); font-size: 18px; letter-spacing: .01em; color: var(--ink); }
+
+/* ------------- Общие примитивы ------------- */
+.screen { position: relative; z-index: 2; min-height: 100dvh; display: flex; flex-direction: column; animation: screenIn .5s both; }
+.scroll { flex: 1; overflow-y: auto; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+.pad { padding: 68px 24px 48px; }
+
+.eyebrow {
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent); font-weight: 600; filter: brightness(1.35);
+}
+.h1 { font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1.32; color: var(--ink); margin: 0; text-wrap: pretty; }
+.h2 { font-family: var(--serif); font-weight: 500; font-size: 24px; line-height: 1.28; color: var(--ink); margin: 0; text-wrap: pretty; }
+.lead { color: var(--muted); font-size: 14.5px; line-height: 1.55; margin: 0; text-wrap: pretty; }
+
+.field {
+  width: 100%; height: 56px; border-radius: 15px; border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .05); color: var(--ink); font-family: var(--sans);
+  font-size: 17px; text-align: center; outline: none; letter-spacing: .01em;
+  transition: border-color .2s, background .2s;
+}
+.field:focus { border-color: var(--accent); background: rgba(143, 111, 240, .1); }
+
+.cta {
+  width: 100%; height: 56px; border-radius: 16px; border: none; background: var(--cream);
+  color: #1a0f2e; font-family: var(--sans); font-size: 16px; font-weight: 700; cursor: pointer;
+  transition: transform .12s, box-shadow .2s;
+}
+.cta:hover { box-shadow: 0 14px 34px -8px var(--accent); }
+.cta:active { transform: scale(.98); }
+.cta:disabled { opacity: .5; cursor: default; box-shadow: none; }
+.ctaPulse { animation: glowPulse 2.4s ease-in-out infinite; }
+
+.linkBtn { background: none; border: none; color: var(--muted); font-family: var(--sans); font-size: 13px; cursor: pointer; border-bottom: 1px solid rgba(169, 158, 198, .4); padding: 0; }
+.linkBtn:hover { color: var(--ink); }
+
+.backBtn {
+  position: absolute; top: 60px; left: 22px; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--line); color: var(--ink); background: none; display: flex; align-items: center;
+  justify-content: center; font-size: 17px; cursor: pointer; z-index: 3;
+}
+.backBtn:active { transform: scale(.94); }
+
+.steps { display: flex; gap: 6px; align-items: center; justify-content: center; }
+.step { height: 6px; width: 6px; border-radius: 3px; background: rgba(185, 170, 225, .3); transition: width .3s, background .3s; }
+.stepOn { width: 22px; background: var(--accent); }
+
+/* ------------- Экран 1: имя (hero) ------------- */
+.hero { display: flex; flex-direction: column; justify-content: center; min-height: 100dvh; padding: 72px 24px 54px; text-align: center; }
+.heroLogo {
+  position: relative; width: 29px; height: 38px; border-radius: 6px; margin: 0 auto;
+  background: linear-gradient(160deg, #f3eee4, #ddd3ef); box-shadow: inset 0 0 0 1px rgba(90, 70, 140, .4);
+  display: flex; align-items: center; justify-content: center;
+}
+.heroLogo::before { content: ''; width: 12px; height: 12px; border-radius: 50%; box-shadow: inset -4px -1px 0 0 rgba(110, 88, 168, .9); }
+.heroCopy { margin-top: 32px; }
+.heroTitle { margin-top: 16px; }
+.heroForm { margin-top: 30px; display: flex; flex-direction: column; gap: 16px; }
+.heroHint { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 4px 6px 0; text-wrap: pretty; }
+.heroSub { margin-top: 18px; }
+.heroArt { display: none; }
+
+/* ------------- Экран 2: вопрос ------------- */
+.center { text-align: center; }
+.topLogoWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.miniLogo {
+  position: relative; width: 22px; height: 29px; border-radius: 5px;
+  background: linear-gradient(160deg, #f3eee4, #ddd3ef); box-shadow: inset 0 0 0 1px rgba(90, 70, 140, .4);
+  display: flex; align-items: center; justify-content: center;
+}
+.miniLogo::before { content: ''; width: 9px; height: 9px; border-radius: 50%; box-shadow: inset -3px -1px 0 0 rgba(110, 88, 168, .9); }
+
+.options { display: flex; flex-direction: column; gap: 11px; margin-top: 26px; }
+.option {
+  width: 100%; min-height: 58px; display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  border-radius: 15px; cursor: pointer; font-family: var(--sans); font-size: 15px; font-weight: 600;
+  border: 1px solid var(--line); background: rgba(255, 255, 255, .045); color: var(--ink); text-align: left;
+  transition: transform .12s, box-shadow .2s, background .2s, border-color .2s;
+  animation: dealIn .55s both cubic-bezier(.2, .75, .25, 1);
+}
+.option:hover { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(143, 111, 240, .35); }
+.option:active { transform: scale(.98); }
+.optionSel { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 0 1px var(--accent), 0 16px 36px -8px var(--accent); }
+.optionLabel { flex: 1; line-height: 1.3; }
+.optionArrow {
+  width: 24px; height: 24px; border-radius: 50%; border: 1px solid currentColor; opacity: .55;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 13px;
+}
+
+/* ------------- Экран 3: настройка колоды ------------- */
+.tune { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 32px 70px; }
+.tuneDeck { position: relative; width: 190px; height: 158px; }
+.tuneGlow {
+  position: absolute; top: 56%; left: 50%; width: 150px; height: 150px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(143, 111, 240, .5), rgba(143, 111, 240, 0) 66%);
+  animation: glowBreath 2.8s ease-in-out infinite;
+}
+.tuneCard {
+  position: absolute; bottom: 20px; left: 50%; margin-left: -33px; width: 66px; height: 104px; border-radius: 9px;
+  background: linear-gradient(160deg, #efeaf7, #d3c8ea);
+  box-shadow: inset 0 0 0 1px rgba(90, 70, 140, .4), inset 0 0 0 4px rgba(255, 255, 255, .42), 0 10px 24px -10px rgba(0, 0, 0, .6);
+  transform-origin: 50% 100%; display: flex; align-items: center; justify-content: center;
+  animation: fanShuffle 2.8s ease-in-out infinite;
+}
+.tuneCard::before { content: ''; width: 32%; aspect-ratio: 1; border-radius: 50%; box-shadow: inset -6px -2px 0 0 rgba(110, 88, 168, .85); }
+.tuneTitle { font-family: var(--serif); font-weight: 500; font-size: 24px; line-height: 1.3; color: var(--ink); margin: 40px 0 0; text-align: center; }
+.tuneLines { position: relative; width: 100%; max-width: 300px; height: 56px; margin-top: 20px; text-align: center; }
+.tuneLine {
+  position: absolute; left: 0; right: 0; top: 0; padding: 0 10px; color: var(--muted); font-size: 15px; line-height: 1.5;
+  text-wrap: pretty; opacity: 0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease;
+}
+.tuneLineOn { opacity: 1; transform: translateY(0); }
+
+/* ------------- Экран 4: выбор карт ------------- */
+.pickGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 12px; margin: 26px 6px 0; justify-items: center; }
+.pickCard {
+  position: relative; width: 100%; aspect-ratio: 0.66; max-width: 86px; cursor: pointer; border-radius: 11px;
+  transition: transform .22s cubic-bezier(.2, .8, .2, 1), box-shadow .22s;
+  box-shadow: 0 8px 22px -12px rgba(0, 0, 0, .7);
+}
+.pickCard:active { filter: brightness(1.05); }
+.pickCardSel { transform: translateY(-12px); box-shadow: 0 0 0 2px var(--accent), 0 18px 40px -10px var(--accent); }
+.cardBack {
+  position: absolute; inset: 0; border-radius: 11px; background: linear-gradient(160deg, #efeaf7, #d3c8ea);
+  box-shadow: inset 0 0 0 1px rgba(90, 70, 140, .4), inset 0 0 0 4px rgba(255, 255, 255, .42);
+  display: flex; align-items: center; justify-content: center;
+}
+.cardBack::before { content: ''; width: 34%; aspect-ratio: 1; border-radius: 50%; box-shadow: inset -6px -2px 0 0 rgba(110, 88, 168, .85); }
+.pickBadge {
+  position: absolute; top: -9px; right: -9px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent);
+  color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+  box-shadow: 0 4px 12px -2px var(--accent); border: 2px solid #160e2d;
+}
+.pickCounter { text-align: center; color: var(--muted); font-size: 13px; margin-top: 20px; }
+.pickCta { margin-top: 16px; animation: riseUp .5s both; }
+
+/* ------------- Экран 5: расклад ------------- */
+.readHead { text-align: center; margin-top: 6px; }
+.readRow { display: flex; justify-content: center; align-items: flex-start; gap: 14px; margin-top: 26px; }
+.readSlot { display: flex; flex-direction: column; align-items: center; gap: 11px; width: 30%; }
+.flipPersp {
+  position: relative; width: 100%; aspect-ratio: 0.58; perspective: 900px;
+  transition: opacity .5s ease, transform .55s cubic-bezier(.2, .8, .2, 1);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .55));
+}
+.flipPerspActive { filter: drop-shadow(0 12px 26px var(--accent)); }
+.flipInner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.3, .8, .25, 1); }
+.flipFace { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flipBack { background: linear-gradient(160deg, #efeaf7, #d3c8ea); box-shadow: inset 0 0 0 1px rgba(90, 70, 140, .4), inset 0 0 0 4px rgba(255, 255, 255, .42); display: flex; align-items: center; justify-content: center; }
+.flipBack::before { content: ''; width: 32%; aspect-ratio: 1; border-radius: 50%; box-shadow: inset -6px -2px 0 0 rgba(110, 88, 168, .85); }
+.flipFront { transform: rotateY(180deg); overflow: hidden; background-size: cover; background-position: center; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .55); }
+.flipFrontActive { box-shadow: 0 0 0 2px var(--accent), inset 0 0 0 3px rgba(255, 255, 255, .6); }
+.glare { position: absolute; top: 0; left: 0; width: 44%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .85), transparent); animation: glare 1s ease-out .1s both; pointer-events: none; }
+.readLabel { font-family: var(--sans); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); text-align: center; line-height: 1.25; font-weight: 600; opacity: 0; transition: opacity .5s .3s ease; }
+.readLabelOn { opacity: 1; }
+.readLabelActive { color: var(--accent); filter: brightness(1.35); }
+
+.interps { display: flex; flex-direction: column; }
+.interp { animation: riseUp .5s both; margin-top: 24px; }
+.interpFirst { margin-top: 30px; }
+.interpHidden { display: none; }
+.interpHead { display: flex; align-items: baseline; gap: 9px; }
+.interpTag { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 16px; filter: brightness(1.3); }
+.interpRule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(169, 158, 198, .35), transparent); }
+.interpText { color: #d8d1ea; font-size: 14.5px; line-height: 1.64; margin: 9px 0 0; text-wrap: pretty; }
+.caret { display: inline-block; width: 2px; height: 1.05em; background: var(--accent); margin-left: 2px; vertical-align: -2px; animation: blink 1s step-end infinite; filter: brightness(1.3); }
+
+.payBlock { margin-top: 34px; }
+.spinnerWrap { padding: 6px 0; text-align: center; animation: riseUp .5s both; }
+.spinner { width: 36px; height: 36px; border: 3px solid rgba(255, 255, 255, .18); border-top-color: var(--cream); border-radius: 50%; margin: 0 auto 14px; animation: spin .9s linear infinite; }
+.spinnerText { font-family: var(--serif); font-weight: 600; font-size: 19px; color: var(--ink); }
+.restart { text-align: center; margin-top: 18px; }
+
+/* ------------- Экран 6: Твой ход ------------- */
+.action { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 64px 28px 40px; }
+.actionLead { text-align: center; color: var(--muted); font-size: 15px; line-height: 1.55; margin: 44px 4px 0; max-width: 320px; text-wrap: pretty; animation: riseUp .6s .05s both; }
+.actionLead b { color: var(--ink); font-weight: 400; }
+.actionHead { display: none; }
+.actionBait { max-width: 340px; margin-top: 32px; color: #d8d1ea; font-size: 15px; line-height: 1.66; text-align: center; text-wrap: pretty; }
+.actionFoot { width: 100%; max-width: 340px; margin-top: 26px; }
+
+/* Мистическая карта (hero-декор на десктопе + экран «Твой ход») */
+.mystery { position: relative; width: 200px; aspect-ratio: 0.62; margin-top: 30px; cursor: pointer; animation: floaty 4.2s ease-in-out infinite; }
+.mysteryShake { animation: shake .54s ease; }
+.mysteryAura { position: absolute; top: 50%; left: 50%; width: 150%; height: 150%; transform: translate(-50%, -50%); background: conic-gradient(from 0deg, rgba(143, 111, 240, 0), rgba(143, 111, 240, .4), rgba(143, 111, 240, 0), rgba(143, 111, 240, .4), rgba(143, 111, 240, 0)); filter: blur(20px); animation: auraSpin 9s linear infinite; pointer-events: none; }
+.mysteryBody {
+  position: relative; width: 100%; height: 100%; border-radius: 16px; overflow: hidden;
+  background: linear-gradient(160deg, #2c1b56, #140c2b);
+  box-shadow: 0 0 0 1px rgba(170, 140, 255, .55), inset 0 0 0 5px rgba(180, 160, 255, .12), 0 22px 52px -14px var(--accent);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+.mysteryBody::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(143, 111, 240, .35), transparent 62%); }
+.mysteryFrame { position: absolute; inset: 9px; border-radius: 11px; border: 1px solid rgba(180, 160, 255, .28); pointer-events: none; }
+.mysteryMoon { position: relative; width: 64px; height: 64px; border-radius: 50%; box-shadow: inset -16px -6px 0 0 rgba(214, 201, 255, .92); filter: drop-shadow(0 0 10px rgba(143, 111, 240, .8)); }
+.mysteryStar { position: relative; width: 9px; height: 9px; background: #e6ddff; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 6px rgba(180, 160, 255, .9)); }
+.mysteryTitle { position: relative; font-family: var(--serif); font-style: italic; font-size: 22px; letter-spacing: .04em; color: #efe9fb; text-shadow: 0 2px 14px rgba(143, 111, 240, .7); }
+.mysteryShimmer { position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .14), transparent); animation: shimmer 4.5s ease-in-out infinite; pointer-events: none; }
+
+/* =====================================================================
+   Десктоп (≥ 860px): горизонтальные композиции
+   ===================================================================== */
+@media (min-width: 860px) {
+  .pad { padding: 110px 48px 56px; }
+  .backBtn { top: 100px; left: 48px; width: 38px; height: 38px; font-size: 18px; }
+
+  .eyebrow { font-size: 13px; letter-spacing: .24em; }
+  .h1 { font-size: 40px; line-height: 1.2; }
+  .h2 { font-size: 34px; line-height: 1.24; }
+  .lead { font-size: 16px; }
+
+  /* hero → две колонки */
+  .hero { flex-direction: row; align-items: center; justify-content: center; gap: 76px; padding: 96px 56px 56px; text-align: left; }
+  .heroLogo { display: none; }
+  .heroCopy { margin-top: 0; max-width: 580px; flex: 1; min-width: 0; }
+  .heroTitle { font-size: 42px; line-height: 1.18; margin-top: 18px; }
+  .heroSub { margin-top: 22px; max-width: 460px; }
+  .heroForm { max-width: 440px; }
+  .heroHint { margin: 16px 2px 0; }
+  .heroArt { display: flex; flex-shrink: 0; align-items: center; justify-content: center; width: 320px; height: 480px; }
+  .heroArt .mystery { width: 250px; margin-top: 0; }
+
+  /* вопрос → сетка 2×2 */
+  .colWrap { width: 100%; max-width: 900px; margin: 0 auto; text-align: center; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 38px; text-align: left; }
+  .option { min-height: 86px; padding: 20px 24px; border-radius: 16px; font-size: 16.5px; }
+
+  /* настройка */
+  .tuneDeck { width: 280px; height: 230px; }
+  .tuneCard { bottom: 24px; margin-left: -49px; width: 98px; height: 154px; border-radius: 12px; }
+  .tuneGlow { width: 230px; height: 230px; }
+  .tuneTitle { font-size: 32px; }
+
+  /* выбор карт → ряд с переносом */
+  .pickGrid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 36px; }
+  .pickCard { width: 108px; max-width: none; aspect-ratio: 0.64; }
+  .pickCardSel { transform: translateY(-14px); }
+
+  /* расклад → 3 карты и 3 колонки толкований */
+  .readRow { gap: 28px; margin-top: 36px; width: 100%; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .readSlot { width: auto; flex: 1; max-width: 210px; }
+  .interps { flex-direction: row; justify-content: center; gap: 28px; width: 100%; max-width: 760px; margin: 26px auto 0; }
+  .interp, .interpFirst { flex: 1; max-width: 210px; margin-top: 0; }
+  .interpHidden { display: block; visibility: hidden; }
+
+  /* Твой ход → две колонки */
+  .action { flex-direction: row; align-items: center; justify-content: center; gap: 72px; padding: 104px 56px 56px; }
+  .actionCol { flex: 1; min-width: 0; max-width: 480px; }
+  .actionLead { display: none; }
+  .actionHead { display: block; }
+  .actionBait { max-width: 420px; margin-top: 22px; font-size: 16.5px; text-align: left; }
+  .actionFoot { max-width: 420px; margin-top: 30px; }
+  .mystery { width: 272px; aspect-ratio: 0.62; }
+  .mysteryTitle { font-size: 26px; }
+}
+
+/* ------------- keyframes ------------- */
+@keyframes riseUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dealIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sway { 0%, 100% { transform: translateX(-50%) rotate(-2.5deg); } 50% { transform: translateX(-50%) rotate(2.5deg); } }
+@keyframes twinkle { 0%, 100% { opacity: .12; transform: scale(.7); } 50% { opacity: .7; transform: scale(1); } }
+@keyframes screenIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 22px -6px var(--accent); } 50% { box-shadow: 0 0 44px -2px var(--accent); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fanShuffle { 0%, 14% { transform: rotate(0deg); } 52%, 66% { transform: rotate(var(--a)); } 100% { transform: rotate(0deg); } }
+@keyframes glowBreath { 0%, 100% { opacity: .3; transform: translate(-50%, -50%) scale(.85); } 50% { opacity: .7; transform: translate(-50%, -50%) scale(1.12); } }
+@keyframes shimmer { 0% { transform: translateX(-120%) skewX(-18deg); } 100% { transform: translateX(320%) skewX(-18deg); } }
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+@keyframes glare { 0% { transform: translateX(-140%) skewX(-20deg); opacity: 0; } 30% { opacity: .9; } 60%, 100% { transform: translateX(260%) skewX(-20deg); opacity: 0; } }
+@keyframes floaty { 0%, 100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-12px) rotate(.5deg); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px) rotate(-1.5deg); } 40% { transform: translateX(7px) rotate(1.5deg); } 60% { transform: translateX(-5px); } 80% { transform: translateX(4px); } }
+@keyframes auraSpin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fan, .star, .tuneGlow, .tuneCard, .glowPulse, .ctaPulse, .mystery, .mysteryAura, .mysteryBody, .mysteryShimmer, .spinner { animation: none !important; }
+  .flipInner, .flipPersp { transition: none !important; }
+}
