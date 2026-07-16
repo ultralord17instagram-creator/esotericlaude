@@ -53,22 +53,13 @@ export function pickCards(name, count, deck = DECK) {
   return picked
 }
 
-// Собрать расклад для выбранного вопроса и имени: 3 открытых карты + 1 закрытая.
-export function buildReveal(question, rawName, deck = DECK) {
+// Собрать тексты расклада для выбранного вопроса и имени: 3 толкования + байт «Твой ход».
+// Лица карт (картинки колоды) назначает клиент через pickCards по имени — тексты от них не зависят.
+export function buildReading(question, rawName) {
   const name = normalizeName(rawName)
-  const cards = pickCards(name, question.cards.length + 1, deck)
-  const open = question.cards.map((c, i) => ({
-    card: cards[i],
-    position: c.position,
-    text: interpolate(c.text, name),
-    locked: false,
-  }))
-  const last = cards[cards.length - 1]
-  const lock = {
-    card: last,
-    position: interpolate(question.lockTitle, name),
-    text: interpolate(question.lockText, name),
-    locked: true,
+  return {
+    name,
+    interps: question.interps.map((t) => interpolate(t, name)),
+    actionBait: interpolate(question.actionBait, name),
   }
-  return { name, cards: [...open, lock] }
 }
