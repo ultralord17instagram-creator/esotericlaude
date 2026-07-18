@@ -32,3 +32,20 @@ test('getLanding отдаёт конфиг taro-him на движке live-revea
   assert.equal(l.product, 'tarot')
   assert.equal(l.questions.length, 4)
 })
+
+test('getLanding отдаёт конфиг taro-terminal на движке terminal', () => {
+  const l = getLanding('taro-terminal')
+  assert.equal(l.slug, 'taro-terminal')
+  assert.equal(l.engine, 'terminal')
+  assert.equal(l.product, 'tarot')
+  assert.equal(l.states.length, 8)
+})
+
+test('getLanding отдаёт конфиг horo-love на движке horo-love', () => {
+  const l = getLanding('horo-love')
+  assert.equal(l.slug, 'horo-love')
+  assert.equal(l.engine, 'horo-love')
+  assert.equal(l.product, 'horoscope')
+  assert.equal(l.branchIds.length, 3)
+  assert.ok(l.fork.options.length === 3)
+})
