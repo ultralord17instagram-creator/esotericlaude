@@ -49,3 +49,25 @@ test('getLanding отдаёт конфиг horo-love на движке horo-love
   assert.equal(l.branchIds.length, 3)
   assert.ok(l.fork.options.length === 3)
 })
+
+test('getLanding отдаёт конфиг taro-porcha на движке diagnostic', () => {
+  const l = getLanding('taro-porcha')
+  assert.equal(l.slug, 'taro-porcha')
+  assert.equal(l.engine, 'diagnostic')
+  assert.equal(l.product, 'tarot')
+  assert.equal(l.scan.symptoms.length, 9)
+})
+
+test('getLanding отдаёт конфиг rod на движке rod', () => {
+  const l = getLanding('rod')
+  assert.equal(l.slug, 'rod')
+  assert.equal(l.engine, 'rod')
+  assert.equal(l.product, 'matrix')
+  assert.equal(l.theme, 'ancestry')
+  assert.equal(l.quiz.steps.length, 8)
+  const ids = l.quiz.steps.map(s => s.id)
+  assert.equal(ids[0], 'mirror')
+  assert.ok(ids.includes('birth_date'))
+  assert.ok(ids.includes('name'))
+  assert.equal(l.revealFields.length, 5)
+})
