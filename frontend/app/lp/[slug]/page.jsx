@@ -5,6 +5,8 @@ import CompatClient from './CompatClient'
 import RevealClient from './RevealClient'
 import TerminalClient from './TerminalClient'
 import HoroLoveClient from './HoroLoveClient'
+import DiagnosticClient from './DiagnosticClient'
+import RodClient from './RodClient'
 
 export function generateMetadata({ params }) {
   const l = getLanding(params.slug)
@@ -20,6 +22,8 @@ export default function LandingPage({ params }) {
     landing.engine === 'live-reveal' ? RevealClient :
     landing.engine === 'terminal' ? TerminalClient :
     landing.engine === 'horo-love' ? HoroLoveClient :
+    landing.engine === 'diagnostic' ? DiagnosticClient :
+    landing.engine === 'rod' ? RodClient :
     LandingClient
   return <Client landing={landing} />
 }
