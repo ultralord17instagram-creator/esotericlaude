@@ -14,14 +14,21 @@ test('revealFields: 5 блоков, 2 открытых, 3 залоченных, 
     ['realization', 'mission', 'firstStep'])
 })
 
-test('DAR_PACK: Аркан 1 заполнен всеми блоками, без длинного тире', () => {
-  const d = DAR_PACK[1]
-  assert.ok(d, 'нет аркана 1')
-  for (const key of BLOCK_IDS) {
-    assert.equal(typeof d[key], 'string')
-    assert.ok(d[key].length > 0, `1.${key} пустой`)
-    assert.ok(!d[key].includes('—'), `1.${key} содержит длинное тире`)
+test('DAR_PACK: все 22 аркана заполнены всеми блоками, без длинного тире', () => {
+  for (let arcana = 1; arcana <= 22; arcana++) {
+    const d = DAR_PACK[arcana]
+    assert.ok(d, `нет аркана ${arcana}`)
+    for (const key of BLOCK_IDS) {
+      assert.equal(typeof d[key], 'string', `${arcana}.${key} не строка`)
+      assert.ok(d[key].length > 0, `${arcana}.${key} пустой`)
+      assert.ok(!d[key].includes('—'), `${arcana}.${key} содержит длинное тире`)
+    }
   }
+})
+
+test('DAR_PACK: ровно 22 аркана, без лишних ключей', () => {
+  const keys = Object.keys(DAR_PACK).map(Number).sort((a, b) => a - b)
+  assert.deepEqual(keys, Array.from({ length: 22 }, (_, i) => i + 1))
 })
 
 test('arcanaFromMatrix: 1..22 из точки личного предназначения', () => {
