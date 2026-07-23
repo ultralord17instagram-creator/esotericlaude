@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; }
+  body { font-family: 'Manrope', system-ui, sans-serif; }
+  a { color: #b9a6ea; text-decoration: none; }
+  a:hover { color: #d6c9ff; }
+  .scroll::-webkit-scrollbar { display: none; }
+  @keyframes riseUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes riseX { from { opacity: 0; transform: translateX(-22px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes dealIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes sway { 0%,100% { transform: translateX(-50%) rotate(-2.5deg); } 50% { transform: translateX(-50%) rotate(2.5deg); } }
+  @keyframes twinkle { 0%,100% { opacity: .12; transform: scale(.7); } 50% { opacity: .7; transform: scale(1); } }
+  @keyframes screenIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes flipIn { from { opacity: 0; transform: perspective(600px) rotateY(-82deg); } to { opacity: 1; transform: perspective(600px) rotateY(0); } }
+  @keyframes glowPulse { 0%,100% { box-shadow: 0 0 22px -6px var(--accent, #8f6ff0); } 50% { box-shadow: 0 0 44px -2px var(--accent, #8f6ff0); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes fanShuffle { 0%,14% { transform: rotate(0deg); } 52%,66% { transform: rotate(var(--a)); } 100% { transform: rotate(0deg); } }
+  @keyframes glowBreath { 0%,100% { opacity: .3; transform: translate(-50%,-50%) scale(.85); } 50% { opacity: .7; transform: translate(-50%,-50%) scale(1.12); } }
+  @keyframes shimmer { 0% { transform: translateX(-120%) skewX(-18deg); } 100% { transform: translateX(320%) skewX(-18deg); } }
+  @keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+  @keyframes glare { 0% { transform: translateX(-140%) skewX(-20deg); opacity: 0; } 30% { opacity: .9; } 60%,100% { transform: translateX(260%) skewX(-20deg); opacity: 0; } }
+  @keyframes floaty { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-14px) rotate(.5deg); } }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px) rotate(-1.5deg); } 40% { transform: translateX(7px) rotate(1.5deg); } 60% { transform: translateX(-5px); } 80% { transform: translateX(4px); } }
+  @keyframes auraSpin { to { transform: rotate(360deg); } }
+</style>
+</helmet>
+
+<div style="--ink:#ece7f6;--muted:#a99ec6;--line:rgba(185,170,225,.24);--cream:#f3eee4;--accent:{{ accentVar }};position:relative;width:100%;height:100vh;min-height:660px;overflow:hidden;background:radial-gradient(130% 100% at 50% -6%,#2c1b52 0%,#170e30 46%,#0c0720 100%);font-family:'Manrope',sans-serif;color:var(--ink);">
+  <div style="position:absolute;width:640px;height:640px;right:-160px;bottom:-260px;border-radius:50%;background:radial-gradient(circle,rgba(180,70,220,.4),rgba(150,50,200,0) 62%);filter:blur(34px);pointer-events:none;"></div>
+  <div style="position:absolute;top:-40px;left:50%;width:560px;height:520px;transform-origin:50% 92%;animation:sway 11s ease-in-out infinite;opacity:.09;pointer-events:none;">
+    <div style="position:absolute;bottom:0;left:50%;margin-left:-80px;width:160px;height:250px;border-radius:16px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 2px rgba(90,70,140,.4),inset 0 0 0 7px rgba(255,255,255,.4);transform:rotate(-30deg) translateX(-150px);"></div>
+    <div style="position:absolute;bottom:0;left:50%;margin-left:-80px;width:160px;height:250px;border-radius:16px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 2px rgba(90,70,140,.4),inset 0 0 0 7px rgba(255,255,255,.4);transform:rotate(-15deg) translateX(-78px);"></div>
+    <div style="position:absolute;bottom:0;left:50%;margin-left:-80px;width:160px;height:250px;border-radius:16px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 2px rgba(90,70,140,.4),inset 0 0 0 7px rgba(255,255,255,.4);"></div>
+    <div style="position:absolute;bottom:0;left:50%;margin-left:-80px;width:160px;height:250px;border-radius:16px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 2px rgba(90,70,140,.4),inset 0 0 0 7px rgba(255,255,255,.4);transform:rotate(15deg) translateX(78px);"></div>
+    <div style="position:absolute;bottom:0;left:50%;margin-left:-80px;width:160px;height:250px;border-radius:16px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 2px rgba(90,70,140,.4),inset 0 0 0 7px rgba(255,255,255,.4);transform:rotate(30deg) translateX(150px);"></div>
+  </div>
+  <sc-for list="{{ stars }}" as="s" hint-placeholder-count="10"><div style="{{ s.style }}"></div></sc-for>
+
+  <!-- top bar -->
+  <div style="position:absolute;top:30px;left:48px;z-index:20;display:flex;align-items:center;gap:12px;">
+    <div style="position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;">
+      <div style="position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(150,120,240,.5),rgba(150,120,240,0) 68%);"></div>
+      <div style="position:relative;width:20px;height:26px;border-radius:5px;background:linear-gradient(160deg,#f3eee4,#ddd3ef);box-shadow:inset 0 0 0 1px rgba(90,70,140,.4);display:flex;align-items:center;justify-content:center;"><div style="width:8px;height:8px;border-radius:50%;box-shadow:inset -3px -1px 0 0 rgba(110,88,168,.9);"></div></div>
+    </div>
+    <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:.01em;color:var(--ink);">Таро на него</span>
+  </div>
+
+  <!-- ===================== SCREEN 1 — HERO (имя) ===================== -->
+  <sc-if value="{{ show1 }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:96px 56px 56px;animation:screenIn .5s both;">
+    <div style="display:flex;align-items:center;gap:76px;max-width:1140px;width:100%;">
+      <div style="flex:1;min-width:0;max-width:580px;">
+        <div style="animation:riseX .6s .05s both;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600;filter:brightness(1.35);">Расклад Таро на него</div>
+        <h1 style="animation:riseX .7s .14s both;font-family:'Playfair Display',serif;font-weight:500;font-size:42px;line-height:1.18;color:var(--ink);margin:18px 0 0;text-wrap:pretty;">Введи его имя. Карты скажут о нём то, чего ты не можешь проверить.</h1>
+        <p style="animation:riseX .7s .26s both;color:var(--muted);font-size:17px;line-height:1.6;margin:22px 0 0;max-width:460px;text-wrap:pretty;">Один вопрос, который не даёт тебе спать — и колода ответит именно на него.</p>
+        <div style="animation:riseUp .7s .4s both;margin-top:34px;max-width:440px;display:flex;flex-direction:column;gap:14px;">
+          <input placeholder="Его имя" onChange="{{ onName }}" style="width:100%;height:62px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);font-family:'Manrope',sans-serif;font-size:18px;padding:0 22px;outline:none;" style-focus="border-color:var(--accent);background:rgba(143,111,240,.1)" />
+          <button onClick="{{ onNext1 }}" style="width:100%;height:62px;border-radius:16px;border:none;background:var(--cream);color:#1a0f2e;font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;cursor:pointer;" style-active="transform:scale(.99)" style-hover="box-shadow:0 16px 40px -10px var(--accent)">Продолжить</button>
+        </div>
+        <p style="animation:riseUp .7s .5s both;color:var(--muted);font-size:13.5px;margin:16px 2px 0;">Достаточно имени — колода найдёт его энергию.</p>
+      </div>
+      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:320px;height:480px;">
+        <div style="position:relative;width:250px;height:392px;animation:floaty 5s ease-in-out infinite;">
+          <div style="position:absolute;top:50%;left:50%;width:150%;height:130%;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,rgba(143,111,240,0),rgba(143,111,240,.35),rgba(143,111,240,0),rgba(143,111,240,.35),rgba(143,111,240,0));filter:blur(26px);animation:auraSpin 12s linear infinite;pointer-events:none;"></div>
+          <div style="position:relative;width:100%;height:100%;border-radius:22px;background:linear-gradient(160deg,#2c1b56,#140c2b);box-shadow:0 0 0 1px rgba(170,140,255,.5),inset 0 0 0 6px rgba(180,160,255,.12),0 30px 70px -18px var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;overflow:hidden;animation:glowPulse 3.4s ease-in-out infinite;">
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,rgba(143,111,240,.34),transparent 62%);"></div>
+            <div style="position:absolute;inset:13px;border-radius:15px;border:1px solid rgba(180,160,255,.26);"></div>
+            <div style="position:relative;width:96px;height:96px;border-radius:50%;box-shadow:inset -24px -8px 0 0 rgba(214,201,255,.92);filter:drop-shadow(0 0 14px rgba(143,111,240,.8));"></div>
+            <div style="position:relative;width:12px;height:12px;background:#e6ddff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);filter:drop-shadow(0 0 8px rgba(180,160,255,.9));"></div>
+            <div style="position:absolute;top:0;left:0;width:38%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);animation:shimmer 5s ease-in-out infinite;pointer-events:none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== SCREEN 3 — ВОПРОС ===================== -->
+  <sc-if value="{{ show3 }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:110px 48px 56px;animation:screenIn .5s both;">
+    <div onClick="{{ goHome }}" style="position:absolute;top:100px;left:48px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;" style-active="transform:scale(.94)">←</div>
+    <div style="width:100%;max-width:860px;text-align:center;">
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:22px;"><sc-for list="{{ steps }}" as="st" hint-placeholder-count="3"><div style="{{ st.style }}"></div></sc-for></div>
+      <div style="font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600;filter:brightness(1.35);">Расклад Таро на него</div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:40px;line-height:1.2;color:var(--ink);margin:16px 0 0;">Выбери вопрос, который не&nbsp;даёт тебе спать.</h1>
+      <p style="color:var(--muted);font-size:16px;line-height:1.55;margin:16px 0 0;">Колода ответит именно на него.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:38px;text-align:left;">
+        <sc-for list="{{ questions }}" as="q" hint-placeholder-count="4">
+          <div style="{{ q.outerStyle }}">
+            <button data-key="{{ q.key }}" onClick="{{ onPickQ }}" style="{{ q.innerStyle }}" style-hover="border-color:var(--accent);box-shadow:0 0 0 1px rgba(143,111,240,.35)" style-active="transform:scale(.98)">
+              <span style="flex:1;line-height:1.3;">{{ q.label }}</span>
+              <span style="width:28px;height:28px;border-radius:50%;border:1px solid currentColor;opacity:.55;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;">→</span>
+            </button>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== SCREEN 2 — НАСТРОЙКА КОЛОДЫ ===================== -->
+  <sc-if value="{{ show2 }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:96px 48px 56px;animation:screenIn .5s both;">
+    <div style="position:relative;width:280px;height:230px;">
+      <div style="position:absolute;top:56%;left:50%;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(143,111,240,.5),rgba(143,111,240,0) 66%);animation:glowBreath 2.8s ease-in-out infinite;"></div>
+      <div style="position:absolute;bottom:24px;left:50%;margin-left:-49px;width:98px;height:154px;border-radius:12px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 1px rgba(90,70,140,.4),inset 0 0 0 5px rgba(255,255,255,.42),0 14px 30px -12px rgba(0,0,0,.6);transform-origin:50% 100%;--a:-26deg;animation:fanShuffle 2.8s ease-in-out infinite;animation-delay:0s;display:flex;align-items:center;justify-content:center;"><div style="width:32%;aspect-ratio:1;border-radius:50%;box-shadow:inset -8px -3px 0 0 rgba(110,88,168,.85);"></div></div>
+      <div style="position:absolute;bottom:24px;left:50%;margin-left:-49px;width:98px;height:154px;border-radius:12px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 1px rgba(90,70,140,.4),inset 0 0 0 5px rgba(255,255,255,.42),0 14px 30px -12px rgba(0,0,0,.6);transform-origin:50% 100%;--a:-13deg;animation:fanShuffle 2.8s ease-in-out infinite;animation-delay:.08s;display:flex;align-items:center;justify-content:center;"><div style="width:32%;aspect-ratio:1;border-radius:50%;box-shadow:inset -8px -3px 0 0 rgba(110,88,168,.85);"></div></div>
+      <div style="position:absolute;bottom:24px;left:50%;margin-left:-49px;width:98px;height:154px;border-radius:12px;background:linear-gradient(160deg,#f3eef9,#dccff0);box-shadow:inset 0 0 0 1px rgba(90,70,140,.4),inset 0 0 0 5px rgba(255,255,255,.5),0 16px 34px -10px var(--accent);transform-origin:50% 100%;--a:0deg;animation:fanShuffle 2.8s ease-in-out infinite;animation-delay:.16s;display:flex;align-items:center;justify-content:center;overflow:hidden;"><div style="width:32%;aspect-ratio:1;border-radius:50%;box-shadow:inset -8px -3px 0 0 rgba(110,88,168,.9);"></div><div style="position:absolute;top:0;left:0;width:34%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:shimmer 2.8s ease-in-out infinite;"></div></div>
+      <div style="position:absolute;bottom:24px;left:50%;margin-left:-49px;width:98px;height:154px;border-radius:12px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 1px rgba(90,70,140,.4),inset 0 0 0 5px rgba(255,255,255,.42),0 14px 30px -12px rgba(0,0,0,.6);transform-origin:50% 100%;--a:13deg;animation:fanShuffle 2.8s ease-in-out infinite;animation-delay:.24s;display:flex;align-items:center;justify-content:center;"><div style="width:32%;aspect-ratio:1;border-radius:50%;box-shadow:inset -8px -3px 0 0 rgba(110,88,168,.85);"></div></div>
+      <div style="position:absolute;bottom:24px;left:50%;margin-left:-49px;width:98px;height:154px;border-radius:12px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 1px rgba(90,70,140,.4),inset 0 0 0 5px rgba(255,255,255,.42),0 14px 30px -12px rgba(0,0,0,.6);transform-origin:50% 100%;--a:26deg;animation:fanShuffle 2.8s ease-in-out infinite;animation-delay:.32s;display:flex;align-items:center;justify-content:center;"><div style="width:32%;aspect-ratio:1;border-radius:50%;box-shadow:inset -8px -3px 0 0 rgba(110,88,168,.85);"></div></div>
+    </div>
+    <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:32px;color:var(--ink);margin:44px 0 0;text-align:center;">Настраиваю колоду на него…</h1>
+    <div style="position:relative;width:100%;max-width:420px;height:52px;margin-top:20px;text-align:center;">
+      <sc-for list="{{ tuneLines }}" as="tl" hint-placeholder-count="1"><div style="{{ tl.style }}">{{ tl.text }}</div></sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== SCREEN 4 — ВЫБОР КАРТ ===================== -->
+  <sc-if value="{{ show4 }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:110px 48px 56px;animation:screenIn .5s both;">
+    <div onClick="{{ goTo3 }}" style="position:absolute;top:100px;left:48px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;" style-active="transform:scale(.94)">←</div>
+    <div style="width:100%;max-width:900px;text-align:center;">
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:22px;"><sc-for list="{{ steps }}" as="st" hint-placeholder-count="3"><div style="{{ st.style }}"></div></sc-for></div>
+      <div style="font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600;filter:brightness(1.35);">Твой вопрос</div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:34px;line-height:1.24;color:var(--ink);margin:14px 0 0;">«{{ qLabel }}»</h1>
+      <p style="color:var(--muted);font-size:16px;line-height:1.55;margin:14px 0 0;">Сосредоточься на нём и выбери <b style="color:var(--ink);font-weight:600;">3 карты</b>. Колода уже знает ответ.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:36px;">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="7">
+          <div data-id="{{ c.id }}" onClick="{{ onCardTap }}" style="{{ c.style }}" style-active="filter:brightness(1.05)">
+            <div style="position:absolute;inset:0;border-radius:12px;background:linear-gradient(160deg,#efeaf7,#d3c8ea);box-shadow:inset 0 0 0 1px rgba(90,70,140,.4),inset 0 0 0 5px rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center;"><div style="width:32%;aspect-ratio:1;border-radius:50%;box-shadow:inset -8px -3px 0 0 rgba(110,88,168,.85);"></div></div>
+            <sc-if value="{{ c.selected }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:-10px;right:-10px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;box-shadow:0 4px 14px -2px var(--accent);border:2px solid #140c26;">{{ c.num }}</div></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="color:var(--muted);font-size:14px;margin-top:26px;">Выбрано {{ pickedCount }} из 3</div>
+      <sc-if value="{{ canContinue }}" hint-placeholder-val="{{ false }}">
+        <div style="animation:riseUp .5s both;margin-top:18px;display:flex;justify-content:center;">
+          <button onClick="{{ onContinue }}" style="min-width:280px;height:58px;padding:0 40px;border-radius:16px;border:none;background:var(--cream);color:#1a0f2e;font-family:'Manrope',sans-serif;font-size:16.5px;font-weight:700;cursor:pointer;animation:glowPulse 2.4s ease-in-out infinite;" style-active="transform:scale(.98)">Раскрыть расклад</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== SCREEN 5 — РАСКЛАД (ядро) ===================== -->
+  <sc-if value="{{ show5 }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;animation:screenIn .5s both;">
+    <div class="scroll" ref="{{ setSc }}" style="flex:1;overflow-y:auto;scrollbar-width:none;padding:104px 48px 48px;display:flex;flex-direction:column;align-items:center;">
+      <div onClick="{{ goTo4 }}" style="position:absolute;top:100px;left:48px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;z-index:3;" style-active="transform:scale(.94)">←</div>
+      <div style="text-align:center;max-width:820px;">
+        <div style="font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600;filter:brightness(1.35);">Твой расклад</div>
+        <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:34px;line-height:1.26;color:var(--ink);margin:12px 0 0;text-wrap:pretty;">Колода легла. Три карты открыты. Последняя ждёт тебя.</h1>
+      </div>
+
+      <div style="display:flex;justify-content:center;align-items:flex-start;gap:28px;margin-top:36px;width:100%;max-width:760px;">
+        <sc-for list="{{ readCards }}" as="c" hint-placeholder-count="3">
+          <div style="{{ c.wrap }}">
+            <div style="{{ c.persp }}">
+              <div style="{{ c.inner }}">
+                <div style="{{ c.back }}"><div style="width:32%;aspect-ratio:1;border-radius:50%;box-shadow:inset -8px -3px 0 0 rgba(110,88,168,.85);"></div></div>
+                <div style="{{ c.front }}"><sc-if value="{{ c.flipped }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:0;left:0;width:44%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:glare 1s ease-out .1s both;pointer-events:none;"></div></sc-if></div>
+              </div>
+            </div>
+            <div style="{{ c.labelStyle }}">{{ c.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:28px;margin-top:26px;width:100%;max-width:760px;">
+        <sc-for list="{{ interpItems }}" as="it" hint-placeholder-count="3">
+          <div ref="{{ setInterp }}" data-i="{{ it.i }}" style="{{ it.style }}">
+            <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-size:16px;filter:brightness(1.3);">{{ it.label }}</span><span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(169,158,198,.35),transparent);"></span></div>
+            <p style="color:#d8d1ea;font-size:14.5px;line-height:1.62;margin:9px 0 0;text-wrap:pretty;">{{ it.text }}<sc-if value="{{ it.typing }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;width:2px;height:1.05em;background:var(--accent);margin-left:2px;vertical-align:-2px;animation:blink 1s step-end infinite;filter:brightness(1.3);"></span></sc-if></p>
+          </div>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ showPay }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:40px;display:flex;flex-direction:column;align-items:center;">
+          <sc-if value="{{ notBought }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ onBuy }}" style="min-width:320px;height:60px;padding:0 44px;border-radius:16px;border:none;background:var(--cream);color:#1a0f2e;font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;cursor:pointer;animation:glowPulse 2.4s ease-in-out infinite;" style-active="transform:scale(.98)">Узнай что делать</button>
+          </sc-if>
+          <sc-if value="{{ bought }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;animation:riseUp .5s both;"><div style="width:38px;height:38px;border:3px solid rgba(255,255,255,.18);border-top-color:var(--cream);border-radius:50%;margin:0 auto 14px;animation:spin .9s linear infinite;"></div><div style="font-family:'Playfair Display',serif;font-weight:600;font-size:20px;color:var(--ink);">Открываем расклад…</div></div>
+          </sc-if>
+          <div style="margin-top:18px;"><span onClick="{{ onRestart }}" style="color:var(--muted);font-size:13.5px;cursor:pointer;border-bottom:1px solid rgba(169,158,198,.4);">Начать заново</span></div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== SCREEN 6 — ТВОЙ ХОД ===================== -->
+  <sc-if value="{{ show6 }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:104px 56px 56px;animation:screenIn .6s both;">
+    <div onClick="{{ goTo5 }}" style="position:absolute;top:100px;left:48px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;" style-active="transform:scale(.94)">←</div>
+    <div style="display:flex;align-items:center;gap:72px;max-width:1040px;width:100%;">
+      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:300px;">
+        <div style="{{ mysteryWrap }}" onClick="{{ onFlip }}">
+          <div style="position:absolute;top:50%;left:50%;width:150%;height:145%;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,rgba(143,111,240,0),rgba(143,111,240,.4),rgba(143,111,240,0),rgba(143,111,240,.4),rgba(143,111,240,0));filter:blur(24px);animation:auraSpin 9s linear infinite;pointer-events:none;"></div>
+          <div style="position:relative;width:100%;height:100%;border-radius:20px;background:linear-gradient(160deg,#2c1b56,#140c2b);box-shadow:0 0 0 1px rgba(170,140,255,.55),inset 0 0 0 6px rgba(180,160,255,.12),0 26px 60px -16px var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;overflow:hidden;animation:glowPulse 3s ease-in-out infinite;cursor:pointer;">
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(143,111,240,.35),transparent 62%);"></div>
+            <div style="position:absolute;inset:11px;border-radius:14px;border:1px solid rgba(180,160,255,.28);pointer-events:none;"></div>
+            <div style="position:relative;width:82px;height:82px;border-radius:50%;box-shadow:inset -20px -8px 0 0 rgba(214,201,255,.92);filter:drop-shadow(0 0 12px rgba(143,111,240,.8));"></div>
+            <div style="position:relative;width:11px;height:11px;background:#e6ddff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);filter:drop-shadow(0 0 7px rgba(180,160,255,.9));"></div>
+            <div style="position:relative;font-family:'Playfair Display',serif;font-style:italic;font-size:26px;letter-spacing:.04em;color:#efe9fb;text-shadow:0 2px 14px rgba(143,111,240,.7);">Твой ход</div>
+            <div style="position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);animation:shimmer 4.5s ease-in-out infinite;pointer-events:none;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;min-width:0;max-width:480px;">
+        <div style="animation:riseX .6s .05s both;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;filter:brightness(1.35);">Последняя карта</div>
+        <h2 style="animation:riseX .7s .12s both;font-family:'Playfair Display',serif;font-weight:500;font-size:34px;line-height:1.24;color:var(--ink);margin:14px 0 0;text-wrap:pretty;">Три карты сказали, что происходит. Эта говорит, что с&nbsp;этим делать.</h2>
+        <p style="animation:riseUp .7s .24s both;color:#d8d1ea;font-size:16.5px;line-height:1.66;margin:22px 0 0;text-wrap:pretty;">{{ baitText }}</p>
+        <div style="animation:riseUp .7s .36s both;margin-top:30px;max-width:420px;">
+          <button onClick="{{ onFlip }}" style="width:100%;height:60px;border-radius:16px;border:none;background:var(--cream);color:#1a0f2e;font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;cursor:pointer;animation:glowPulse 2.4s ease-in-out infinite;" style-active="transform:scale(.98)">Перевернуть карту</button>
+          <div style="margin-top:16px;"><span onClick="{{ onRestart }}" style="color:var(--muted);font-size:13.5px;cursor:pointer;border-bottom:1px solid rgba(169,158,198,.4);">Начать заново</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#8f6ff0&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#8f6ff0&quot;,&quot;#b06fe0&quot;,&quot;#6f8ff0&quot;,&quot;#c76fa8&quot;]},&quot;price&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;390 ₽&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;1&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Просмотр&quot;}}">
+class Component extends DCLogic {
+  state = { screen: 1, name: '', question: null, selecting: null, picked: [], tuneStep: 0, dealt: false, flips: [false, false, false], typedArr: ['', '', ''], activeCard: -1, showPay: false, bought: false, cardShake: false };
+
+  positions = ['Где он сейчас', 'Что внутри', 'Поворот'];
+  cardImg = 'assets/priestess.png';
+  interps() {
+    const N = (this.state.name || '').trim() || 'Он';
+    return [
+      N + ' не так спокоен без тебя, как хочет казаться. Ты всё ещё всплываешь у него в мыслях, даже когда он это отрицает.',
+      'Его тянет к тебе сильнее, чем он готов признать, но гордость и страх снова проиграть держат его на расстоянии. Он ждёт от тебя знака и не получает его.',
+      'Рядом легла карта, которую ты не захочешь видеть: ты рискуешь оказаться не единственной в его поле. Времени у тебя меньше, чем кажется.',
+    ];
+  }
+
+  componentDidMount() {
+    const s = parseInt(this.props.startScreen, 10);
+    if (s === 2) this.setState({ screen: 3 });
+    else if (s === 3) this.setState({ screen: 2, question: 'hide', tuneStep: 1 });
+    else if (s === 4) this.setState({ screen: 4, question: 'hide' });
+    else if (s === 5) this.setState({ screen: 5, question: 'hide', picked: [0, 3, 5], dealt: true, flips: [true, true, true], typedArr: this.interps(), activeCard: 2, showPay: true });
+    else if (s === 6) this.setState({ screen: 6, question: 'hide', bought: true });
+  }
+  componentWillUnmount() { clearTimeout(this._qt); this.clearTune(); this.clearReading(); }
+
+  clearTune = () => (this._tune || []).forEach(clearTimeout);
+  goScreen = (n) => { this.clearTune(); this.setState({ screen: n }); };
+  onName = (e) => this.setState({ name: e.target.value });
+  onNext1 = () => this.goScreen(3);
+  runTune = () => {
+    this.clearTune();
+    this._tune = [
+      setTimeout(() => this.setState({ tuneStep: 1 }), 1800),
+      setTimeout(() => this.setState({ tuneStep: 2 }), 3600),
+      setTimeout(() => this.setState({ screen: 4 }), 5400),
+    ];
+  };
+
+  onPickQ = (e) => {
+    const key = e.currentTarget.dataset.key;
+    this.setState({ selecting: key });
+    clearTimeout(this._qt);
+    this._qt = setTimeout(() => { this.setState({ screen: 2, question: key, selecting: null, tuneStep: 0 }); this.runTune(); }, 500);
+  };
+
+  onCardTap = (e) => {
+    const id = Number(e.currentTarget.dataset.id);
+    this.setState((s) => {
+      const has = s.picked.includes(id);
+      const picked = has ? s.picked.filter((x) => x !== id) : (s.picked.length < 3 ? [...s.picked, id] : s.picked);
+      return { picked };
+    });
+  };
+
+  onContinue = () => {
+    if (this.state.picked.length < 3) return;
+    this.clearReading();
+    this.setState({ screen: 5, dealt: false, flips: [false, false, false], typedArr: ['', '', ''], activeCard: -1, showPay: false, bought: false });
+    this.startReading();
+  };
+
+  clearReading = () => { (this._rd || []).forEach(clearTimeout); clearInterval(this._tw); this._rd = []; };
+  startReading = () => {
+    this.clearReading();
+    this._rd.push(setTimeout(() => this.setState({ dealt: true }), 260));
+    this._rd.push(setTimeout(() => this.revealCard(0), 1300));
+  };
+  revealCard = (i) => {
+    this.setState((s) => ({ activeCard: i, flips: s.flips.map((v, idx) => (idx === i ? true : v)) }));
+    this._rd.push(setTimeout(() => this.typeCard(i), 780));
+  };
+  typeCard = (i) => {
+    const full = this.interps()[i];
+    let n = 0;
+    clearInterval(this._tw);
+    this._tw = setInterval(() => {
+      n++;
+      this.setState((s) => { const t = s.typedArr.slice(); t[i] = full.slice(0, n); return { typedArr: t }; });
+      if (n >= full.length) {
+        clearInterval(this._tw);
+        this._rd.push(setTimeout(() => { if (i < 2) this.revealCard(i + 1); else this.finishReading(); }, 720));
+      }
+    }, 26);
+  };
+  finishReading = () => { this.setState({ showPay: true }); this._rd.push(setTimeout(() => { if (this._sc) this._sc.scrollTo({ top: this._sc.scrollHeight, behavior: 'smooth' }); }, 280)); };
+  setSc = (el) => { this._sc = el; };
+  setInterp = (el) => { if (el) { this._interp = this._interp || []; this._interp[Number(el.dataset.i)] = el; } };
+
+  onBuy = () => { this.setState({ bought: true }); this._rd = this._rd || []; this._rd.push(setTimeout(() => this.setState({ screen: 6 }), 2000)); };
+  onFlip = () => { this.setState({ cardShake: true }); setTimeout(() => this.setState({ cardShake: false }), 540); };
+  onRestart = () => { this.clearTune(); this.clearReading(); this.setState({ screen: 1, name: '', question: null, selecting: null, picked: [], tuneStep: 0, dealt: false, flips: [false, false, false], typedArr: ['', '', ''], activeCard: -1, showPay: false, bought: false }); };
+
+  renderVals() {
+    const { screen, name, selecting, picked, dealt, flips, typedArr, activeCard, showPay, bought, cardShake } = this.state;
+    const accent = this.props.accent || '#8f6ff0';
+    const price = this.props.price || '390 ₽';
+
+    const QS = [
+      { key: 'return', label: 'Вернётся ли он ко мне' },
+      { key: 'feel', label: 'Что он на самом деле ко мне чувствует' },
+      { key: 'hide', label: 'Что он от меня скрывает' },
+      { key: 'other', label: 'Есть ли у него другая' },
+    ];
+    const questions = QS.map((q, i) => {
+      const sel = selecting === q.key;
+      return {
+        key: q.key, label: q.label,
+        outerStyle: { animation: 'dealIn .5s both cubic-bezier(.2,.75,.25,1)', animationDelay: (0.15 + i * 0.09) + 's' },
+        innerStyle: {
+          width: '100%', minHeight: '86px', display: 'flex', alignItems: 'center', gap: '14px',
+          padding: '20px 24px', borderRadius: '16px', cursor: 'pointer',
+          fontFamily: 'Manrope, sans-serif', fontSize: '16.5px', fontWeight: 600,
+          transition: 'transform .12s, box-shadow .2s, background .2s, border-color .2s',
+          border: '1px solid ' + (sel ? accent : 'rgba(185,170,225,.24)'),
+          background: sel ? accent : 'rgba(255,255,255,.045)',
+          color: sel ? '#fff' : 'var(--ink)',
+          boxShadow: sel ? ('0 0 0 1px ' + accent + ', 0 16px 36px -8px ' + accent) : 'none',
+        },
+      };
+    });
+
+    const stars = [
+      { t: '11%', l: '9%', s: 3, d: 0 }, { t: '19%', l: '90%', s: 4, d: 1.2 },
+      { t: '33%', l: '4%', s: 2, d: .6 }, { t: '43%', l: '95%', s: 3, d: 2 },
+      { t: '62%', l: '7%', s: 4, d: .9 }, { t: '70%', l: '92%', s: 2, d: 1.6 },
+      { t: '84%', l: '30%', s: 3, d: .3 }, { t: '14%', l: '52%', s: 2, d: 2.4 },
+      { t: '82%', l: '66%', s: 2, d: 1.1 }, { t: '88%', l: '15%', s: 3, d: 1.8 },
+      { t: '8%', l: '30%', s: 2, d: .5 }, { t: '26%', l: '74%', s: 2, d: 1.3 },
+    ].map((o) => ({
+      style: {
+        position: 'absolute', top: o.t, left: o.l, width: (o.s * 2) + 'px', height: (o.s * 2) + 'px',
+        background: 'rgba(236,231,246,.9)',
+        clipPath: 'polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)',
+        filter: 'drop-shadow(0 0 3px rgba(180,160,255,.8))',
+        animation: 'twinkle 3.6s ease-in-out infinite', animationDelay: o.d + 's',
+      },
+    }));
+
+    const cards = [0, 1, 2, 3, 4, 5, 6].map((id) => {
+      const sel = picked.includes(id);
+      const order = picked.indexOf(id);
+      return {
+        id, selected: sel, num: sel ? (order + 1) : '',
+        style: {
+          position: 'relative', width: '108px', aspectRatio: '0.64', cursor: 'pointer',
+          borderRadius: '12px', transition: 'transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s',
+          transform: sel ? 'translateY(-14px)' : 'translateY(0)',
+          boxShadow: sel ? ('0 0 0 2px ' + accent + ', 0 20px 44px -10px ' + accent) : '0 10px 24px -12px rgba(0,0,0,.7)',
+        },
+      };
+    });
+
+    const steps = [3, 4, 5].map((n) => ({
+      style: {
+        height: '6px', borderRadius: '3px', transition: 'width .3s, background .3s',
+        width: screen === n ? '24px' : '6px',
+        background: screen === n ? accent : 'rgba(185,170,225,.3)',
+      },
+    }));
+
+    const qLabel = (QS.find((q) => q.key === this.state.question) || {}).label || '';
+    const nm = (name || '').trim();
+    const subjName = nm || 'Он';
+    const subjLower = nm || 'он';
+
+    const fullTexts = this.interps();
+    const img = this.cardImg;
+    const readCards = [0, 1, 2].map((i) => {
+      const flipped = flips[i];
+      const active = activeCard === i;
+      return {
+        i, label: this.positions[i], flipped,
+        wrap: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '13px', flex: '1', maxWidth: '210px' },
+        persp: {
+          position: 'relative', width: '100%', aspectRatio: '0.58', perspective: '1000px',
+          opacity: dealt ? 1 : 0,
+          transform: dealt ? 'translateY(0) scale(1)' : 'translateY(-30px) scale(.9)',
+          transition: 'opacity .5s ease, transform .55s cubic-bezier(.2,.8,.2,1)',
+          transitionDelay: (i * 0.14) + 's',
+          filter: active ? ('drop-shadow(0 14px 30px ' + accent + ')') : 'drop-shadow(0 10px 22px rgba(0,0,0,.55))',
+        },
+        inner: {
+          position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d',
+          transition: 'transform .8s cubic-bezier(.3,.8,.25,1)',
+          transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+        },
+        back: {
+          position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
+          borderRadius: '12px', background: 'linear-gradient(160deg,#efeaf7,#d3c8ea)',
+          boxShadow: 'inset 0 0 0 1px rgba(90,70,140,.4),inset 0 0 0 5px rgba(255,255,255,.42)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        },
+        front: {
+          position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
+          transform: 'rotateY(180deg)', borderRadius: '12px', overflow: 'hidden',
+          backgroundImage: 'url(' + img + ')', backgroundSize: 'cover', backgroundPosition: 'center',
+          boxShadow: active ? ('0 0 0 2px ' + accent + ',inset 0 0 0 3px rgba(255,255,255,.6)') : 'inset 0 0 0 3px rgba(255,255,255,.55)',
+        },
+        labelStyle: {
+          fontFamily: "'Manrope',sans-serif", fontSize: '11.5px', letterSpacing: '.08em', textTransform: 'uppercase',
+          color: active ? accent : 'var(--muted)', filter: active ? 'brightness(1.35)' : 'none',
+          opacity: flipped ? 1 : 0, transition: 'opacity .5s .3s ease', textAlign: 'center', lineHeight: 1.25, fontWeight: 600,
+        },
+      };
+    });
+    const interpItems = [0, 1, 2].map((i) => {
+      const flipped = flips[i];
+      const text = typedArr[i] || '';
+      return {
+        i, label: this.positions[i], text,
+        typing: activeCard === i && text.length < fullTexts[i].length,
+        style: { flex: '1', maxWidth: '210px', visibility: flipped ? 'visible' : 'hidden', animation: 'riseUp .5s both' },
+      };
+    });
+
+    const tuneLines = [
+      subjName + ' ещё не знает, что карты уже говорят о нём…',
+      'Считываю, что он прячет за словами…',
+      'Свожу его линию с твоей…',
+    ].map((t, i) => ({
+      text: t,
+      style: {
+        position: 'absolute', left: 0, right: 0, top: 0, padding: '0 10px',
+        transition: 'opacity .6s ease, transform .6s ease',
+        opacity: this.state.tuneStep === i ? 1 : 0,
+        transform: this.state.tuneStep === i ? 'translateY(0)' : 'translateY(8px)',
+        color: 'var(--muted)', fontSize: '16px', lineHeight: '1.5', textWrap: 'pretty',
+      },
+    }));
+
+    return {
+      accentVar: accent, price, questions, stars, cards, steps, qLabel,
+      pickedCount: picked.length, canContinue: picked.length === 3,
+      show1: screen === 1, show2: screen === 2, show3: screen === 3, show4: screen === 4, show5: screen === 5, show6: screen === 6,
+      onFlip: this.onFlip, goTo5: () => this.goScreen(5),
+      mysteryWrap: { position: 'relative', width: '272px', aspectRatio: '0.62', animation: cardShake ? 'shake .54s ease' : 'floaty 4.6s ease-in-out infinite' },
+      baitText: 'Карта называет одно действие, которое решает всё: сделаешь его в ближайшие дни, и ' + subjLower + ' сам потянется к тебе.',
+      tuneLines,
+      bought, notBought: !bought,
+      readCards, interpItems, showPay,
+      setSc: this.setSc, setInterp: this.setInterp,
+      onName: this.onName, onPickQ: this.onPickQ, onCardTap: this.onCardTap,
+      onContinue: this.onContinue, onBuy: this.onBuy, onRestart: this.onRestart, onNext1: this.onNext1,
+      goHome: () => this.goScreen(1), goTo3: () => this.goScreen(3), goTo4: () => this.goScreen(4),
+    };
+  }
+}
+</script>
+</body>
+</html>

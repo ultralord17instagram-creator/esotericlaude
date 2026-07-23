@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #201b11; -webkit-font-smoothing: antialiased; }
+  a { color: var(--lock); }
+  a:hover { color: var(--accent-d); }
+  @keyframes flick { 0%,100%{opacity:1} 92%{opacity:1} 94%{opacity:.9} 96%{opacity:1} }
+  @media (prefers-reduced-motion: reduce){ .anim{animation:none !important} }
+</style>
+</helmet>
+
+<div style="--screen:#e7d6ac;--screen-2:#ddca9c;--ink:#332e1c;--ink-soft:#5f5029;--muted:#9c8656;--line:#c3ac7a;--accent:#7c8a56;--accent-d:#5c6d40;--accent-l:#9aa675;--glow:#d59a5a;--lock:#bd6335;--wood:#8f7647;--wood-d:#5f4e2d;background-color:#201b11;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 7px),radial-gradient(130% 100% at 50% -18%,#3a2d1580,transparent 55%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;font-family:'IBM Plex Mono',monospace;">
+
+  <!-- BEZEL -->
+  <div style="width:390px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:36px;padding:15px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+    <!-- SCREEN -->
+    <div class="anim" style="border-radius:24px;padding:22px 22px 22px;display:flex;flex-direction:column;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 80% at 50% 22%,var(--screen),var(--screen-2));box-shadow:inset 0 0 70px #4a2f1840,inset 0 0 0 2px var(--wood-d);animation:flick 6s linear infinite;">
+
+      <!-- top bar: back + status -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:34px;height:34px;flex-shrink:0;border-radius:0;border:1.5px solid var(--line);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;background:linear-gradient(180deg,var(--screen),var(--screen-2));display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--ink-soft);box-shadow:inset 0 1px 0 #ffffff88;">‹</div>
+        <div style="flex:1;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);">
+          <span>QUESTION MODE</span><span>STEP 05-08</span>
+        </div>
+      </div>
+
+      <!-- question counter -->
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:2px;color:var(--muted);margin-top:16px;">ВОПРОС 1 / 3 //</div>
+
+      <!-- pinned card -->
+      <div style="display:flex;flex-direction:column;align-items:center;margin-top:14px;">
+        <div style="width:122px;aspect-ratio:164/262;border-radius:0;overflow:hidden;box-shadow:0 0 0 3px var(--glow),0 0 0 6px var(--wood-d),0 0 18px #d59a5a66,0 8px 0 #00000022;">
+          <img src="assets/card-moon-art.png" alt="Аркан Луна" style="width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated;">
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin-top:9px;">XVIII · ЛУНА</div>
+      </div>
+
+      <!-- question -->
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);margin-top:20px;">Какая деталь на карте ощущается как знак для тебя? Что откликается первым?</div>
+
+      <!-- answer grid 2x2 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;">
+        <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:14px 12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Фигура</div>
+        <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:14px 12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Свет</div>
+        <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:14px 12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Символ</div>
+        <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:14px 12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Общее настроение</div>
+      </div>
+
+      <!-- free text -->
+      <div style="margin-top:10px;border:1.5px dashed var(--line);border-radius:0;padding:14px 14px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);background:#00000008;">Опиши своими словами (по желанию)</div>
+
+      <!-- disabled next -->
+      <div style="background:#c9be9c;color:#8f8768;padding:14px;text-align:center;font-family:'Handjet',monospace;font-weight:700;font-size:22px;letter-spacing:1px;margin-top:22px;box-shadow:0 0 0 3px #a49a78;opacity:.75;">ДАЛЕЕ ▶</div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

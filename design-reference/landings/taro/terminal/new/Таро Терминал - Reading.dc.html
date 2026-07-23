@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #201b11; -webkit-font-smoothing: antialiased; }
+  a { color: var(--lock); }
+  a:hover { color: var(--accent-d); }
+  @keyframes caret { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes flick { 0%,100%{opacity:1} 92%{opacity:1} 94%{opacity:.9} 96%{opacity:1} }
+  @media (prefers-reduced-motion: reduce){ .anim{animation:none !important} }
+</style>
+</helmet>
+
+<div style="--screen:#e7d6ac;--screen-2:#ddca9c;--ink:#332e1c;--ink-soft:#5f5029;--muted:#9c8656;--line:#c3ac7a;--accent:#7c8a56;--accent-d:#5c6d40;--accent-l:#9aa675;--glow:#d59a5a;--lock:#bd6335;--wood:#8f7647;--wood-d:#5f4e2d;background-color:#201b11;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 7px),radial-gradient(130% 100% at 50% -18%,#3a2d1580,transparent 55%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;font-family:'IBM Plex Mono',monospace;">
+
+  <!-- BEZEL -->
+  <div style="width:390px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:36px;padding:15px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+    <!-- SCREEN -->
+    <div class="anim" style="border-radius:24px;padding:26px 24px 24px;display:flex;flex-direction:column;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 80% at 50% 22%,var(--screen),var(--screen-2));box-shadow:inset 0 0 70px #4a2f1840,inset 0 0 0 2px var(--wood-d);animation:flick 6s linear infinite;">
+
+      <!-- status -->
+      <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);">
+        <span>TERMINAL READS…</span><span>STATUS: DONE</span>
+      </div>
+
+      <!-- progress -->
+      <div style="display:flex;gap:5px;margin-top:14px;">
+        <span style="flex:1;height:4px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span>
+      </div>
+
+      <!-- card, centered with breathing room -->
+      <div style="display:flex;flex-direction:column;align-items:center;margin-top:24px;">
+        <div style="width:172px;aspect-ratio:164/262;border-radius:0;overflow:hidden;box-shadow:0 0 0 3px var(--glow),0 0 0 6px var(--wood-d),0 0 22px #d59a5a66,0 10px 0 #00000022;image-rendering:pixelated;">
+          <img src="assets/card-moon-art.png" alt="Аркан Луна" style="width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated;">
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);margin-top:12px;">XVIII · ЛУНА</div>
+      </div>
+
+      <!-- title -->
+      <div style="font-family:'Handjet',monospace;font-weight:800;font-size:34px;color:var(--ink);text-align:center;letter-spacing:1px;text-shadow:0 0 12px var(--glow);margin-top:20px;">ТВОЙ ВЫВОД</div>
+
+      <!-- reading text in a contained panel with clear contrast -->
+      <div style="margin-top:18px;border-radius:0;border:2px solid var(--line);background:linear-gradient(180deg,#f0e6cc,#e8dcbf);box-shadow:inset 0 1px 0 #ffffff88,inset 0 0 24px #d59a5a1f;padding:20px 18px;display:flex;flex-direction:column;gap:14px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.65;color:var(--ink);">Свою привязанность ты назвала <span style="color:var(--accent-d);font-weight:600;">«Ожидание»</span>.</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.65;color:var(--ink);">А не хватает тебе <span style="color:var(--accent-d);font-weight:600;">«Свободы»</span>.</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.65;color:var(--ink);">Карта «Луна» показывает: дело не в нём, а в том, что ты сама себя держишь. Её ключ — это <span style="color:var(--lock);font-weight:600;">«Иллюзии»</span>.</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.65;color:var(--ink);font-style:italic;">Иногда мы скучаем не по человеку, а по той версии себя, которая рядом с ним оживала.<span class="anim" style="animation:caret 1s step-end infinite;color:var(--lock);font-style:normal;">▊</span></div>
+      </div>
+
+      <!-- what opens (no lock block) -->
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:2px;color:var(--muted);margin-top:22px;">ЧТО ОТКРОЕТСЯ В ПОЛНОМ РАЗБОРЕ</div>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:12px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Полное значение твоей карты</div>
+        <div style="display:flex;gap:10px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Что делать с этим состоянием</div>
+        <div style="display:flex;gap:10px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Личный вывод и шаг на сегодня</div>
+        <div style="display:flex;gap:10px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Доступ ко всем 22 картам</div>
+      </div>
+
+      <!-- CTA -->
+      <div style="background:var(--lock);color:#f7efd8;padding:14px;text-align:center;font-family:'Handjet',monospace;font-weight:700;font-size:22px;letter-spacing:1px;box-shadow:inset -4px -4px 0 #8f4a28,inset 4px 4px 0 #d98a63,0 0 0 3px var(--wood-d);margin-top:22px;">ЧТО С ЭТИМ ДЕЛАТЬ →</div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

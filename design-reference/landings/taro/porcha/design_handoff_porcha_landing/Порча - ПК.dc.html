@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Oswald:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  a, a:hover { color: inherit; text-decoration: none; }
+  @keyframes slowDrift { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+  @keyframes glowPulse { 0%,100% { opacity:.4; } 50% { opacity:.75; } }
+  @keyframes fan { 0%,100% { transform:rotate(0deg) translateY(0); } 45%,55% { transform:rotate(var(--r)) translateY(var(--y)); } }
+  @keyframes floaty { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+  @keyframes flipIn { from { transform:rotateY(-85deg); opacity:0; } to { transform:rotateY(0deg); opacity:1; } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes blink { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
+  .pk-scroll::-webkit-scrollbar { width:8px; }
+  .pk-scroll::-webkit-scrollbar-thumb { background:rgba(224,68,85,.25); border-radius:8px; }
+  .pk-input::placeholder { color:#6b545a; }
+</style>
+</helmet>
+
+<div style="min-height:100vh; width:100%; position:relative; overflow:hidden; background:linear-gradient(180deg,#0b0708 0%, #140507 58%, #060304 100%); font-family:'Manrope',sans-serif;">
+
+  <!-- ========== HERO ========== -->
+  <sc-if value="{{ isHero }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute; top:-160px; left:50%; transform:translateX(-50%); width:1000px; height:900px; background:radial-gradient(50% 50% at 50% 0%, rgba(224,68,85,.22), transparent 70%); animation:glowPulse 6s ease-in-out infinite; pointer-events:none;"></div>
+    <section style="position:relative; z-index:2; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:60px 48px;">
+      <div style="width:1120px; max-width:92vw; display:grid; grid-template-columns:1.05fr .95fr; gap:70px; align-items:center;">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:#c98088; letter-spacing:.04em;">расклад на негатив</div>
+          <h1 style="font-family:'Playfair Display',serif; font-weight:600; font-size:74px; line-height:1.02; color:#f4ecec; margin:20px 0 0;">На тебе<br><span style="color:#e04455;">порча?</span></h1>
+          <p style="font-family:'Manrope',sans-serif; font-size:19px; line-height:1.6; color:#a2898e; margin:26px 0 0; max-width:440px;">Три карты покажут, что забирает твои силы, деньги и сон. Ответь честно — и увидишь причину.</p>
+          <a onClick="{{ goQuiz }}" style="display:inline-block; margin-top:38px; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.06em; font-size:18px; color:#faf3f3; background:linear-gradient(180deg,#c4182c,#8f0d1c); padding:20px 54px; border-radius:9px; box-shadow:0 14px 40px rgba(196,26,44,.4); text-transform:uppercase; cursor:pointer;">Пройти проверку</a>
+          <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:#7a6065; margin:22px 0 0;">2 минуты наедине с картами</p>
+        </div>
+        <div style="display:flex; justify-content:center;">
+          <div style="display:flex; gap:20px; perspective:1000px; animation:slowDrift 7s ease-in-out infinite;">
+            <div style="position:relative; width:150px; height:252px; border-radius:11px; transform:rotateY(20deg); border:1px solid rgba(224,68,85,.3); background:linear-gradient(180deg,#1d070a,#100406); box-shadow:0 24px 54px rgba(0,0,0,.7); overflow:hidden;">
+              <div style="position:absolute; inset:8px; border:1px solid rgba(224,68,85,.18); border-radius:7px;"></div>
+              <div style="position:absolute; top:50%; left:43%; transform:translate(-50%,-50%); width:60px; height:60px; border-radius:50%; background:radial-gradient(circle,#f0b0b6,#c4182c); box-shadow:0 0 22px rgba(224,68,85,.5);"></div>
+              <div style="position:absolute; top:50%; left:56%; transform:translate(-50%,-50%); width:55px; height:55px; border-radius:50%; background:#150609;"></div>
+              <div style="position:absolute; top:40px; left:62%; width:11px; height:11px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 9px #e04455;"></div>
+            </div>
+            <div style="position:relative; width:164px; height:278px; border-radius:11px; border:1px solid rgba(224,68,85,.5); background:linear-gradient(180deg,#23090e,#140609); box-shadow:0 0 70px rgba(224,68,85,.4); overflow:hidden;">
+              <div style="position:absolute; inset:9px; border:1px solid rgba(224,68,85,.22); border-radius:7px;"></div>
+              <div style="position:absolute; top:50%; left:43%; transform:translate(-50%,-50%); width:74px; height:74px; border-radius:50%; background:radial-gradient(circle,#f4b8be,#d31d31); box-shadow:0 0 34px rgba(224,68,85,.65);"></div>
+              <div style="position:absolute; top:50%; left:57%; transform:translate(-50%,-50%); width:68px; height:68px; border-radius:50%; background:#180810;"></div>
+              <div style="position:absolute; top:46px; left:64%; width:13px; height:13px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 11px #e04455;"></div>
+            </div>
+            <div style="position:relative; width:150px; height:252px; border-radius:11px; transform:rotateY(-20deg); border:1px solid rgba(224,68,85,.3); background:linear-gradient(180deg,#1d070a,#100406); box-shadow:0 24px 54px rgba(0,0,0,.7); overflow:hidden;">
+              <div style="position:absolute; inset:8px; border:1px solid rgba(224,68,85,.18); border-radius:7px;"></div>
+              <div style="position:absolute; top:50%; left:43%; transform:translate(-50%,-50%); width:60px; height:60px; border-radius:50%; background:radial-gradient(circle,#f0b0b6,#c4182c); box-shadow:0 0 22px rgba(224,68,85,.5);"></div>
+              <div style="position:absolute; top:50%; left:56%; transform:translate(-50%,-50%); width:55px; height:55px; border-radius:50%; background:#150609;"></div>
+              <div style="position:absolute; top:40px; left:62%; width:11px; height:11px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 9px #e04455;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ========== QUIZ ========== -->
+  <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; top:-160px; left:50%; transform:translateX(-50%); width:900px; height:800px; background:radial-gradient(50% 50% at 50% 0%, rgba(224,68,85,.16), transparent 70%); animation:glowPulse 6s ease-in-out infinite; pointer-events:none;"></div>
+    <div onClick="{{ goHero }}" style="position:absolute; z-index:5; top:32px; left:32px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(224,68,85,.3); color:#c98088; font-size:22px; cursor:pointer;">←</div>
+    <section style="position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 40px;">
+      <div style="width:520px; max-width:92vw;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:9px;">
+          <span style="font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#c98088;">Плотность негатива</span>
+          <span style="font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; color:#f0dfe1;">{{ percent }}%</span>
+        </div>
+        <div style="height:9px; border-radius:20px; background:#1c1114; overflow:hidden; border:1px solid rgba(224,68,85,.12);">
+          <div style="height:100%; width:{{ fillWidth }}; border-radius:20px; background:linear-gradient(90deg,#7a0d16,#e04455); box-shadow:0 0 14px rgba(224,68,85,.6); transition:width .5s cubic-bezier(.3,.9,.3,1);"></div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:34px;">
+        <div style="font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:#c98088;">Знак {{ qNum }} из {{ total }}</div>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:600; font-size:38px; line-height:1.1; color:#f4ecec; margin:14px 0 0;">Узнаёшь это в себе?</h2>
+      </div>
+      <div style="position:relative; margin-top:36px; display:flex; align-items:center; justify-content:center; width:100%;">
+        <div style="position:absolute; width:400px; height:300px; border-radius:18px; background:linear-gradient(160deg,#140609,#0c0405); border:1px solid rgba(224,68,85,.1); transform:rotate(-5deg) translateY(6px);"></div>
+        <div style="position:absolute; width:412px; height:308px; border-radius:18px; background:linear-gradient(160deg,#170a0d,#0d0506); border:1px solid rgba(224,68,85,.14); transform:rotate(4deg) translateY(3px);"></div>
+        <div style="position:relative; width:440px; max-width:90vw; min-height:320px; border-radius:20px; padding:44px 44px; background:linear-gradient(160deg,#220c11,#150709); border:1.5px solid rgba(224,68,85,.4); box-shadow:0 0 56px rgba(224,68,85,.3); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; transform:{{ cardTransform }}; opacity:{{ cardOpacity }}; transition:transform .38s cubic-bezier(.5,.05,.4,1), opacity .38s ease;">
+          <div style="position:absolute; top:16px; left:16px; width:20px; height:20px; border-top:1px solid rgba(224,68,85,.55); border-left:1px solid rgba(224,68,85,.55); border-top-left-radius:7px;"></div>
+          <div style="position:absolute; top:16px; right:16px; width:20px; height:20px; border-top:1px solid rgba(224,68,85,.55); border-right:1px solid rgba(224,68,85,.55); border-top-right-radius:7px;"></div>
+          <div style="position:absolute; bottom:16px; left:16px; width:20px; height:20px; border-bottom:1px solid rgba(224,68,85,.55); border-left:1px solid rgba(224,68,85,.55); border-bottom-left-radius:7px;"></div>
+          <div style="position:absolute; bottom:16px; right:16px; width:20px; height:20px; border-bottom:1px solid rgba(224,68,85,.55); border-right:1px solid rgba(224,68,85,.55); border-bottom-right-radius:7px;"></div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+            <div style="width:48px; height:1px; background:linear-gradient(90deg, transparent, rgba(224,68,85,.6));"></div>
+            <div style="width:7px; height:7px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 8px rgba(224,68,85,.8);"></div>
+            <div style="width:48px; height:1px; background:linear-gradient(90deg, rgba(224,68,85,.6), transparent);"></div>
+          </div>
+          <span style="font-family:'Playfair Display',serif; font-size:52px; line-height:0; color:rgba(224,68,85,.6); height:26px;">“</span>
+          <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:500; font-size:27px; line-height:1.38; color:#f4e9ea; margin:8px 0 0;">{{ current }}</p>
+          <div style="display:flex; align-items:center; gap:8px; margin-top:28px;">
+            <div style="width:6px; height:6px; transform:rotate(45deg); border:1px solid rgba(224,68,85,.4);"></div>
+            <div style="width:6px; height:6px; transform:rotate(45deg); background:rgba(224,68,85,.5);"></div>
+            <div style="width:6px; height:6px; transform:rotate(45deg); border:1px solid rgba(224,68,85,.4);"></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; gap:16px; margin-top:38px; width:440px; max-width:90vw;">
+        <a onClick="{{ onNo }}" style="flex:1; text-align:center; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.05em; font-size:16px; color:#b79ba0; background:transparent; border:1px solid rgba(224,68,85,.3); padding:18px; border-radius:11px; text-transform:uppercase; cursor:pointer;" style-hover="border-color:rgba(224,68,85,.6); color:#d8c2c6;">Мимо</a>
+        <a onClick="{{ onYes }}" style="flex:1.4; text-align:center; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.05em; font-size:16px; color:#faf3f3; background:linear-gradient(180deg,#c4182c,#8f0d1c); padding:18px; border-radius:11px; text-transform:uppercase; cursor:pointer; box-shadow:0 12px 30px rgba(196,26,44,.4);">Это про меня</a>
+      </div>
+      <div style="display:flex; gap:6px; justify-content:center; margin-top:28px;">
+        <sc-for list="{{ ticks }}" as="t" hint-placeholder-count="9">
+          <div style="width:20px; height:3px; border-radius:3px; background:{{ t.color }}; box-shadow:{{ t.glow }};"></div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ========== NAME + DOB ========== -->
+  <sc-if value="{{ isName }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; top:-160px; left:50%; transform:translateX(-50%); width:900px; height:760px; background:radial-gradient(50% 50% at 50% 0%, rgba(224,68,85,.18), transparent 70%); animation:glowPulse 6s ease-in-out infinite; pointer-events:none;"></div>
+    <div onClick="{{ goQuiz }}" style="position:absolute; z-index:5; top:32px; left:32px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(224,68,85,.3); color:#c98088; font-size:22px; cursor:pointer;">←</div>
+    <section style="position:relative; z-index:2; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:60px 40px;">
+      <div style="width:460px; max-width:92vw; text-align:center;">
+        <h2 style="font-family:'Playfair Display',serif; font-weight:600; font-size:44px; line-height:1.08; color:#f4ecec; margin:0;">Как тебя зовут?</h2>
+        <p style="font-family:'Manrope',sans-serif; font-size:16px; color:#8f7a7f; margin:14px 0 0;">Колода ляжет на твоё имя и дату.</p>
+        <div style="margin-top:38px; display:flex; flex-direction:column; gap:16px; text-align:left;">
+          <input class="pk-input" placeholder="Имя" value="{{ name }}" onInput="{{ onName }}" style="width:100%; font-family:'Manrope',sans-serif; font-size:17px; color:#f2e7e9; background:linear-gradient(160deg,#180b0e,#0e0708); border:1px solid rgba(224,68,85,.28); border-radius:12px; padding:18px 20px; outline:none;" style-focus="border-color:#e04455; box-shadow:0 0 0 3px rgba(224,68,85,.18);">
+          <input class="pk-input" type="date" value="{{ dob }}" onInput="{{ onDob }}" style="width:100%; font-family:'Manrope',sans-serif; font-size:17px; color:#f2e7e9; background:linear-gradient(160deg,#180b0e,#0e0708); border:1px solid rgba(224,68,85,.28); border-radius:12px; padding:18px 20px; outline:none; color-scheme:dark;" style-focus="border-color:#e04455; box-shadow:0 0 0 3px rgba(224,68,85,.18);">
+        </div>
+        <p style="font-family:'Manrope',sans-serif; font-size:14px; line-height:1.5; color:#7a6065; margin:18px 0 0;">Достаточно имени и даты рождения — карты найдут твою энергию.</p>
+        <a onClick="{{ goLoading }}" style="display:inline-block; margin-top:34px; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.06em; font-size:18px; color:{{ nameCtaColor }}; background:{{ nameCtaBg }}; padding:19px 60px; border-radius:9px; text-transform:uppercase; cursor:pointer; box-shadow:{{ nameCtaShadow }};">Разложить карты</a>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ========== LOADING ========== -->
+  <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; inset:0; background:radial-gradient(45% 40% at 50% 46%, rgba(224,68,85,.2), transparent 70%); pointer-events:none;"></div>
+    <section style="position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px;">
+      <div style="position:relative; width:300px; height:300px; display:flex; align-items:flex-end; justify-content:center; animation:floaty 5s ease-in-out infinite;">
+        <div style="position:absolute; bottom:80px; left:50%; margin-left:-95px; width:190px; height:190px; border-radius:50%; background:radial-gradient(circle, rgba(224,68,85,.28), transparent 68%); animation:glowPulse 3s ease-in-out infinite;"></div>
+        <div style="position:absolute; bottom:34px; left:50%; margin-left:-58px; width:116px; height:182px; border-radius:11px; transform-origin:50% 100%; --r:-34deg; --y:-8px; animation:fan 1.9s ease-in-out infinite; animation-delay:0s; border:1px solid rgba(224,68,85,.3); background:linear-gradient(180deg,#1d070a,#100406); box-shadow:0 18px 40px rgba(0,0,0,.6); overflow:hidden;">
+          <div style="position:absolute; inset:8px; border:1px solid rgba(224,68,85,.16); border-radius:7px;"></div>
+          <div style="position:absolute; top:50%; left:44%; transform:translate(-50%,-50%); width:46px; height:46px; border-radius:50%; background:radial-gradient(circle,#f0b0b6,#c4182c);"></div>
+          <div style="position:absolute; top:50%; left:56%; transform:translate(-50%,-50%); width:42px; height:42px; border-radius:50%; background:#150609;"></div>
+        </div>
+        <div style="position:absolute; bottom:34px; left:50%; margin-left:-58px; width:116px; height:182px; border-radius:11px; transform-origin:50% 100%; --r:-17deg; --y:-4px; animation:fan 1.9s ease-in-out infinite; animation-delay:.12s; border:1px solid rgba(224,68,85,.3); background:linear-gradient(180deg,#1d070a,#100406); box-shadow:0 18px 40px rgba(0,0,0,.6); overflow:hidden;">
+          <div style="position:absolute; inset:8px; border:1px solid rgba(224,68,85,.16); border-radius:7px;"></div>
+          <div style="position:absolute; top:50%; left:44%; transform:translate(-50%,-50%); width:46px; height:46px; border-radius:50%; background:radial-gradient(circle,#f0b0b6,#c4182c);"></div>
+          <div style="position:absolute; top:50%; left:56%; transform:translate(-50%,-50%); width:42px; height:42px; border-radius:50%; background:#150609;"></div>
+        </div>
+        <div style="position:absolute; bottom:34px; left:50%; margin-left:-61px; width:122px; height:192px; border-radius:11px; transform-origin:50% 100%; --r:0deg; --y:0px; animation:fan 1.9s ease-in-out infinite; animation-delay:.24s; border:1px solid rgba(224,68,85,.5); background:linear-gradient(180deg,#23090e,#140609); box-shadow:0 0 54px rgba(224,68,85,.4); overflow:hidden; z-index:2;">
+          <div style="position:absolute; inset:9px; border:1px solid rgba(224,68,85,.2); border-radius:7px;"></div>
+          <div style="position:absolute; top:50%; left:44%; transform:translate(-50%,-50%); width:54px; height:54px; border-radius:50%; background:radial-gradient(circle,#f4b8be,#d31d31); box-shadow:0 0 26px rgba(224,68,85,.6);"></div>
+          <div style="position:absolute; top:50%; left:57%; transform:translate(-50%,-50%); width:48px; height:48px; border-radius:50%; background:#180810;"></div>
+          <div style="position:absolute; top:34px; left:63%; width:11px; height:11px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 10px #e04455;"></div>
+        </div>
+        <div style="position:absolute; bottom:34px; left:50%; margin-left:-58px; width:116px; height:182px; border-radius:11px; transform-origin:50% 100%; --r:17deg; --y:-4px; animation:fan 1.9s ease-in-out infinite; animation-delay:.36s; border:1px solid rgba(224,68,85,.3); background:linear-gradient(180deg,#1d070a,#100406); box-shadow:0 18px 40px rgba(0,0,0,.6); overflow:hidden;">
+          <div style="position:absolute; inset:8px; border:1px solid rgba(224,68,85,.16); border-radius:7px;"></div>
+          <div style="position:absolute; top:50%; left:44%; transform:translate(-50%,-50%); width:46px; height:46px; border-radius:50%; background:radial-gradient(circle,#f0b0b6,#c4182c);"></div>
+          <div style="position:absolute; top:50%; left:56%; transform:translate(-50%,-50%); width:42px; height:42px; border-radius:50%; background:#150609;"></div>
+        </div>
+        <div style="position:absolute; bottom:34px; left:50%; margin-left:-58px; width:116px; height:182px; border-radius:11px; transform-origin:50% 100%; --r:34deg; --y:-8px; animation:fan 1.9s ease-in-out infinite; animation-delay:.48s; border:1px solid rgba(224,68,85,.3); background:linear-gradient(180deg,#1d070a,#100406); box-shadow:0 18px 40px rgba(0,0,0,.6); overflow:hidden;">
+          <div style="position:absolute; inset:8px; border:1px solid rgba(224,68,85,.16); border-radius:7px;"></div>
+          <div style="position:absolute; top:50%; left:44%; transform:translate(-50%,-50%); width:46px; height:46px; border-radius:50%; background:radial-gradient(circle,#f0b0b6,#c4182c);"></div>
+          <div style="position:absolute; top:50%; left:56%; transform:translate(-50%,-50%); width:42px; height:42px; border-radius:50%; background:#150609;"></div>
+        </div>
+      </div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:600; font-size:34px; color:#f4ecec; margin:48px 0 0; text-align:center;">Тасую колоду на тебя…</h2>
+      <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; color:#9a7f84; margin:14px 0 0; text-align:center;">Проверяю, чужое это или своё…</p>
+      <div style="width:260px; height:6px; border-radius:20px; background:#1c1114; overflow:hidden; margin-top:30px; border:1px solid rgba(224,68,85,.12);">
+        <div style="height:100%; width:{{ loadPct }}%; border-radius:20px; background:linear-gradient(90deg,#7a0d16,#e04455); box-shadow:0 0 12px rgba(224,68,85,.6); transition:width .12s linear;"></div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ========== PICK 3 CARDS ========== -->
+  <sc-if value="{{ isPick }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; top:-160px; left:50%; transform:translateX(-50%); width:1000px; height:760px; background:radial-gradient(50% 50% at 50% 0%, rgba(224,68,85,.16), transparent 70%); pointer-events:none;"></div>
+    <section style="position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 40px;">
+      <div style="text-align:center;">
+        <h2 style="font-family:'Playfair Display',serif; font-weight:600; font-size:40px; line-height:1.1; color:#f4ecec; margin:0;">Выбери три карты</h2>
+        <p style="font-family:'Manrope',sans-serif; font-size:16px; color:#8f7a7f; margin:13px 0 0;">Не думай. Тянись к тем, что зовут.</p>
+      </div>
+      <div style="display:flex; gap:22px; justify-content:center; flex-wrap:wrap; max-width:900px; margin-top:52px;">
+        <sc-for list="{{ deck }}" as="card" hint-placeholder-count="6">
+          <div onClick="{{ card.onPick }}" style="position:relative; width:124px; height:196px; border-radius:11px; cursor:pointer; transition:transform .28s cubic-bezier(.3,.9,.3,1); transform:{{ card.transform }}; border:1px solid {{ card.borderColor }}; background:linear-gradient(180deg,#1d070a,#100406); box-shadow:{{ card.shadow }}; overflow:hidden;">
+            <div style="position:absolute; inset:8px; border:1px solid rgba(224,68,85,.18); border-radius:7px;"></div>
+            <div style="position:absolute; top:50%; left:43%; transform:translate(-50%,-50%); width:52px; height:52px; border-radius:50%; background:radial-gradient(circle,#f0b0b6,#c4182c); box-shadow:0 0 18px rgba(224,68,85,.5);"></div>
+            <div style="position:absolute; top:50%; left:56%; transform:translate(-50%,-50%); width:48px; height:48px; border-radius:50%; background:#160609;"></div>
+            <div style="position:absolute; top:32px; left:62%; width:10px; height:10px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 8px #e04455;"></div>
+            <sc-if value="{{ card.active }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; top:10px; right:10px; width:30px; height:30px; border-radius:50%; background:#e04455; color:#0a0304; font-family:'Oswald',sans-serif; font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 16px rgba(224,68,85,.7);">{{ card.orderLabel }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:44px; font-family:'Oswald',sans-serif; letter-spacing:.12em; text-transform:uppercase; font-size:14px; color:#c98088;">Выбрано {{ pickedCount }} из 3</div>
+      <a onClick="{{ goResult }}" style="display:inline-block; margin-top:22px; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.06em; font-size:18px; color:{{ revealColor }}; background:{{ revealBg }}; padding:19px 60px; border-radius:9px; text-transform:uppercase; cursor:pointer; box-shadow:{{ revealShadow }};">Раскрыть карты</a>
+    </section>
+  </sc-if>
+
+  <!-- ========== RESULT ========== -->
+  <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+    <div class="pk-scroll" style="position:relative; z-index:2; height:100vh; overflow-y:auto;">
+      <div style="position:absolute; top:-120px; left:50%; transform:translateX(-50%); width:900px; height:560px; background:radial-gradient(50% 60% at 50% 0%, rgba(224,68,85,.16), transparent 70%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:720px; margin:0 auto; padding:70px 40px 90px;">
+        <h2 style="font-family:'Playfair Display',serif; font-weight:600; font-size:36px; line-height:1.14; color:#f4ecec; margin:0 0 34px; text-align:center;">Три карты. Что на тебе,<br>откуда и снимается ли.</h2>
+        <div style="display:flex; gap:20px; justify-content:center; perspective:1200px; margin-bottom:44px;">
+          <div style="flex:1; max-width:180px; display:flex; flex-direction:column; align-items:center; gap:12px;">
+            <div style="width:100%; aspect-ratio:2/3.3; border-radius:9px; border:1px solid rgba(224,68,85,.45); overflow:hidden; box-shadow:0 0 26px rgba(224,68,85,.28); animation:flipIn .6s cubic-bezier(.3,.8,.3,1) .1s both;"><img src="uploads/0.png" alt="" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+            <span style="font-family:'Oswald',sans-serif; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#a97f85; text-align:center;">Что на тебе</span>
+          </div>
+          <div style="flex:1; max-width:180px; display:flex; flex-direction:column; align-items:center; gap:12px;">
+            <div style="width:100%; aspect-ratio:2/3.3; border-radius:9px; border:1px solid rgba(224,68,85,.45); overflow:hidden; box-shadow:0 0 26px rgba(224,68,85,.28); animation:flipIn .6s cubic-bezier(.3,.8,.3,1) .35s both;"><img src="uploads/3.png" alt="" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+            <span style="font-family:'Oswald',sans-serif; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#a97f85; text-align:center;">Откуда это</span>
+          </div>
+          <div style="flex:1; max-width:180px; display:flex; flex-direction:column; align-items:center; gap:12px;">
+            <div style="width:100%; aspect-ratio:2/3.3; border-radius:9px; border:1px solid rgba(224,68,85,.45); overflow:hidden; box-shadow:0 0 26px rgba(224,68,85,.28); animation:flipIn .6s cubic-bezier(.3,.8,.3,1) .6s both;"><img src="uploads/5.png" alt="" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+            <span style="font-family:'Oswald',sans-serif; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#a97f85; text-align:center;">Что дальше</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:18px; min-height:300px;">
+          <sc-for list="{{ paras }}" as="para" hint-placeholder-count="3">
+            <p style="font-family:'Manrope',sans-serif; font-size:16px; line-height:1.66; margin:0; color:#c9b9bd;"><sc-for list="{{ para.segs }}" as="seg" hint-placeholder-count="2"><span style="color:{{ seg.color }}; font-weight:{{ seg.weight }};">{{ seg.text }}</span></sc-for><sc-if value="{{ para.caret }}" hint-placeholder-val="{{ false }}"><span style="color:#e04455; font-weight:600; animation:blink 1s steps(1) infinite;">▍</span></sc-if></p>
+          </sc-for>
+        </div>
+        <div style="text-align:center;">
+          <a onClick="{{ goSummary }}" style="display:inline-block; margin-top:40px; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.06em; font-size:17px; color:#faf3f3; background:linear-gradient(180deg,#c4182c,#8f0d1c); padding:18px 60px; border-radius:9px; text-transform:uppercase; box-shadow:0 12px 34px rgba(196,26,44,.4); cursor:pointer;">Итог расклада</a>
+          <div onClick="{{ restart }}" style="margin-top:16px; font-family:'Manrope',sans-serif; font-size:14px; color:#8f7a7f; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">Начать заново</div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ========== SUMMARY ========== -->
+  <sc-if value="{{ isSummary }}" hint-placeholder-val="{{ false }}">
+    <div class="pk-scroll" style="position:relative; z-index:2; height:100vh; overflow-y:auto;">
+      <div style="position:absolute; top:-120px; left:50%; transform:translateX(-50%); width:900px; height:560px; background:radial-gradient(50% 60% at 50% 0%, rgba(224,68,85,.18), transparent 70%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:680px; margin:0 auto; padding:80px 40px 90px; text-align:center;">
+        <div style="font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:.32em; text-transform:uppercase; color:#c98088;">Итог расклада</div>
+        <p style="font-family:'Playfair Display',serif; font-weight:500; font-size:27px; line-height:1.4; color:#f0e6e7; margin:24px 0 0;">Тяжёлого на тебе нет, так что выдохни. Но лёгкий след после того перелома остался, местами он ещё тянет тебя назад: то с деньгами, то с работой пробуксовка. Крупной беды в этом нет. Пока это слабое и снимается легко. Поймаешь сейчас, до беды не дойдёт.</p>
+        <p style="font-family:'Manrope',sans-serif; font-size:15px; line-height:1.55; color:#8f7a7f; margin:32px 0 20px; text-align:left;">Карты показали направление. Дальше открывается:</p>
+        <div style="display:flex; flex-direction:column; gap:16px; text-align:left; max-width:560px; margin:0 auto;">
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <span style="flex:none; margin-top:6px; width:10px; height:10px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 8px rgba(224,68,85,.7);"></span>
+            <span style="font-family:'Manrope',sans-serif; font-size:16px; line-height:1.5; color:#d8c8cb;">Кто и за что: источник и почему это пришло именно к тебе</span>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <span style="flex:none; margin-top:6px; width:10px; height:10px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 8px rgba(224,68,85,.7);"></span>
+            <span style="font-family:'Manrope',sans-serif; font-size:16px; line-height:1.5; color:#d8c8cb;">На что оно уже влияет: деньги, отношения, здоровье, удача</span>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <span style="flex:none; margin-top:6px; width:10px; height:10px; transform:rotate(45deg); background:#e04455; box-shadow:0 0 8px rgba(224,68,85,.7);"></span>
+            <span style="font-family:'Manrope',sans-serif; font-size:16px; line-height:1.5; color:#d8c8cb;">Пошагово, как снять и закрыться, чтобы не вернулось</span>
+          </div>
+        </div>
+        <a href="#" style="display:inline-block; margin-top:40px; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.06em; font-size:18px; color:#faf3f3; background:linear-gradient(180deg,#c4182c,#8f0d1c); padding:19px 70px; border-radius:9px; text-transform:uppercase; box-shadow:0 12px 34px rgba(196,26,44,.4);">Узнать</a>
+        <div onClick="{{ restart }}" style="margin-top:18px; font-family:'Manrope',sans-serif; font-size:14px; color:#8f7a7f; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">← пройти заново</div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { screen: 'hero', qIndex: 0, yes: 0, answers: [], flying: null, name: '', dob: '', loadPct: 0, picked: [], typed: 0 };
+
+  quizLabels = [
+    'Силы уходят в никуда, просыпаешься уже уставшей',
+    'Деньги утекают сквозь пальцы, сколько бы ни было',
+    'Отношения рушатся на ровном месте',
+    'Любое дело упирается в стену перед самым концом',
+    'Тяжёлые сны и тревога без причины',
+    'Чувство, что кто-то желает тебе зла',
+    'Пошла чёрная полоса, всё валится из рук',
+    'Всё сломалось после одного человека или события',
+    'Смотришь в зеркало и себя не узнаёшь'
+  ];
+
+  resultParas = [
+    [
+      { t: 'Открытой метки карты не дали, но и чистым расклад не назвали. ', b: false },
+      { t: 'Первая карта — то, что ты носишь прямо сейчас.', b: true },
+      { t: ' Силы уходят, а радости нет — будто кто-то тихо отматывает их себе. Это давно не про обычную усталость, ты и сама это чувствуешь.', b: false }
+    ],
+    [
+      { t: 'Вторая карта — про источник.', b: true },
+      { t: ' Всё завязано на одном событии или человеке; с той точки полоса не кончается. Ты и сама помнишь этот момент — жизнь будто раскололась на «до» и «после». То, что пришло тогда, сидит на тебе до сих пор.', b: false }
+    ],
+    [
+      { t: 'Третья карта — про исход.', b: true },
+      { t: ' Снять это тебе по плечу, ресурс есть. Сейчас оно ловится в самом начале. Прозеваешь — окрепнет, и снимать придётся долго.', b: false }
+    ]
+  ];
+
+  startReveal() {
+    clearInterval(this._typer);
+    clearTimeout(this._typeStart);
+    this.setState({ typed: 0 });
+    const total = this.resultParas.reduce((a, segs) => a + segs.reduce((b, s) => b + s.t.length, 0), 0);
+    this._typeStart = setTimeout(() => {
+      this._typer = setInterval(() => {
+        this.setState(st => {
+          const n = (st.typed || 0) + 3;
+          if (n >= total) { clearInterval(this._typer); return { typed: total }; }
+          return { typed: n };
+        });
+      }, 16);
+    }, 950);
+  }
+
+  fly(v) {
+    if (this.state.flying) return;
+    this.setState({ flying: v ? 'right' : 'left' });
+    clearTimeout(this._fly);
+    this._fly = setTimeout(() => {
+      this.setState(st => {
+        const ans = (st.answers || []).slice();
+        ans[st.qIndex] = v;
+        const qi = st.qIndex + 1;
+        const done = qi >= this.quizLabels.length;
+        return { answers: ans, yes: (st.yes || 0) + (v ? 1 : 0), qIndex: qi, screen: done ? 'name' : st.screen, flying: null };
+      });
+    }, 380);
+  }
+
+  componentWillUnmount() { clearInterval(this._t); clearInterval(this._typer); clearTimeout(this._typeStart); clearTimeout(this._fly); }
+
+  runLoad() {
+    clearInterval(this._t);
+    this.setState({ loadPct: 0 });
+    this._t = setInterval(() => {
+      this.setState(s => {
+        const next = s.loadPct + (s.loadPct > 82 ? 2 : 4);
+        if (next >= 100) { clearInterval(this._t); setTimeout(() => this.setState({ screen: 'pick' }), 550); return { loadPct: 100 }; }
+        return { loadPct: next };
+      });
+    }, 90);
+  }
+
+  renderVals() {
+    const labels = this.quizLabels;
+    const s = this.state;
+    const total = labels.length;
+    const qIndex = s.qIndex || 0;
+    const yes = s.yes || 0;
+    const current = labels[Math.min(qIndex, total - 1)];
+    const percent = Math.round((yes / total) * 100);
+    const ticks = labels.map((_, i) => ({
+      color: i < qIndex ? (s.answers && s.answers[i] ? '#e04455' : 'rgba(224,68,85,.3)') : 'rgba(224,68,85,.12)',
+      glow: i < qIndex && s.answers && s.answers[i] ? '0 0 8px rgba(224,68,85,.6)' : 'none'
+    }));
+    const typed = s.typed || 0;
+    let consumed = 0;
+    const paras = this.resultParas.map(segsArr => {
+      const paraStart = consumed;
+      const segs = segsArr.map(seg => {
+        const start = consumed;
+        consumed += seg.t.length;
+        const vis = Math.max(0, Math.min(seg.t.length, typed - start));
+        return { text: seg.t.slice(0, vis), color: seg.b ? '#f2e3e5' : '#c9b9bd', weight: seg.b ? 600 : 400 };
+      });
+      return { segs, caret: typed > paraStart && typed < consumed };
+    });
+
+    const flying = s.flying;
+    const cardTransform = flying === 'right' ? 'translateX(150%) rotate(16deg)'
+      : flying === 'left' ? 'translateX(-150%) rotate(-16deg)'
+      : 'translateX(0) rotate(0deg)';
+    const cardOpacity = flying ? 0 : 1;
+
+    const nameOk = s.name.trim().length > 0;
+
+    const deck = Array.from({ length: 6 }).map((_, i) => {
+      const order = s.picked.indexOf(i);
+      const active = order >= 0;
+      return {
+        active, orderLabel: order + 1,
+        transform: active ? 'translateY(-16px) scale(1.03)' : 'translateY(0)',
+        borderColor: active ? '#e04455' : 'rgba(224,68,85,.28)',
+        shadow: active ? '0 0 34px rgba(224,68,85,.5)' : '0 16px 30px rgba(0,0,0,.6)',
+        onPick: () => this.setState(st => {
+          const p = st.picked.slice();
+          const idx = p.indexOf(i);
+          if (idx >= 0) p.splice(idx, 1);
+          else if (p.length < 3) p.push(i);
+          return { picked: p };
+        })
+      };
+    });
+    const pickedCount = s.picked.length;
+    const canReveal = pickedCount === 3;
+
+    return {
+      isHero: s.screen === 'hero',
+      isQuiz: s.screen === 'quiz',
+      isName: s.screen === 'name',
+      isLoading: s.screen === 'loading',
+      isPick: s.screen === 'pick',
+      isResult: s.screen === 'result',
+      isSummary: s.screen === 'summary',
+      total, qNum: Math.min(qIndex + 1, total), current, ticks,
+      percent, fillWidth: percent + '%',
+      onYes: () => this.fly(true),
+      onNo: () => this.fly(false),
+      cardTransform, cardOpacity,
+      paras,
+      name: s.name, dob: s.dob,
+      onName: (e) => this.setState({ name: e.target.value }),
+      onDob: (e) => this.setState({ dob: e.target.value }),
+      nameCtaColor: nameOk ? '#faf3f3' : '#6b545a',
+      nameCtaBg: nameOk ? 'linear-gradient(180deg,#c4182c,#8f0d1c)' : '#170c0f',
+      nameCtaShadow: nameOk ? '0 12px 34px rgba(196,26,44,.4)' : 'none',
+      loadPct: s.loadPct,
+      deck, pickedCount,
+      revealColor: canReveal ? '#faf3f3' : '#6b545a',
+      revealBg: canReveal ? 'linear-gradient(180deg,#c4182c,#8f0d1c)' : '#170c0f',
+      revealShadow: canReveal ? '0 12px 34px rgba(196,26,44,.4)' : 'none',
+      goQuiz: () => this.setState({ screen: 'quiz', qIndex: 0, yes: 0, answers: [] }),
+      goHero: () => this.setState({ screen: 'hero' }),
+      goLoading: () => { if (nameOk) { this.setState({ screen: 'loading' }); this.runLoad(); } },
+      goResult: () => { if (canReveal) { this.setState({ screen: 'result' }); this.startReveal(); } },
+      goSummary: () => this.setState({ screen: 'summary' }),
+      restart: () => { clearInterval(this._typer); clearTimeout(this._typeStart); this.setState({ screen: 'hero', qIndex: 0, yes: 0, answers: [], typed: 0, name: '', dob: '', loadPct: 0, picked: [] }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import MatrixSVG from '../../matrix/MatrixSVG'
+import MatrixDiagram from './MatrixDiagram'
 import { MATRIX_CONTENT } from '../../content/matrix-content'
 import { resolveSigns } from '../../content/landings/love-copy.js'
 import { compatibleCore, relationshipPoint } from '../logic/compat.js'
@@ -15,42 +15,43 @@ export default function Result({ answers, matrixData }) {
   const name = (answers?.name || '').trim()
 
   return (
-    <div className={styles.page}>
-      <p className={styles.subtitle}>
-        {name ? `${name}, вот полный разбор` : 'Твой полный разбор'}
-      </p>
-      <MatrixSVG nodes={matrixData.nodes} highlight={['center', 'female1']} />
+    <section className={`${styles.funnel} ${styles.shell}`}>
+      <div className={styles.result}>
+        <div className={`${styles.eyebrow} ${styles.center}`}>
+          {name ? `${name}, вот полный разбор` : 'Твой полный разбор'}
+        </div>
 
-      {/* Ответы идут в порядке трёх залоченных вопросов тизера (честностная сцепка) */}
-      <section className={styles.block}>
-        <h3 className={styles.title}>Рядом с кем твой круг обрывается</h3>
-        <p>Твоя точка отношений это {point}. Тебе подходит партнёр с ядром {compat}.</p>
-      </section>
+        <MatrixDiagram nodes={matrixData.nodes} highlight={['center', 'female1']} />
 
-      <section className={styles.block}>
-        <h3 className={styles.title}>Как узнать его при первой встрече</h3>
-        <p>{resolveSigns(compat)}</p>
-      </section>
+        {/* Ответы в порядке трёх залоченных вопросов тизера (честностная сцепка) */}
+        <div className={styles.resultBlock}>
+          <h3>Рядом с кем твой круг обрывается</h3>
+          <p>Твоя точка отношений это {point}. Тебе подходит партнёр с ядром {compat}.</p>
+        </div>
 
-      <section className={styles.block}>
-        <h3 className={styles.title}>В какие годы открывается окно</h3>
-        <p>{content.yearForecast}</p>
-      </section>
+        <div className={styles.resultBlock}>
+          <h3>Как узнать его при первой встрече</h3>
+          <p>{resolveSigns(compat)}</p>
+        </div>
 
-      <section className={styles.block}>
-        <h3 className={styles.title}>Полный разбор твоего сценария</h3>
-        <p>{content.relationships}</p>
-      </section>
+        <div className={styles.resultBlock}>
+          <h3>В какие годы открывается окно</h3>
+          <p>{content.yearForecast}</p>
+        </div>
 
-      <div className={styles.triumph}>
-        <h3 className={styles.title}>Готово. Теперь тебе доступны все продукты Astrix</h3>
-        <p className={styles.subtitle}>
-          Матрица, таро, гороскоп и нумерология. Подписка открыта во всём сервисе.
-        </p>
-        <button className={styles.cta} onClick={() => router.push('/')}>
-          Перейти в Astrix →
-        </button>
+        <div className={styles.resultBlock}>
+          <h3>Полный разбор твоего сценария</h3>
+          <p>{content.relationships}</p>
+        </div>
+
+        <div className={styles.triumph}>
+          <h3>Готово. Теперь тебе доступны все продукты Astrix</h3>
+          <p>Матрица, таро, гороскоп и нумерология. Подписка открыта во всём сервисе.</p>
+          <button className={`${styles.cta} ${styles.ctaFull}`} onClick={() => router.push('/')}>
+            Перейти в Astrix →
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }

@@ -1,0 +1,163 @@
+/* Вход / регистрация — дизайн Astrix (design-reference/rega-reference).
+   Палитра и шрифты из глобальной темы (app/styles/theme.css):
+   --bg-deep #1B1A30 (небесный герой), --bg-base #EAE0CE (страница),
+   --bg-raised #FBF7EF (поля), --accent #B9954F, Source Serif 4 + Golos Text.
+   Десктоп — split-screen (герой слева, форма справа). Мобайл (≤900px) —
+   атмосферный шит: тёмный герой сверху со скруглением, форма ниже.
+   Часть литералов (#F7F1E4 кремовый заголовок, тона согласия) взята из макета. */
+
+/* ── Каркас страницы ───────────────────────────────────────── */
+.page { display: flex; min-height: 100vh; background: var(--bg-base); }
+@media (max-width: 900px) { .page { flex-direction: column; min-height: 100dvh; } }
+
+/* ── Небесный герой (тёмная панель) ────────────────────────── */
+.hero {
+  position: relative; overflow: hidden;
+  flex: 0 0 46%; max-width: 600px;
+  background: var(--bg-deep); color: var(--text-on-dark);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 52px 56px;
+}
+@media (max-width: 900px) {
+  .hero {
+    flex: none; width: 100%; max-width: none;
+    justify-content: flex-start; gap: 22px;
+    padding: 26px 26px 34px; border-radius: 0 0 32px 32px;
+  }
+}
+
+.stars { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .9; z-index: 0; }
+
+.heroLogo { position: relative; z-index: 1; display: flex; align-items: center; gap: 11px; }
+.heroLogoText {
+  font-family: var(--font-heading); font-size: 26px; font-weight: 600;
+  letter-spacing: .02em; color: #F7F1E4;
+}
+@media (max-width: 900px) { .heroLogoText { font-size: 20px; } }
+
+/* Маркетинговый блок — только десктоп */
+.heroBody { position: relative; z-index: 1; }
+.heroTitle {
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: 44px; line-height: 1.14; letter-spacing: -.01em;
+  margin: 0 0 18px; color: #F7F1E4;
+}
+.heroDesc { margin: 0; font-size: 16px; line-height: 1.65; color: rgba(243,236,219,.66); max-width: 40ch; }
+
+.heroFeatures { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.heroFeature { display: flex; align-items: center; gap: 12px; }
+.heroFeatureIcon {
+  width: 34px; height: 34px; flex: none; border-radius: 50%;
+  background: rgba(185,149,79,.16);
+  display: flex; align-items: center; justify-content: center;
+}
+.heroFeatureText { font-size: 15px; color: rgba(243,236,219,.82); }
+
+@media (max-width: 900px) { .heroBody, .heroFeatures { display: none; } }
+
+/* Заголовок формы внутри тёмного героя — только мобайл */
+.heroFormHead { position: relative; z-index: 1; display: none; }
+@media (max-width: 900px) { .heroFormHead { display: block; } }
+.back {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(243,236,219,.24); background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  color: #F3ECDB; cursor: pointer; margin-bottom: 20px;
+}
+.heroFormTitle {
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: 30px; line-height: 1.08; letter-spacing: -.01em;
+  margin: 0 0 6px; color: #F7F1E4;
+}
+.heroFormSub { margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(243,236,219,.6); }
+
+/* ── Колонка формы ─────────────────────────────────────────── */
+.formCol { flex: 1; display: flex; flex-direction: column; padding: 34px 64px 48px; }
+@media (max-width: 900px) { .formCol { padding: 26px 26px 34px; } }
+
+.formTop { display: flex; justify-content: flex-end; font-size: 14px; color: #8C8069; }
+@media (max-width: 900px) { .formTop { display: none; } }
+.topSwitchLink {
+  margin-left: 6px; background: none; border: none; padding: 0; cursor: pointer;
+  font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--accent);
+}
+.topSwitchLink:hover { color: var(--accent-hover); }
+
+.formInner {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  width: 100%; max-width: 390px; margin: 0 auto;
+}
+@media (max-width: 900px) { .formInner { justify-content: flex-start; max-width: none; } }
+
+.formHead { margin-bottom: 30px; }
+@media (max-width: 900px) { .formHead { display: none; } }
+.formTitle {
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: 38px; line-height: 1.08; letter-spacing: -.01em;
+  margin: 0 0 8px; color: var(--text-primary);
+}
+.formSub { margin: 0; font-size: 15px; line-height: 1.55; color: #8C8069; }
+
+/* ── Поля формы (общие для страниц и модалки) ──────────────── */
+.form { display: flex; flex-direction: column; }
+.field { margin-bottom: 18px; }
+.label { display: block; font: 500 13px var(--font-body); color: var(--text-secondary); margin: 0 0 8px; }
+.labelRow { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 8px; }
+.labelRow .label { margin: 0; }
+.forgot { font-size: 13px; font-weight: 600; color: var(--accent); }
+
+.inputWrap { position: relative; }
+.input {
+  width: 100%; box-sizing: border-box; height: 54px;
+  border-radius: 15px; border: 1px solid rgba(30,29,52,.14);
+  background: var(--bg-raised); padding: 0 18px;
+  font-family: var(--font-body); font-size: 15.5px; color: var(--text-primary);
+  outline: none; transition: border-color .2s;
+}
+.inputWrap .input { padding-right: 52px; }
+.input::placeholder { color: var(--text-muted); }
+.input:focus { border-color: var(--accent); }
+
+.eye {
+  position: absolute; right: 14px; top: 0; height: 54px; width: 34px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: none; cursor: pointer; color: var(--text-muted);
+}
+.eye:hover { color: var(--text-secondary); }
+
+/* Согласие (регистрация) */
+.consent { display: flex; align-items: flex-start; gap: 10px; margin: 4px 0 8px; cursor: pointer; }
+.consentInput { position: absolute; opacity: 0; width: 0; height: 0; }
+.consentBox {
+  width: 20px; height: 20px; flex: none; margin-top: 1px; border-radius: 6px;
+  border: 1.5px solid var(--accent); background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.consentBox svg { opacity: 0; }
+.consentInput:checked + .consentBox { background: var(--accent); }
+.consentInput:checked + .consentBox svg { opacity: 1; }
+.consentInput:focus-visible + .consentBox { outline: 2px solid var(--accent); outline-offset: 2px; }
+.consentText { font-size: 13px; line-height: 1.5; color: #8C8069; }
+.consentText b { color: var(--text-secondary); font-weight: 600; }
+
+.error { margin: 4px 0 0; font-size: 13.5px; color: var(--color-error); }
+
+.submit {
+  width: 100%; height: 58px; margin-top: 22px; border-radius: 999px; border: none;
+  background: var(--bg-deep); color: var(--text-on-dark);
+  font-family: var(--font-body); font-size: 16px; font-weight: 600; cursor: pointer;
+  transition: transform .15s, opacity .2s;
+}
+.submit:hover:not(:disabled) { transform: translateY(-1px); }
+.submit:disabled { opacity: .55; cursor: default; }
+
+/* Нижняя ссылка-переключатель */
+.switch { text-align: center; margin: 18px 0 0; font-size: 13.5px; color: #8C8069; }
+.switchMobile { display: none; text-align: center; margin: 18px 0 0; font-size: 13.5px; color: #8C8069; }
+@media (max-width: 900px) { .switchMobile { display: block; } }
+.switchLink {
+  background: none; border: none; padding: 0; cursor: pointer;
+  font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--accent);
+}
+.switchLink:hover { color: var(--accent-hover); }

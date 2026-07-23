@@ -1,13 +1,12 @@
 /* =====================================================================
    Лендинг «Таро Терминал» (движок terminal). Тема «тёплый CRT» по дизайн-системе
-   design-reference/landings/taro/terminal/design_handoff_tarot_terminal
-   (направление 1c, mobile-first, hi-fi). Скоуплено на .root.
+   design-reference/landings/taro/terminal. Скоуплено на .root.
 
    Адаптив:
-     - Мобайл: «устройство» на весь экран (full-bleed), без тёмных полей.
-     - Десктоп: устройство по центру на тёмном «столе».
-         · экраны-флоу (boot/select/intro/pause/draw/q1/q2) — портрет;
-         · reveal/reading/paywall — landscape 920×520, 2 колонки (.bezelWide).
+     - Мобайл: скруглённое портретное «устройство» по центру стола, экраны в колонку.
+     - ПК (>=1000px): ландшафтное «устройство» 1120×640 (export_pk), каждый экран
+       в 2 колонки (карта/колода слева, контент справа) либо крупный центр.
+   Карта закреплена и видна на q1/q2/q3/analyze/reading.
 
    Шрифты из глобальных self-host переменных (полная кириллица, офлайн-сборка):
      --font-handjet  пиксельный дисплейный заголовок
@@ -39,7 +38,6 @@
   --text: var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
 
   --shadow-glow: 0 0 16px rgba(213, 154, 90, .53);
-  --shadow-bezel: inset 0 2px 4px #ffffff33, inset 0 -8px 14px #00000055, 0 12px 26px #00000066;
   --btn-shadow: inset -4px -4px 0 var(--accent-d), inset 4px 4px 0 var(--accent-l), 0 0 0 3px var(--wood-d);
 
   position: relative;
@@ -47,6 +45,9 @@
   min-height: 100dvh;
   overflow-x: clip;
   display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(20px, 5vw, 48px) clamp(12px, 4vw, 28px);
   /* «Стол»: тёмный фон с пиксельной точечной текстурой и верхним тёплым светом. */
   background-color: var(--bg);
   background-image:
@@ -61,37 +62,36 @@
 }
 
 /* --------------------------- Устройство --------------------------- */
-/* Мобайл: безель заполняет весь вьюпорт, тёмный «стол» не виден (full-bleed). */
+/* Скруглённое «устройство» по центру тёмного стола. */
 .bezel {
   display: flex;
   width: 100%;
-  min-height: 100dvh;
-  padding: 10px;
+  max-width: 404px;
+  margin: auto;
+  padding: 14px;
+  border-radius: 34px;
   background: linear-gradient(180deg, var(--wood), var(--wood-d));
-  box-shadow: var(--shadow-bezel);
+  box-shadow: inset 0 2px 4px #ffffff33, inset 0 -8px 14px #00000055, 0 18px 40px #00000077;
 }
 
-/* «Экран» CRT: пергамент + сканлайны + вложенная рамка + мягкое мерцание. */
+/* «Экран» CRT: пергамент + сканлайны + тонкая рамка + мягкое мерцание. */
 .screen {
   position: relative;
   flex: 1;
   min-width: 0;
+  min-height: 580px;
   display: flex;
   flex-direction: column;
-  padding: 22px 18px;
+  padding: 24px 22px;
   overflow: hidden;
+  border-radius: 22px;
   background:
     repeating-linear-gradient(#00000010 0 1px, transparent 1px 3px),
-    radial-gradient(120% 90% at 50% 30%, var(--screen), var(--screen-2));
-  box-shadow:
-    inset 0 0 40px #4a2f1826,
-    inset 0 0 0 3px var(--wood-d),
-    inset 0 0 0 6px var(--screen),
-    inset 0 0 0 9px var(--line);
-  animation: flick 5s linear infinite;
+    radial-gradient(120% 80% at 50% 22%, var(--screen), var(--screen-2));
+  box-shadow: inset 0 0 70px #4a2f1840, inset 0 0 0 2px var(--wood-d);
+  animation: flick 6s linear infinite;
 }
 
-/* Внутренний паддинг с учётом вложенной рамки (9px колец). */
 .pad {
   flex: 1;
   display: flex;
@@ -102,17 +102,15 @@
 .center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; }
 .stack { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 12px; text-align: left; }
 
-/* Раскладка «две колонки» (reveal/reading/paywall). Мобайл — колонка. */
-.split { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 14px; }
-.splitCenter { justify-content: center; }
+/* Универсальная 2-колоночная раскладка (мобайл — колонка, ПК — ряд). */
+.two { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 22px; margin-top: 14px; }
+.aside { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; flex-shrink: 0; }
+.main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 .grow { flex: 1; min-height: 8px; }
-.colCard { display: flex; align-items: center; justify-content: center; }
-.colBody { min-width: 0; }
-.colSide { display: flex; flex-direction: column; gap: 12px; }
-.colSideFill { flex: 1; min-height: 0; }
-.colSideFill .lockBlock { flex: 1; }
 
 /* ---------------------------- Хром экрана ---------------------------- */
+.topbar { display: flex; align-items: center; gap: 12px; }
+.topbar .statusBar { flex: 1; }
 .statusBar {
   display: flex;
   justify-content: space-between;
@@ -124,8 +122,6 @@
   text-shadow: 0 0 6px var(--glow);
 }
 .statusBar span { white-space: nowrap; }
-/* На экранах с кнопкой «назад» сдвигаем статус-строку, чтобы не перекрывалась. */
-.statusBarBack { padding-left: 40px; }
 
 .progress { display: flex; gap: 5px; margin-top: 14px; }
 .seg { flex: 1; height: 4px; border-radius: 2px; background: var(--line); }
@@ -193,7 +189,10 @@
 .cta:active { transform: translateY(2px); background: var(--accent-d); box-shadow: inset 4px 4px 0 #46542f, inset -3px -3px 0 var(--accent), 0 0 0 3px var(--wood-d); }
 .cta:disabled { background: #6e6a4e; color: #a49d80; box-shadow: 0 0 0 3px #4a4636; opacity: .55; cursor: default; }
 
-/* Лок-вариант (reading → paywall). */
+/* boot CTA — компактная, по центру (не на всю ширину). */
+.ctaBoot { width: auto; align-self: center; margin-top: 28px; padding: 14px 44px; }
+
+/* Лок-вариант (reading → регистрация). */
 .ctaLock {
   color: var(--paper);
   background: var(--lock);
@@ -206,37 +205,41 @@
 .linkBtn:hover { color: var(--ink); }
 .restart { margin-top: 14px; text-align: center; }
 
+/* Инлайн-кнопка «назад» (в строке статуса), пиксельный бевел. */
 .backBtn {
-  position: absolute; top: 12px; left: 10px; z-index: 10;
-  width: 32px; height: 32px; border-radius: 0; cursor: pointer;
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
   background: linear-gradient(180deg, var(--screen), var(--screen-2));
-  border: 1.5px solid var(--line); color: var(--ink);
-  font-family: var(--mono); font-size: 16px; line-height: 1;
-  box-shadow: inset 0 1px 0 #ffffff66;
+  border: 1.5px solid var(--line); color: var(--ink-soft);
+  font-family: var(--mono); font-size: 17px; line-height: 1;
+  box-shadow: inset -2px -2px 0 #0000000f, inset 2px 2px 0 #ffffff88;
 }
 .backBtn:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); }
 
 /* --------------------------- Меню (select) --------------------------- */
-.selTitle { font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: .02em; color: var(--ink); text-align: center; text-transform: uppercase; text-shadow: 0 0 12px var(--glow); margin: 14px 0 0; }
-.selSub { font-family: var(--text); font-size: 12.5px; color: var(--ink-soft); text-align: center; margin: 8px 0 0; }
-.menu { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; flex: 1; }
+.selTwo { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 16px; }
+.selHead { display: flex; flex-direction: column; gap: 8px; text-align: center; }
+.selCount { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--muted); }
+.selTitle { font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: .02em; color: var(--ink); text-align: center; text-transform: uppercase; text-shadow: 0 0 12px var(--glow); margin: 6px 0 0; }
+.selSub { font-family: var(--text); font-size: 12.5px; color: var(--ink-soft); text-align: center; margin: 0; }
+.menu { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; flex: 1; }
 .menuItem {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   width: 100%; text-align: left;
   font-family: var(--text); font-size: 13.5px; color: var(--ink);
   background: linear-gradient(180deg, var(--screen), var(--screen-2));
   border: 1.5px solid var(--line); border-radius: 0; padding: 12px 15px; cursor: pointer;
-  box-shadow: inset 0 1px 0 #ffffff66;
+  box-shadow: inset -2px -2px 0 #0000000f, inset 2px 2px 0 #ffffff88;
   transition: background .15s, border-color .15s, box-shadow .2s, transform .1s;
 }
 .menuItem:hover { background: var(--accent); border-color: var(--accent-d); color: var(--paper); box-shadow: var(--shadow-glow); transform: translateX(2px); }
 .menuArrow { font-family: var(--mono); font-size: 12px; color: var(--muted); flex-shrink: 0; }
 .menuItem:hover .menuArrow { color: var(--paper); }
 
-/* ----------------------- Вопросы (q1/q2, чекбоксы) ----------------------- */
+/* ----------------------- Вопросы (q1/q2/q3) ----------------------- */
 .qEyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--muted); margin-top: 18px; }
-.qPrompt { font-family: var(--text); font-weight: 600; font-size: 16px; line-height: 1.45; color: var(--ink); margin: 8px 0 0; text-wrap: pretty; }
-.options { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; flex: 1; }
+.qPrompt { font-family: var(--text); font-weight: 600; font-size: 16px; line-height: 1.45; color: var(--ink); margin: 0; text-wrap: pretty; }
+.options { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
 .option {
   display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
   font-family: var(--text); font-size: 13px; line-height: 1.35; color: var(--ink);
@@ -252,9 +255,32 @@
 .optionOn { background: var(--accent); border-color: var(--accent-d); color: var(--paper); box-shadow: var(--shadow-glow); }
 .optionOn .optBox { border-color: var(--paper); color: var(--paper); }
 
+/* Блоки-теги (q1/q2): сетка 2×2 плиток с пиксельным бевелом, выбор одного. */
+.blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.block {
+  font-family: var(--text); font-size: 12.5px; line-height: 1.3; color: var(--ink);
+  background: linear-gradient(180deg, var(--screen), var(--screen-2));
+  border: 1.5px solid var(--line); border-radius: 0;
+  padding: 13px 12px; cursor: pointer; text-align: center;
+  box-shadow: inset -2px -2px 0 #0000000f, inset 2px 2px 0 #ffffff88;
+  transition: background .15s, border-color .15s, box-shadow .2s;
+}
+.block:hover { border-color: var(--accent); }
+.blockOn { background: var(--accent); border-color: var(--accent-d); color: var(--paper); box-shadow: var(--shadow-glow); }
+
+/* Поле «своими словами» (необязательное) — пунктирная рамка, приглушённое. */
+.ownInput {
+  width: 100%; margin-top: 10px; box-sizing: border-box;
+  font-family: var(--text); font-size: 12.5px; color: var(--ink);
+  background: #00000008;
+  border: 1.5px dashed var(--line); border-radius: 0; padding: 13px 14px;
+}
+.ownInput::placeholder { color: var(--muted); }
+.ownInput:focus { outline: none; border-color: var(--accent); box-shadow: var(--shadow-glow); }
+
 /* ------------------------- Колода (экран draw) ------------------------- */
 /* Стопка на месте: 2 нижние карты статичны, 4 верхние тасуются по одной (steps). */
-.deck { position: relative; width: 150px; height: 220px; margin: 4px auto 22px; }
+.deck { position: relative; width: 150px; height: 220px; margin: 4px auto; }
 .deckCard {
   position: absolute; width: 116px;
   aspect-ratio: 350/470; border-radius: 2px;
@@ -273,6 +299,8 @@
 .deckCard:nth-child(6) { animation-delay: -3s; }
 .deckStar { width: 48px; height: 48px; shape-rendering: crispEdges; fill: var(--glow); }
 .drawLine { font-family: var(--text); font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); text-align: center; margin: 0; }
+/* Заголовок draw — только на ПК (на мобайле экран без него). */
+.padDraw .display { display: none; }
 
 /* -------------------------- Карта flip (reveal) -------------------------- */
 /* Пропорция под наш пиксельный арт (340×590). */
@@ -289,86 +317,55 @@
   box-shadow: inset 0 0 0 3px var(--glow), inset 0 0 0 6px var(--wood-d), inset -5px -5px 0 #00000044;
 }
 .flipFront { transform: rotateY(180deg); background-size: cover; background-position: center; background-color: #cbb684; border: 2px solid var(--glow); box-shadow: 0 0 14px var(--glow); }
-.cardTitle { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: .04em; color: var(--ink); text-transform: uppercase; text-shadow: 0 0 10px var(--glow); margin: 14px 0 0; text-align: center; }
+.cardTitle { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .04em; color: var(--ink); text-transform: uppercase; text-shadow: 0 0 10px var(--glow); margin: 8px 0 0; text-align: center; }
+.cardLabel { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--muted); margin-top: 4px; }
 .revealDesc { display: none; }
 
-.skipRow { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px 0 12px; }
+.skipRow { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px 0 0; }
 .skipRule { flex: 1; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--accent) 55%, var(--line) 55%); }
 .skipLink { background: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 11px; color: var(--lock); white-space: nowrap; }
 .skipLink:hover { text-decoration: underline; }
 
-/* ---------------------------- Reading (тизер) ---------------------------- */
-.readTitle { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .02em; color: var(--ink); text-align: center; text-transform: uppercase; text-shadow: 0 0 12px var(--glow); margin: 12px 0 0; }
-.readText { font-family: var(--text); font-size: 12.5px; line-height: 1.75; color: var(--ink); margin: 14px 0 0; text-wrap: pretty; min-height: 3.2em; }
-.readText p { margin: 0; }
-.readText p + p { margin-top: 10px; }
-.lockBlock { position: relative; padding: 16px; border: 1px solid var(--line); border-radius: 0; overflow: hidden; min-height: 108px; }
-.lockBlur { filter: blur(4px); opacity: .42; color: var(--ink-soft); font-family: var(--text); font-size: 11px; line-height: 1.8; }
-.lockOverlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(#e7d6ac00, #e7d6acdd); }
-.lockIcon { filter: drop-shadow(0 0 6px var(--glow)); animation: lockpulse 2.4s ease-in-out infinite; }
-.lockLabel { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--lock); }
+/* ---------------------------- Reading (вывод) ---------------------------- */
+.readTitle { font-family: var(--display); font-weight: 800; font-size: 30px; letter-spacing: .02em; color: var(--ink); text-align: center; text-transform: uppercase; text-shadow: 0 0 12px var(--glow); margin: 6px 0 0; }
+.readPanel {
+  margin-top: 16px; padding: 20px 18px; border: 2px solid var(--line); border-radius: 0;
+  background: linear-gradient(180deg, #f0e6cc, #e8dcbf);
+  box-shadow: inset 0 1px 0 #ffffff88, inset 0 0 24px #d59a5a1f;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.readLine { font-family: var(--text); font-size: 13.5px; line-height: 1.65; color: var(--ink); margin: 0; text-wrap: pretty; }
+.readLineThought { font-style: italic; }
+.hlTag { color: var(--accent-d); font-weight: 600; }
+.hlKey { color: var(--lock); font-weight: 600; }
 
-/* ------------------------------ Paywall ------------------------------ */
-.pwEyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: .3em; color: var(--accent-d); text-align: center; text-transform: uppercase; text-shadow: 0 0 6px var(--glow); }
-.pwTitle { font-family: var(--display); font-weight: 800; font-size: 30px; line-height: .92; letter-spacing: .02em; color: var(--ink); text-align: center; text-transform: uppercase; text-shadow: 0 0 12px var(--glow); margin: 12px 0 0; }
-.payoffs { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+/* Reading: блок «что откроется» (буллеты). */
+.unlock { margin-top: 18px; }
+.unlockTitle { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--accent-d); text-transform: uppercase; text-shadow: 0 0 6px var(--glow); margin-bottom: 10px; }
+.payoffs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
 .payoffRow { display: flex; gap: 9px; align-items: flex-start; font-family: var(--text); font-size: 11.5px; line-height: 1.5; color: var(--ink); }
 .payoffMark { color: var(--accent-d); font-weight: 700; flex-shrink: 0; }
-.priceCard { padding: 14px; text-align: center; border: 2px solid var(--accent); border-radius: 0; background: linear-gradient(180deg, var(--screen), var(--screen-2)); box-shadow: var(--shadow-glow); }
-.priceLabel { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .02em; color: var(--ink); text-transform: uppercase; }
-.priceNote { font-family: var(--text); font-size: 10.5px; color: var(--muted); margin-top: 4px; }
-.pwRestart { text-align: center; }
 .loginNote { font-family: var(--text); font-size: 11px; color: var(--muted); text-align: center; margin: 0; }
 .loginNote a { color: var(--lock); }
 
-/* ============= Вариант B: закреплённая карта, блоки, ввод, analyze ============= */
-/* Статичное лицо карты (q1/q2/q3/analyze/reading). */
+/* ---------- Закреплённая карта (q1/q2/q3/analyze/reading) ---------- */
 .cardFace {
-  width: 150px; aspect-ratio: 340/590; margin: 0 auto; flex-shrink: 0;
-  position: relative; align-self: center;
+  width: 172px; aspect-ratio: 340/590; flex-shrink: 0;
+  position: relative;
   background-size: cover; background-position: center; background-color: #cbb684;
-  border: 2px solid var(--glow); box-shadow: 0 0 14px var(--glow);
+  box-shadow: 0 0 0 3px var(--glow), 0 0 0 6px var(--wood-d), 0 0 18px #d59a5a66, 0 8px 0 #00000022;
 }
-.cardSmall { width: 100px; }
+.cardSmall { width: 122px; }
 .cardTag {
-  position: absolute; left: 0; right: 0; bottom: -19px; text-align: center;
-  font-family: var(--mono); font-size: 8.5px; letter-spacing: .12em; color: var(--muted);
+  position: absolute; left: 0; right: 0; bottom: -20px; text-align: center;
+  font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: var(--muted);
 }
-
-/* Раскладка вопроса: карта сверху, тело под ней. */
-.qLayout { display: flex; flex-direction: column; gap: 24px; flex: 1; min-height: 0; margin-top: 12px; }
-.qBody { display: flex; flex-direction: column; min-height: 0; }
-
-/* Блоки-теги (q1/q2): сетка 2×2, обязательный выбор одного. */
-.blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-.block {
-  font-family: var(--text); font-size: 12.5px; line-height: 1.3; color: var(--ink);
-  background: transparent; border: 1.5px solid var(--line); border-radius: 0;
-  padding: 11px 12px; cursor: pointer; text-align: center;
-  transition: background .15s, border-color .15s, box-shadow .2s;
-}
-.block:hover { border-color: var(--accent); }
-.blockOn { background: var(--accent); border-color: var(--accent-d); color: var(--paper); box-shadow: var(--shadow-glow); }
-
-/* Поле «своими словами» (необязательное). */
-.ownInput {
-  width: 100%; margin-top: 12px; box-sizing: border-box;
-  font-family: var(--text); font-size: 13px; color: var(--ink);
-  background: linear-gradient(180deg, var(--screen), var(--screen-2));
-  border: 1.5px solid var(--line); border-radius: 0; padding: 11px 13px;
-}
-.ownInput::placeholder { color: var(--muted); }
-.ownInput:focus { outline: none; border-color: var(--accent); box-shadow: var(--shadow-glow); }
 
 /* Экран analyze (псевдо-обработка). */
-.analyzeLog { width: 100%; max-width: 300px; font-family: var(--mono); font-size: 11px; line-height: 2; color: var(--accent-d); min-height: 92px; }
+.analyzeLog { width: 100%; max-width: 320px; margin: 0 auto; font-family: var(--mono); font-size: 11px; line-height: 2; color: var(--accent-d); min-height: 92px; }
 .analyzeLog p { margin: 0; text-shadow: 0 0 6px var(--glow); }
-.analyzeBar { width: 100%; max-width: 300px; height: 6px; background: var(--line); overflow: hidden; }
+.analyzeBar { width: 100%; max-width: 320px; margin: 12px auto 0; height: 6px; background: var(--line); overflow: hidden; }
 .analyzeBar span { display: block; height: 100%; background: var(--accent); box-shadow: var(--shadow-glow); transition: width .3s; }
-
-/* Reading: блок «что откроется» (буллеты без цены). */
-.unlock { margin-top: 14px; }
-.unlockTitle { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--accent-d); text-transform: uppercase; text-shadow: 0 0 6px var(--glow); margin-bottom: 10px; }
 
 /* ------------------------------ Анимации ------------------------------ */
 @keyframes flick { 0%, 91% { opacity: 1; } 93% { opacity: .86; } 95% { opacity: 1; } 100% { opacity: 1; } }
@@ -381,77 +378,113 @@
   100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-/* ========================= ДЕСКТОП ========================= */
-@media (min-width: 900px) {
-  .root {
-    padding: clamp(28px, 5vh, 64px) 24px;
-    align-items: center;
-    justify-content: center;
+/* ============================ ПК (>=1000px) ============================ */
+/* Ландшафтное «устройство» 1120×640, экраны в 2 колонки (export_pk). */
+@media (min-width: 1000px) {
+  .root { align-items: center; padding: clamp(24px, 4vh, 56px) 32px; }
+  .bezel { max-width: 1120px; width: min(1120px, calc(100vw - 64px)); border-radius: 30px; padding: 16px; }
+  /* min-height (не фикс): устройство держит 640, но растёт под «плотный» контент
+     (reading), чтобы кнопка внизу не обрезалась overflow:hidden. */
+  .screen {
+    min-height: 640px;
+    border-radius: 20px;
+    padding: 40px 52px;
+    box-shadow: inset 0 0 90px #4a2f1840, inset 0 0 0 2px var(--wood-d);
   }
-  /* Экраны-флоу: портретное «устройство» по центру тёмного стола. */
-  .bezel {
-    width: min(384px, 92vw);
-    min-height: 0;
-    height: min(680px, 88vh);
-    padding: 14px;
-    border-radius: 2px;
-    margin: auto;
-  }
-  .screen { padding: 26px 22px; }
-  .bootTitle { font-size: 56px; }
+  .pad { padding: 0; }
 
-  /* reveal / reading / paywall: landscape 920×520, 2 колонки. */
-  .bezelWide {
-    width: min(920px, 96vw);
-    height: min(520px, 86vh);
-    padding: 16px;
-  }
-  .bezelWide .screen {
-    padding: 34px 40px;
-    box-shadow:
-      inset 0 0 50px #4a2f1826,
-      inset 0 0 0 4px var(--wood-d),
-      inset 0 0 0 8px var(--screen),
-      inset 0 0 0 11px var(--line);
-  }
-  .bezelWide .split { flex-direction: row; align-items: center; gap: 44px; text-align: left; }
-  .grow { display: none; }
+  /* Общий 2-колоночный лейаут. */
+  .two { flex-direction: row; align-items: stretch; gap: 56px; margin-top: 20px; }
+  .aside { justify-content: center; }
+  .main { justify-content: flex-start; }
 
-  /* колонки внутри .split */
-  .colCard { display: flex; align-items: center; justify-content: center; height: 100%; }
-  .colCard .card { width: auto; height: 88%; margin: 0; }
-  .colBody { flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-  .colSide { width: 320px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; }
-  .colSideFill { flex: 0 0 auto; }
-  .colSideFill .lockBlock { flex: none; }
+  .statusBar { font-size: 11px; }
+  .seg { height: 5px; }
+  .topbar { gap: 14px; }
+  .backBtn { width: 38px; height: 38px; font-size: 18px; }
 
-  /* reveal desktop */
-  .bezelWide .cardTitle { font-size: 50px; text-align: left; margin: 18px 0 0; line-height: .9; }
-  .bezelWide .revealDesc { display: block; font-family: var(--text); font-size: 15px; line-height: 1.8; color: var(--ink); margin: 18px 0 0; max-width: 42ch; }
-  .bezelWide .skipRow { justify-content: flex-start; margin: 22px 0 0; max-width: 320px; }
-  .bezelWide .colBody .cta { width: fit-content; padding: 13px 30px; margin-top: 26px; }
-  .bezelWide .footer { display: none; }
+  /* CTA в правой колонке — авто-ширина, слева, крупнее. */
+  .main > .cta { width: fit-content; align-self: flex-start; padding: 15px 44px; font-size: 26px; }
 
-  /* reading desktop */
-  .bezelWide .readTitle { font-size: 44px; text-align: left; margin: 20px 0 0; }
-  .bezelWide .readText { font-size: 16px; margin-top: 18px; max-width: 42ch; }
-  .bezelWide .restart { text-align: left; }
+  /* ---- boot ---- */
+  .padBoot .bootStatus { font-size: 11px; letter-spacing: .4em; }
+  .padBoot .bootTitle { font-size: 104px; }
+  .padBoot .bootSub { font-size: 17px; margin-top: 26px; }
+  .padBoot .ctaBoot { margin-top: 40px; padding: 16px 52px; font-size: 30px; }
+  .padBoot .footer { font-size: 11px; }
 
-  /* paywall desktop */
-  .bezelWide .pwEyebrow { text-align: left; letter-spacing: .3em; }
-  .bezelWide .pwTitle { font-size: 44px; text-align: left; margin-top: 14px; }
-  .bezelWide .payoffs { margin-top: 24px; gap: 12px; }
-  .bezelWide .payoffRow { font-size: 14px; }
-  .bezelWide .priceLabel { font-size: 32px; }
+  /* ---- select ---- */
+  .padSelect .selTwo { flex-direction: row; gap: 56px; align-items: center; }
+  .padSelect .selHead { width: 340px; flex-shrink: 0; text-align: left; gap: 14px; }
+  .padSelect .selHead .statusBar { color: var(--accent-d); }
+  .padSelect .selTitle { font-size: 56px; text-align: left; margin: 6px 0 0; line-height: .94; }
+  .padSelect .selSub { font-size: 15px; text-align: left; line-height: 1.8; }
+  .padSelect .selCount { font-size: 11px; }
+  .padSelect .menu { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: center; margin: 0; }
+  .padSelect .menuItem { font-size: 15px; padding: 18px 20px; }
 
-  /* вариант B десктоп: карта на всю высоту колонки в reading. */
-  .colCard .cardFace { width: auto; height: 82%; margin: 0; }
-  .bezelWide .unlockTitle { text-align: left; }
+  /* ---- intro ---- */
+  .padIntro .stack { max-width: 720px; gap: 10px; }
+  .padIntro .eyebrow { font-size: 13px; }
+  .padIntro .display { font-size: 88px; }
+  .padIntro .lead { font-size: 18px; max-width: 640px; line-height: 1.85; margin-top: 20px; }
+  .padIntro > .cta { width: fit-content; align-self: flex-start; padding: 15px 40px; font-size: 26px; }
+
+  /* ---- pause ---- */
+  .padPause .center { max-width: 640px; margin: 0 auto; gap: 30px; }
+  .padPause .pauseIcon { width: 92px; height: 92px; }
+  .padPause .pauseIcon span { width: 9px; height: 32px; }
+  .padPause .display { font-size: 62px; }
+  .padPause .lead { font-size: 18px; line-height: 1.85; }
+  .padPause > .cta { width: fit-content; align-self: center; padding: 15px 44px; font-size: 26px; }
+
+  /* ---- draw ---- */
+  .padDraw .aside { width: 420px; }
+  .padDraw .deck { transform: scale(1.55); }
+  .padDraw .display { display: block; font-size: 50px; line-height: .9; }
+  .padDraw .drawLine { font-size: 18px; line-height: 1.85; text-align: left; margin-top: 20px; max-width: 420px; }
+
+  /* ---- reveal ---- */
+  .padReveal .card { width: auto; height: min(460px, 66vh); margin: 0; }
+  .padReveal .cardLabel { font-size: 12px; }
+  .padReveal .cardTitle { font-size: 72px; text-align: left; margin: 6px 0 0; line-height: .88; }
+  .padReveal .revealDesc { display: block; font-family: var(--text); font-size: 18px; line-height: 1.85; color: var(--ink); margin: 22px 0 0; max-width: 440px; }
+  .padReveal .skipRow { justify-content: flex-start; max-width: 300px; margin: 18px 0 0; }
+
+  /* ---- question ---- */
+  .padQuestion .qEyebrow { font-size: 12px; margin-top: 22px; }
+  .padQuestion .aside { width: 300px; }
+  .padQuestion .cardFace { width: auto; height: min(340px, 52vh); }
+  .padQuestion .qPrompt { font-size: 24px; line-height: 1.4; max-width: 520px; }
+  .padQuestion .blocks { gap: 14px; margin-top: 30px; }
+  .padQuestion .block { font-size: 15px; padding: 18px 16px; }
+  .padQuestion .ownInput { font-size: 15px; padding: 18px 16px; margin-top: 14px; }
+  .padQuestion .options { margin-top: 24px; }
+  .padQuestion .option { font-size: 15px; padding: 15px 16px; }
+
+  /* ---- analyze ---- */
+  .padAnalyze .aside { width: 300px; }
+  .padAnalyze .cardFace { width: auto; height: min(340px, 52vh); }
+  .padAnalyze .analyzeLog { font-size: 14px; max-width: none; }
+  .padAnalyze .analyzeBar { max-width: 440px; margin-left: 0; }
+
+  /* ---- reading ---- */
+  .padReading .aside { width: 300px; }
+  .padReading .cardFace { width: auto; height: min(360px, 54vh); }
+  .padReading .readTitle { font-size: 44px; text-align: left; margin: 10px 0 0; }
+  .padReading .readPanel { max-width: 560px; padding: 18px 18px; gap: 11px; margin-top: 14px; }
+  .padReading .readLine { font-size: 15px; line-height: 1.6; }
+  .padReading .unlock { margin-top: 14px; }
+  .padReading .unlockTitle { font-size: 11px; margin-bottom: 8px; }
+  .padReading .payoffs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; max-width: 560px; }
+  .padReading .payoffRow { font-size: 13.5px; }
+  .padReading .main > .cta { margin-top: 16px; }
+  .padReading .restart { text-align: left; margin-top: 10px; }
 }
 
 /* ------------------------- Доступность: reduce ------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .screen { animation: none !important; }
-  .caret, .lockIcon, .cta, .menuItem, .option, .flipInner, .deckCard { animation: none !important; transition: none !important; }
+  .caret, .cta, .menuItem, .option, .flipInner, .deckCard { animation: none !important; transition: none !important; }
   .flipOn .flipInner { transform: rotateY(180deg); }
 }

@@ -30,10 +30,13 @@ test('generate suzheny: locked-поля собраны из шаблонов', (
   assert.ok(/«.»/.test(v.firstLetter))          // буква подставлена
   assert.ok(!v.meetMonth.includes('{month}'))   // месяц подставлен
 })
-test('generate return: ключ это выбранный his_sign', () => {
-  const v = generate({ branch: 'return', birthDate: '1994-09-10', hisSign: 'scorpio' })
-  assert.match(v.willReturn, /Скорпион|всерьёз/)
-  assert.ok(!v.whenReturn.includes('{month}'))
+test('generate return: его знак выводится по дате рождения (детерминизм)', () => {
+  const args = { branch: 'return', birthDate: '1994-09-10', name: 'Аня' } // Дева -> Рыбы (оппозиция)
+  const a = generate(args)
+  const b = generate(args)
+  assert.deepEqual(a, b)                          // детерминизм
+  assert.ok(a.hisState && a.willReturn)           // поля из досье собраны
+  assert.ok(!a.whenReturn.includes('{month}'))    // месяц подставлен
 })
 test('buildReveal: возвращает поля с value и locked', () => {
   const v = generate(SUZH)

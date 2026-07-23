@@ -1,31 +1,45 @@
 'use client'
 import Link from 'next/link'
-import { Sun, Layers, HelpCircle } from 'lucide-react'
 import { SPREADS } from '../content/tarot/spreads'
+import { StarMark } from './components/icons'
 import styles from './components/tarot.module.css'
 
-const ICONS = { day: Sun, three: Layers, yesno: HelpCircle }
-const DESCRIPTIONS = {
-  day: 'Одна карта на сегодня — общий настрой дня.',
-  three: 'Расклад из трёх карт: прошлое, настоящее, будущее и другие темы.',
-  yesno: 'Задай вопрос и получи ответ да или нет.',
+// Описания и мета для экрана выбора расклада (макет 2b).
+const META = {
+  day:   { desc: 'Совет и настрой на день',        meta: '1 карта · 30 сек',   art: 'single' },
+  three: { desc: 'Прошлое · Настоящее · Будущее',  meta: '3 карты · популярный', art: 'stack' },
+  yesno: { desc: 'Чёткий ответ на закрытый вопрос', meta: '1 карта · 30 сек',   art: 'single' },
 }
+
+const SingleArt = () => (
+  <div className={styles.spreadArt}><StarMark size={22} /></div>
+)
+const StackArt = () => (
+  <div className={styles.spreadArtStack}>
+    <span /><span /><span><StarMark size={20} /></span>
+  </div>
+)
 
 export default function TarotClient() {
   return (
     <div className={styles.page}>
-      <p className={styles.eyebrow}>Эзотерический хаб</p>
-      <h1 className={styles.title}>Расклад Таро</h1>
-      <p className={styles.subtitle}>Выбери сценарий гадания</p>
+      <div className={styles.head}>
+        <p className={styles.eyebrow}>Эзотерический хаб</p>
+        <h1 className={styles.title}>Выберите расклад</h1>
+        <p className={styles.subtitle}>Чем больше карт — тем глубже разбор ситуации.</p>
+      </div>
 
-      <div className={styles.scenarioGrid}>
+      <div className={styles.spreadGrid}>
         {SPREADS.map((spread) => {
-          const Icon = ICONS[spread.id] ?? Layers
+          const m = META[spread.id] ?? META.day
           return (
-            <Link key={spread.id} href={`/tarot/${spread.id}`} className={styles.scenarioCard}>
-              <Icon className={styles.scenarioIcon} size={28} strokeWidth={1.5} />
-              <div className={styles.scenarioName}>{spread.name}</div>
-              <div className={styles.scenarioDesc}>{DESCRIPTIONS[spread.id]}</div>
+            <Link key={spread.id} href={`/tarot/${spread.id}`} className={styles.spreadCard}>
+              {m.art === 'stack' ? <StackArt /> : <SingleArt />}
+              <div>
+                <div className={styles.spreadName}>{spread.name}</div>
+                <div className={styles.spreadDesc}>{m.desc}</div>
+                <div className={styles.spreadMeta}>{m.meta}</div>
+              </div>
             </Link>
           )
         })}

@@ -1,13 +1,13 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { sign as getSign } from '../content/horoscope/astro'
 import {
-  sign as getSign,
-} from '../content/horoscope/astro'
-import {
+  getToday,
   loadBirthLocal, saveBirthLocal, fetchBirthFromProfile, saveBirthToProfile, normalizeBirth,
 } from '../content/horoscope'
 import SignHeader from './components/SignHeader'
+import DetailView from './components/DetailView'
 import TodayView from './TodayView'
 import PortraitView from './PortraitView'
 import LunarView from './LunarView'
@@ -18,10 +18,11 @@ export default function HoroscopeClient() {
   const { user } = useAuth()
   const isSubscribed = user?.subscribed ?? false
 
-  const [birth, setBirth] = useState(null)   // 'YYYY-MM-DD' | null
+  const [birth, setBirth] = useState(null)     // 'YYYY-MM-DD' | null
   const [tab, setTab] = useState('today')
-  const [ready, setReady] = useState(false)  // прочитали ли память
-  const [draft, setDraft] = useState('')     // значение поля ввода
+  const [detail, setDetail] = useState(null)   // id платной категории дня | null
+  const [ready, setReady] = useState(false)    // прочитали ли память
+  const [draft, setDraft] = useState('')       // значение поля ввода
 
   // При входе тянем дату: сперва профиль (если залогинен), затем localStorage.
   useEffect(() => {
@@ -42,23 +43,37 @@ export default function HoroscopeClient() {
     setBirth(d)
   }
 
-  const changeDate = () => { setDraft(birth ?? ''); setBirth(null) }
+  const changeDate = () => { setDraft(birth ?? ''); setDetail(null); setBirth(null) }
+  const switchTab = (t) => { setDetail(null); setTab(t) }
 
   // Экран ввода (память пуста или нажали «Ввести другую»).
   if (!ready) return <div className={styles.page} />
   if (!birth) {
     return (
       <div className={styles.page}>
-        <form className={styles.form} onSubmit={submit}>
-          <h1 className={styles.signName}>Гороскоп на сегодня</h1>
-          <div className={styles.field}>
-            <label className={styles.label}>Дата рождения</label>
-            <input className={styles.input} type="date" value={draft} onChange={e => setDraft(e.target.value)} />
+        <div className={styles.formWrap}>
+          <div className={styles.formCard}>
+            <h1 className={styles.formTitle}>Гороскоп на сегодня</h1>
+            <p className={styles.formSub}>
+              Введи дату рождения, определим твой знак и покажем небо на сегодня, портрет знака и лунный календарь.
+            </p>
+            <form onSubmit={submit}>
+              <div className={styles.field}>
+                <label className={styles.fieldLabel}>Дата рождения</label>
+                <input className={styles.input} type="date" value={draft} onChange={e => setDraft(e.target.value)} />
+              </div>
+              <button className={styles.btnPrimary} type="submit" disabled={!normalizeBirth(draft)}>
+                <Sparkle size={14} /> Смотреть небо
+              </button>
+            </form>
+            <p className={styles.formHint}>
+              <Sparkle size={12} />
+              {user
+                ? 'Нужна только дата, знак определим сами.'
+                : 'Нужна только дата. Войди, чтобы она сохранилась на всех устройствах.'}
+            </p>
           </div>
-          <span className={styles.lockNote}><Sparkle size={12} /> Нужна только дата рождения, знак определим сами</span>
-          <button className={styles.btnPrimary} type="submit" disabled={!normalizeBirth(draft)}>Смотреть небо</button>
-          {!user && <span className={styles.lockNote}>Войди, чтобы дата сохранилась на всех устройствах</span>}
-        </form>
+        </div>
       </div>
     )
   }
@@ -66,10 +81,22 @@ export default function HoroscopeClient() {
   const sign = getSign(birth)
   const today = new Date()
 
+  // Экран деталей категории дня (drill-down) — заменяет шапку и вкладки.
+  if (tab === 'today' && detail) {
+    const block = getToday(sign.id, today).blocks.find(b => b.id === detail)
+    if (block) {
+      return (
+        <div className={styles.page}>
+          <DetailView block={block} signName={sign.name} isSubscribed={isSubscribed} onBack={() => setDetail(null)} />
+        </div>
+      )
+    }
+  }
+
   return (
     <div className={styles.page}>
-      <SignHeader sign={sign} tab={tab} onTab={setTab} onChange={changeDate} />
-      {tab === 'today'    && <TodayView sign={sign} today={today} isSubscribed={isSubscribed} />}
+      <SignHeader sign={sign} tab={tab} onTab={switchTab} onChange={changeDate} />
+      {tab === 'today'    && <TodayView sign={sign} today={today} isSubscribed={isSubscribed} onOpenDetail={setDetail} />}
       {tab === 'portrait' && <PortraitView sign={sign} isSubscribed={isSubscribed} />}
       {tab === 'lunar'    && <LunarView today={today} isSubscribed={isSubscribed} />}
     </div>

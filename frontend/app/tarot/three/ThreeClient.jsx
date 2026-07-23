@@ -4,15 +4,18 @@ import Link from 'next/link'
 import { Lock } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import CardFan from '../components/CardFan'
-import TarotCard from '../components/TarotCard'
+import ReadingCard from '../components/ReadingCard'
 import Paywall from '../../components/ui/Paywall'
-import { Check, Arrow, THEME_ICONS } from '../components/icons'
+import { Check, StarMark, IconPast, IconFuture, THEME_ICONS } from '../components/icons'
 import { getSpread } from '../../content/tarot/spreads'
 import { assignRandomCards, getText } from '../../content/tarot'
 import { requestUsage } from '../../content/tarot/api'
 import styles from '../components/tarot.module.css'
 
 const SPREAD = getSpread('three')
+
+// Иконки позиций таймлайна: Прошлое (часы) · Настоящее (звезда) · Будущее (солнце).
+const POS_ICONS = [IconPast, StarMark, IconFuture]
 
 // Подписи/цитаты тем (макет 2a). Ключ — id темы из SPREADS.three.themes.
 const THEME_META = {
@@ -89,40 +92,55 @@ export default function ThreeClient() {
     return (
       <div className={styles.page}>
         <Back />
-        <div className={styles.head}>
-          <p className={styles.eyebrow}>{theme.name}</p>
-          <h1 className={styles.title}>Ваш расклад</h1>
-        </div>
-        <p className={styles.intro}>{getText({ scenario: 'three', themeId: theme.id, intro: true })}</p>
+        <div className={styles.reading}>
+          <div className={styles.head}>
+            <p className={styles.eyebrow}>Расклад</p>
+            <p className={styles.questionEcho} style={{ margin: '0 auto' }}>{theme.name}</p>
+          </div>
+          <p className={styles.intro}>{getText({ scenario: 'three', themeId: theme.id, intro: true })}</p>
 
-        <div className={styles.positions}>
-          {SPREAD.positions.map((label, i) => {
-            const card = order[i]
-            const locked = i >= unlocked
-            return (
-              <div key={label} className={styles.position}>
-                <div className={styles.positionCard}><TarotCard card={card} faceUp /></div>
-                <div>
-                  <div className={styles.positionLabel}>{label}</div>
-                  {locked ? (
-                    <div className={styles.positionText}>
-                      <Lock size={14} style={{ verticalAlign: '-2px', marginRight: 6 }} />
-                      Толкование доступно по подписке
-                    </div>
-                  ) : (
-                    <div className={styles.positionText}>
-                      {getText({ scenario: 'three', themeId: theme.id, number: card.number })}
-                    </div>
-                  )}
-                </div>
+          <div className={styles.triadRow}>
+            {SPREAD.positions.map((label, i) => (
+              <div key={label} className={`${styles.triadItem} ${i === 1 ? styles.center : ''}`}>
+                <div className={`${styles.posLabel} ${i === 1 ? styles.on : ''}`}>{label}</div>
+                <ReadingCard card={order[i]} variant="triad" active={i === 1} />
               </div>
-            )
-          })}
-        </div>
+            ))}
+          </div>
 
-        {mode === 'demo' && <div style={{ marginTop: 32 }}><Paywall /></div>}
-        <div className={styles.actions}>
-          <button className={styles.btnGhost} onClick={reset}>Другой расклад</button>
+          <div className={styles.posBlocks}>
+            {SPREAD.positions.map((label, i) => {
+              const card = order[i]
+              const locked = i >= unlocked
+              const on = i === 1
+              const Icon = POS_ICONS[i] ?? StarMark
+              return (
+                <div key={label} className={`${styles.pos} ${on ? styles.on : ''}`}>
+                  <div className={styles.posRail}>
+                    <div className={styles.posIcon}><Icon size={18} /></div>
+                    <div className={styles.posConnector} />
+                  </div>
+                  <div className={styles.posContent}>
+                    <div className={`${styles.posBlockKicker} ${on ? styles.on : ''}`}>{label} · {card.ru}</div>
+                    {locked ? (
+                      <p className={styles.posBlockText}>
+                        <span className={styles.locked}><Lock size={14} /> Толкование по подписке</span>
+                      </p>
+                    ) : (
+                      <p className={styles.posBlockText}>
+                        {getText({ scenario: 'three', themeId: theme.id, number: card.number })}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {mode === 'demo' && <div style={{ marginTop: 32 }}><Paywall /></div>}
+          <div className={styles.readingActions}>
+            <button className={styles.btnPrimary} onClick={reset}>Другой расклад <StarMark size={16} /></button>
+          </div>
         </div>
       </div>
     )

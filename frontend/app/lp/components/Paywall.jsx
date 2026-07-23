@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useTracking } from '../../hooks/useTracking'
 import styles from '../lp.module.css'
 
-export default function Paywall({ slug, heading, payoffs, onRestart }) {
+export default function Paywall({ slug, heading, payoffs, onRestart, ctaOnly }) {
   const { user } = useAuth()
   const router = useRouter()
   const { track } = useTracking()
@@ -13,6 +13,15 @@ export default function Paywall({ slug, heading, payoffs, onRestart }) {
     track('cta_click', { slug })
     try { localStorage.setItem('post_checkout_return', `/lp/${slug}`) } catch {}
     router.push(user ? '/lk' : '/register')
+  }
+
+  // Компактный режим: только кнопка (например, под вопросами тизера).
+  if (ctaOnly) {
+    return (
+      <div className={styles.paywallCta}>
+        <button className={styles.cta} onClick={onClick}>Открыть полный разбор →</button>
+      </div>
+    )
   }
 
   return (

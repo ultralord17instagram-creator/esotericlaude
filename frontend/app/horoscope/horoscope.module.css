@@ -1,52 +1,376 @@
-/* Структурный каркас продукта «Гороскоп». Визуальную полировку делает владелец. */
-.page { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+/* Продукт «Гороскоп» — дизайн Astrix (design-reference/horo-reference).
+   Палитра и шрифты из глобальной темы (app/styles/theme.css):
+   --bg-base #EAE0CE, --bg-raised #FBF7EF, --bg-tile #F3ECDB, --accent #B9954F,
+   --bg-deep #1B1A30, Source Serif 4 (заголовки) + Golos Text (текст).
+   Десктоп-first: мобильные раскладки в @media (max-width: …).
+   Единичные литералы (#F3ECDD плашка неба, тон текста #4A4436, #8C8069
+   приглушённый) взяты из макета и в теме токенами не заведены. */
 
-/* Шапка знака + вкладки */
-.header { margin-bottom: 20px; }
-.signRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.signName { font-size: 22px; font-weight: 600; }
-.signRange { opacity: 0.7; font-size: 14px; }
-.changeBtn { background: none; border: 1px solid currentColor; border-radius: 999px; padding: 6px 12px; cursor: pointer; font-size: 13px; opacity: 0.8; }
-.tabs { display: flex; gap: 6px; margin-top: 16px; }
-.tab { flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: transparent; cursor: pointer; font-size: 14px; }
-.tabOn { background: rgba(255,255,255,0.1); font-weight: 600; }
+.page { max-width: 1120px; margin: 0 auto; padding: 28px 40px 80px; }
+@media (max-width: 900px) { .page { padding: 16px 22px 40px; } }
 
-/* Форма ввода даты */
-.form { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
-.field { display: flex; flex-direction: column; gap: 6px; }
-.label { font-size: 13px; opacity: 0.75; }
-.input { padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: inherit; }
-.btnPrimary { padding: 12px 18px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; }
-.btnPrimary:disabled { opacity: 0.5; cursor: default; }
+/* ── Хлебные крошки (только десктоп) ───────────────────────── */
+.breadcrumb { font-size: 13.5px; color: var(--text-muted); margin-bottom: 24px; }
+.crumbSep { margin: 0 6px; color: #C4B9A0; }
+.crumbCurrent { color: var(--text-secondary); font-weight: 600; }
+@media (max-width: 900px) { .breadcrumb { display: none; } }
 
-/* Живое небо */
-.sky { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
-.skyFact { padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
-.skyIcon { font-size: 22px; }
-.skyLabel { font-size: 12px; opacity: 0.7; margin-top: 6px; }
-.skyValue { font-weight: 600; }
-.skyText { font-size: 13px; opacity: 0.85; margin-top: 4px; }
-.retroBadges { display: flex; gap: 6px; flex-wrap: wrap; }
-.retroBadge { font-size: 12px; padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(255,180,0,0.5); }
+/* ── Шапка знака ───────────────────────────────────────────── */
+.header { margin-bottom: 4px; }
+.headRow {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: 24px;
+}
+@media (max-width: 900px) { .headRow { align-items: flex-start; gap: 12px; margin-bottom: 16px; } }
 
-/* Карточка блока */
-.block { padding: 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 12px; }
-.blockName { font-weight: 600; margin-bottom: 8px; }
-.blockText { line-height: 1.6; }
-.locked { display: flex; flex-direction: column; gap: 10px; }
-.lockedTeaser { line-height: 1.6; }
-.bait { opacity: 0.9; }
-.lockCta { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; align-self: flex-start; }
-.lockNote { font-size: 12px; opacity: 0.6; }
+.signName {
+  font-family: var(--font-heading); font-weight: 500;
+  font-size: clamp(32px, 5.5vw, 52px); line-height: 1; letter-spacing: -.02em;
+  color: var(--text-primary); margin: 0 0 12px;
+}
+@media (max-width: 900px) { .signName { margin-bottom: 8px; } }
 
-/* Совет дня */
-.advice { margin-top: 8px; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.06); font-style: italic; }
+.signMeta {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 9px;
+  font-size: 16px; color: var(--text-secondary);
+}
+@media (max-width: 900px) { .signMeta { gap: 7px; font-size: 13px; } }
+.metaDot { color: #C4B399; }
 
-/* Лунная сетка */
-.lunarGrid { overflow-x: auto; }
-.lunarTable { border-collapse: collapse; width: 100%; font-size: 12px; }
-.lunarTable th, .lunarTable td { padding: 4px 6px; text-align: center; border: 1px solid rgba(255,255,255,0.08); }
-.lunarSphere { text-align: left; white-space: nowrap; }
-.rGood { color: #6ee787; }
-.rNeutral { opacity: 0.5; }
-.rBad { color: #ff7b72; }
+.changeBtn {
+  flex: none; display: inline-flex; align-items: center; gap: 9px;
+  height: 46px; padding: 0 20px; border-radius: 999px;
+  border: 1px solid rgba(30,29,52,.2); background: transparent;
+  font-family: var(--font-body); font-size: 15px; font-weight: 600;
+  color: var(--text-primary); cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.changeBtn:hover { border-color: var(--accent); color: var(--accent-hover); }
+@media (max-width: 900px) { .changeBtn { height: 38px; padding: 0 15px; gap: 7px; font-size: 13px; } }
+
+/* ── Вкладки разделов ──────────────────────────────────────── */
+.tabs {
+  display: flex; gap: 28px; margin-bottom: 32px;
+  border-bottom: 1px solid rgba(30,29,52,.1);
+}
+.tab {
+  padding: 0 0 16px; margin-bottom: -1px; background: none;
+  border: none; border-bottom: 2px solid transparent;
+  font-family: var(--font-body); font-weight: 600; font-size: 16px;
+  color: #8C8069; cursor: pointer; transition: color .2s, border-color .2s;
+}
+.tab:hover { color: var(--text-primary); }
+.tabOn { color: var(--text-primary); border-bottom-color: var(--accent); }
+@media (max-width: 900px) {
+  .tabs { gap: 8px; margin-bottom: 18px; border-bottom: none; }
+  .tab {
+    flex: 1; min-height: 48px; padding: 0 10px; margin-bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; line-height: 1.12; border-radius: 16px;
+    border: 1px solid transparent; font-size: 13.5px;
+  }
+  .tabOn {
+    background: var(--bg-raised); border-color: rgba(30,29,52,.1);
+    box-shadow: 0 2px 6px rgba(27,26,48,.05);
+  }
+}
+
+/* ── Раздел «Сегодня» ──────────────────────────────────────── */
+.today { display: flex; flex-direction: column; gap: 16px; }
+
+/* Астросводка: десктоп — ряд из 4 карточек */
+.skyRow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.skyCard {
+  background: var(--bg-tile); border: 1px solid rgba(30,29,52,.07);
+  border-radius: 20px; padding: 24px;
+}
+.skyIconWrap {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; margin-bottom: 16px;
+}
+.skyIconMoon { background: #DCD0B6; }
+.skyCardLabel { font-size: 12.5px; color: var(--text-muted); margin-bottom: 4px; }
+.skyCardValue { font-size: 19px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+.skyCardText { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--text-secondary); }
+
+/* Астросводка: мобильный — переключаемая карточка с чипами */
+.skyMobile {
+  display: none; background: #F3ECDD; border: 1px solid rgba(30,29,52,.07);
+  border-radius: 24px; padding: 20px;
+}
+.skyChips { display: flex; flex-wrap: wrap; gap: 8px; }
+.skyChip {
+  display: inline-flex; align-items: center; height: 34px; padding: 0 14px;
+  border: none; border-radius: 999px; background: var(--bg-base); color: var(--text-secondary);
+  font-family: var(--font-body); font-size: 13px; font-weight: 600;
+  white-space: nowrap; cursor: pointer; transition: background .15s, color .15s;
+}
+.skyChipOn { background: #211F30; color: var(--text-on-dark); }
+.skyMain { display: flex; align-items: center; gap: 16px; margin: 18px 0 13px; }
+.skyMainIcon {
+  width: 58px; height: 58px; flex: none; border-radius: 50%; background: #DCD0B6;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.skyMainMeta { min-width: 0; }
+.skyMainLabel { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+.skyMainTitle {
+  font-family: var(--font-heading); font-size: 23px; font-weight: 600;
+  color: var(--text-primary); line-height: 1.05;
+}
+.skyMainText { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--text-secondary); min-height: 84px; }
+
+@media (max-width: 900px) {
+  .skyRow { display: none; }
+  .skyMobile { display: block; }
+}
+
+/* Карточка «Гороскоп на сегодня» (настрой, бесплатно) */
+.moodCard {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: 22px; padding: 32px;
+}
+@media (max-width: 900px) { .moodCard { padding: 22px; } }
+.moodHead { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
+.moodHead svg { color: var(--accent); }
+.moodTitle {
+  font-family: var(--font-heading); font-weight: 600; font-size: 26px;
+  margin: 0; color: var(--text-primary);
+}
+@media (max-width: 900px) { .moodTitle { font-size: 19px; } }
+.moodText { margin: 0; font-size: 17px; line-height: 1.65; color: #4A4436; max-width: 88ch; }
+@media (max-width: 900px) { .moodText { font-size: 14.5px; line-height: 1.6; } }
+
+/* Плитки категорий дня (платные) */
+.catGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 900px) { .catGrid { grid-template-columns: 1fr 1fr; gap: 12px; } }
+
+.catTile {
+  display: flex; flex-direction: column; text-align: left;
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: 20px;
+  padding: 24px; cursor: pointer; color: inherit;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.catTile:hover {
+  transform: translateY(-3px); border-color: var(--accent);
+  box-shadow: 0 20px 44px -30px rgba(185,149,79,.75);
+}
+@media (max-width: 900px) { .catTile { padding: 18px; } }
+
+.catTop { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+@media (max-width: 900px) { .catTop { margin-bottom: 10px; } }
+.catIcon {
+  width: 38px; height: 38px; flex: none; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 900px) { .catIcon { width: 34px; height: 34px; } }
+.catLock { display: none; color: #B7AC93; margin-top: 3px; }
+.catName {
+  font-family: var(--font-heading); font-weight: 600; font-size: 19px;
+  margin: 0 0 8px; color: var(--text-primary);
+}
+@media (max-width: 900px) { .catName { font-size: 16px; margin-bottom: 6px; } }
+.catTeaser {
+  margin: 0; font-size: 14px; line-height: 1.55; color: #8C8069; flex: 1;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+@media (max-width: 900px) { .catTeaser { font-size: 12.5px; line-height: 1.5; } }
+.catCta {
+  margin-top: 16px; display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: var(--text-primary);
+}
+.catCta svg { color: var(--text-primary); }
+@media (max-width: 900px) { .catCta { display: none; } .catLock { display: inline-flex; } }
+
+/* Нижняя тёмная кнопка (только мобильный, гостю) */
+.fullCta {
+  display: none; height: 52px; border-radius: 999px;
+  background: var(--bg-deep); color: var(--text-on-dark);
+  border: none; cursor: pointer; align-items: center; justify-content: center; gap: 9px;
+  font-family: var(--font-body); font-size: 15px; font-weight: 600;
+}
+.fullCta svg { color: var(--text-on-dark); }
+@media (max-width: 900px) { .fullCta { display: flex; } }
+
+/* Совет дня (бесплатная карточка внизу) */
+.adviceCard {
+  background: var(--bg-tile); border: 1px solid var(--border);
+  border-radius: 20px; padding: 24px 26px;
+}
+@media (max-width: 900px) { .adviceCard { padding: 20px 22px; } }
+.adviceKicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent-hover); margin-bottom: 10px;
+}
+.adviceKicker svg { color: var(--accent); }
+.adviceText {
+  margin: 0; font-family: var(--font-heading); font-style: italic;
+  font-size: 17px; line-height: 1.6; color: #4A4436;
+}
+@media (max-width: 900px) { .adviceText { font-size: 15px; } }
+
+/* ── Экран деталей категории (drill-down) ──────────────────── */
+.detail { max-width: 640px; }
+.detailHead { display: flex; align-items: center; gap: 13px; margin-bottom: 22px; }
+.detailBack {
+  width: 42px; height: 42px; flex: none; border-radius: 50%;
+  border: 1px solid rgba(30,29,52,.18); background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; line-height: 1; color: var(--text-primary);
+  transition: border-color .2s, background .2s;
+}
+.detailBack:hover { border-color: var(--accent); background: var(--accent-dim); }
+.detailKicker {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent-hover);
+}
+.detailIcon {
+  width: 64px; height: 64px; border-radius: 50%; background: var(--bg-tile);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.detailTitle {
+  font-family: var(--font-heading); font-weight: 600; font-size: clamp(26px, 4vw, 34px);
+  line-height: 1.05; letter-spacing: -.01em; margin: 0 0 14px; color: var(--text-primary);
+}
+.detailLead { margin: 0 0 14px; font-size: 16px; line-height: 1.65; color: #4A4436; }
+.detailBody { margin: 0; font-size: 16px; line-height: 1.7; color: #4A4436; }
+.detailBody + .detailBody { margin-top: 14px; }
+
+/* Тизер с затуханием в фон страницы */
+.fadeWrap { position: relative; }
+.fadeText { margin: 0; font-size: 16px; line-height: 1.65; color: #8C8069; }
+.fadeMask {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 64px;
+  background: linear-gradient(to bottom, rgba(234,224,185,0), var(--bg-base));
+}
+
+/* ── Раздел «Портрет знака» ────────────────────────────────── */
+.portraitGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .portraitGrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .portraitGrid { grid-template-columns: 1fr; gap: 14px; } }
+
+.pCard {
+  display: flex; flex-direction: column;
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: 20px; padding: 26px;
+}
+@media (max-width: 900px) { .pCard { padding: 22px; border-radius: 22px; } }
+.pIcon {
+  width: 40px; height: 40px; flex: none; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+}
+.pName {
+  font-family: var(--font-heading); font-weight: 600; font-size: 20px;
+  margin: 0 0 10px; color: var(--text-primary);
+}
+@media (max-width: 900px) { .pName { font-size: 19px; } }
+.pText { margin: 0; font-size: 14.5px; line-height: 1.6; color: #4A4436; }
+
+/* ── Раздел «Лунный календарь» ─────────────────────────────── */
+.lunarStack { display: flex; flex-direction: column; gap: 16px; }
+.lunarCard {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: 22px; padding: 32px;
+}
+@media (max-width: 900px) { .lunarCard { padding: 22px; } }
+.lunarHead { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.lunarHead svg { color: var(--accent); }
+.lunarMoon {
+  width: 38px; height: 38px; flex: none; border-radius: 50%; background: #DCD0B6;
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 900px) { .lunarMoon { width: 30px; height: 30px; } }
+.lunarTitle {
+  font-family: var(--font-heading); font-weight: 600; font-size: 24px;
+  margin: 0; color: var(--text-primary);
+}
+@media (max-width: 900px) { .lunarTitle { font-size: 18px; } }
+.lunarText { margin: 0; font-size: 16px; line-height: 1.65; color: #4A4436; }
+@media (max-width: 900px) { .lunarText { font-size: 14.5px; line-height: 1.6; } }
+.lunarIntro { margin: 0 0 12px; font-size: 16px; line-height: 1.65; color: #4A4436; }
+@media (max-width: 900px) { .lunarIntro { font-size: 14.5px; } }
+
+/* Сетка благоприятности (подписчику) */
+.gridWrap { overflow-x: auto; margin-top: 8px; -webkit-overflow-scrolling: touch; }
+.gridTable { border-collapse: collapse; width: 100%; font-size: 12px; }
+.gridTable th, .gridTable td {
+  padding: 5px 6px; text-align: center; border: 1px solid rgba(30,29,52,.08);
+  color: var(--text-secondary);
+}
+.gridTable thead th { font-weight: 600; color: var(--text-muted); }
+.gridSphere { text-align: left; white-space: nowrap; font-weight: 600; color: var(--text-primary); }
+.rGood { color: #4E9A6B; }
+.rNeutral { color: rgba(30,29,52,.32); }
+.rBad { color: #B4524A; }
+.gridLegend {
+  display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px;
+  font-size: 12.5px; color: var(--text-muted);
+}
+.gridLegend span { display: inline-flex; align-items: center; gap: 6px; }
+.sphereOverview {
+  margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sphereOverview p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--text-secondary); }
+
+/* ── Общий паттерн платного блока (байт + пейвол) ──────────── */
+.locked { display: flex; flex-direction: column; gap: 12px; }
+.baitReveal { position: relative; }
+.lockedTeaser { margin: 0; font-size: 14.5px; line-height: 1.6; color: #8C8069; }
+.baitGhost {
+  margin: 6px 0 0; font-size: 14.5px; line-height: 1.6; color: #8C8069;
+  max-height: 3.2em; overflow: hidden; user-select: none; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.55), transparent 92%);
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,.55), transparent 92%);
+}
+.baitCta {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  margin: 2px 0 0; padding: 0; background: none; border: none; cursor: pointer;
+  color: var(--text-primary); font-family: var(--font-body); font-weight: 600; font-size: 14.5px;
+  transition: color .18s;
+}
+.baitCta:hover { color: var(--accent-hover); }
+.baitCta svg { color: var(--text-primary); }
+.lockNote { align-self: flex-start; color: var(--text-muted); font-size: 12.5px; }
+
+/* ── Экран ввода даты рождения ─────────────────────────────── */
+.formWrap { max-width: 460px; margin: 40px auto 0; }
+@media (max-width: 900px) { .formWrap { margin-top: 8px; } }
+.formCard {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: 24px; padding: 34px 32px;
+  box-shadow: 0 30px 60px -40px rgba(27,26,48,.5);
+}
+@media (max-width: 900px) { .formCard { padding: 26px 22px; } }
+.formTitle {
+  font-family: var(--font-heading); font-weight: 500; font-size: clamp(26px, 5vw, 34px);
+  line-height: 1.08; letter-spacing: -.015em; margin: 0 0 10px; color: var(--text-primary);
+}
+.formSub { margin: 0 0 24px; font-size: 15px; line-height: 1.55; color: var(--text-secondary); }
+.field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
+.fieldLabel {
+  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.input {
+  width: 100%; box-sizing: border-box; height: 52px;
+  border: 1.5px solid rgba(30,29,52,.14); background: var(--bg-base); border-radius: 14px;
+  padding: 0 15px; font-family: var(--font-body); font-size: 16px; color: var(--text-primary);
+  outline: none; transition: border-color .2s;
+}
+.input:focus { border-color: var(--accent); }
+.btnPrimary {
+  width: 100%; height: 56px; border-radius: 999px; border: none;
+  background: var(--bg-deep); color: var(--text-on-dark);
+  font-family: var(--font-body); font-weight: 600; font-size: 16px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer; transition: transform .15s, opacity .2s;
+}
+.btnPrimary:hover:not(:disabled) { transform: translateY(-1px); }
+.btnPrimary:disabled { background: rgba(30,29,52,.12); color: rgba(30,29,52,.4); cursor: default; }
+.formHint {
+  display: flex; align-items: center; gap: 8px; margin: 16px 0 0;
+  font-size: 13px; color: var(--text-muted);
+}
+.formHint svg { color: var(--accent); flex: none; }

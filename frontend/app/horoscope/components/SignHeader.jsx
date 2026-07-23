@@ -1,4 +1,5 @@
 'use client'
+import { EditIcon } from './icons'
 import styles from '../horoscope.module.css'
 
 const TABS = [
@@ -11,13 +12,27 @@ const TABS = [
 export default function SignHeader({ sign, tab, onTab, onChange }) {
   return (
     <header className={styles.header}>
-      <div className={styles.signRow}>
+      <nav className={styles.breadcrumb}>
+        Сервисы <span className={styles.crumbSep}>›</span>
+        <span className={styles.crumbCurrent}>Гороскоп</span>
+      </nav>
+
+      <div className={styles.headRow}>
         <div>
-          <div className={styles.signName}>{sign.name}</div>
-          <div className={styles.signRange}>{sign.range} · {sign.element} · {sign.planet}</div>
+          <h1 className={styles.signName}>{sign.name}</h1>
+          <div className={styles.signMeta}>
+            <span>{sign.range}</span>
+            <span className={styles.metaDot}>·</span>
+            <span>{sign.element}</span>
+            <span className={styles.metaDot}>·</span>
+            <span>{sign.planet}</span>
+          </div>
         </div>
-        <button type="button" className={styles.changeBtn} onClick={onChange}>Ввести другую</button>
+        <button type="button" className={styles.changeBtn} onClick={onChange}>
+          <EditIcon size={14} /> Ввести другую
+        </button>
       </div>
+
       <nav className={styles.tabs}>
         {TABS.map(t => (
           <button

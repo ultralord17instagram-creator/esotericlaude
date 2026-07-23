@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#D8CEB9;-webkit-font-smoothing:antialiased;font-family:'Golos Text',system-ui,sans-serif}
+.optw:target [data-badge]{background:#B9954F!important;color:#fff!important}
+input,button{font-family:'Golos Text',system-ui,sans-serif}
+input::placeholder{color:#A99E86}
+input:focus{outline:none;border-color:#B9954F!important}
+a{color:#B9954F}
+a:hover{color:#9E7E3E}
+</style>
+</helmet>
+
+<section style="padding:44px 48px 60px;--serif:'Source Serif 4',Georgia,serif;--sans:'Golos Text',system-ui,sans-serif">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">3</span>
+    <span style="font:600 13px/1.2 'Golos Text',system-ui,sans-serif;color:#1B1A30">Вход и регистрация — всплывающие окна (модалки)</span>
+  </div>
+  <p style="margin:0 0 34px;font:400 12.5px/1.6 'Golos Text',sans-serif;color:rgba(30,29,52,.58);max-width:80ch">Вариант 1b как оверлей поверх страницы, а не отдельный экран. Десктопная модалка <a href="#3a">3a</a> и мобильный bottom-sheet <a href="#3b">3b</a>. В обоих переключатель «Вход / Регистрация» и «глаз» кликабельны.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+    <!-- ============ 3a — Десктопная модалка ============ -->
+    <div class="optw" id="3a" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#3a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">3a</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Десктоп · модальное окно поверх страницы</span>
+      </div>
+      <div data-screen-label="Модалка · Десктоп" style="width:1440px;height:860px;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(27,26,48,.55),0 8px 20px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.08)">
+        <!-- backdrop page -->
+        <div style="position:absolute;inset:0;background:#EAE0CE">
+          <div style="height:46px;background:#E4DAC6;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid rgba(30,29,52,.08)">
+            <div style="display:flex;gap:8px;width:130px"><span style="width:12px;height:12px;border-radius:50%;background:#D0A9A3"></span><span style="width:12px;height:12px;border-radius:50%;background:#D8B884"></span><span style="width:12px;height:12px;border-radius:50%;background:#A7B49B"></span></div>
+            <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:8px;height:28px;padding:0 18px;background:#F3ECDD;border:1px solid rgba(30,29,52,.08);border-radius:999px;font-size:12.5px;color:#6E6551">astrix.app</div></div>
+            <div style="width:130px"></div>
+          </div>
+          <header style="max-width:1200px;margin:0 auto;padding:26px 40px;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <svg width="28" height="28" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#EAE0CE"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg>
+              <span style="font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#211F30">Astrix</span>
+            </div>
+            <nav style="display:flex;gap:36px"><span style="color:#3A3550;font-size:15px;font-weight:500">Сервисы</span><span style="color:#3A3550;font-size:15px;font-weight:500">Как это работает</span><span style="color:#3A3550;font-size:15px;font-weight:500">Отзывы</span></nav>
+            <div style="display:flex;align-items:center;gap:18px"><span style="color:#26243A;font-size:15px;font-weight:600">Войти</span><span style="height:44px;padding:0 22px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-weight:600;font-size:14.5px;display:inline-flex;align-items:center">Попробовать бесплатно</span></div>
+          </header>
+          <div style="max-width:1100px;margin:60px auto 0;padding:0 40px;text-align:center">
+            <h1 style="font-family:var(--serif);font-weight:600;font-size:66px;line-height:1.08;letter-spacing:-.02em;margin:0 0 20px;color:#211F30">Ваш день по звёздам</h1>
+            <p style="margin:0 auto;font-size:19px;line-height:1.6;color:#8C8069;max-width:60ch">Ежедневный гороскоп, натальная карта и лунный календарь — рассчитаны лично для вас.</p>
+          </div>
+        </div>
+        <!-- scrim -->
+        <div style="position:absolute;inset:0;background:rgba(20,19,34,.5);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)"></div>
+
+        <!-- modal -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:680px;background:#EAE0CE;border-radius:26px;overflow:hidden;box-shadow:0 50px 100px -30px rgba(10,9,20,.7);display:flex">
+          <div style="width:250px;flex:none;background:#1B1A30;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:34px 30px">
+            <svg viewBox="0 0 250 520" width="250" height="520" style="position:absolute;inset:0;opacity:.9">
+              <circle cx="50" cy="80" r="1.5" fill="#F3ECDB" opacity=".7"></circle>
+              <circle cx="180" cy="60" r="1.8" fill="#F3ECDB" opacity=".85"></circle>
+              <circle cx="210" cy="180" r="1.5" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="40" cy="230" r="1.4" fill="#F3ECDB" opacity=".55"></circle>
+              <circle cx="190" cy="330" r="1.5" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="70" cy="420" r="1.4" fill="#F3ECDB" opacity=".5"></circle>
+              <path d="M90 110 L140 160 L180 60" style="fill:none;stroke:#B9954F;stroke-width:1;opacity:.5"></path>
+              <circle cx="90" cy="110" r="2.6" fill="#B9954F"></circle>
+              <circle cx="140" cy="160" r="2.2" fill="#B9954F"></circle>
+              <path d="M150 220 l1.4 5.4 5.4 1.4 -5.4 1.4 -1.4 5.4 -1.4 -5.4 -5.4 -1.4 5.4 -1.4 z" fill="#F3ECDB" opacity=".85"></path>
+            </svg>
+            <div style="position:relative;display:flex;align-items:center;gap:9px">
+              <svg width="28" height="28" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#1B1A30"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg>
+              <span style="font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.02em;color:#F7F1E4">Astrix</span>
+            </div>
+            <div style="position:relative">
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.15;letter-spacing:-.01em;margin:0 0 10px;color:#F7F1E4">Небо уже сверило ваш день</h2>
+              <p style="margin:0;font-size:13.5px;line-height:1.6;color:rgba(243,236,219,.62)">Продолжите там, где остановились.</p>
+            </div>
+          </div>
+
+          <div style="flex:1;position:relative;padding:34px 40px 40px">
+            <div style="position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(30,29,52,.06);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 2 L12 12 M12 2 L2 12" style="stroke:#6E6551;stroke-width:1.5;stroke-linecap:round"></path></svg></div>
+
+            <div style="display:flex;background:#E0D5BF;border-radius:999px;padding:4px;margin:6px 0 24px;max-width:280px">
+              <div onClick="{{ setMLogin }}" style="{{ mSegLogin }}">Вход</div>
+              <div onClick="{{ setMReg }}" style="{{ mSegReg }}">Регистрация</div>
+            </div>
+
+            <sc-if value="{{ mIsLogin }}" hint-placeholder-val="{{ true }}">
+              <h1 style="font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#211F30">С возвращением</h1>
+              <p style="margin:0 0 24px;font-size:14px;line-height:1.5;color:#8C8069">Войдите, чтобы открыть свой день.</p>
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+              <input type="email" placeholder="astra@почта.ру" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15px;color:#26243A;margin-bottom:16px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin:0 0 8px"><label style="font:500 12.5px 'Golos Text';color:#6E6551">Пароль</label><span style="font-size:12.5px;font-weight:600;color:#B9954F;cursor:pointer">Забыли?</span></div>
+              <div style="position:relative;margin-bottom:24px">
+                <input type="{{ mPwType }}" value="planetary" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 50px 0 18px;font-size:15px;color:#26243A">
+                <div onClick="{{ toggleMPw }}" style="position:absolute;right:14px;top:0;height:52px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer">
+                  <sc-if value="{{ mPwOpen }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle></svg></sc-if>
+                  <sc-if value="{{ mPwClosed }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></sc-if>
+                </div>
+              </div>
+              <button style="width:100%;height:54px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15.5px;font-weight:600;border:none;cursor:pointer">Войти</button>
+              <p style="text-align:center;margin:18px 0 0;font-size:13.5px;color:#8C8069">Нет аккаунта? <span onClick="{{ setMReg }}" style="color:#B9954F;font-weight:600;cursor:pointer">Создать</span></p>
+            </sc-if>
+
+            <sc-if value="{{ mIsReg }}" hint-placeholder-val="{{ false }}">
+              <h1 style="font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#211F30">Создайте аккаунт</h1>
+              <p style="margin:0 0 24px;font-size:14px;line-height:1.5;color:#8C8069">Пара шагов — и ваша карта звёзд с вами.</p>
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+              <input type="email" placeholder="astra@почта.ру" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15px;color:#26243A;margin-bottom:16px">
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Пароль</label>
+              <div style="position:relative;margin-bottom:16px">
+                <input type="{{ mPwType }}" placeholder="Минимум 8 символов" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 50px 0 18px;font-size:15px;color:#26243A">
+                <div onClick="{{ toggleMPw }}" style="position:absolute;right:14px;top:0;height:52px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer">
+                  <sc-if value="{{ mPwOpen }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle></svg></sc-if>
+                  <sc-if value="{{ mPwClosed }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></sc-if>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;margin:0 0 22px">
+                <div style="width:19px;height:19px;flex:none;border-radius:6px;border:1.5px solid #B9954F;background:#B9954F;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+                <span style="font-size:12px;line-height:1.5;color:#8C8069">Принимаю <span style="color:#6E6551;font-weight:600">условия</span> и <span style="color:#6E6551;font-weight:600">политику конфиденциальности</span></span>
+              </div>
+              <button style="width:100%;height:54px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15.5px;font-weight:600;border:none;cursor:pointer">Создать аккаунт</button>
+              <p style="text-align:center;margin:18px 0 0;font-size:13.5px;color:#8C8069">Уже с нами? <span onClick="{{ setMLogin }}" style="color:#B9954F;font-weight:600;cursor:pointer">Войти</span></p>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+      <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5)">Модалка · 1440px · сегмент и «глаз» кликабельны</span>
+    </div>
+
+    <!-- ============ 3b — Мобильный bottom-sheet ============ -->
+    <div class="optw" id="3b" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#3b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">3b</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Мобайл · bottom-sheet поверх страницы</span>
+      </div>
+      <div data-screen-label="Bottom-sheet · Мобайл" style="width:390px;height:800px;position:relative;background:#EAE0CE;border-radius:44px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06)">
+        <!-- backdrop home -->
+        <div style="position:absolute;inset:0;background:#EAE0CE">
+          <div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;color:#26243A"><span style="font-weight:600;letter-spacing:.02em">9:41</span><div style="display:flex;align-items:center;gap:7px"><div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:7px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:9px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:11px;background:#26243A;border-radius:1px"></div></div><div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #26243A;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#26243A;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#26243A;border-radius:1px"></div></div></div></div>
+          <div style="padding:20px 26px 0;display:flex;align-items:center;gap:9px"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#EAE0CE"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg><span style="font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.02em;color:#211F30">Astrix</span></div>
+          <div style="padding:34px 26px 0"><h1 style="font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.05;letter-spacing:-.01em;margin:0 0 12px;color:#211F30">Ваш день<br>по звёздам</h1><p style="margin:0;font-size:15px;line-height:1.6;color:#8C8069">Гороскоп, натальная карта и лунный календарь.</p></div>
+        </div>
+        <!-- scrim -->
+        <div style="position:absolute;inset:0;background:rgba(20,19,34,.48);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)"></div>
+
+        <!-- sheet -->
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#EAE0CE;border-radius:32px 32px 0 0;box-shadow:0 -20px 50px -20px rgba(10,9,20,.5);padding:12px 28px 0">
+          <div style="display:flex;justify-content:center;padding:0 0 18px"><div style="width:44px;height:5px;border-radius:3px;background:rgba(30,29,52,.2)"></div></div>
+
+          <div style="display:flex;background:#E0D5BF;border-radius:999px;padding:4px;margin:0 0 22px">
+            <div onClick="{{ setSLogin }}" style="{{ sSegLogin }}">Вход</div>
+            <div onClick="{{ setSReg }}" style="{{ sSegReg }}">Регистрация</div>
+          </div>
+
+          <sc-if value="{{ sIsLogin }}" hint-placeholder-val="{{ false }}">
+            <h1 style="font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#211F30">С возвращением</h1>
+            <p style="margin:0 0 22px;font-size:13.5px;line-height:1.5;color:#8C8069">Войдите, чтобы открыть свой день.</p>
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+            <input type="email" placeholder="astra@почта.ру" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15px;color:#26243A;margin-bottom:16px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;margin:0 0 8px"><label style="font:500 12.5px 'Golos Text';color:#6E6551">Пароль</label><span style="font-size:12.5px;font-weight:600;color:#B9954F;cursor:pointer">Забыли?</span></div>
+            <div style="position:relative;margin-bottom:22px">
+              <input type="{{ sPwType }}" value="planetary" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 50px 0 18px;font-size:15px;color:#26243A">
+              <div onClick="{{ toggleSPw }}" style="position:absolute;right:14px;top:0;height:52px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer">
+                <sc-if value="{{ sPwOpen }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle></svg></sc-if>
+                <sc-if value="{{ sPwClosed }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></sc-if>
+              </div>
+            </div>
+            <button style="width:100%;height:54px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15.5px;font-weight:600;border:none;cursor:pointer">Войти</button>
+            <p style="text-align:center;margin:16px 0 22px;font-size:13.5px;color:#8C8069">Нет аккаунта? <span onClick="{{ setSReg }}" style="color:#B9954F;font-weight:600;cursor:pointer">Создать</span></p>
+          </sc-if>
+
+          <sc-if value="{{ sIsReg }}" hint-placeholder-val="{{ true }}">
+            <h1 style="font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#211F30">Создайте аккаунт</h1>
+            <p style="margin:0 0 22px;font-size:13.5px;line-height:1.5;color:#8C8069">Пара шагов — и ваша карта звёзд с вами.</p>
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+            <input type="email" placeholder="astra@почта.ру" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15px;color:#26243A;margin-bottom:16px">
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Пароль</label>
+            <div style="position:relative;margin-bottom:16px">
+              <input type="{{ sPwType }}" placeholder="Минимум 8 символов" style="width:100%;height:52px;border-radius:14px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 50px 0 18px;font-size:15px;color:#26243A">
+              <div onClick="{{ toggleSPw }}" style="position:absolute;right:14px;top:0;height:52px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer">
+                <sc-if value="{{ sPwOpen }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle></svg></sc-if>
+                <sc-if value="{{ sPwClosed }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></sc-if>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:9px;margin:0 0 20px">
+              <div style="width:19px;height:19px;flex:none;border-radius:6px;border:1.5px solid #B9954F;background:#B9954F;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+              <span style="font-size:12px;line-height:1.5;color:#8C8069">Принимаю <span style="color:#6E6551;font-weight:600">условия</span> и <span style="color:#6E6551;font-weight:600">политику конфиденциальности</span></span>
+            </div>
+            <button style="width:100%;height:54px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15.5px;font-weight:600;border:none;cursor:pointer">Создать аккаунт</button>
+            <p style="text-align:center;margin:16px 0 22px;font-size:13.5px;color:#8C8069">Уже с нами? <span onClick="{{ setSLogin }}" style="color:#B9954F;font-weight:600;cursor:pointer">Войти</span></p>
+          </sc-if>
+        </div>
+      </div>
+      <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5)">Bottom-sheet · сегмент и «глаз» кликабельны</span>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:44px 48px 60px;--serif:'Source Serif 4',Georgia,serif;--sans:'Golos Text',system-ui,sans-serif">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">2</span>
+    <span style="font:600 13px/1.2 'Golos Text',system-ui,sans-serif;color:#1B1A30">Вход и регистрация — десктоп (вариант 1b)</span>
+  </div>
+  <p style="margin:0 0 34px;font:400 12.5px/1.6 'Golos Text',sans-serif;color:rgba(30,29,52,.58);max-width:80ch">Атмосферный вариант <a href="#1b">1b</a>, разложенный под ширину 1440px: небесная панель-герой слева, форма справа. Тот же язык Astrix, палитра и шрифты. Экраны входа <a href="#2a">2a</a>, регистрации <a href="#2b">2b</a> и приветствия-развилки <a href="#2c">2c</a>.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+    <!-- ============ 2a — Десктоп вход ============ -->
+    <div class="optw" id="2a" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#2a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">2a</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Десктоп · вход — split-screen с небесной панелью</span>
+      </div>
+      <div data-screen-label="Вход · Десктоп" style="width:1440px;background:#EAE0CE;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(27,26,48,.55),0 8px 20px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.08);color:#26243A">
+        <div style="height:46px;background:#E4DAC6;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid rgba(30,29,52,.08)">
+          <div style="display:flex;gap:8px;width:130px"><span style="width:12px;height:12px;border-radius:50%;background:#D0A9A3"></span><span style="width:12px;height:12px;border-radius:50%;background:#D8B884"></span><span style="width:12px;height:12px;border-radius:50%;background:#A7B49B"></span></div>
+          <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:8px;height:28px;padding:0 18px;background:#F3ECDD;border:1px solid rgba(30,29,52,.08);border-radius:999px;font-size:12.5px;color:#6E6551"><svg width="10" height="11" viewBox="0 0 11 12" style="display:block"><rect x="1.5" y="5" width="8" height="6" rx="1.4" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></rect><path d="M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></path></svg>astrix.app/login</div></div>
+          <div style="width:130px"></div>
+        </div>
+
+        <div style="display:flex;min-height:820px">
+          <!-- Left celestial hero -->
+          <div style="width:600px;flex:none;background:#1B1A30;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:52px 56px">
+            <svg viewBox="0 0 600 820" width="600" height="820" style="position:absolute;inset:0;opacity:.92">
+              <circle cx="90" cy="120" r="1.5" fill="#F3ECDB" opacity=".7"></circle>
+              <circle cx="200" cy="90" r="2" fill="#F3ECDB" opacity=".9"></circle>
+              <circle cx="470" cy="130" r="1.6" fill="#F3ECDB" opacity=".7"></circle>
+              <circle cx="520" cy="240" r="2" fill="#F3ECDB" opacity=".85"></circle>
+              <circle cx="70" cy="330" r="1.6" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="140" cy="470" r="1.4" fill="#F3ECDB" opacity=".55"></circle>
+              <circle cx="500" cy="470" r="1.5" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="430" cy="620" r="1.6" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="120" cy="650" r="1.4" fill="#F3ECDB" opacity=".5"></circle>
+              <path d="M200 90 L300 170 L400 150 L470 130" style="fill:none;stroke:#B9954F;stroke-width:1;opacity:.5"></path>
+              <path d="M300 170 L340 270 L520 240" style="fill:none;stroke:#B9954F;stroke-width:1;opacity:.4"></path>
+              <circle cx="300" cy="170" r="3" fill="#B9954F"></circle>
+              <circle cx="400" cy="150" r="2.4" fill="#B9954F"></circle>
+              <circle cx="340" cy="270" r="2.6" fill="#B9954F"></circle>
+              <path d="M300 130 l1.6 6 6 1.6 -6 1.6 -1.6 6 -1.6 -6 -6 -1.6 6 -1.6 z" fill="#F3ECDB" opacity=".85"></path>
+            </svg>
+            <div style="position:relative;display:flex;align-items:center;gap:11px">
+              <svg width="34" height="34" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#1B1A30"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg>
+              <span style="font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.02em;color:#F7F1E4">Astrix</span>
+            </div>
+            <div style="position:relative">
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:44px;line-height:1.14;letter-spacing:-.01em;margin:0 0 18px;color:#F7F1E4">Небо уже сверило<br>ваш день</h2>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:rgba(243,236,219,.66);max-width:40ch">Ежедневный гороскоп, натальная карта и лунный календарь — там, где вы остановились.</p>
+            </div>
+            <div style="position:relative;display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;align-items:center;gap:12px"><div style="width:34px;height:34px;flex:none;border-radius:50%;background:rgba(185,149,79,.16);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 0 l1.3 5 5 1.3 -5 1.3 -1.3 5 -1.3 -5 -5-1.3 5-1.3 z" style="fill:#B9954F"></path></svg></div><span style="font-size:15px;color:rgba(243,236,219,.82)">Персональный гороскоп на каждый день</span></div>
+              <div style="display:flex;align-items:center;gap:12px"><div style="width:34px;height:34px;flex:none;border-radius:50%;background:rgba(185,149,79,.16);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="12.5" cy="8.5" r="7" style="fill:#1B1A30"></circle></svg></div><span style="font-size:15px;color:rgba(243,236,219,.82)">Натальная карта и лунный календарь</span></div>
+            </div>
+          </div>
+
+          <!-- Right form -->
+          <div style="flex:1;display:flex;flex-direction:column;padding:34px 64px 48px">
+            <div style="display:flex;justify-content:flex-end;font-size:14px;color:#8C8069">Нет аккаунта? <a href="#2b" style="color:#B9954F;font-weight:600;text-decoration:none;margin-left:6px">Создать</a></div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;width:100%;max-width:390px;margin:0 auto">
+              <h1 style="font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.08;letter-spacing:-.01em;margin:0 0 8px;color:#211F30">С возвращением</h1>
+              <p style="margin:0 0 34px;font-size:15px;line-height:1.55;color:#8C8069">Войдите, чтобы открыть свой день по звёздам.</p>
+
+              <label style="display:block;font:500 13px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+              <input type="email" placeholder="astra@почта.ру" style="width:100%;height:56px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15.5px;color:#26243A;margin-bottom:20px">
+
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin:0 0 8px">
+                <label style="font:500 13px 'Golos Text';color:#6E6551">Пароль</label>
+                <span style="font-size:13px;font-weight:600;color:#B9954F;cursor:pointer">Забыли?</span>
+              </div>
+              <div style="position:relative;margin-bottom:30px">
+                <input type="password" value="planetary" style="width:100%;height:56px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 52px 0 18px;font-size:15.5px;color:#26243A">
+                <div style="position:absolute;right:16px;top:0;height:56px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></div>
+              </div>
+
+              <button style="width:100%;height:58px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:16px;font-weight:600;border:none;cursor:pointer">Войти</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5)">Вход · 1440px</span>
+    </div>
+
+    <!-- ============ 2b — Десктоп регистрация ============ -->
+    <div class="optw" id="2b" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#2b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">2b</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Десктоп · регистрация</span>
+      </div>
+      <div data-screen-label="Регистрация · Десктоп" style="width:1440px;background:#EAE0CE;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(27,26,48,.55),0 8px 20px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.08);color:#26243A">
+        <div style="height:46px;background:#E4DAC6;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid rgba(30,29,52,.08)">
+          <div style="display:flex;gap:8px;width:130px"><span style="width:12px;height:12px;border-radius:50%;background:#D0A9A3"></span><span style="width:12px;height:12px;border-radius:50%;background:#D8B884"></span><span style="width:12px;height:12px;border-radius:50%;background:#A7B49B"></span></div>
+          <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:8px;height:28px;padding:0 18px;background:#F3ECDD;border:1px solid rgba(30,29,52,.08);border-radius:999px;font-size:12.5px;color:#6E6551"><svg width="10" height="11" viewBox="0 0 11 12" style="display:block"><rect x="1.5" y="5" width="8" height="6" rx="1.4" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></rect><path d="M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></path></svg>astrix.app/signup</div></div>
+          <div style="width:130px"></div>
+        </div>
+
+        <div style="display:flex;min-height:820px">
+          <div style="width:600px;flex:none;background:#1B1A30;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:52px 56px">
+            <svg viewBox="0 0 600 820" width="600" height="820" style="position:absolute;inset:0;opacity:.92">
+              <circle cx="90" cy="120" r="1.5" fill="#F3ECDB" opacity=".7"></circle>
+              <circle cx="200" cy="90" r="2" fill="#F3ECDB" opacity=".9"></circle>
+              <circle cx="470" cy="130" r="1.6" fill="#F3ECDB" opacity=".7"></circle>
+              <circle cx="520" cy="240" r="2" fill="#F3ECDB" opacity=".85"></circle>
+              <circle cx="70" cy="330" r="1.6" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="140" cy="470" r="1.4" fill="#F3ECDB" opacity=".55"></circle>
+              <circle cx="500" cy="470" r="1.5" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="430" cy="620" r="1.6" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="120" cy="650" r="1.4" fill="#F3ECDB" opacity=".5"></circle>
+              <path d="M200 90 L300 170 L400 150 L470 130" style="fill:none;stroke:#B9954F;stroke-width:1;opacity:.5"></path>
+              <path d="M300 170 L340 270 L520 240" style="fill:none;stroke:#B9954F;stroke-width:1;opacity:.4"></path>
+              <circle cx="300" cy="170" r="3" fill="#B9954F"></circle>
+              <circle cx="400" cy="150" r="2.4" fill="#B9954F"></circle>
+              <circle cx="340" cy="270" r="2.6" fill="#B9954F"></circle>
+              <path d="M300 130 l1.6 6 6 1.6 -6 1.6 -1.6 6 -1.6 -6 -6 -1.6 6 -1.6 z" fill="#F3ECDB" opacity=".85"></path>
+            </svg>
+            <div style="position:relative;display:flex;align-items:center;gap:11px">
+              <svg width="34" height="34" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#1B1A30"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg>
+              <span style="font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.02em;color:#F7F1E4">Astrix</span>
+            </div>
+            <div style="position:relative">
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:44px;line-height:1.14;letter-spacing:-.01em;margin:0 0 18px;color:#F7F1E4">Карта звёзд<br>ждёт владельца</h2>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:rgba(243,236,219,.66);max-width:40ch">Создайте аккаунт за минуту и получите первый разбор дня бесплатно.</p>
+            </div>
+            <div style="position:relative;display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;align-items:center;gap:12px"><div style="width:34px;height:34px;flex:none;border-radius:50%;background:rgba(185,149,79,.16);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 0 l1.3 5 5 1.3 -5 1.3 -1.3 5 -1.3 -5 -5-1.3 5-1.3 z" style="fill:#B9954F"></path></svg></div><span style="font-size:15px;color:rgba(243,236,219,.82)">Персональный гороскоп на каждый день</span></div>
+              <div style="display:flex;align-items:center;gap:12px"><div style="width:34px;height:34px;flex:none;border-radius:50%;background:rgba(185,149,79,.16);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="12.5" cy="8.5" r="7" style="fill:#1B1A30"></circle></svg></div><span style="font-size:15px;color:rgba(243,236,219,.82)">Натальная карта и лунный календарь</span></div>
+            </div>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;padding:34px 64px 48px">
+            <div style="display:flex;justify-content:flex-end;font-size:14px;color:#8C8069">Уже с нами? <a href="#2a" style="color:#B9954F;font-weight:600;text-decoration:none;margin-left:6px">Войти</a></div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;width:100%;max-width:390px;margin:0 auto">
+              <h1 style="font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.08;letter-spacing:-.01em;margin:0 0 8px;color:#211F30">Создайте аккаунт</h1>
+              <p style="margin:0 0 30px;font-size:15px;line-height:1.55;color:#8C8069">Пара шагов — и ваша карта звёзд с вами.</p>
+
+              <label style="display:block;font:500 13px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+              <input type="email" placeholder="astra@почта.ру" style="width:100%;height:56px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15.5px;color:#26243A;margin-bottom:18px">
+
+              <label style="display:block;font:500 13px 'Golos Text';color:#6E6551;margin:0 0 8px">Пароль</label>
+              <div style="position:relative;margin-bottom:18px">
+                <input type="password" placeholder="Минимум 8 символов" style="width:100%;height:56px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 52px 0 18px;font-size:15.5px;color:#26243A">
+                <div style="position:absolute;right:16px;top:0;height:56px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;margin:0 0 26px">
+                <div style="width:20px;height:20px;flex:none;border-radius:6px;border:1.5px solid #B9954F;background:#B9954F;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+                <span style="font-size:13px;line-height:1.5;color:#8C8069">Принимаю <span style="color:#6E6551;font-weight:600">условия</span> и <span style="color:#6E6551;font-weight:600">политику конфиденциальности</span></span>
+              </div>
+
+              <button style="width:100%;height:58px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:16px;font-weight:600;border:none;cursor:pointer">Создать аккаунт</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5)">Регистрация · 1440px</span>
+    </div>
+
+    <!-- ============ 2c — Десктоп приветствие/развилка ============ -->
+    <div class="optw" id="2c" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#2c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">2c</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Десктоп · приветствие-развилка (вход или регистрация)</span>
+      </div>
+      <div data-screen-label="Приветствие · Десктоп" style="width:1440px;background:#EAE0CE;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(27,26,48,.55),0 8px 20px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.08);color:#26243A">
+        <div style="height:46px;background:#E4DAC6;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid rgba(30,29,52,.08)">
+          <div style="display:flex;gap:8px;width:130px"><span style="width:12px;height:12px;border-radius:50%;background:#D0A9A3"></span><span style="width:12px;height:12px;border-radius:50%;background:#D8B884"></span><span style="width:12px;height:12px;border-radius:50%;background:#A7B49B"></span></div>
+          <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:8px;height:28px;padding:0 18px;background:#F3ECDD;border:1px solid rgba(30,29,52,.08);border-radius:999px;font-size:12.5px;color:#6E6551"><svg width="10" height="11" viewBox="0 0 11 12" style="display:block"><rect x="1.5" y="5" width="8" height="6" rx="1.4" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></rect><path d="M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></path></svg>astrix.app</div></div>
+          <div style="width:130px"></div>
+        </div>
+
+        <div style="display:flex;min-height:820px">
+          <div style="width:600px;flex:none;background:#1B1A30;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:52px 56px">
+            <svg viewBox="0 0 600 820" width="600" height="820" style="position:absolute;inset:0;opacity:.92">
+              <circle cx="90" cy="120" r="1.5" fill="#F3ECDB" opacity=".7"></circle>
+              <circle cx="200" cy="90" r="2" fill="#F3ECDB" opacity=".9"></circle>
+              <circle cx="470" cy="130" r="1.6" fill="#F3ECDB" opacity=".7"></circle>
+              <circle cx="520" cy="240" r="2" fill="#F3ECDB" opacity=".85"></circle>
+              <circle cx="70" cy="330" r="1.6" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="140" cy="470" r="1.4" fill="#F3ECDB" opacity=".55"></circle>
+              <circle cx="500" cy="470" r="1.5" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="430" cy="620" r="1.6" fill="#F3ECDB" opacity=".6"></circle>
+              <circle cx="120" cy="650" r="1.4" fill="#F3ECDB" opacity=".5"></circle>
+              <path d="M200 90 L300 170 L400 150 L470 130" style="fill:none;stroke:#B9954F;stroke-width:1;opacity:.5"></path>
+              <path d="M300 170 L340 270 L520 240" style="fill:none;stroke:#B9954F;stroke-width:1;opacity:.4"></path>
+              <circle cx="300" cy="170" r="3" fill="#B9954F"></circle>
+              <circle cx="400" cy="150" r="2.4" fill="#B9954F"></circle>
+              <circle cx="340" cy="270" r="2.6" fill="#B9954F"></circle>
+              <path d="M300 130 l1.6 6 6 1.6 -6 1.6 -1.6 6 -1.6 -6 -6 -1.6 6 -1.6 z" fill="#F3ECDB" opacity=".85"></path>
+            </svg>
+            <div style="position:relative;display:flex;align-items:center;gap:11px">
+              <svg width="34" height="34" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#1B1A30"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg>
+              <span style="font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.02em;color:#F7F1E4">Astrix</span>
+            </div>
+            <div style="position:relative">
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:46px;line-height:1.12;letter-spacing:-.01em;margin:0 0 18px;color:#F7F1E4">Добро пожаловать<br>в Astrix</h2>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:rgba(243,236,219,.66);max-width:42ch">Ваш ежедневный гороскоп, натальная карта и лунный календарь — в одном месте.</p>
+            </div>
+            <div style="position:relative;font-size:13.5px;color:rgba(243,236,219,.5)">«Каждое утро начинаю с Astrix» — Мария, Весы</div>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 64px">
+            <div style="width:100%;max-width:380px;text-align:center">
+              <h1 style="font-family:var(--serif);font-weight:600;font-size:36px;line-height:1.12;letter-spacing:-.01em;margin:0 0 12px;color:#211F30">С чего начнём?</h1>
+              <p style="margin:0 0 40px;font-size:15px;line-height:1.6;color:#8C8069">Войдите в аккаунт или создайте новый — всё займёт минуту.</p>
+              <button style="width:100%;height:58px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:16px;font-weight:600;border:none;cursor:pointer;margin-bottom:14px">Войти</button>
+              <button style="width:100%;height:58px;border-radius:999px;background:transparent;color:#26243A;font-size:16px;font-weight:600;border:1px solid rgba(30,29,52,.24);cursor:pointer">Создать аккаунт</button>
+              <p style="margin:26px 0 0;font-size:12.5px;line-height:1.55;color:#9A8D72">Продолжая, вы принимаете условия<br>и политику конфиденциальности</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5)">Приветствие · 1440px</span>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:44px 48px 60px;--serif:'Source Serif 4',Georgia,serif;--sans:'Golos Text',system-ui,sans-serif">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">1</span>
+    <span style="font:600 13px/1.2 'Golos Text',system-ui,sans-serif;color:#1B1A30">Вход и регистрация — мобильная версия</span>
+  </div>
+  <p style="margin:0 0 34px;font:400 12.5px/1.6 'Golos Text',sans-serif;color:rgba(30,29,52,.58);max-width:80ch">Атмосферный вариант <a href="#1b">1b</a> в языке Astrix — небесный герой ведёт к форме-шиту. Экраны приветствия-развилки, входа и регистрации. Email + пароль, палитра и шрифты Astrix.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+
+    <!-- ============ 1b — Атмосферный, небесный герой ============ -->
+    <div class="optw" id="1b" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#1b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">1b</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Атмосферный · небесный герой → форма-шит</span>
+      </div>
+      <div style="display:flex;gap:28px;align-items:flex-start">
+
+        <!-- 1b welcome -->
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div data-screen-label="Приветствие · 1b" style="width:390px;background:#EAE0CE;border-radius:44px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);color:#26243A;position:relative">
+            <div style="background:#1B1A30;padding:0 0 42px;border-radius:0 0 40px 40px;position:relative;overflow:hidden">
+              <div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;color:#F3ECDB">
+                <span style="font-weight:600;letter-spacing:.02em">9:41</span>
+                <div style="display:flex;align-items:center;gap:7px">
+                  <div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:7px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:9px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:11px;background:#F3ECDB;border-radius:1px"></div></div>
+                  <div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #F3ECDB;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#F3ECDB;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#F3ECDB;border-radius:1px"></div></div>
+                </div>
+              </div>
+              <svg viewBox="0 0 390 300" width="390" height="300" style="display:block;position:absolute;top:40px;left:0;opacity:.9">
+                <circle cx="60" cy="70" r="1.2" fill="#F3ECDB" opacity=".7"></circle>
+                <circle cx="120" cy="46" r="1.6" fill="#F3ECDB" opacity=".9"></circle>
+                <circle cx="300" cy="60" r="1.3" fill="#F3ECDB" opacity=".6"></circle>
+                <circle cx="340" cy="120" r="1.6" fill="#F3ECDB" opacity=".8"></circle>
+                <circle cx="46" cy="150" r="1.4" fill="#F3ECDB" opacity=".7"></circle>
+                <circle cx="90" cy="210" r="1.2" fill="#F3ECDB" opacity=".5"></circle>
+                <circle cx="330" cy="220" r="1.3" fill="#F3ECDB" opacity=".6"></circle>
+                <path d="M120 46 L175 90 L240 78 L300 60" style="fill:none;stroke:#B9954F;stroke-width:.8;opacity:.5"></path>
+                <path d="M175 90 L200 150" style="fill:none;stroke:#B9954F;stroke-width:.8;opacity:.4"></path>
+                <circle cx="175" cy="90" r="2.4" fill="#B9954F"></circle>
+                <circle cx="240" cy="78" r="2" fill="#B9954F"></circle>
+                <circle cx="200" cy="150" r="2.2" fill="#B9954F"></circle>
+                <path d="M175 65 l1 4.5 4.5 1 -4.5 1 -1 4.5 -1 -4.5 -4.5 -1 4.5 -1 z" fill="#F3ECDB" opacity=".85"></path>
+              </svg>
+              <div style="position:relative;text-align:center;padding:70px 40px 0">
+                <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:20px">
+                  <svg width="34" height="34" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#1B1A30"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg>
+                </div>
+                <h1 style="font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;letter-spacing:-.01em;margin:0 0 12px;color:#F7F1E4">Добро пожаловать<br>в Astrix</h1>
+                <p style="margin:0;font-size:14px;line-height:1.6;color:rgba(243,236,219,.66)">Ваш ежедневный гороскоп, натальная карта и лунный календарь — в одном месте.</p>
+              </div>
+            </div>
+
+            <div style="padding:30px 30px 12px">
+              <button style="width:100%;height:56px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15.5px;font-weight:600;border:none;cursor:pointer;margin-bottom:12px">Войти</button>
+              <button style="width:100%;height:56px;border-radius:999px;background:transparent;color:#26243A;font-size:15.5px;font-weight:600;border:1px solid rgba(30,29,52,.24);cursor:pointer">Создать аккаунт</button>
+              <p style="text-align:center;margin:22px 0 4px;font-size:11.5px;line-height:1.55;color:#9A8D72">Продолжая, вы принимаете условия<br>и политику конфиденциальности</p>
+            </div>
+            <div style="display:flex;justify-content:center;padding:6px 0 12px"><div style="width:128px;height:5px;border-radius:3px;background:rgba(30,29,52,.22)"></div></div>
+          </div>
+          <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5);text-align:center">Приветствие · развилка</span>
+        </div>
+
+        <!-- 1b login sheet -->
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div data-screen-label="Вход · 1b" style="width:390px;background:#EAE0CE;border-radius:44px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);color:#26243A">
+            <div style="background:#1B1A30;border-radius:0 0 36px 36px;padding-bottom:30px;position:relative;overflow:hidden">
+              <div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;color:#F3ECDB">
+                <span style="font-weight:600;letter-spacing:.02em">9:41</span>
+                <div style="display:flex;align-items:center;gap:7px">
+                  <div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:7px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:9px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:11px;background:#F3ECDB;border-radius:1px"></div></div>
+                  <div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #F3ECDB;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#F3ECDB;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#F3ECDB;border-radius:1px"></div></div>
+                </div>
+              </div>
+              <div style="padding:8px 30px 0;position:relative">
+                <div style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(243,236,219,.24);display:flex;align-items:center;justify-content:center;margin-bottom:24px;cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M9.5 3 L5 8 L9.5 13" style="fill:none;stroke:#F3ECDB;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+                <h1 style="font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#F7F1E4">С возвращением</h1>
+                <p style="margin:0;font-size:13.5px;line-height:1.55;color:rgba(243,236,219,.6)">Звёзды уже сверили ваш маршрут.</p>
+                <svg viewBox="0 0 60 60" width="60" height="60" style="position:absolute;right:26px;top:6px;opacity:.9"><path d="M30 10 l1.5 6 6 1.5 -6 1.5 -1.5 6 -1.5 -6 -6 -1.5 6 -1.5 z" fill="#B9954F"></path><circle cx="14" cy="40" r="1.4" fill="#F3ECDB" opacity=".7"></circle><circle cx="48" cy="44" r="1.2" fill="#F3ECDB" opacity=".6"></circle></svg>
+              </div>
+            </div>
+
+            <div style="padding:26px 30px 12px">
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+              <input type="email" placeholder="astra@почта.ру" style="width:100%;height:54px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15px;color:#26243A;margin-bottom:18px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin:0 0 8px">
+                <label style="font:500 12.5px 'Golos Text';color:#6E6551">Пароль</label>
+                <span style="font-size:12.5px;font-weight:600;color:#B9954F;cursor:pointer">Забыли?</span>
+              </div>
+              <div style="position:relative;margin-bottom:28px">
+                <input type="password" value="planetary" style="width:100%;height:54px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 50px 0 18px;font-size:15px;color:#26243A">
+                <div style="position:absolute;right:14px;top:0;height:54px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></div>
+              </div>
+              <button style="width:100%;height:56px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15.5px;font-weight:600;border:none;cursor:pointer">Войти</button>
+              <p style="text-align:center;margin:22px 0 4px;font-size:13.5px;color:#8C8069">Нет аккаунта? <span style="color:#B9954F;font-weight:600;cursor:pointer">Создать</span></p>
+            </div>
+            <div style="display:flex;justify-content:center;padding:6px 0 12px"><div style="width:128px;height:5px;border-radius:3px;background:rgba(30,29,52,.22)"></div></div>
+          </div>
+          <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5);text-align:center">Вход</span>
+        </div>
+
+        <!-- 1b register sheet -->
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div data-screen-label="Регистрация · 1b" style="width:390px;background:#EAE0CE;border-radius:44px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);color:#26243A">
+            <div style="background:#1B1A30;border-radius:0 0 36px 36px;padding-bottom:30px;position:relative;overflow:hidden">
+              <div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;color:#F3ECDB">
+                <span style="font-weight:600;letter-spacing:.02em">9:41</span>
+                <div style="display:flex;align-items:center;gap:7px">
+                  <div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:7px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:9px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:11px;background:#F3ECDB;border-radius:1px"></div></div>
+                  <div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #F3ECDB;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#F3ECDB;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#F3ECDB;border-radius:1px"></div></div>
+                </div>
+              </div>
+              <div style="padding:8px 30px 0;position:relative">
+                <div style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(243,236,219,.24);display:flex;align-items:center;justify-content:center;margin-bottom:24px;cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M9.5 3 L5 8 L9.5 13" style="fill:none;stroke:#F3ECDB;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+                <h1 style="font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#F7F1E4">Создайте аккаунт</h1>
+                <p style="margin:0;font-size:13.5px;line-height:1.55;color:rgba(243,236,219,.6)">Карта звёзд ждёт своего владельца.</p>
+                <svg viewBox="0 0 60 60" width="60" height="60" style="position:absolute;right:26px;top:6px;opacity:.9"><path d="M30 10 l1.5 6 6 1.5 -6 1.5 -1.5 6 -1.5 -6 -6 -1.5 6 -1.5 z" fill="#B9954F"></path><circle cx="14" cy="40" r="1.4" fill="#F3ECDB" opacity=".7"></circle><circle cx="48" cy="44" r="1.2" fill="#F3ECDB" opacity=".6"></circle></svg>
+              </div>
+            </div>
+
+            <div style="padding:26px 30px 12px">
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Email</label>
+              <input type="email" placeholder="astra@почта.ру" style="width:100%;height:54px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 18px;font-size:15px;color:#26243A;margin-bottom:18px">
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Пароль</label>
+              <div style="position:relative;margin-bottom:16px">
+                <input type="password" placeholder="Минимум 8 символов" style="width:100%;height:54px;border-radius:15px;border:1px solid rgba(30,29,52,.14);background:#FBF7EF;padding:0 50px 0 18px;font-size:15px;color:#26243A">
+                <div style="position:absolute;right:14px;top:0;height:54px;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 10 s3-5 8-5 8 5 8 5 -3 5 -8 5 -8-5 -8-5 z" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></path><circle cx="10" cy="10" r="2.3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M3 3 L17 17" style="stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:9px;margin:0 0 22px">
+                <div style="width:19px;height:19px;flex:none;border-radius:6px;border:1.5px solid #B9954F;background:#B9954F;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+                <span style="font-size:12px;line-height:1.5;color:#8C8069">Принимаю <span style="color:#6E6551;font-weight:600">условия</span> и <span style="color:#6E6551;font-weight:600">политику конфиденциальности</span></span>
+              </div>
+              <button style="width:100%;height:56px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15.5px;font-weight:600;border:none;cursor:pointer">Создать аккаунт</button>
+              <p style="text-align:center;margin:22px 0 4px;font-size:13.5px;color:#8C8069">Уже с нами? <span style="color:#B9954F;font-weight:600;cursor:pointer">Войти</span></p>
+            </div>
+            <div style="display:flex;justify-content:center;padding:6px 0 12px"><div style="width:128px;height:5px;border-radius:3px;background:rgba(30,29,52,.22)"></div></div>
+          </div>
+          <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5);text-align:center">Регистрация</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { mode: 'login', pwLogin: false, pwReg: false, mMode: 'login', mPw: false, sMode: 'register', sPw: false };
+  seg(active) {
+    return active
+      ? "flex:1;height:40px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:#FBF7EF;color:#211F30;font:600 13.5px 'Golos Text',sans-serif;box-shadow:0 2px 6px rgba(27,26,48,.12);cursor:pointer"
+      : "flex:1;height:40px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:transparent;color:#8C8069;font:600 13.5px 'Golos Text',sans-serif;cursor:pointer";
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      isLogin: s.mode === 'login',
+      isReg: s.mode === 'register',
+      segLogin: this.seg(s.mode === 'login'),
+      segReg: this.seg(s.mode === 'register'),
+      setLogin: () => this.setState({ mode: 'login' }),
+      setReg: () => this.setState({ mode: 'register' }),
+      pwLoginType: s.pwLogin ? 'text' : 'password',
+      pwRegType: s.pwReg ? 'text' : 'password',
+      pwLoginOpen: s.pwLogin,
+      pwLoginClosed: !s.pwLogin,
+      pwRegOpen: s.pwReg,
+      pwRegClosed: !s.pwReg,
+      togglePwLogin: () => this.setState(x => ({ pwLogin: !x.pwLogin })),
+      togglePwReg: () => this.setState(x => ({ pwReg: !x.pwReg })),
+      // desktop modal
+      mIsLogin: s.mMode === 'login',
+      mIsReg: s.mMode === 'register',
+      mSegLogin: this.seg(s.mMode === 'login'),
+      mSegReg: this.seg(s.mMode === 'register'),
+      setMLogin: () => this.setState({ mMode: 'login' }),
+      setMReg: () => this.setState({ mMode: 'register' }),
+      mPwType: s.mPw ? 'text' : 'password',
+      mPwOpen: s.mPw,
+      mPwClosed: !s.mPw,
+      toggleMPw: () => this.setState(x => ({ mPw: !x.mPw })),
+      // mobile bottom sheet
+      sIsLogin: s.sMode === 'login',
+      sIsReg: s.sMode === 'register',
+      sSegLogin: this.seg(s.sMode === 'login'),
+      sSegReg: this.seg(s.sMode === 'register'),
+      setSLogin: () => this.setState({ sMode: 'login' }),
+      setSReg: () => this.setState({ sMode: 'register' }),
+      sPwType: s.sPw ? 'text' : 'password',
+      sPwOpen: s.sPw,
+      sPwClosed: !s.sPw,
+      toggleSPw: () => this.setState(x => ({ sPw: !x.sPw })),
+    };
+  }
+}
+</script>
+</body>
+</html>

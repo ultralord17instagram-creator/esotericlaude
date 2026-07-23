@@ -28,7 +28,7 @@ function prng(a) {
 }
 
 // values по ветке. Порядок pick() фиксирован -> результат стабилен.
-export function generate({ branch, birthDate, name = '', hisSign = null }) {
+export function generate({ branch, birthDate, name = '' }) {
   const rand = prng(seed(`${name}|${birthDate}|${branch}`))
   const pick = (arr) => arr[Math.floor(rand() * arr.length)]
   const her = sign(birthDate)
@@ -51,7 +51,8 @@ export function generate({ branch, birthDate, name = '', hisSign = null }) {
   }
 
   if (branch === 'return') {
-    const d = BRANCHES.return.dossier[hisSign]
+    const his = BRANCHES.return.hisSignBy[her.id]
+    const d = BRANCHES.return.dossier[his]
     const month = pick(MONTHS)
     return {
       hisState: d.hisState,

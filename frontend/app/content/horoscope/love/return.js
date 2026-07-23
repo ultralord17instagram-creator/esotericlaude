@@ -26,15 +26,6 @@ export const returnBranch = {
         { value: 'afraid', label: 'Боюсь, но да' },
       ] },
     { id: 'birth_date', type: 'date', required: true, question: 'Твоя дата рождения' },
-    { id: 'his_sign', type: 'choice', required: true, question: 'Его знак',
-      options: [
-        { value: 'aries', label: 'Овен' }, { value: 'taurus', label: 'Телец' },
-        { value: 'gemini', label: 'Близнецы' }, { value: 'cancer', label: 'Рак' },
-        { value: 'leo', label: 'Лев' }, { value: 'virgo', label: 'Дева' },
-        { value: 'libra', label: 'Весы' }, { value: 'scorpio', label: 'Скорпион' },
-        { value: 'sagittarius', label: 'Стрелец' }, { value: 'capricorn', label: 'Козерог' },
-        { value: 'aquarius', label: 'Водолей' }, { value: 'pisces', label: 'Рыбы' },
-      ] },
   ],
   calcLines: ['Определяю твой знак…', 'Читаю его по звёздам…', 'Смотрю, что между вами осталось…'],
   paywall: {
@@ -53,6 +44,13 @@ export const returnBranch = {
     { id: 'whenReturn', label: 'Когда он сделает шаг',             locked: true  },
     { id: 'whatToDo',   label: 'Что сделать, чтобы он вернулся',   locked: true  },
   ],
+  // Его знак выводится по дате рождения (у пользователя не спрашиваем): её знак ->
+  // противоположный по зодиаку (ось партнёрства, 7-й дом). Биекция -> доступны все 12 досье.
+  hisSignBy: {
+    aries: 'libra', taurus: 'scorpio', gemini: 'sagittarius', cancer: 'capricorn',
+    leo: 'aquarius', virgo: 'pisces', libra: 'aries', scorpio: 'taurus',
+    sagittarius: 'gemini', capricorn: 'cancer', aquarius: 'leo', pisces: 'virgo',
+  },
   // Досье по ЕГО знаку. whenReturn содержит {month}.
   dossier: {
     aries: {

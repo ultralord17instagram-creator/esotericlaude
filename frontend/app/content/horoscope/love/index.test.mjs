@@ -28,6 +28,14 @@ test('suzheny: destinedSign задан для всех 12 знаков', () => {
   for (const s of SIGN_IDS) assert.ok(BRANCHES.suzheny.destinedSign[s], `нет пары для ${s}`)
 })
 
+test('return: hisSignBy задан для всех 12 знаков и биективен', () => {
+  const map = BRANCHES.return.hisSignBy
+  for (const s of SIGN_IDS) assert.ok(map[s], `нет пары для ${s}`)
+  const targets = SIGN_IDS.map(s => map[s])
+  assert.equal(new Set(targets).size, 12, 'маппинг должен быть биекцией (доступны все 12 досье)')
+  for (const t of targets) assert.ok(BRANCHES.return.dossier[t], `нет досье для его знака ${t}`)
+})
+
 test('revealFields: у каждой ветки есть и free, и locked', () => {
   for (const id of BRANCH_IDS) {
     const rf = BRANCHES[id].revealFields

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#D8CEB9;-webkit-font-smoothing:antialiased;font-family:'Golos Text',system-ui,sans-serif}
+.optw:target [data-badge]{background:#B9954F!important;color:#fff!important}
+a{color:#B9954F}
+a:hover{color:#9E7E3E}
+</style>
+</helmet>
+
+<section style="padding:40px 44px 20px">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">2</span>
+    <span style="font:600 13px/1.2 &quot;Golos Text&quot;,system-ui,sans-serif;color:#1B1A30">Гороскоп — десктопная страница «Сегодня»</span>
+  </div>
+  <p style="margin:0 0 30px;font:400 12.5px/1.6 &quot;Golos Text&quot;,sans-serif;color:rgba(30,29,52,.58);max-width:78ch">Тот же экран дня, переразложенный под ширину 1440px. Астросводка — четыре карточки в ряд с полным текстом, ниже открытый гороскоп на сегодня и четыре категории в ряд с пейволом. Язык Astrix — палитра, шрифты и компоненты те же, что в мобильной версии.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+    <div class="optw" id="2a" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#2a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">2a</a>
+        <span style="font:400 12px/1.3 &quot;Golos Text&quot;,sans-serif;color:rgba(30,29,52,.62)">Десктоп — гороскоп на сегодня · Дева</span>
+      </div>
+
+      <div data-screen-label="Гороскоп · Десктоп" style="--serif:&quot;Source Serif 4&quot;,Georgia,serif;--sans:&quot;Golos Text&quot;,system-ui,sans-serif;width:1440px;background:#EAE0CE;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(27,26,48,.55),0 8px 20px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.08);font-family:var(--sans);color:#26243A">
+
+        <div style="height:46px;background:#E4DAC6;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid rgba(30,29,52,.08)">
+          <div style="display:flex;gap:8px;width:130px"><span style="width:12px;height:12px;border-radius:50%;background:#D0A9A3"></span><span style="width:12px;height:12px;border-radius:50%;background:#D8B884"></span><span style="width:12px;height:12px;border-radius:50%;background:#A7B49B"></span></div>
+          <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:8px;height:28px;padding:0 18px;background:#F3ECDD;border:1px solid rgba(30,29,52,.08);border-radius:999px;font-size:12.5px;color:#6E6551"><svg width="10" height="11" viewBox="0 0 11 12" style="display:block"><rect x="1.5" y="5" width="8" height="6" rx="1.4" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></rect><path d="M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5" style="fill:none;stroke:#9A8D72;stroke-width:1.1"></path></svg>astrix.app/horoscope</div></div>
+          <div style="width:130px"></div>
+        </div>
+
+        <header style="max-width:1200px;margin:0 auto;padding:26px 40px;display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <svg width="28" height="28" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#EAE0CE"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg>
+            <span style="font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#211F30">Astrix</span>
+          </div>
+          <nav style="display:flex;gap:36px">
+            <a style="color:#3A3550;font-size:15px;font-weight:500;text-decoration:none;cursor:pointer">Сервисы</a>
+            <a style="color:#3A3550;font-size:15px;font-weight:500;text-decoration:none;cursor:pointer">Как это работает</a>
+            <a style="color:#3A3550;font-size:15px;font-weight:500;text-decoration:none;cursor:pointer">Отзывы</a>
+          </nav>
+          <div style="display:flex;align-items:center;gap:18px">
+            <a style="color:#26243A;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer">Войти</a>
+            <a style="height:44px;padding:0 22px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;text-decoration:none;cursor:pointer">Попробовать бесплатно</a>
+          </div>
+        </header>
+
+        <div style="max-width:1200px;margin:0 auto;padding:20px 40px 72px">
+          <div style="font-size:13.5px;color:#9A8D72;margin-bottom:26px">Сервисы <span style="margin:0 6px;color:#C4B9A0">›</span> <span style="color:#6E6551;font-weight:600">Гороскоп</span></div>
+
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px">
+            <div>
+              <h1 style="font-family:var(--serif);font-weight:500;font-size:52px;line-height:1;letter-spacing:-.02em;margin:0 0 12px;color:#211F30">Дева</h1>
+              <div style="font-size:16px;color:#6E6551;display:flex;align-items:center;gap:9px"><span>23.08 – 22.09</span><span style="color:#C4B399">·</span><span>Земля</span><span style="color:#C4B399">·</span><span>Меркурий</span></div>
+            </div>
+            <div style="flex:none;display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 20px;border-radius:999px;border:1px solid rgba(30,29,52,.2);font-size:15px;font-weight:600;color:#26243A;cursor:pointer">
+              <svg width="15" height="15" viewBox="0 0 14 14" style="display:block"><path d="M9.5 2 l2.5 2.5 -7 7 -3 .5 .5-3 z" style="fill:none;stroke:#26243A;stroke-width:1.2;stroke-linejoin:round"></path></svg>
+              Ввести другую
+            </div>
+          </div>
+
+          <div style="display:flex;gap:28px;margin-bottom:34px;border-bottom:1px solid rgba(30,29,52,.1)">
+            <div onClick="{{ dtab0 }}" style="{{ dts0 }}">Сегодня</div>
+            <div onClick="{{ dtab1 }}" style="{{ dts1 }}">Портрет знака</div>
+            <div onClick="{{ dtab2 }}" style="{{ dts2 }}">Лунный календарь</div>
+          </div>
+
+          <sc-if value="{{ dToday }}" hint-placeholder-val="{{ true }}">
+
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px">
+            <div style="background:#F3ECDD;border:1px solid rgba(30,29,52,.07);border-radius:20px;padding:24px">
+              <div style="width:40px;height:40px;border-radius:50%;background:#DCD0B6;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:16px"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="11" style="fill:#B7A985"></circle><circle cx="24.5" cy="17" r="11" style="fill:#DCD0B6"></circle></svg></div>
+              <div style="font-size:12.5px;color:#9A8D72;margin-bottom:4px">Фаза Луны</div>
+              <div style="font-size:19px;font-weight:700;color:#211F30;margin-bottom:10px">Старая Луна</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6E6551">Луна почти истаяла, круг завершается, небо просит тишины. Лучшее сегодня — отдых и мягкое подведение итогов. Не берись за большое, накопи силу.</p>
+            </div>
+            <div style="background:#F3ECDD;border:1px solid rgba(30,29,52,.07);border-radius:20px;padding:24px">
+              <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="36" height="36" viewBox="0 0 30 30"><path d="M20 4 a11 11 0 1 0 0 22 a13.5 13.5 0 0 1 0-22 z" style="fill:#D9A94E"></path></svg></div>
+              <div style="font-size:12.5px;color:#9A8D72;margin-bottom:4px">Лунный день</div>
+              <div style="font-size:19px;font-weight:700;color:#211F30;margin-bottom:10px">26-й день</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6E6551">Двадцать шестой день просит беречь силы и слова. Меньше лишней траты и обещаний, больше скромности и наблюдения. Спокойный день, где экономия энергии на пользу.</p>
+            </div>
+            <div style="background:#F3ECDD;border:1px solid rgba(30,29,52,.07);border-radius:20px;padding:24px">
+              <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 1 l1.6 8.8 8.8 1.6 -8.8 1.6 -1.6 8.8 -1.6 -8.8 -8.8 -1.6 8.8 -1.6 z" style="fill:#211F30"></path></svg></div>
+              <div style="font-size:12.5px;color:#9A8D72;margin-bottom:4px">День недели</div>
+              <div style="font-size:19px;font-weight:700;color:#211F30;margin-bottom:10px">Венера</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6E6551">День под Венерой — про любовь, красоту и удовольствие. Хорошо для отношений, заботы о себе и всего, что радует. День смягчает и сближает.</p>
+            </div>
+            <div style="background:#F3ECDD;border:1px solid rgba(30,29,52,.07);border-radius:20px;padding:24px">
+              <div style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="30" height="30" viewBox="0 0 26 26"><circle cx="13" cy="13" r="9" style="fill:none;stroke:#7FA07A;stroke-width:1.6"></circle><path d="M13 8 v5 l3.2 2.2" style="fill:none;stroke:#7FA07A;stroke-width:1.6;stroke-linecap:round"></path></svg></div>
+              <div style="font-size:12.5px;color:#9A8D72;margin-bottom:4px">Ретрограды</div>
+              <div style="font-size:19px;font-weight:700;color:#211F30;margin-bottom:10px">Нет</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6E6551">Сегодня ретроградных планет нет — все идут прямо. Хороший фон, чтобы начинать разговоры, договариваться и запускать задуманное.</p>
+            </div>
+          </div>
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:32px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:14px">
+              <svg width="20" height="20" viewBox="0 0 16 16"><path d="M8 0 l1.3 5 5 1.3 -5 1.3 -1.3 5 -1.3 -5 -5-1.3 5-1.3 z" style="fill:#B9954F"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:26px;margin:0;color:#211F30">Гороскоп на сегодня</h2>
+            </div>
+            <p style="margin:0;font-size:17px;line-height:1.65;color:#4A4436;max-width:88ch">Сегодня хорошо анализировать и доводить до ума — ум работает чётко и по делу. Но не давай внутреннему критику перегибать: сделанное хорошо не обязано быть идеальным. Одно маленькое доброе дело для другого наполнит тебя смыслом.</p>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:24px;display:flex;flex-direction:column">
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(192,132,151,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="19" height="19" viewBox="0 0 16 16"><path d="M8 14 C2 9.5 1 6 3 4 c1.6-1.6 4-.6 5 1 1-1.6 3.4-2.6 5-1 2 2 1 5.5-5 10 z" style="fill:none;stroke:#C08497;stroke-width:1.3;stroke-linejoin:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 8px;color:#211F30">Любовь</h3>
+              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:#8C8069;flex:1">Внутренний критик может помешать простому теплу. Есть момент, где важно промолчать вовремя…</p>
+              <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:24px;display:flex;flex-direction:column">
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(154,141,114,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="19" height="19" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M8 4.5 v7 M6 6.5 h3.2 a1.5 1.5 0 0 1 0 3 H6.4 M6 9.5 h3.6" style="fill:none;stroke:#9A8D72;stroke-width:1.2;stroke-linecap:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 8px;color:#211F30">Деньги и работа</h3>
+              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:#8C8069;flex:1">Есть короткий шанс и рядом ловушка, похожие как две капли. Отличить успевают немногие…</p>
+              <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:24px;display:flex;flex-direction:column">
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(127,160,122,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="19" height="19" viewBox="0 0 16 16"><path d="M2 8.5 h3 l1.5-4 3 8 1.5-4 h3" style="fill:none;stroke:#7FA07A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 8px;color:#211F30">Здоровье и энергия</h3>
+              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:#8C8069;flex:1">Решают маленькие полезные привычки, а не большие подвиги. Ты почувствуешь, с какой начать…</p>
+              <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:24px;display:flex;flex-direction:column">
+              <div style="width:38px;height:38px;border-radius:50%;background:rgba(217,169,78,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="19" height="19" viewBox="0 0 16 16"><path d="M8 1 l1.9 4 4.4.5 -3.3 3 .9 4.3 -3.9-2.2 -3.9 2.2 .9-4.3 -3.3-3 4.4-.5 z" style="fill:none;stroke:#D9A94E;stroke-width:1.2;stroke-linejoin:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 8px;color:#211F30">Удача дня</h3>
+              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:#8C8069;flex:1">Любит того, кто действует тихо и вовремя. Есть окно, когда мелочь решает больше обычного…</p>
+              <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ dPortrait }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:26px;display:flex;flex-direction:column">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(154,141,114,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="18" height="18" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M2.5 14 a5.5 5.5 0 0 1 11 0" style="fill:none;stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 10px;color:#211F30">Характер</h3>
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#4A4436">Дева — земной знак практики и порядка. Ты замечаешь детали, которых не видят другие, и доводишь начатое до чистого результата. За внешней сдержанностью — тёплое желание быть полезной и делать мир аккуратнее.</p>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:26px;display:flex;flex-direction:column">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(185,149,79,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="18" height="18" viewBox="0 0 16 16"><path d="M9.5 1 L4 9 h3.2 l-1 6 5.3-8.5 h-3.2 z" style="fill:none;stroke:#B9954F;stroke-width:1.3;stroke-linejoin:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 10px;color:#211F30">Суперсила</h3>
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#4A4436">Умение превращать хаос в систему. Там, где другие теряются, ты раскладываешь всё по полочкам и находишь работающее решение — спокойно, без лишнего шума и суеты.</p>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:26px;display:flex;flex-direction:column">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(142,130,160,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="18" height="18" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" style="fill:none;stroke:#8E82A0;stroke-width:1.3"></circle><path d="M8 1.5 a6.5 6.5 0 0 1 0 13 z" style="fill:#8E82A0;opacity:.55"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 10px;color:#211F30">Теневая сторона</h3>
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069">Внутренний критик, который редко бывает доволен. Перфекционизм легко превращается в самоедство, а забота о других — в незаметную усталость…</p>
+              <div style="margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:26px;display:flex;flex-direction:column">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(192,132,151,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="18" height="18" viewBox="0 0 16 16"><path d="M8 14 C2 9.5 1 6 3 4 c1.6-1.6 4-.6 5 1 1-1.6 3.4-2.6 5-1 2 2 1 5.5-5 10 z" style="fill:none;stroke:#C08497;stroke-width:1.3;stroke-linejoin:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 10px;color:#211F30">Любовь и отношения</h3>
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069">В близости тебе важны надёжность и внимание к мелочам. Ты влюбляешься не в слова, а в поступки — и не прощаешь небрежности…</p>
+              <div style="margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:26px;display:flex;flex-direction:column">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(185,149,79,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="18" height="18" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><path d="M8 4.5 v7 M6 6.5 h3.2 a1.5 1.5 0 0 1 0 3 H6.4 M6 9.5 h3.6" style="fill:none;stroke:#B9954F;stroke-width:1.2;stroke-linecap:round"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 10px;color:#211F30">Деньги</h3>
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069">С деньгами ты аккуратна и умеешь считать наперёд. Но иногда экономишь там, где стоило бы вложиться в себя…</p>
+              <div style="margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:20px;padding:26px;display:flex;flex-direction:column">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(127,160,122,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><svg width="18" height="18" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" style="fill:none;stroke:#7FA07A;stroke-width:1.3"></circle><path d="M8 3.5 l1.4 3.1 3.1 1.4 -3.1 1.4 -1.4 3.1 -1.4-3.1 -3.1-1.4 3.1-1.4 z" style="fill:#7FA07A"></path></svg></div>
+              <h3 style="font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 10px;color:#211F30">Предназначение</h3>
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069">Твой путь — служение через мастерство: делать мир чище, здоровее и понятнее. В полном разборе — в какой сфере это раскрывается сильнее всего…</p>
+              <div style="margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ dCal }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:1fr;gap:16px;align-items:start">
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:32px">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                <div style="width:38px;height:38px;flex:none;border-radius:50%;background:#DCD0B6;overflow:hidden;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="7" style="fill:#B7A985"></circle><circle cx="16" cy="11" r="7" style="fill:#FBF7EF"></circle></svg></div>
+                <h2 style="font-family:var(--serif);font-weight:600;font-size:24px;margin:0;color:#211F30">Лунный день 26 · Старая Луна</h2>
+              </div>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#4A4436">Двадцать шестой день просит беречь силы и слова. Меньше лишней траты и обещаний, больше скромности и наблюдения. Спокойный день, в котором экономия энергии идёт на пользу.</p>
+            </div>
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:32px;display:flex;flex-direction:column">
+              <div style="display:flex;align-items:center;gap:11px;margin-bottom:14px"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2.5" y="4" width="15" height="13" rx="2.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></rect><path d="M2.5 8 H17.5" style="stroke:#B9954F;stroke-width:1.3"></path><path d="M6.5 2.5 V5.5 M13.5 2.5 V5.5" style="stroke:#B9954F;stroke-width:1.3"></path></svg><h2 style="font-family:var(--serif);font-weight:600;font-size:24px;margin:0;color:#211F30">Благоприятные дни месяца</h2></div>
+              <p style="margin:0 0 12px;font-size:16px;line-height:1.65;color:#4A4436">Календарь показывает, какие дни месяца хороши для красоты, денег, любви, дел и здоровья.</p>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#8C8069">В этом месяце есть окна, когда удача открыта именно для твоих дел, и они быстро закрываются. Большинство узнаёт о лучшем дне уже задним числом…</p>
+              <div style="margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#211F30;cursor:pointer"><svg width="13" height="14" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор</div>
+            </div>
+          </div>
+          </sc-if>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:20px 44px 56px">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">1</span>
+    <span style="font:600 13px/1.2 &quot;Golos Text&quot;,system-ui,sans-serif;color:#1B1A30">Гороскоп — мобильный экран «Сегодня»</span>
+  </div>
+  <p style="margin:0 0 30px;font:400 12.5px/1.6 &quot;Golos Text&quot;,sans-serif;color:rgba(30,29,52,.58);max-width:70ch">Экран дня по знаку: сверху — переключаемая астросводка (фаза Луны, лунный день, день недели, ретрограды), ниже — открытый гороскоп на сегодня и категории плиткой 2×2 с пейволом. Язык Astrix — та же палитра, шрифты и компоненты.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+    <div class="optw" id="1a" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge="" href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px;text-decoration:none">1a</a>
+        <span style="font:400 12px/1.3 &quot;Golos Text&quot;,sans-serif;color:rgba(30,29,52,.62)">Гороскоп на сегодня · Дева</span>
+      </div>
+
+      <div data-screen-label="Гороскоп · Вариант C" style="--serif:&quot;Source Serif 4&quot;,Georgia,serif;--sans:&quot;Golos Text&quot;,system-ui,sans-serif;width:390px;background:#EAE0CE;border-radius:36px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);font-family:var(--sans);color:#26243A">
+
+        <sc-if value="{{ mainView }}" hint-placeholder-val="{{ true }}">
+        <div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px">
+          <span style="font-weight:600;letter-spacing:.02em">9:41</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:7px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:9px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:11px;background:#26243A;border-radius:1px"></div></div>
+            <div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #26243A;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#26243A;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#26243A;border-radius:1px"></div></div>
+          </div>
+        </div>
+
+        <header style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 22px 4px">
+          <div style="min-width:0">
+            <h1 style="font-family:var(--serif);font-weight:600;font-size:32px;line-height:1;letter-spacing:-.01em;margin:0 0 8px;color:#211F30">Дева</h1>
+            <div style="font-size:13px;color:#6E6551;display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span>23.08 – 22.09</span><span style="color:#C4B399">·</span><span>Земля</span><span style="color:#C4B399">·</span><span>Меркурий</span></div>
+          </div>
+          <div style="flex:none;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px;border-radius:999px;border:1px solid rgba(30,29,52,.2);font-size:13px;font-weight:600;color:#26243A;cursor:pointer">
+            <svg width="13" height="13" viewBox="0 0 14 14" style="display:block"><path d="M9.5 2 l2.5 2.5 -7 7 -3 .5 .5-3 z" style="fill:none;stroke:#26243A;stroke-width:1.2;stroke-linejoin:round"></path></svg>
+            Ввести другую
+          </div>
+        </header>
+
+        <div style="display:flex;gap:8px;padding:18px 22px 4px">
+          <div onClick="{{ tab0 }}" style="{{ tabS0 }}"><span>Сегодня</span></div>
+          <div onClick="{{ tab1 }}" style="{{ tabS1 }}"><span>Портрет<br>знака</span></div>
+          <div onClick="{{ tab2 }}" style="{{ tabS2 }}"><span>Лунный<br>календарь</span></div>
+        </div>
+
+        <sc-if value="{{ tabToday }}" hint-placeholder-val="{{ true }}">
+
+        <div style="margin:16px 22px 0;background:#F3ECDD;border:1px solid rgba(30,29,52,.07);border-radius:24px;padding:20px 20px 22px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <div onClick="{{ pick0 }}" style="{{ chip0 }}">Фаза Луны</div>
+            <div onClick="{{ pick1 }}" style="{{ chip1 }}">Лунный день</div>
+            <div onClick="{{ pick2 }}" style="{{ chip2 }}">День недели</div>
+            <div onClick="{{ pick3 }}" style="{{ chip3 }}">Ретрограды</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;margin:18px 0 13px">
+            <div style="width:58px;height:58px;flex:none;border-radius:50%;background:#DCD0B6;display:flex;align-items:center;justify-content:center;overflow:hidden">
+              <sc-if value="{{ selFaza }}" hint-placeholder-val="{{ true }}"><svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="16" style="fill:#B7A985"></circle><circle cx="36" cy="25" r="16" style="fill:#DCD0B6"></circle></svg></sc-if>
+              <sc-if value="{{ selDay }}" hint-placeholder-val="{{ false }}"><svg width="34" height="34" viewBox="0 0 30 30"><path d="M20 4 a11 11 0 1 0 0 22 a13.5 13.5 0 0 1 0-22 z" style="fill:#D9A94E"></path></svg></sc-if>
+              <sc-if value="{{ selWeek }}" hint-placeholder-val="{{ false }}"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M12 1 l1.6 8.8 8.8 1.6 -8.8 1.6 -1.6 8.8 -1.6 -8.8 -8.8 -1.6 8.8 -1.6 z" style="fill:#211F30"></path></svg></sc-if>
+              <sc-if value="{{ selRetro }}" hint-placeholder-val="{{ false }}"><svg width="30" height="30" viewBox="0 0 26 26"><circle cx="13" cy="13" r="9" style="fill:none;stroke:#7FA07A;stroke-width:1.7"></circle><path d="M13 8 v5 l3.2 2.2" style="fill:none;stroke:#7FA07A;stroke-width:1.7;stroke-linecap:round"></path></svg></sc-if>
+            </div>
+            <div style="min-width:0"><div style="font-size:12px;color:#9A8D72;margin-bottom:2px">{{ astroLabel }}</div><div style="font-family:var(--serif);font-size:23px;font-weight:600;color:#211F30;line-height:1.05">{{ astroTitle }}</div></div>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.55;color:#6E6551;min-height:84px">{{ astroText }}</p>
+        </div>
+
+        <div style="margin:14px 22px 0;background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 0 l1.3 5 5 1.3 -5 1.3 -1.3 5 -1.3 -5 -5-1.3 5-1.3 z" style="fill:#B9954F"></path></svg>
+            <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Гороскоп на сегодня</h2>
+          </div>
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:#4A4436">Сегодня хорошо анализировать и доводить до ума — ум работает чётко и по делу. Но не давай внутреннему критику перегибать: одно маленькое доброе дело для другого наполнит тебя смыслом.</p>
+        </div>
+
+        <div style="padding:14px 22px 4px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+          <div onClick="{{ openLove }}" style="{{ tileStyle }}">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(192,132,151,.14);display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 16 16"><path d="M8 14 C2 9.5 1 6 3 4 c1.6-1.6 4-.6 5 1 1-1.6 3.4-2.6 5-1 2 2 1 5.5-5 10 z" style="fill:none;stroke:#C08497;stroke-width:1.3;stroke-linejoin:round"></path></svg></div>
+              <svg width="13" height="14" viewBox="0 0 14 15" style="flex:none;margin-top:3px"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></path></svg>
+            </div>
+            <h3 style="font-family:var(--serif);font-weight:600;font-size:16px;margin:0 0 6px;color:#211F30">Любовь</h3>
+            <p style="margin:0;font-size:12.5px;line-height:1.5;color:#8C8069;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">Внутренний критик может помешать простому теплу. Есть момент, где важно промолчать вовремя…</p>
+          </div>
+
+          <div onClick="{{ openMoney }}" style="{{ tileStyle }}">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(154,141,114,.16);display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M8 4.5 v7 M6 6.5 h3.2 a1.5 1.5 0 0 1 0 3 H6.4 M6 9.5 h3.6" style="fill:none;stroke:#9A8D72;stroke-width:1.2;stroke-linecap:round"></path></svg></div>
+              <svg width="13" height="14" viewBox="0 0 14 15" style="flex:none;margin-top:3px"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></path></svg>
+            </div>
+            <h3 style="font-family:var(--serif);font-weight:600;font-size:16px;margin:0 0 6px;color:#211F30">Деньги и работа</h3>
+            <p style="margin:0;font-size:12.5px;line-height:1.5;color:#8C8069;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">Есть короткий шанс и рядом ловушка, похожие как две капли. Отличить успевают немногие…</p>
+          </div>
+
+          <div onClick="{{ openHealth }}" style="{{ tileStyle }}">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(127,160,122,.16);display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 16 16"><path d="M2 8.5 h3 l1.5-4 3 8 1.5-4 h3" style="fill:none;stroke:#7FA07A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"></path></svg></div>
+              <svg width="13" height="14" viewBox="0 0 14 15" style="flex:none;margin-top:3px"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></path></svg>
+            </div>
+            <h3 style="font-family:var(--serif);font-weight:600;font-size:16px;margin:0 0 6px;color:#211F30">Здоровье</h3>
+            <p style="margin:0;font-size:12.5px;line-height:1.5;color:#8C8069;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">Решают маленькие полезные привычки, а не большие подвиги. Ты почувствуешь, с какой начать…</p>
+          </div>
+
+          <div onClick="{{ openLuck }}" style="{{ tileStyle }}">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(217,169,78,.16);display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 16 16"><path d="M8 1 l1.9 4 4.4.5 -3.3 3 .9 4.3 -3.9-2.2 -3.9 2.2 .9-4.3 -3.3-3 4.4-.5 z" style="fill:none;stroke:#D9A94E;stroke-width:1.2;stroke-linejoin:round"></path></svg></div>
+              <svg width="13" height="14" viewBox="0 0 14 15" style="flex:none;margin-top:3px"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#B7AC93;stroke-width:1.3"></path></svg>
+            </div>
+            <h3 style="font-family:var(--serif);font-weight:600;font-size:16px;margin:0 0 6px;color:#211F30">Удача дня</h3>
+            <p style="margin:0;font-size:12.5px;line-height:1.5;color:#8C8069;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">Любит того, кто действует тихо и вовремя. Есть окно, когда мелочь решает больше обычного…</p>
+          </div>
+
+        </div>
+
+        <div style="padding:16px 22px 4px">
+          <div style="height:52px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer">
+            <svg width="14" height="15" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#F3ECDB;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#F3ECDB;stroke-width:1.3"></path></svg>
+            Смотреть полный разбор
+          </div>
+          <div style="margin-top:10px;text-align:center;font-size:12px;color:#9A8D72"><br></div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ tabPortrait }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:20px 22px 4px;display:flex;flex-direction:column;gap:14px">
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:11px">
+              <svg width="17" height="17" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="3" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M2.5 14 a5.5 5.5 0 0 1 11 0" style="fill:none;stroke:#9A8D72;stroke-width:1.3;stroke-linecap:round"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Характер</h2>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:#4A4436">Дева — земной знак практики и порядка. Ты замечаешь детали, которых не видят другие, и доводишь начатое до чистого результата. За внешней сдержанностью — тёплое желание быть полезной и делать мир аккуратнее.</p>
+          </div>
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:11px">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M9.5 1 L4 9 h3.2 l-1 6 5.3-8.5 h-3.2 z" style="fill:none;stroke:#B9954F;stroke-width:1.3;stroke-linejoin:round"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Суперсила</h2>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:#4A4436">Умение превращать хаос в систему. Там, где другие теряются, ты раскладываешь всё по полочкам и находишь работающее решение — спокойно, без лишнего шума и суеты.</p>
+          </div>
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:11px">
+              <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" style="fill:none;stroke:#8E82A0;stroke-width:1.3"></circle><path d="M8 1.5 a6.5 6.5 0 0 1 0 13 z" style="fill:#8E82A0;opacity:.55"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Теневая сторона</h2>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Внутренний критик, который редко бывает доволен. Перфекционизм легко превращается в самоедство, а забота о других — в незаметную усталость…</p>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#211F30;cursor:pointer"><svg width="14" height="15" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор<span style="font-size:16px">→</span></div>
+          </div>
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:11px">
+              <svg width="15" height="15" viewBox="0 0 16 16"><path d="M8 14 C2 9.5 1 6 3 4 c1.6-1.6 4-.6 5 1 1-1.6 3.4-2.6 5-1 2 2 1 5.5-5 10 z" style="fill:none;stroke:#C08497;stroke-width:1.3;stroke-linejoin:round"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Любовь и отношения</h2>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">В близости тебе важны надёжность и внимание к мелочам. Ты влюбляешься не в слова, а в поступки — и не прощаешь небрежности…</p>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#211F30;cursor:pointer"><svg width="14" height="15" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор<span style="font-size:16px">→</span></div>
+          </div>
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:11px">
+              <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><path d="M8 4.5 v7 M6 6.5 h3.2 a1.5 1.5 0 0 1 0 3 H6.4 M6 9.5 h3.6" style="fill:none;stroke:#B9954F;stroke-width:1.2;stroke-linecap:round"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Деньги</h2>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">С деньгами ты аккуратна и умеешь считать наперёд. Но иногда экономишь там, где стоило бы вложиться в себя…</p>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#211F30;cursor:pointer"><svg width="14" height="15" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор<span style="font-size:16px">→</span></div>
+          </div>
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:11px">
+              <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" style="fill:none;stroke:#7FA07A;stroke-width:1.3"></circle><path d="M8 3.5 l1.4 3.1 3.1 1.4 -3.1 1.4 -1.4 3.1 -1.4-3.1 -3.1-1.4 3.1-1.4 z" style="fill:#7FA07A"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Предназначение</h2>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Твой путь — служение через мастерство: делать мир чище, здоровее и понятнее. В полном разборе — в какой сфере это раскрывается сильнее всего…</p>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#211F30;cursor:pointer"><svg width="14" height="15" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>Смотреть полный разбор<span style="font-size:16px">→</span></div>
+          </div>
+
+          <div style="margin-top:2px;text-align:center;font-size:12px;color:#9A8D72"><br></div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ tabCal }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:22px 22px 4px;display:flex;flex-direction:column;gap:16px">
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:26px;height:26px;flex:none;border-radius:50%;background:#DCD0B6;overflow:hidden"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="7" style="fill:#B7A985"></circle><circle cx="16" cy="11" r="7" style="fill:#DCD0B6"></circle></svg></div>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:18px;margin:0;color:#211F30">Лунный день 26 · Старая Луна</h2>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:#4A4436">Двадцать шестой день просит беречь силы и слова. Меньше лишней траты и обещаний, больше скромности и наблюдения. Спокойный день, в котором экономия энергии идёт на пользу.</p>
+          </div>
+
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.08);border-radius:22px;padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+              <svg width="17" height="17" viewBox="0 0 20 20"><rect x="2.5" y="4" width="15" height="13" rx="2.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></rect><path d="M2.5 8 H17.5" style="stroke:#B9954F;stroke-width:1.3"></path><path d="M6.5 2.5 V5.5 M13.5 2.5 V5.5" style="stroke:#B9954F;stroke-width:1.3"></path></svg>
+              <h2 style="font-family:var(--serif);font-weight:600;font-size:19px;margin:0;color:#211F30">Благоприятные дни месяца</h2>
+            </div>
+            <p style="margin:0 0 12px;font-size:14.5px;line-height:1.6;color:#4A4436">Календарь показывает, какие дни месяца хороши для красоты, денег, любви, дел и здоровья.</p>
+            <div style="position:relative">
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8C8069">В этом месяце есть окна, когда удача открыта именно для твоих дел, и они быстро закрываются. Большинство узнаёт о лучшем дне уже задним числом, когда момент упущен…</p>
+              <div style="position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(to bottom,rgba(251,247,239,0),#FBF7EF)"></div>
+            </div>
+            <div style="margin-top:16px;display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:#211F30;cursor:pointer">
+                <svg width="14" height="15" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>
+                Смотреть полный разбор
+                <span style="font-size:16px">→</span>
+              </div>
+              <div style="font-size:12.5px;color:#9A8D72">Откроется по подписке, отмена в любой момент</div>
+            </div>
+          </div>
+
+        </div>
+        </sc-if>
+
+        <div style="display:flex;justify-content:center;padding:26px 0 14px">
+          <div style="width:134px;height:5px;border-radius:3px;background:rgba(30,29,52,.28)"></div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ inDetail }}" hint-placeholder-val="{{ false }}">
+        <div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px">
+          <span style="font-weight:600;letter-spacing:.02em">9:41</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:7px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:9px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:11px;background:#26243A;border-radius:1px"></div></div>
+            <div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #26243A;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#26243A;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#26243A;border-radius:1px"></div></div>
+          </div>
+        </div>
+
+        <header style="display:flex;align-items:center;gap:13px;padding:8px 22px 6px">
+          <div onClick="{{ back }}" style="width:40px;height:40px;flex:none;border-radius:50%;border:1px solid rgba(30,29,52,.18);display:flex;align-items:center;justify-content:center;font-size:22px;color:#26243A;cursor:pointer">‹</div>
+          <div style="font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#A08A5E">Дева · Гороскоп на сегодня</div>
+        </header>
+
+        <section style="padding:14px 22px 4px">
+          <div style="width:64px;height:64px;border-radius:50%;background:#F3ECDD;display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+            <sc-if value="{{ dLove }}" hint-placeholder-val="{{ true }}"><svg width="30" height="30" viewBox="0 0 16 16"><path d="M8 14 C2 9.5 1 6 3 4 c1.6-1.6 4-.6 5 1 1-1.6 3.4-2.6 5-1 2 2 1 5.5-5 10 z" style="fill:none;stroke:#C08497;stroke-width:1.3;stroke-linejoin:round"></path></svg></sc-if>
+            <sc-if value="{{ dMoney }}" hint-placeholder-val="{{ false }}"><svg width="30" height="30" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" style="fill:none;stroke:#9A8D72;stroke-width:1.3"></circle><path d="M8 4.5 v7 M6 6.5 h3.2 a1.5 1.5 0 0 1 0 3 H6.4 M6 9.5 h3.6" style="fill:none;stroke:#9A8D72;stroke-width:1.2;stroke-linecap:round"></path></svg></sc-if>
+            <sc-if value="{{ dHealth }}" hint-placeholder-val="{{ false }}"><svg width="30" height="30" viewBox="0 0 16 16"><path d="M2 8.5 h3 l1.5-4 3 8 1.5-4 h3" style="fill:none;stroke:#7FA07A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"></path></svg></sc-if>
+            <sc-if value="{{ dLuck }}" hint-placeholder-val="{{ false }}"><svg width="30" height="30" viewBox="0 0 16 16"><path d="M8 1 l1.9 4 4.4.5 -3.3 3 .9 4.3 -3.9-2.2 -3.9 2.2 .9-4.3 -3.3-3 4.4-.5 z" style="fill:none;stroke:#D9A94E;stroke-width:1.2;stroke-linejoin:round"></path></svg></sc-if>
+          </div>
+          <h1 style="font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.05;letter-spacing:-.01em;margin:0 0 14px;color:#211F30">{{ detailTitle }}</h1>
+          <p style="margin:0 0 14px;font-size:15px;line-height:1.65;color:#4A4436">{{ detailLead }}</p>
+          <div style="position:relative">
+            <p style="margin:0;font-size:15px;line-height:1.65;color:#8C8069">{{ detailTeaser }}</p>
+            <div style="position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(to bottom,rgba(234,224,185,0),#EAE0CE)"></div>
+          </div>
+          <div style="margin-top:26px;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:#211F30;cursor:pointer">
+            <svg width="15" height="16" viewBox="0 0 14 15" style="flex:none"><rect x="2.2" y="6.5" width="9.6" height="7" rx="1.6" style="fill:none;stroke:#211F30;stroke-width:1.3"></rect><path d="M4.3 6.5 V4.7 a2.7 2.7 0 0 1 5.4 0 V6.5" style="fill:none;stroke:#211F30;stroke-width:1.3"></path></svg>
+            Смотреть полный разбор
+            <span style="font-size:17px">→</span>
+          </div>
+          <div style="margin-top:10px;font-size:12.5px;color:#9A8D72">Откроется по подписке, отмена в любой момент</div>
+        </section>
+
+        <div style="display:flex;justify-content:center;padding:26px 0 14px">
+          <div style="width:134px;height:5px;border-radius:3px;background:rgba(30,29,52,.28)"></div>
+        </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { astro: 0, tab: 0, detail: null, dtab: 0 };
+  renderVals() {
+    const A = [
+      { label: 'Фаза Луны', title: 'Старая Луна', text: 'Луна почти истаяла, круг завершается, небо просит тишины. Лучшее сегодня — отдых, восстановление и мягкое подведение итогов перед новым началом. Не берись за большое, накопи силу.' },
+      { label: 'Лунный день', title: '26-й лунный день', text: 'Двадцать шестой день просит беречь силы и слова. Меньше лишней траты и обещаний, больше скромности и наблюдения. Спокойный день, где экономия энергии идёт на пользу.' },
+      { label: 'День недели', title: 'Венера', text: 'День под Венерой — про любовь, красоту и удовольствие. Хорошо для отношений, заботы о себе и всего, что радует. День смягчает и сближает.' },
+      { label: 'Ретрограды', title: 'Планет нет', text: 'Сегодня ретроградных планет нет — все идут прямо. Хороший фон, чтобы начинать разговоры, договариваться и запускать задуманное без задержек.' },
+    ];
+    const s = this.state.astro || 0;
+    const base = { display: 'inline-flex', alignItems: 'center', height: '34px', padding: '0 14px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap', transition: 'background .15s, color .15s' };
+    const chip = i => Object.assign({}, base, i === s ? { background: '#211F30', color: '#F3ECDB' } : { background: '#EAE0CE', color: '#6E6551' });
+
+    const t = this.state.tab || 0;
+    const tabBase = { flex: '1 1 0', minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', lineHeight: 1.12, borderRadius: '16px', fontSize: '13.5px', fontWeight: 600, cursor: 'pointer', border: '1px solid transparent' };
+    const tab = i => i === t
+      ? Object.assign({}, tabBase, { padding: '0 10px', background: '#FBF7EF', border: '1px solid rgba(30,29,52,.1)', color: '#211F30', boxShadow: '0 2px 6px rgba(27,26,48,.05)' })
+      : Object.assign({}, tabBase, { padding: '0 10px', color: '#8C8069' });
+
+    const d = this.state.detail;
+    const details = [
+      { title: 'Любовь', lead: 'В сфере чувств сегодня твой внутренний критик может помешать простому теплу. Есть момент, где важно промолчать вовремя.', teaser: 'Сегодня в любви открыто короткое окно, и оно работает не в твою пользу, если пройти мимо. Один сигнал уже здесь, но заметить его успевают немногие. Чем дольше он остаётся незамеченным, тем дороже упущенное.' },
+      { title: 'Деньги и работа', lead: 'В деньгах сегодня внутренний критик может и помочь, и помешать. Есть тонкая грань, которую важно почувствовать.', teaser: 'Сегодня в финансах у тебя есть короткий шанс и рядом с ним ловушка, и они похожи как две капли. Отличить одно от другого успевают немногие твоего знака. Пока ты не разглядел разницу, время работает против тебя.' },
+      { title: 'Здоровье и энергия', lead: 'В самочувствии сегодня решают маленькие полезные привычки, а не большие подвиги. Ты почувствуешь, с какой начать.', teaser: 'Сегодня внутри тебя происходит сдвиг энергии, который ты почувствуешь, но легко объяснишь пустяком. За этим тихим знаком стоит больше, чем кажется на первый взгляд. Пока ты его не разгадал, он тянет твои силы незаметно.' },
+      { title: 'Удача дня', lead: 'Удача сегодня любит того, кто действует тихо и вовремя. Есть одно окно, когда мелочь решает больше обычного.', teaser: 'Твоё везение сегодня спрятано в конкретном часе и в одном простом жесте. Знак поймает тот, кто не будет спешить и прислушается к первому желанию. Большинство узнаёт о нём задним числом, когда момент уже прошёл.' },
+    ];
+    const hasD = d !== null && d !== undefined;
+
+    const dt = this.state.dtab || 0;
+    const dtabS = i => ({ fontSize: '16px', fontWeight: 600, cursor: 'pointer', paddingBottom: '16px', marginBottom: '-1px', borderBottom: i === dt ? '2px solid #B9954F' : '2px solid transparent', color: i === dt ? '#211F30' : '#8C8069' });
+
+    return {
+      chip0: chip(0), chip1: chip(1), chip2: chip(2), chip3: chip(3),
+      openLove: () => this.setState({ detail: 0 }), openMoney: () => this.setState({ detail: 1 }), openHealth: () => this.setState({ detail: 2 }), openLuck: () => this.setState({ detail: 3 }),
+      back: () => this.setState({ detail: null }),
+      mainView: !hasD, inDetail: hasD,
+      dToday: dt === 0, dPortrait: dt === 1, dCal: dt === 2,
+      dtab0: () => this.setState({ dtab: 0 }), dtab1: () => this.setState({ dtab: 1 }), dtab2: () => this.setState({ dtab: 2 }),
+      dts0: dtabS(0), dts1: dtabS(1), dts2: dtabS(2),
+      tileStyle: { background: '#FBF7EF', border: '1px solid rgba(30,29,52,.08)', borderRadius: '20px', padding: '18px', display: 'flex', flexDirection: 'column', cursor: 'pointer' },
+      dLove: d === 0, dMoney: d === 1, dHealth: d === 2, dLuck: d === 3,
+      detailTitle: hasD ? details[d].title : '', detailLead: hasD ? details[d].lead : '', detailTeaser: hasD ? details[d].teaser : '',
+      pick0: () => this.setState({ astro: 0 }), pick1: () => this.setState({ astro: 1 }), pick2: () => this.setState({ astro: 2 }), pick3: () => this.setState({ astro: 3 }),
+      selFaza: s === 0, selDay: s === 1, selWeek: s === 2, selRetro: s === 3,
+      astroLabel: A[s].label, astroTitle: A[s].title, astroText: A[s].text,
+      tabS0: tab(0), tabS1: tab(1), tabS2: tab(2),
+      tab0: () => this.setState({ tab: 0 }), tab1: () => this.setState({ tab: 1 }), tab2: () => this.setState({ tab: 2 }),
+      tabToday: t === 0, tabPortrait: t === 1, tabCal: t === 2,
+    };
+  }
+}
+</script>
+</body>
+</html>

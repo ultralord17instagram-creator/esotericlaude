@@ -1,0 +1,96 @@
+/* Модалка входа/регистрации поверх страницы (design-reference 3a/3b).
+   Десктоп: окно по центру с узкой тёмной панелью слева и формой справа.
+   Мобайл (≤600px): bottom-sheet со скруглением сверху и ручкой.
+   Поля формы наследуются из auth.module.css (общий AuthForm). */
+
+.scrim {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  background: rgba(20,19,34,.5);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  animation: fade .18s ease-out;
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: relative; display: flex; width: 100%; max-width: 680px;
+  max-height: calc(100vh - 48px);
+  background: var(--bg-base); border-radius: 26px; overflow: hidden;
+  box-shadow: 0 50px 100px -30px rgba(10,9,20,.7);
+  animation: pop .22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+
+/* ── Тёмная панель слева (десктоп) ─────────────────────────── */
+.side {
+  width: 250px; flex: none; position: relative; overflow: hidden;
+  background: var(--bg-deep); color: var(--text-on-dark);
+  display: flex; flex-direction: column; justify-content: space-between; padding: 34px 30px;
+}
+.sideStars { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .9; z-index: 0; }
+.sideLogo { position: relative; z-index: 1; display: flex; align-items: center; gap: 9px; }
+.sideLogoText {
+  font-family: var(--font-heading); font-size: 21px; font-weight: 600;
+  letter-spacing: .02em; color: #F7F1E4;
+}
+.sideHead { position: relative; z-index: 1; }
+.sideTitle {
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: 27px; line-height: 1.15; letter-spacing: -.01em;
+  margin: 0 0 10px; color: #F7F1E4;
+}
+.sideSub { margin: 0; font-size: 13.5px; line-height: 1.6; color: rgba(243,236,219,.62); }
+
+/* ── Правая часть с формой ─────────────────────────────────── */
+.body { flex: 1; position: relative; padding: 34px 40px 40px; overflow-y: auto; }
+
+.close {
+  position: absolute; top: 20px; right: 20px; z-index: 2;
+  width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(30,29,52,.06); color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center;
+}
+.close:hover { background: rgba(30,29,52,.12); }
+
+.handle { display: none; justify-content: center; padding: 2px 0 16px; }
+.handle span { width: 44px; height: 5px; border-radius: 3px; background: rgba(30,29,52,.2); }
+
+.segment {
+  display: flex; background: #E0D5BF; border-radius: 999px; padding: 4px;
+  margin: 6px 0 24px; max-width: 280px;
+}
+.segBtn {
+  flex: 1; height: 40px; border-radius: 999px; border: none; cursor: pointer;
+  background: transparent; color: #8C8069;
+  font-family: var(--font-body); font-weight: 600; font-size: 13.5px;
+  transition: background .15s, color .15s;
+}
+.segBtnOn { background: var(--bg-raised); color: var(--text-primary); box-shadow: 0 2px 6px rgba(27,26,48,.12); }
+
+.head { margin-bottom: 24px; }
+.title {
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: 30px; line-height: 1.08; letter-spacing: -.01em;
+  margin: 0 0 6px; color: var(--text-primary);
+}
+.sub { margin: 0; font-size: 14px; line-height: 1.5; color: #8C8069; }
+
+/* ── Bottom-sheet на мобайле ───────────────────────────────── */
+@media (max-width: 600px) {
+  .scrim { align-items: flex-end; padding: 0; }
+  .modal {
+    max-width: none; max-height: 94vh;
+    border-radius: 32px 32px 0 0;
+    box-shadow: 0 -20px 50px -20px rgba(10,9,20,.5);
+    animation: slideUp .26s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .side { display: none; }
+  .body { padding: 12px 28px 28px; }
+  .close { display: none; }
+  .handle { display: flex; }
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .scrim, .modal { animation: none; }
+}

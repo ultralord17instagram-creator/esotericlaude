@@ -26,13 +26,25 @@ const StarSvg = () => (
   </svg>
 )
 
-const LockSvg = ({ size = 32 }) => (
-  <svg className={styles.lockIcon} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <rect x="4.5" y="10.5" width="15" height="10" rx="2.5" fill="var(--lock)" />
-    <path d="M8 10.5 V7 a4 4 0 0 1 8 0 V10.5" stroke="var(--lock)" strokeWidth="2" fill="none" />
-    <circle cx="12" cy="15" r="1.6" fill="#f7efd8" />
-  </svg>
-)
+// Подсветка токенов-цитат в строке вывода: оборачивает «значение» в span с классом
+// (тег ответа — оливковый, ключ карты — терракота). Возвращает массив узлов.
+const highlight = (line, marks) => {
+  let nodes = [line]
+  marks.forEach(({ value, cls }, mi) => {
+    if (!value) return
+    const token = `«${value}»`
+    nodes = nodes.flatMap((node, ni) => {
+      if (typeof node !== 'string' || !node.includes(token)) return [node]
+      const out = []
+      node.split(token).forEach((p, pi) => {
+        if (pi) out.push(<span key={`${mi}-${ni}-${pi}`} className={cls}>{token}</span>)
+        if (p) out.push(p)
+      })
+      return out
+    })
+  })
+  return nodes
+}
 
 // Статичное лицо вытянутой карты для закреплённого показа на вопросах/анализе/выводе.
 // (reveal делает собственный flip и этот компонент не использует.)
@@ -59,7 +71,6 @@ export default function TerminalClient({ landing }) {
   const [drawing, setDrawing] = useState(false)
   const [flipped, setFlipped] = useState(false)
   const [secs, setSecs] = useState(0)
-  const [typed, setTyped] = useState('')
   const [reduced, setReduced] = useState(false)
   const [analyzeLines, setAnalyzeLines] = useState([])
   const [analyzePct, setAnalyzePct] = useState(0)
@@ -70,7 +81,6 @@ export default function TerminalClient({ landing }) {
   const teaser = state && card
     ? buildTeaser(state, card, { tag: a1Tag, text: a1Text }, { tag: a2Tag, text: a2Text }, landing.microcopy.own)
     : null
-  const wide = phase === 'reveal' || phase === 'reading'
 
   const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = [] }
   const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.current.push(t); return t }
@@ -131,22 +141,6 @@ export default function TerminalClient({ landing }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase])
 
-  // reading: печать тизера по символам (или мгновенно при reduced-motion).
-  useEffect(() => {
-    if (phase !== 'reading' || !teaser) return undefined
-    const full = teaser.open.join('\n')
-    if (reduced) { setTyped(full); return undefined }
-    setTyped('')
-    let i = 0
-    const id = setInterval(() => {
-      i += 1
-      setTyped(full.slice(0, i))
-      if (i >= full.length) clearInterval(id)
-    }, 28)
-    return () => clearInterval(id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, reduced])
-
   const go = (p) => { clearTimers(); setPhase(p) }
   const goNext = () => go(nextPhase(phase))
   const goBack = () => go(prevPhase(phase))
@@ -183,15 +177,19 @@ export default function TerminalClient({ landing }) {
     clearTimers()
     setStateId(null); setCard(null)
     setA1Tag(null); setA1Text(''); setA2Tag(null); setA2Text(''); setA3(null)
-    setDrawing(false); setFlipped(false); setSecs(0); setTyped('')
+    setDrawing(false); setFlipped(false); setSecs(0)
     setAnalyzeLines([]); setAnalyzePct(0)
     setPhase('boot')
   }
 
   // --- Хром-хелперы ---
-  const StatusBar = ({ left, right, back }) => (
-    <div className={`${styles.statusBar} ${back ? styles.statusBarBack : ''}`}>
-      <span>{left}</span><span>{right}</span>
+  // Верхняя строка: инлайн «назад» (где доступно) + статус. Одна на мобайл и ПК.
+  const TopBar = ({ left, right }) => (
+    <div className={styles.topbar}>
+      {canGoBack(phase) && (
+        <button className={styles.backBtn} onClick={goBack} aria-label={landing.microcopy.back}>‹</button>
+      )}
+      <div className={styles.statusBar}><span>{left}</span><span>{right}</span></div>
     </div>
   )
   const Progress = ({ step }) => (
@@ -201,9 +199,6 @@ export default function TerminalClient({ landing }) {
       ))}
     </div>
   )
-  const BackBtn = () => (canGoBack(phase)
-    ? <button className={styles.backBtn} onClick={goBack} aria-label={landing.microcopy.back}>‹</button>
-    : null)
 
   const c = landing.chrome[phase] // конфиг статус-строки текущей фазы уровня
 
@@ -211,39 +206,42 @@ export default function TerminalClient({ landing }) {
   if (phase === 'boot') {
     const titleLines = landing.boot.title.split(' ')
     view = (
-      <div className={styles.pad}>
+      <div className={`${styles.pad} ${styles.padBoot}`}>
         <div className={styles.bootStatus}>{landing.boot.status}</div>
         <div className={styles.center}>
           <h1 className={styles.bootTitle}>
             {titleLines.map((w, i) => <span key={i}>{w}{i < titleLines.length - 1 && <br />}</span>)}
           </h1>
           <p className={styles.bootSub}>{landing.boot.subtitle}<span className={styles.caret}>▊</span></p>
+          <button className={`${styles.cta} ${styles.ctaBoot}`} onClick={onStart}>{landing.boot.cta}</button>
         </div>
-        <button className={styles.cta} onClick={onStart}>{landing.boot.cta}</button>
         <div className={styles.footer}>{landing.boot.footer}</div>
       </div>
     )
   } else if (phase === 'select') {
     view = (
-      <div className={styles.pad}>
-        <StatusBar left={landing.select.mode} right={landing.select.status} />
-        <h1 className={styles.selTitle}>{landing.select.title}</h1>
-        <p className={styles.selSub}>{landing.select.subtitle}</p>
-        <div className={styles.menu}>
-          {landing.states.map((s) => (
-            <button key={s.id} className={styles.menuItem} onClick={() => onSelectState(s.id)}>
-              <span>{s.menuLabel}</span><span className={styles.menuArrow}>›</span>
-            </button>
-          ))}
+      <div className={`${styles.pad} ${styles.padSelect}`}>
+        <div className={styles.selTwo}>
+          <div className={styles.selHead}>
+            <div className={styles.statusBar}><span>{landing.select.mode}</span><span>{landing.select.status}</span></div>
+            <h1 className={styles.selTitle}>{landing.select.title}</h1>
+            <p className={styles.selSub}>{landing.select.subtitle}</p>
+            <div className={styles.selCount}>{`CHOOSE 1 OF ${landing.states.length}`}</div>
+          </div>
+          <div className={styles.menu}>
+            {landing.states.map((s) => (
+              <button key={s.id} className={styles.menuItem} onClick={() => onSelectState(s.id)}>
+                <span>{s.menuLabel}</span><span className={styles.menuArrow}>›</span>
+              </button>
+            ))}
+          </div>
         </div>
-        <div className={styles.footer}>{`CHOOSE 1 OF ${landing.states.length} · STEP 00-08`}</div>
       </div>
     )
   } else if (phase === 'intro') {
     view = (
-      <div className={styles.pad}>
-        <BackBtn />
-        <StatusBar left={c.mode} right={c.status} back />
+      <div className={`${styles.pad} ${styles.padIntro}`}>
+        <TopBar left={c.mode} right={c.status} />
         <Progress step={STEP.intro} />
         <div className={styles.stack}>
           <div className={styles.eyebrow}>{c.eyebrow}</div>
@@ -256,9 +254,8 @@ export default function TerminalClient({ landing }) {
     )
   } else if (phase === 'pause') {
     view = (
-      <div className={styles.pad}>
-        <BackBtn />
-        <StatusBar left={c.mode} right={c.status} back />
+      <div className={`${styles.pad} ${styles.padPause}`}>
+        <TopBar left={c.mode} right={c.status} />
         <Progress step={STEP.pause} />
         <div className={styles.center}>
           <div className={styles.pauseIcon} aria-hidden="true"><span /><span /></div>
@@ -271,32 +268,36 @@ export default function TerminalClient({ landing }) {
     )
   } else if (phase === 'draw') {
     view = (
-      <div className={styles.pad}>
-        <BackBtn />
-        <StatusBar left={c.mode} right={c.status} back />
-        <div className={styles.center}>
-          <div className={styles.deck} aria-hidden="true">
-            <div className={styles.deckCard} />
-            <div className={styles.deckCard} />
-            <div className={styles.deckCard}><StarSvg /></div>
-            <div className={styles.deckCard}><StarSvg /></div>
-            <div className={styles.deckCard}><StarSvg /></div>
-            <div className={styles.deckCard}><StarSvg /></div>
+      <div className={`${styles.pad} ${styles.padDraw}`}>
+        <TopBar left={c.mode} right={c.status} />
+        <div className={styles.two}>
+          <div className={styles.aside}>
+            <div className={styles.deck} aria-hidden="true">
+              <div className={styles.deckCard} />
+              <div className={styles.deckCard} />
+              <div className={styles.deckCard}><StarSvg /></div>
+              <div className={styles.deckCard}><StarSvg /></div>
+              <div className={styles.deckCard}><StarSvg /></div>
+              <div className={styles.deckCard}><StarSvg /></div>
+            </div>
           </div>
-          <p className={styles.drawLine}>{landing.draw.line}<br />{landing.draw.hint}</p>
+          <div className={styles.main}>
+            <h2 className={styles.display}>{landing.draw.title}</h2>
+            <p className={styles.drawLine}>{landing.draw.line}<br />{landing.draw.hint}</p>
+            <div className={styles.grow} />
+            <button className={styles.cta} onClick={onDraw} disabled={drawing}>{landing.draw.cta} ▶</button>
+            <div className={styles.footer}>{c.step}</div>
+          </div>
         </div>
-        <button className={styles.cta} onClick={onDraw} disabled={drawing}>{landing.draw.cta} ▶</button>
-        <div className={styles.footer}>{c.step}</div>
       </div>
     )
   } else if (phase === 'reveal') {
     const timerRight = secs > 0 ? `◷ ${secs}s` : c.status
     view = (
-      <div className={styles.pad}>
-        <BackBtn />
-        <StatusBar left={c.mode} right={timerRight} back />
-        <div className={`${styles.split} ${styles.splitCenter}`}>
-          <div className={styles.colCard}>
+      <div className={`${styles.pad} ${styles.padReveal}`}>
+        <TopBar left={c.mode} right={timerRight} />
+        <div className={styles.two}>
+          <div className={styles.aside}>
             <div className={`${styles.card} ${flipped ? styles.flipOn : ''}`}>
               <div className={styles.flipInner}>
                 <div className={`${styles.flipFace} ${styles.flipBack}`}><StarSvg /></div>
@@ -304,14 +305,16 @@ export default function TerminalClient({ landing }) {
                   style={card ? { backgroundImage: `url(${CARD_SRC(card.slug)})` } : undefined} />
               </div>
             </div>
+            {card && <div className={styles.cardLabel}>{ROMAN[card.number]} · {card.ru}</div>}
           </div>
-          <div className={styles.colBody}>
-            {card && <div className={styles.cardTitle}>{ROMAN[card.number]} · {card.ru}</div>}
+          <div className={styles.main}>
+            {card && <div className={styles.cardTitle}>{card.ru}</div>}
             <p className={styles.revealDesc}>{landing.reveal.line}</p>
             <div className={styles.skipRow}>
               <span className={styles.skipRule} />
               <button className={styles.skipLink} onClick={goNext}>{landing.reveal.skip} ⏭</button>
             </div>
+            <div className={styles.grow} />
             <button className={styles.cta} onClick={goNext}>{landing.reveal.cta} ▶</button>
             <div className={styles.footer}>{c.step}</div>
           </div>
@@ -326,13 +329,12 @@ export default function TerminalClient({ landing }) {
     const text = isQ1 ? a1Text : a2Text
     const setText = isQ1 ? setA1Text : setA2Text
     view = (
-      <div className={styles.pad}>
-        <BackBtn />
-        <StatusBar left={c.mode} right={c.step} back />
+      <div className={`${styles.pad} ${styles.padQuestion}`}>
+        <TopBar left={c.mode} right={c.step} />
         <div className={styles.qEyebrow}>{c.eyebrow}</div>
-        <div className={styles.qLayout}>
-          <CardFace card={card} small />
-          <div className={styles.qBody}>
+        <div className={styles.two}>
+          <div className={styles.aside}><CardFace card={card} small /></div>
+          <div className={styles.main}>
             <p className={styles.qPrompt}>{q.prompt}</p>
             <div className={styles.blocks}>
               {q.blocks.map((b) => (
@@ -343,23 +345,23 @@ export default function TerminalClient({ landing }) {
             </div>
             <input className={styles.ownInput} type="text" value={text} maxLength={60}
               placeholder={q.placeholder} onChange={(e) => setText(e.target.value)} />
+            <div className={styles.grow} />
+            <button className={styles.cta} disabled={!tag} onClick={() => {
+              track(isQ1 ? 'q1_answer' : 'q2_answer', { slug: landing.slug, tag })
+              goNext()
+            }}>{landing.microcopy.next} ▶</button>
           </div>
         </div>
-        <button className={styles.cta} disabled={!tag} onClick={() => {
-          track(isQ1 ? 'q1_answer' : 'q2_answer', { slug: landing.slug, tag })
-          goNext()
-        }}>{landing.microcopy.next} ▶</button>
       </div>
     )
   } else if (phase === 'q3') {
     view = (
-      <div className={styles.pad}>
-        <BackBtn />
-        <StatusBar left={c.mode} right={c.step} back />
+      <div className={`${styles.pad} ${styles.padQuestion}`}>
+        <TopBar left={c.mode} right={c.step} />
         <div className={styles.qEyebrow}>{c.eyebrow}</div>
-        <div className={styles.qLayout}>
-          <CardFace card={card} small />
-          <div className={styles.qBody}>
+        <div className={styles.two}>
+          <div className={styles.aside}><CardFace card={card} small /></div>
+          <div className={styles.main}>
             <p className={styles.qPrompt}>{state.q3.prompt}</p>
             <div className={styles.options}>
               {state.q3.options.map((o) => (
@@ -370,63 +372,73 @@ export default function TerminalClient({ landing }) {
                 </button>
               ))}
             </div>
+            <div className={styles.grow} />
+            <button className={styles.cta} disabled={!a3} onClick={() => {
+              track('q3_answer', { slug: landing.slug, value: a3 })
+              goNext()
+            }}>Узнать вывод ▶</button>
           </div>
         </div>
-        <button className={styles.cta} disabled={!a3} onClick={() => {
-          track('q3_answer', { slug: landing.slug, value: a3 })
-          goNext()
-        }}>Узнать вывод ▶</button>
       </div>
     )
   } else if (phase === 'analyze') {
     view = (
-      <div className={styles.pad}>
-        <StatusBar left={c.mode} right={c.status} />
-        <div className={styles.center}>
-          <CardFace card={card} small />
-          <div className={styles.analyzeLog}>
-            {analyzeLines.map((l, i) => <p key={i}>{l}</p>)}
+      <div className={`${styles.pad} ${styles.padAnalyze}`}>
+        <TopBar left={c.mode} right={c.status} />
+        <div className={styles.two}>
+          <div className={styles.aside}><CardFace card={card} small /></div>
+          <div className={styles.main}>
+            <div className={styles.grow} />
+            <div className={styles.analyzeLog}>
+              {analyzeLines.map((l, i) => <p key={i}>{l}</p>)}
+            </div>
+            <div className={styles.analyzeBar} aria-hidden="true"><span style={{ width: `${analyzePct}%` }} /></div>
+            <div className={styles.grow} />
           </div>
-          <div className={styles.analyzeBar} aria-hidden="true"><span style={{ width: `${analyzePct}%` }} /></div>
         </div>
       </div>
     )
   } else {
-    // reading (финальная фаза): вывод + замок + что откроется + переход на регистрацию.
-    const lines = typed.split('\n')
+    // reading (финальная фаза): закреплённая карта, вывод в светлой панели с
+    // подсветкой токенов (без замка), «что откроется» + переход на регистрацию.
+    const kw = card?.keywords?.[0]
+    const last = teaser.open.length - 1
     view = (
-      <div className={styles.pad}>
-        <StatusBar left={c.mode} right={c.status} />
+      <div className={`${styles.pad} ${styles.padReading}`}>
+        <TopBar left={c.mode} right={c.status} />
         <Progress step={STEP.reading} />
-        <div className={styles.split}>
-          <div className={styles.colCard}><CardFace card={card} /></div>
-          <div className={styles.colBody}>
+        <div className={styles.two}>
+          <div className={styles.aside}><CardFace card={card} /></div>
+          <div className={styles.main}>
             <h1 className={styles.readTitle}>{landing.reading.title}</h1>
-            <div className={styles.readText}>
-              {lines.map((line, i) => (
-                <p key={i}>{line}{i === lines.length - 1 && <span className={styles.caret}>▊</span>}</p>
-              ))}
+            <div className={styles.readPanel}>
+              {teaser.open.map((line, i) => {
+                const marks =
+                  i === 0 ? [{ value: a1Tag, cls: styles.hlTag }] :
+                  i === 1 ? [{ value: a2Tag, cls: styles.hlTag }] :
+                  i === 2 ? [{ value: kw, cls: styles.hlKey }] : []
+                return (
+                  <p key={i} className={`${styles.readLine} ${i === last ? styles.readLineThought : ''}`}>
+                    {highlight(line, marks)}
+                    {i === last && <span className={styles.caret}>▊</span>}
+                  </p>
+                )
+              })}
+            </div>
+            <div className={styles.unlock}>
+              <div className={styles.unlockTitle}>{landing.reading.unlockTitle}</div>
+              <ul className={styles.payoffs}>
+                {landing.reading.payoffs.map((row) => (
+                  <li key={row} className={styles.payoffRow}><span className={styles.payoffMark}>✦</span><span>{row}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div className={styles.grow} />
+            <button className={`${styles.cta} ${styles.ctaLock}`} onClick={onOpenFull}>{landing.reading.cta}</button>
+            <div className={styles.restart}>
+              <button className={styles.linkBtn} onClick={onRestart}>{landing.microcopy.restart}</button>
             </div>
           </div>
-        </div>
-        <div className={styles.lockBlock}>
-          <div className={styles.lockBlur}>{teaser?.lock}</div>
-          <div className={styles.lockOverlay}>
-            <LockSvg size={32} />
-            <div className={styles.lockLabel}>РАЗБОР ЗАКРЫТ</div>
-          </div>
-        </div>
-        <div className={styles.unlock}>
-          <div className={styles.unlockTitle}>{landing.reading.unlockTitle}</div>
-          <ul className={styles.payoffs}>
-            {landing.reading.payoffs.map((row) => (
-              <li key={row} className={styles.payoffRow}><span className={styles.payoffMark}>✦</span><span>{row}</span></li>
-            ))}
-          </ul>
-        </div>
-        <button className={`${styles.cta} ${styles.ctaLock}`} onClick={onOpenFull}>{landing.reading.cta}</button>
-        <div className={styles.restart}>
-          <button className={styles.linkBtn} onClick={onRestart}>{landing.microcopy.restart}</button>
         </div>
       </div>
     )
@@ -434,7 +446,7 @@ export default function TerminalClient({ landing }) {
 
   return (
     <div className={styles.root}>
-      <div className={`${styles.bezel} ${wide ? styles.bezelWide : ''}`}>
+      <div className={styles.bezel}>
         <div className={styles.screen}>{view}</div>
       </div>
     </div>

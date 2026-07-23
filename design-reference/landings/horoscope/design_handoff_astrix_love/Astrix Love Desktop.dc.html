@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Golos+Text:wght@400;500;600&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  a { color: #a996ff; text-decoration: none; }
+  a:hover { color: #c4b7ff; }
+  @keyframes astrixSpin { to { transform: rotate(360deg); } }
+  @keyframes astrixSpinRev { to { transform: rotate(-360deg); } }
+  @keyframes astrixOrbit { to { transform: rotate(360deg); } }
+  @keyframes astrixPulse { 0%,100% { transform: scale(1); opacity:.9; } 50% { transform: scale(1.08); opacity:1; } }
+  @keyframes astrixGlow { 0%,100% { box-shadow:0 0 30px rgba(139,124,240,.4), inset 0 0 20px rgba(139,124,240,.3); } 50% { box-shadow:0 0 60px rgba(139,124,240,.75), inset 0 0 34px rgba(139,124,240,.5); } }
+  @keyframes astrixTwinkle { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+  .astrix-input::placeholder { color:#6b6489; }
+  .astrix-input:focus { outline:none; border-color:#a996ff !important; }
+</style>
+</helmet>
+
+<div style="position:relative; min-height:100vh; background:#0a0714; overflow:hidden; font-family:'Golos Text',sans-serif;">
+
+  <!-- ambient glows -->
+  <div style="position:absolute; top:-260px; left:50%; transform:translateX(-50%); width:1100px; height:820px; border-radius:50%; background:radial-gradient(circle, rgba(139,124,240,.4), rgba(139,124,240,0) 66%); filter:blur(10px); pointer-events:none;"></div>
+  <div style="position:absolute; bottom:-300px; right:-160px; width:720px; height:720px; border-radius:50%; background:radial-gradient(circle, rgba(94,74,190,.28), rgba(94,74,190,0) 68%); filter:blur(10px); pointer-events:none;"></div>
+
+  <!-- starfield -->
+  <div style="position:absolute; inset:0; pointer-events:none;">
+    <span style="position:absolute; top:90px; left:8%; width:2px; height:2px; border-radius:50%; background:#e6ddff; animation:astrixTwinkle 3.5s ease-in-out infinite;"></span>
+    <span style="position:absolute; top:140px; left:22%; width:3px; height:3px; border-radius:50%; background:#fff; box-shadow:0 0 6px #b7a8ff; animation:astrixTwinkle 4s ease-in-out infinite;"></span>
+    <span style="position:absolute; top:70px; left:78%; color:#a996ff; font-size:13px; animation:astrixTwinkle 5s ease-in-out infinite;">✦︎</span>
+    <span style="position:absolute; top:220px; left:90%; width:2px; height:2px; border-radius:50%; background:#cdbfff; animation:astrixTwinkle 3.2s ease-in-out infinite;"></span>
+    <span style="position:absolute; top:340px; left:5%; width:2px; height:2px; border-radius:50%; background:#cdbfff; animation:astrixTwinkle 3.8s ease-in-out infinite;"></span>
+    <span style="position:absolute; top:400px; left:64%; color:#8b7cf0; font-size:10px; animation:astrixTwinkle 4.2s ease-in-out infinite;">✦︎</span>
+    <span style="position:absolute; top:520px; left:15%; width:2px; height:2px; border-radius:50%; background:#e6ddff; animation:astrixTwinkle 3.4s ease-in-out infinite;"></span>
+    <span style="position:absolute; top:600px; left:86%; width:2px; height:2px; border-radius:50%; background:#cdbfff; animation:astrixTwinkle 4.1s ease-in-out infinite;"></span>
+    <span style="position:absolute; top:680px; left:40%; color:#8b7cf0; font-size:9px; animation:astrixTwinkle 5s ease-in-out infinite;">✦︎</span>
+    <span style="position:absolute; top:760px; left:70%; width:2px; height:2px; border-radius:50%; background:#cdbfff; animation:astrixTwinkle 3.3s ease-in-out infinite;"></span>
+  </div>
+
+  <!-- top bar -->
+  <div style="position:relative; z-index:5; display:flex; align-items:center; justify-content:space-between; padding:30px 56px;">
+    <div style="display:flex; align-items:center; gap:11px;">
+      <span style="font-size:20px; color:#a996ff;">✦︎</span>
+      <span style="font-family:'Unbounded',sans-serif; font-weight:600; font-size:18px; letter-spacing:.28em; color:#ECE9F7;">ASTRIX</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <span style="width:30px; height:4px; border-radius:2px; background:{{ s.color }};"></span>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- ===== INTRO ===== -->
+  <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+  <div style="position:relative; z-index:2; max-width:1120px; margin:0 auto; padding:56px 40px 80px; text-align:center;">
+    <div style="width:96px; height:96px; margin:0 auto; border-radius:50%; background:rgba(139,124,240,.16); border:1px solid rgba(160,140,255,.4); display:flex; align-items:center; justify-content:center; font-size:40px; color:#c4b7ff; box-shadow:0 0 50px rgba(139,124,240,.5);">♡︎</div>
+    <div style="font-family:'Unbounded',sans-serif; font-size:12px; letter-spacing:.44em; color:#8079a4; margin-top:26px;">ASTRIX · ЛЮБОВЬ</div>
+    <div style="font-family:'Unbounded',sans-serif; font-weight:500; font-size:46px; line-height:1.2; color:#F4F1FF; margin-top:22px; text-wrap:balance;">Что у тебя с любовью<br>прямо сейчас?</div>
+    <div style="color:#8b84a8; font-size:17px; margin-top:16px;">Выбери, что ближе всего — звёзды подберут расклад именно для тебя</div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:56px;">
+      <div onClick="{{ chooseA }}" style="cursor:pointer; padding:36px 32px; border-radius:26px; background:rgba(255,255,255,.03); border:1px solid rgba(150,130,240,.18); text-align:left;" style-hover="border-color:#a996ff; background:rgba(139,124,240,.12);">
+        <div style="color:#F1EEFB; font-size:22px; font-weight:500;">Жду своего человека</div>
+        <div style="color:#8079a4; font-size:15px; margin-top:10px;">Верю, что встреча впереди</div>
+      </div>
+      <div onClick="{{ chooseB }}" style="cursor:pointer; padding:36px 32px; border-radius:26px; background:rgba(255,255,255,.03); border:1px solid rgba(150,130,240,.18); text-align:left;" style-hover="border-color:#a996ff; background:rgba(139,124,240,.12);">
+        <div style="color:#F1EEFB; font-size:22px; font-weight:500;">Не могу отпустить</div>
+        <div style="color:#8079a4; font-size:15px; margin-top:10px;">Прошлое всё ещё держит</div>
+      </div>
+      <div onClick="{{ chooseC }}" style="cursor:pointer; padding:36px 32px; border-radius:26px; background:rgba(255,255,255,.03); border:1px solid rgba(150,130,240,.18); text-align:left;" style-hover="border-color:#a996ff; background:rgba(139,124,240,.12);">
+        <div style="color:#F1EEFB; font-size:22px; font-weight:500;">Всё время не складывается</div>
+        <div style="color:#8079a4; font-size:15px; margin-top:10px;">Хочу понять причину</div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===== DATE OF BIRTH ===== -->
+  <sc-if value="{{ isDob }}" hint-placeholder-val="{{ false }}">
+  <div style="position:relative; z-index:2; max-width:560px; margin:0 auto; padding:70px 40px 80px; text-align:center;">
+    <div style="width:84px; height:84px; margin:0 auto; border-radius:50%; border:1px solid rgba(160,140,255,.4); display:flex; align-items:center; justify-content:center; font-size:34px; color:#c4b7ff; box-shadow:0 0 40px rgba(139,124,240,.4); animation:astrixPulse 4s ease-in-out infinite;">☾︎</div>
+    <div style="font-family:'Unbounded',sans-serif; font-weight:500; font-size:32px; color:#F1EEFB; margin-top:30px;">Когда ты родилась?</div>
+    <div style="color:#8b84a8; font-size:15.5px; margin-top:12px;">Дата рождения раскроет твой знак</div>
+
+    <div style="display:flex; gap:12px; margin-top:44px;">
+      <input class="astrix-input" value="{{ day }}" onChange="{{ setDay }}" placeholder="ДД" inputmode="numeric" style="width:96px; text-align:center; background:rgba(255,255,255,.04); border:1px solid rgba(150,130,240,.2); border-radius:16px; padding:18px 0; color:#F1EEFB; font-size:20px; font-family:'Golos Text',sans-serif;" />
+      <select class="astrix-input" value="{{ month }}" onChange="{{ setMonth }}" style="flex:1; background:rgba(255,255,255,.04); border:1px solid rgba(150,130,240,.2); border-radius:16px; padding:18px 16px; color:#F1EEFB; font-size:18px; font-family:'Golos Text',sans-serif; appearance:none;">
+        <option value="" style="color:#000;">Месяц</option>
+        <option value="1" style="color:#000;">Январь</option>
+        <option value="2" style="color:#000;">Февраль</option>
+        <option value="3" style="color:#000;">Март</option>
+        <option value="4" style="color:#000;">Апрель</option>
+        <option value="5" style="color:#000;">Май</option>
+        <option value="6" style="color:#000;">Июнь</option>
+        <option value="7" style="color:#000;">Июль</option>
+        <option value="8" style="color:#000;">Август</option>
+        <option value="9" style="color:#000;">Сентябрь</option>
+        <option value="10" style="color:#000;">Октябрь</option>
+        <option value="11" style="color:#000;">Ноябрь</option>
+        <option value="12" style="color:#000;">Декабрь</option>
+      </select>
+      <input class="astrix-input" value="{{ year }}" onChange="{{ setYear }}" placeholder="ГГГГ" inputmode="numeric" style="width:116px; text-align:center; background:rgba(255,255,255,.04); border:1px solid rgba(150,130,240,.2); border-radius:16px; padding:18px 0; color:#F1EEFB; font-size:20px; font-family:'Golos Text',sans-serif;" />
+    </div>
+
+    <div style="min-height:64px; margin-top:28px; display:flex; align-items:center; justify-content:center;">
+      <sc-if value="{{ zodiacName }}" hint-placeholder-val="{{ false }}">
+        <div style="display:inline-flex; align-items:center; gap:12px; padding:12px 22px; border-radius:100px; background:rgba(139,124,240,.14); border:1px solid rgba(160,140,255,.3);">
+          <span style="font-size:23px; color:#c4b7ff;">{{ zodiacGlyph }}</span>
+          <span style="color:#d8d0ef; font-size:16.5px;">Твой знак — {{ zodiacName }}</span>
+        </div>
+      </sc-if>
+    </div>
+
+    <div onClick="{{ goName }}" style="cursor:pointer; margin-top:14px; text-align:center; padding:19px; border-radius:16px; background:{{ dobBtnBg }}; color:#0a0714; font-family:'Unbounded',sans-serif; font-weight:600; font-size:16px;">Далее</div>
+  </div>
+  </sc-if>
+
+  <!-- ===== NAME ===== -->
+  <sc-if value="{{ isName }}" hint-placeholder-val="{{ false }}">
+  <div style="position:relative; z-index:2; max-width:560px; margin:0 auto; padding:70px 40px 80px; text-align:center;">
+    <div style="width:84px; height:84px; margin:0 auto; border-radius:50%; border:1px solid rgba(160,140,255,.4); display:flex; align-items:center; justify-content:center; font-size:34px; color:#c4b7ff; box-shadow:0 0 40px rgba(139,124,240,.4); animation:astrixPulse 4s ease-in-out infinite;">✧︎</div>
+    <div style="font-family:'Unbounded',sans-serif; font-weight:500; font-size:32px; color:#F1EEFB; margin-top:30px;">Как тебя зовут?</div>
+    <div style="color:#8b84a8; font-size:15.5px; margin-top:12px;">Звёзды обращаются к тебе по имени</div>
+
+    <input class="astrix-input" value="{{ name }}" onChange="{{ setName }}" placeholder="Твоё имя" style="width:100%; margin-top:44px; text-align:center; background:rgba(255,255,255,.04); border:1px solid rgba(150,130,240,.2); border-radius:16px; padding:20px 16px; color:#F1EEFB; font-size:20px; font-family:'Golos Text',sans-serif;" />
+
+    <div onClick="{{ startLoading }}" style="cursor:pointer; margin-top:44px; text-align:center; padding:19px; border-radius:16px; background:{{ nameBtnBg }}; color:#0a0714; font-family:'Unbounded',sans-serif; font-weight:600; font-size:16px;">Составить прогноз</div>
+  </div>
+  </sc-if>
+
+  <!-- ===== LOADING ===== -->
+  <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+  <div style="position:relative; z-index:2; min-height:64vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 40px;">
+    <div style="position:relative; width:320px; height:320px; display:flex; align-items:center; justify-content:center;">
+      <div style="position:absolute; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle, rgba(139,124,240,.28), rgba(139,124,240,0) 68%); animation:astrixPulse 5s ease-in-out infinite;"></div>
+      <div style="position:absolute; width:308px; height:308px; border-radius:50%; border:1px solid rgba(160,140,255,.28); animation:astrixSpin 26s linear infinite;">
+        <span style="position:absolute; top:-11px; left:50%; transform:translateX(-50%); color:#c4b7ff; font-size:16px;">♈︎</span>
+        <span style="position:absolute; top:32px; right:32px; color:#b7a8ff; font-size:16px;">♉︎</span>
+        <span style="position:absolute; top:50%; right:-9px; transform:translateY(-50%); color:#c4b7ff; font-size:16px;">♊︎</span>
+        <span style="position:absolute; bottom:32px; right:32px; color:#b7a8ff; font-size:16px;">♋︎</span>
+        <span style="position:absolute; bottom:-11px; left:50%; transform:translateX(-50%); color:#c4b7ff; font-size:16px;">♌︎</span>
+        <span style="position:absolute; bottom:32px; left:32px; color:#b7a8ff; font-size:16px;">♍︎</span>
+        <span style="position:absolute; top:50%; left:-9px; transform:translateY(-50%); color:#c4b7ff; font-size:16px;">♎︎</span>
+        <span style="position:absolute; top:32px; left:32px; color:#b7a8ff; font-size:16px;">♏︎</span>
+      </div>
+      <div style="position:absolute; width:242px; height:242px; border-radius:50%; border:1px dashed rgba(160,140,255,.4); animation:astrixSpinRev 18s linear infinite;"></div>
+      <div style="position:absolute; width:276px; height:276px; animation:astrixOrbit 7s linear infinite;">
+        <span style="position:absolute; top:-6px; left:50%; transform:translateX(-50%); width:14px; height:14px; border-radius:50%; background:#e6ddff; box-shadow:0 0 16px 4px rgba(199,183,255,.9);"></span>
+      </div>
+      <div style="position:absolute; width:186px; height:186px; animation:astrixOrbit 4.5s linear infinite reverse;">
+        <span style="position:absolute; top:-4px; left:50%; transform:translateX(-50%); width:9px; height:9px; border-radius:50%; background:#8b7cf0; box-shadow:0 0 12px 3px rgba(139,124,240,.9);"></span>
+      </div>
+      <div style="position:relative; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle at 50% 38%, #2a2150, #120d26); display:flex; flex-direction:column; align-items:center; justify-content:center; animation:astrixGlow 4s ease-in-out infinite;">
+        <span style="font-family:'Unbounded',sans-serif; font-size:40px; color:#F4F1FF;">{{ progress }}<span style="font-size:20px; color:#a996ff;">%</span></span>
+      </div>
+    </div>
+    <div style="font-family:'Unbounded',sans-serif; font-size:22px; color:#F1EEFB; margin-top:54px; min-height:28px;">{{ loadingMsg }}</div>
+    <div style="color:#8b84a8; font-size:16px; margin-top:14px;">{{ name }}, звёзды почти сошлись…</div>
+  </div>
+  </sc-if>
+
+  <!-- ===== RESULT ===== -->
+  <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+  <div style="position:relative; z-index:2; max-width:1080px; margin:0 auto; padding:34px 40px 90px; display:grid; grid-template-columns:360px 1fr; gap:56px; align-items:start;">
+
+    <!-- left hero -->
+    <div style="position:sticky; top:34px; padding:38px 32px; border-radius:28px; background:linear-gradient(165deg, rgba(139,124,240,.16), rgba(139,124,240,.04)); border:1px solid rgba(160,140,255,.24); text-align:center;">
+      <div style="font-family:'Unbounded',sans-serif; font-size:11px; letter-spacing:.4em; color:#8079a4;">ТВОЙ ЛЮБОВНЫЙ ПРОГНОЗ</div>
+      <div style="display:inline-flex; align-items:center; gap:10px; margin-top:18px; padding:9px 18px; border-radius:100px; background:rgba(139,124,240,.16); border:1px solid rgba(160,140,255,.3);">
+        <span style="font-size:20px; color:#c4b7ff;">{{ zodiacGlyph }}</span>
+        <span style="color:#d8d0ef; font-size:15px;">{{ greetingName }} · {{ zodiacName }}</span>
+      </div>
+
+      <div style="position:relative; width:190px; height:190px; margin:30px auto 0; display:flex; align-items:center; justify-content:center;">
+        <div style="position:absolute; width:190px; height:190px; border-radius:50%; background:rgba(255,255,255,.05);"></div>
+        <div style="position:absolute; width:190px; height:190px; border-radius:50%; background:{{ scoreRingBg }};"></div>
+        <div style="position:relative; width:138px; height:138px; border-radius:50%; background:radial-gradient(circle at 50% 40%, #17102e, #08050f); display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:inset 0 0 24px rgba(139,124,240,.35);">
+          <span style="font-size:17px; color:#c4b7ff; line-height:1;">♥︎</span>
+          <span style="font-family:'Unbounded',sans-serif; font-size:40px; color:#F4F1FF; margin-top:5px; line-height:1;">{{ loveScore }}<span style="font-size:18px; color:#a996ff;">%</span></span>
+          <span style="color:#8b84a8; font-size:11.5px; margin-top:6px; letter-spacing:.02em;">энергия любви</span>
+        </div>
+      </div>
+
+      <div onClick="{{ restart }}" style="cursor:pointer; margin-top:32px; text-align:center; padding:15px; border-radius:14px; border:1px solid rgba(160,140,255,.24); color:#c4b7ff; font-family:'Unbounded',sans-serif; font-weight:500; font-size:14px;">Пройти ещё раз</div>
+    </div>
+
+    <!-- right reading -->
+    <div>
+      <div>
+        <div style="font-family:'Unbounded',sans-serif; font-size:13px; letter-spacing:.26em; color:#a996ff;">ЕГО ЗНАК</div>
+        <div style="color:#d6cfe8; font-size:17px; line-height:1.62; margin-top:12px; max-width:600px;">{{ aboutSign }}</div>
+
+        <div style="font-family:'Unbounded',sans-serif; font-size:13px; letter-spacing:.26em; color:#a996ff; margin-top:30px;">ВОЗРАСТ</div>
+        <div style="color:#d6cfe8; font-size:17px; line-height:1.62; margin-top:12px; max-width:600px;">{{ aboutAge }}</div>
+
+        <div style="font-family:'Unbounded',sans-serif; font-size:13px; letter-spacing:.26em; color:#a996ff; margin-top:30px;">КАКОЙ ОН</div>
+        <div style="color:#d6cfe8; font-size:17px; line-height:1.62; margin-top:12px; max-width:600px;">{{ aboutCharacter }}</div>
+
+        <div style="font-family:'Unbounded',sans-serif; font-size:13px; letter-spacing:.26em; color:#a996ff; margin-top:30px;">КАК ПОЗНАКОМИТЕСЬ</div>
+        <div style="color:#d6cfe8; font-size:17px; line-height:1.62; margin-top:12px; max-width:600px;">{{ aboutMeet }}</div>
+      </div>
+
+      <div style="margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:24px 40px;">
+        <div>
+          <div style="font-family:'Unbounded',sans-serif; font-size:12.5px; letter-spacing:.2em; color:#7b7498;">ПЕРВАЯ БУКВА ЕГО ИМЕНИ</div>
+          <div style="cursor:pointer; display:inline-block; margin-top:12px; padding:9px 24px; border-radius:100px; background:rgba(139,124,240,.14); border:1px solid rgba(160,140,255,.3); color:#c4b7ff; font-family:'Unbounded',sans-serif; font-weight:500; font-size:13px; letter-spacing:.02em;">Узнать</div>
+        </div>
+        <div>
+          <div style="font-family:'Unbounded',sans-serif; font-size:12.5px; letter-spacing:.2em; color:#7b7498;">МЕСЯЦ, КОГДА ВЫ ВСТРЕТИТЕСЬ</div>
+          <div style="cursor:pointer; display:inline-block; margin-top:12px; padding:9px 24px; border-radius:100px; background:rgba(139,124,240,.14); border:1px solid rgba(160,140,255,.3); color:#c4b7ff; font-family:'Unbounded',sans-serif; font-weight:500; font-size:13px; letter-spacing:.02em;">Узнать</div>
+        </div>
+        <div>
+          <div style="font-family:'Unbounded',sans-serif; font-size:12.5px; letter-spacing:.2em; color:#7b7498;">КАК ТЫ УЗНАЕШЬ ЕГО СРЕДИ ДРУГИХ</div>
+          <div style="cursor:pointer; display:inline-block; margin-top:12px; padding:9px 24px; border-radius:100px; background:rgba(139,124,240,.14); border:1px solid rgba(160,140,255,.3); color:#c4b7ff; font-family:'Unbounded',sans-serif; font-weight:500; font-size:13px; letter-spacing:.02em;">Узнать</div>
+        </div>
+        <div>
+          <div style="font-family:'Unbounded',sans-serif; font-size:12.5px; letter-spacing:.2em; color:#7b7498;">ЧТО ЧУТЬ НЕ ПОМЕШАЕТ ВАМ</div>
+          <div style="cursor:pointer; display:inline-block; margin-top:12px; padding:9px 24px; border-radius:100px; background:rgba(139,124,240,.14); border:1px solid rgba(160,140,255,.3); color:#c4b7ff; font-family:'Unbounded',sans-serif; font-weight:500; font-size:13px; letter-spacing:.02em;">Узнать</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { step: 'intro', loveAnswer: '', day: '', month: '', year: '', name: '', progress: 0 };
+
+  componentWillUnmount() { if (this._t) clearInterval(this._t); }
+
+  pick(v) { this.setState({ loveAnswer: v, step: 'dob' }); }
+
+  zodiac(m, d) {
+    if (!m || !d) return null;
+    const Z = [
+      [1,20,'Козерог','♑'],[2,19,'Водолей','♒'],[3,21,'Рыбы','♓'],[4,20,'Овен','♈'],
+      [5,21,'Телец','♉'],[6,21,'Близнецы','♊'],[7,23,'Рак','♋'],[8,23,'Лев','♌'],
+      [9,23,'Дева','♍'],[10,23,'Весы','♎'],[11,22,'Скорпион','♏'],[12,22,'Стрелец','♐'],
+      [12,31,'Козерог','♑']
+    ];
+    for (const [mm,dd,name,g] of Z) {
+      if (m < mm || (m === mm && d < dd)) return { name, glyph: g + '\uFE0E' };
+    }
+    return { name:'Козерог', glyph:'♑\uFE0E' };
+  }
+
+  dobOk() {
+    const d = +this.state.day, m = +this.state.month, y = +this.state.year;
+    return d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 1900 && y <= 2025;
+  }
+
+  startLoading() {
+    if (!this.state.name.trim()) return;
+    this.setState({ step: 'loading', progress: 0 });
+    if (this._t) clearInterval(this._t);
+    this._t = setInterval(() => {
+      this.setState(s => {
+        const p = Math.min(100, s.progress + 2);
+        if (p >= 100) { clearInterval(this._t); setTimeout(() => this.setState({ step: 'result' }), 400); }
+        return { progress: p };
+      });
+    }, 55);
+  }
+
+  score() {
+    const s = (this.state.name + this.state.day + this.state.year);
+    let h = 0; for (let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) % 1000;
+    return 70 + (h % 28);
+  }
+
+  reading() {
+    const map = {
+      a: {
+        aboutSign: 'Твой человек по звёздам — Скорпион. Вода к твоей стихии: он даёт глубину, которой тебе не хватало, и не боится твоей серьёзности.',
+        age: 'Младше тебя, но зрелее своих лет. Его серьёзность удивит тебя с первой встречи.',
+        character: 'Спокойный снаружи, страстный внутри. Немногословный, но если сказал — сделал. Его преданность даст тебе ощущение, что ты по-настоящему его.',
+        meet: 'Через общий круг — там, где ты будешь занята делом, а не поиском. Он заметит тебя первым.'
+      },
+      b: {
+        aboutSign: 'Твой человек по звёздам — Рак. Он умеет держать, а не удерживать: рядом с ним старая привязанность тихо отпускает сама.',
+        age: 'Примерно твоего возраста или чуть старше. С ним ты впервые почувствуешь, что торопиться некуда.',
+        character: 'Тёплый, чуткий, домашний. Замечает настроение раньше слов. Его забота залечит то, что осталось от прошлого.',
+        meet: 'В спокойном месте, связанном с домом или близкими, — на дне рождения, ужине, у общих друзей.'
+      },
+      c: {
+        aboutSign: 'Твой человек по звёздам — Козерог. Он рушит твой привычный сценарий «не складывается»: с ним всё складывается медленно, но окончательно.',
+        age: 'Старше тебя и уверенно стоит на ногах. Рядом с ним хаос в отношениях наконец заканчивается.',
+        character: 'Надёжный, основательный, без игр. Говорит мало, но делает много. С ним ты перестанешь проверять, серьёзно ли это.',
+        meet: 'Через работу или общее дело — там, где ты проявляешь себя, а не подстраиваешься.'
+      }
+    };
+    return map[this.state.loveAnswer] || map.a;
+  }
+
+  renderVals() {
+    const step = this.state.step;
+    const z = this.zodiac(+this.state.month, +this.state.day);
+    const dobOk = this.dobOk();
+    const nameOk = !!this.state.name.trim();
+    const p = this.state.progress;
+    const msg = p < 25 ? 'Звёзды выстраиваются…' : p < 50 ? 'Читаем твою натальную карту…' : p < 75 ? 'Венера открывает твой дом любви…' : 'Составляем любовный прогноз…';
+    const r = this.reading();
+    const sc = this.score();
+
+    const order = ['intro','dob','name','loading','result'];
+    const idx = order.indexOf(step);
+    const steps = order.map((s,i) => ({ color: i <= idx ? '#a996ff' : 'rgba(150,130,240,.2)' }));
+
+    return {
+      steps,
+      isIntro: step === 'intro',
+      isDob: step === 'dob',
+      isName: step === 'name',
+      isLoading: step === 'loading',
+      isResult: step === 'result',
+
+      chooseA: () => this.pick('a'),
+      chooseB: () => this.pick('b'),
+      chooseC: () => this.pick('c'),
+
+      day: this.state.day,
+      month: this.state.month,
+      year: this.state.year,
+      name: this.state.name,
+      setDay: (e) => this.setState({ day: e.target.value.replace(/\D/g,'').slice(0,2) }),
+      setMonth: (e) => this.setState({ month: e.target.value }),
+      setYear: (e) => this.setState({ year: e.target.value.replace(/\D/g,'').slice(0,4) }),
+      setName: (e) => this.setState({ name: e.target.value }),
+
+      zodiacName: z ? z.name : '',
+      zodiacGlyph: z ? z.glyph : '',
+      dobBtnBg: dobOk ? '#8b7cf0' : 'rgba(139,124,240,.3)',
+      nameBtnBg: nameOk ? '#8b7cf0' : 'rgba(139,124,240,.3)',
+      goName: () => { if (this.dobOk()) this.setState({ step: 'name' }); },
+      startLoading: () => this.startLoading(),
+
+      progress: p,
+      loadingMsg: msg,
+
+      greetingName: this.state.name.trim() || 'Друг',
+      loveScore: sc,
+      scoreRingBg: `conic-gradient(from -90deg, #c4b7ff 0deg, #8b7cf0 ${sc*3.6}deg, rgba(255,255,255,.04) ${sc*3.6}deg 360deg)`,
+      aboutSign: r.aboutSign,
+      aboutAge: r.age,
+      aboutCharacter: r.character,
+      aboutMeet: r.meet,
+      restart: () => this.setState({ step:'intro', loveAnswer:'', day:'', month:'', year:'', name:'', progress:0 }),
+    };
+  }
+}
+</script>
+</body>
+</html>

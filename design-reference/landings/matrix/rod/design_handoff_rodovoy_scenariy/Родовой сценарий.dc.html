@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&family=Prata&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9e8ee; font-family: 'Golos Text', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #7c2b3b; text-decoration: none; }
+  a:hover { color: #9c4152; }
+  input::placeholder { color: #a89a8e; opacity: 1; }
+  @keyframes rsSpin { to { transform: rotate(360deg); } }
+  @keyframes rsPulse { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.12); opacity: 1; } }
+  @keyframes rsFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<section style="padding: 56px; display: flex; flex-direction: column; gap: 28px;">
+  <div style="display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 22px; font-weight: 800; color: #1b1726; letter-spacing: -0.4px;">Родовой сценарий — бордо + сериф</div>
+    <div style="font-size: 15px; color: #6b6577; max-width: 640px;">Кликабельный флоу: лендинг → вопрос → дата рождения → имя → анимация подсчёта (текст меняется) → матрица судьбы с разбором. Кнопки внизу вопроса и имени двигают по шагам.</div>
+  </div>
+
+  <div style="display: flex; gap: 56px; flex-wrap: wrap; align-items: flex-start;">
+
+    <div id="3a" style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+
+        <!-- ===== ЛЕНДИНГ ===== -->
+        <sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+        <div style="background: #f3ece2; color: #241a1c;">
+
+          <div style="display: flex; flex-direction: column; padding: 74px 26px 40px; background: linear-gradient(180deg,#f3ece2 0%,#eae0d3 100%);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 38px;">
+              <div style="width: 46px; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="width: 16px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+              <div style="width: 16px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+              <div style="width: 16px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+              <div style="width: 16px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+              <div style="width: 16px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+            </div>
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+              <div style="font-size: 13px; font-weight: 600; letter-spacing: 4px; color: #a08a86; text-transform: uppercase; margin-bottom: 20px;">Родовой сценарий</div>
+              <h1 style="margin: 0 0 20px; font-family: 'Prata', serif; font-size: 33px; font-weight: 400; line-height: 1.16; letter-spacing: 0.2px; color: #241a1c; text-wrap: pretty;">В твоём роду это повторяется. И круг идёт к тебе.</h1>
+              <p style="margin: 0 0 30px; font-size: 15.5px; line-height: 1.5; color: #6b5d5f; max-width: 320px;">2 минуты и только дата рождения. Матрица покажет, что ты несёшь по женской линии.</p>
+              <button onClick="{{ goQuiz }}" style="width: 100%; border: none; cursor: pointer; background: #7c2b3b; color: #f7f0ea; font-family: inherit; font-size: 17px; font-weight: 800; line-height: 1.25; padding: 20px; border-radius: 18px; box-shadow: 0 12px 30px rgba(124,43,59,0.26);">Узнать свой родовой сценарий</button>
+              <div style="margin-top: 16px; font-size: 14px; color: #a08a86;">Честно, даже если будет тяжело.</div>
+            </div>
+          </div>
+
+          <div style="padding: 44px 26px; border-top: 1px solid rgba(36,26,28,0.08);">
+            <div style="font-size: 13px; font-weight: 600; letter-spacing: 3px; color: #a08a86; text-transform: uppercase; margin-bottom: 26px;">Как это работает</div>
+            <div style="display: flex; flex-direction: column; gap: 22px;">
+              <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #7c2b3b; display: flex; align-items: center; justify-content: center; font-family: 'Prata', serif; font-size: 17px; color: #7c2b3b;">1</div>
+                <div>
+                  <div style="font-size: 17px; font-weight: 700; margin-bottom: 3px;">Вводишь дату рождения</div>
+                  <div style="font-size: 14.5px; line-height: 1.45; color: #6b5d5f;">Больше ничего не нужно — ни имени, ни анкет.</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #7c2b3b; display: flex; align-items: center; justify-content: center; font-family: 'Prata', serif; font-size: 17px; color: #7c2b3b;">2</div>
+                <div>
+                  <div style="font-size: 17px; font-weight: 700; margin-bottom: 3px;">Считаем матрицу по женской линии</div>
+                  <div style="font-size: 14.5px; line-height: 1.45; color: #6b5d5f;">Разбираем узловые точки родового сценария.</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #7c2b3b; display: flex; align-items: center; justify-content: center; font-family: 'Prata', serif; font-size: 17px; color: #7c2b3b;">3</div>
+                <div>
+                  <div style="font-size: 17px; font-weight: 700; margin-bottom: 3px;">Получаешь разбор</div>
+                  <div style="font-size: 14.5px; line-height: 1.45; color: #6b5d5f;">Что повторяется и где круг можно разорвать.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 44px 26px; background: #efe6d9; border-top: 1px solid rgba(36,26,28,0.08);">
+            <h2 style="margin: 0 0 22px; font-family: 'Prata', serif; font-size: 25px; font-weight: 400; line-height: 1.2; color: #241a1c;">Что покажет матрица</h2>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: #7c2b3b; margin-top: 8px;"></span><span style="font-size: 16px; line-height: 1.45; color: #3a2c2e;">Что повторяется из поколения в поколение</span></div>
+              <div style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: #7c2b3b; margin-top: 8px;"></span><span style="font-size: 16px; line-height: 1.45; color: #3a2c2e;">Твои сильные точки, доставшиеся от рода</span></div>
+              <div style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: #7c2b3b; margin-top: 8px;"></span><span style="font-size: 16px; line-height: 1.45; color: #3a2c2e;">Где рвётся круг — и как это остановить на себе</span></div>
+              <div style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: #7c2b3b; margin-top: 8px;"></span><span style="font-size: 16px; line-height: 1.45; color: #3a2c2e;">Что ты передаёшь дальше — дочерям</span></div>
+            </div>
+          </div>
+
+          <div style="padding: 44px 26px; border-top: 1px solid rgba(36,26,28,0.08);">
+            <div style="font-family: 'Prata', serif; font-size: 21px; line-height: 1.4; color: #241a1c; font-style: italic;">«Я наконец поняла, почему у меня, мамы и бабушки одна и та же история с деньгами.»</div>
+            <div style="margin-top: 16px; font-size: 14px; color: #a08a86; letter-spacing: 0.3px;">Марина, 34 · прошла разбор</div>
+          </div>
+
+          <div style="padding: 46px 26px 40px; background: #241a1c; color: #f3ece2;">
+            <h2 style="margin: 0 0 22px; font-family: 'Prata', serif; font-size: 27px; font-weight: 400; line-height: 1.2; text-align: center; color: #f7f0ea;">Готова увидеть свой круг?</h2>
+            <button onClick="{{ goQuiz }}" style="width: 100%; border: none; cursor: pointer; background: #c25668; color: #241a1c; font-family: inherit; font-size: 17px; font-weight: 800; line-height: 1.25; padding: 20px; border-radius: 18px; box-shadow: 0 12px 30px rgba(194,86,104,0.24);">Узнать свой родовой сценарий</button>
+            <div style="margin-top: 16px; text-align: center; font-size: 14px; color: #b39a96;">2 минуты · только дата рождения · анонимно</div>
+            <div style="margin-top: 28px; text-align: center; font-size: 11.5px; line-height: 1.5; color: #8a7773;">Матрица судьбы — инструмент саморефлексии, а не медицинская или психологическая услуга.</div>
+          </div>
+
+        </div>
+        </sc-if>
+
+        <!-- ===== ЭКРАН ВОПРОСА ===== -->
+        <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+        <div style="min-height: 100%; background: linear-gradient(180deg,#f3ece2 0%,#eae0d3 100%); display: flex; flex-direction: column; padding: 66px 26px 40px; color: #241a1c;">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 30px;">
+            <button onClick="{{ goLanding }}" style="flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(36,26,28,0.14); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #7c2b3b; font-size: 18px; line-height: 1;">‹</button>
+            <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
+              <div style="width: 34px; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="width: 12px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.16);"></div>
+              <div style="width: 12px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.16);"></div>
+              <div style="width: 12px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.16);"></div>
+              <div style="width: 12px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.16);"></div>
+              <div style="width: 12px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.16);"></div>
+              <div style="width: 12px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.16);"></div>
+              <div style="width: 12px; height: 3px; border-radius: 2px; background: rgba(36,26,28,0.16);"></div>
+            </div>
+          </div>
+
+          <div style="text-align: center; font-size: 13px; font-weight: 600; letter-spacing: 4px; color: #a08a86; text-transform: uppercase; margin-bottom: 18px;">Шаг 1 / 8</div>
+          <h1 style="margin: 0 0 30px; font-family: 'Prata', serif; font-size: 29px; font-weight: 400; line-height: 1.18; letter-spacing: 0.2px; color: #241a1c; text-align: center; text-wrap: pretty;">Что из этого больше всего похоже на женщин твоего рода?</h1>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <sc-for list="{{ options }}" as="opt" hint-placeholder-count="4">
+              <button onClick="{{ opt.on }}" style="{{ opt.style }}">
+                <span style="{{ opt.dot }}"></span>
+                <span style="text-align: left; font-size: 15.5px; font-weight: 700; line-height: 1.3; color: #241a1c;">{{ opt.title }}</span>
+              </button>
+            </sc-for>
+          </div>
+
+          <div style="flex: 1; min-height: 24px;"></div>
+          <button onClick="{{ goDate }}" style="width: 100%; border: none; cursor: pointer; background: {{ nextBg }}; color: #f7f0ea; font-family: inherit; font-size: 17px; font-weight: 800; padding: 20px; border-radius: 18px;">Далее</button>
+        </div>
+        </sc-if>
+
+        <!-- ===== ДАТА РОЖДЕНИЯ ===== -->
+        <sc-if value="{{ isDate }}" hint-placeholder-val="{{ false }}">
+        <div style="min-height: 100%; background: linear-gradient(180deg,#f3ece2 0%,#eae0d3 100%); display: flex; flex-direction: column; padding: 66px 26px 40px; color: #241a1c;">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 40px;">
+            <button onClick="{{ goQuiz }}" style="flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(36,26,28,0.14); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #7c2b3b; font-size: 18px; line-height: 1;">‹</button>
+            <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+            </div>
+          </div>
+          <h1 style="margin: 0 0 34px; font-family: 'Prata', serif; font-size: 28px; font-weight: 400; line-height: 1.22; letter-spacing: 0.2px; color: #241a1c; text-align: center; text-wrap: pretty;">Теперь дата рождения, чтобы построить твою матрицу рода</h1>
+          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <select value="{{ dd }}" onChange="{{ setDd }}" style="width: 78px; height: 62px; padding: 0 10px; border-radius: 16px; border: 1.5px solid rgba(36,26,28,0.14); background: rgba(36,26,28,0.03); font-family: inherit; font-size: 17px; font-weight: 700; color: #241a1c; outline: none; cursor: pointer; -webkit-appearance: none; appearance: none; text-align: center;" style-focus="border-color:#7c2b3b">
+              <option value="" disabled>День</option>
+              <sc-for list="{{ days }}" as="d" hint-placeholder-count="3"><option value="{{ d }}">{{ d }}</option></sc-for>
+            </select>
+            <select value="{{ mm }}" onChange="{{ setMm }}" style="flex: 1; height: 62px; padding: 0 16px; border-radius: 16px; border: 1.5px solid rgba(36,26,28,0.14); background: rgba(36,26,28,0.03); font-family: inherit; font-size: 17px; font-weight: 700; color: #241a1c; outline: none; cursor: pointer;" style-focus="border-color:#7c2b3b">
+              <option value="" disabled>Месяц</option>
+              <sc-for list="{{ months }}" as="m" hint-placeholder-count="3"><option value="{{ m }}">{{ m }}</option></sc-for>
+            </select>
+            <select value="{{ yyyy }}" onChange="{{ setYyyy }}" style="width: 96px; height: 62px; padding: 0 10px; border-radius: 16px; border: 1.5px solid rgba(36,26,28,0.14); background: rgba(36,26,28,0.03); font-family: inherit; font-size: 17px; font-weight: 700; color: #241a1c; outline: none; cursor: pointer; -webkit-appearance: none; appearance: none; text-align: center;" style-focus="border-color:#7c2b3b">
+              <option value="" disabled>Год</option>
+              <sc-for list="{{ years }}" as="y" hint-placeholder-count="3"><option value="{{ y }}">{{ y }}</option></sc-for>
+            </select>
+          </div>
+          <button onClick="{{ goName }}" style="width: 100%; border: none; cursor: pointer; background: {{ dateNextBg }}; color: #f7f0ea; font-family: inherit; font-size: 17px; font-weight: 800; padding: 20px; border-radius: 18px;">Далее</button>
+          <div style="flex: 1;"></div>
+        </div>
+        </sc-if>
+
+        <!-- ===== ИМЯ ===== -->
+        <sc-if value="{{ isName }}" hint-placeholder-val="{{ false }}">
+        <div style="min-height: 100%; background: linear-gradient(180deg,#f3ece2 0%,#eae0d3 100%); display: flex; flex-direction: column; padding: 66px 26px 40px; color: #241a1c;">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 40px;">
+            <button onClick="{{ goDate }}" style="flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(36,26,28,0.14); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #7c2b3b; font-size: 18px; line-height: 1;">‹</button>
+            <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: rgba(36,26,28,0.14);"></div>
+            </div>
+          </div>
+          <h1 style="margin: 0 0 30px; font-family: 'Prata', serif; font-size: 28px; font-weight: 400; line-height: 1.22; letter-spacing: 0.2px; color: #241a1c; text-align: center;">Как тебя зовут?</h1>
+          <input value="{{ name }}" onChange="{{ setName }}" placeholder="Имя" style="width: 100%; height: 62px; text-align: center; margin-bottom: 16px; border-radius: 16px; border: 1.5px solid rgba(36,26,28,0.14); background: rgba(36,26,28,0.03); font-family: inherit; font-size: 18px; font-weight: 700; color: #241a1c; outline: none;" style-focus="border-color:#7c2b3b" />
+          <button onClick="{{ startLoading }}" style="width: 100%; border: none; cursor: pointer; background: #7c2b3b; color: #f7f0ea; font-family: inherit; font-size: 17px; font-weight: 800; padding: 20px; border-radius: 18px; box-shadow: 0 12px 30px rgba(124,43,59,0.26);">Построить матрицу рода</button>
+          <div style="flex: 1;"></div>
+        </div>
+        </sc-if>
+
+        <!-- ===== АНИМАЦИЯ ПОДСЧЁТА ===== -->
+        <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="min-height: 100%; background: radial-gradient(120% 80% at 50% 40%, #2a1a1e 0%, #1a1113 60%, #140d0f 100%); display: flex; flex-direction: column; padding: 66px 26px 46px; color: #f3ece2;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: #c25668;"></div>
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: #c25668;"></div>
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: #c25668;"></div>
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: #c25668;"></div>
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: #c25668;"></div>
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: #c25668;"></div>
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: #c25668;"></div>
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: rgba(243,236,226,0.16);"></div>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px;">
+            <div style="position: relative; width: 92px; height: 92px;">
+              <div style="position: absolute; inset: 0; border-radius: 50%; border: 2px dashed rgba(194,86,104,0.55); animation: rsSpin 7s linear infinite;"></div>
+              <div style="position: absolute; inset: 20px; border-radius: 50%; background: radial-gradient(circle, rgba(194,86,104,0.5) 0%, rgba(194,86,104,0) 70%); animation: rsPulse 1.8s ease-in-out infinite;"></div>
+              <div style="position: absolute; inset: 38px; border-radius: 50%; background: #c25668;"></div>
+            </div>
+            <div key="{{ loadStep }}" style="text-align: center; animation: rsFade .5s ease;">
+              <div style="font-family: 'Prata', serif; font-size: 26px; font-weight: 400; line-height: 1.24; color: #f6ece2; max-width: 300px; margin: 0 auto 14px;">{{ loadTitle }}</div>
+              <div style="font-size: 15px; color: #b79a95;">{{ loadSub }}</div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- ===== МАТРИЦА (РЕЗУЛЬТАТ) ===== -->
+        <sc-if value="{{ isMatrix }}" hint-placeholder-val="{{ false }}">
+        <div style="background: #f3ece2; color: #241a1c;">
+
+          <div style="padding: 60px 12px 34px;">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 26px; padding: 0 4px;">
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+              <div style="flex: 1; height: 4px; border-radius: 2px; background: #7c2b3b;"></div>
+            </div>
+
+            <!-- MATRIX CARD -->
+            <div style="border-radius: 28px; padding: 30px 10px 30px; background: radial-gradient(120% 80% at 50% 22%, #34232b 0%, #251a20 62%, #1e1519 100%); border: 1px solid rgba(201,138,74,0.28); box-shadow: 0 20px 50px rgba(36,22,28,0.35);">
+              <div style="text-align: center; font-size: 12.5px; font-weight: 600; letter-spacing: 3.5px; color: #c2a596; text-transform: uppercase; margin-bottom: 26px;">Твой родовой сценарий</div>
+              <!-- OCTAGRAM (SVG) -->
+              <svg viewBox="-34 -14 408 368" width="100%" style="display: block; max-width: 336px; margin: 0 auto; overflow: visible;" data-om-raster>
+                <defs>
+                  <radialGradient id="rsCore" cx="50%" cy="42%" r="60%">
+                    <stop offset="0%" stop-color="#2a1c22" />
+                    <stop offset="100%" stop-color="#160f12" />
+                  </radialGradient>
+                </defs>
+
+                <!-- two overlapping squares -> octagram -->
+                <polygon points="170,50 290,170 170,290 50,170" fill="rgba(201,138,74,0.05)" stroke="#c98a4a" stroke-width="1.1" stroke-opacity="0.7" />
+                <polygon points="255,85 255,255 85,255 85,85" fill="rgba(201,138,74,0.05)" stroke="#c98a4a" stroke-width="1.1" stroke-opacity="0.7" />
+
+                <!-- axis + diagonal guide lines -->
+                <line x1="50" y1="170" x2="290" y2="170" stroke="#c98a4a" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="2 4" />
+                <line x1="170" y1="50" x2="170" y2="290" stroke="#c98a4a" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="2 4" />
+                <line x1="85" y1="85" x2="255" y2="255" stroke="#c98a4a" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="2 4" />
+                <line x1="255" y1="85" x2="85" y2="255" stroke="#c98a4a" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="2 4" />
+
+                <!-- outer axis labels -->
+                <text x="170" y="10" text-anchor="middle" fill="#b39c8b" font-size="10" letter-spacing="2" font-family="'Golos Text',sans-serif">МЕСЯЦ</text>
+                <text x="170" y="334" text-anchor="middle" fill="#b39c8b" font-size="10" letter-spacing="2" font-family="'Golos Text',sans-serif">ЗАДАЧА</text>
+                <text x="-2" y="174" text-anchor="middle" fill="#c9b19d" font-size="10" letter-spacing="1" font-family="'Golos Text',sans-serif">ДЕНЬ</text>
+                <text x="342" y="174" text-anchor="middle" fill="#c9b19d" font-size="10" letter-spacing="1" font-family="'Golos Text',sans-serif">ГОД</text>
+                <text x="44" y="34" text-anchor="middle" fill="#d8c4ad" font-size="9" font-family="'Golos Text',sans-serif" transform="rotate(-45 44 34)">мужская линия</text>
+                <text x="296" y="306" text-anchor="middle" fill="#d8c4ad" font-size="9" font-family="'Golos Text',sans-serif" transform="rotate(-45 296 306)">женская линия</text>
+
+                <!-- corner nodes -->
+                <g font-family="'Golos Text',sans-serif" font-weight="700">
+                  <circle cx="85" cy="85" r="19" fill="#241a20" stroke="#c98a4a" stroke-opacity="0.5" stroke-width="1.4" /><text x="85" y="85" text-anchor="middle" dominant-baseline="central" fill="#cbb8a0" font-size="15">14</text>
+                  <circle cx="255" cy="85" r="19" fill="#241a20" stroke="#c98a4a" stroke-opacity="0.5" stroke-width="1.4" /><text x="255" y="85" text-anchor="middle" dominant-baseline="central" fill="#cbb8a0" font-size="15">4</text>
+                  <circle cx="85" cy="255" r="19" fill="#241a20" stroke="#c98a4a" stroke-opacity="0.5" stroke-width="1.4" /><text x="85" y="255" text-anchor="middle" dominant-baseline="central" fill="#cbb8a0" font-size="15">10</text>
+                  <circle cx="255" cy="255" r="19" fill="#241a20" stroke="#c98a4a" stroke-opacity="0.5" stroke-width="1.4" /><text x="255" y="255" text-anchor="middle" dominant-baseline="central" fill="#cbb8a0" font-size="15">18</text>
+
+                  <!-- cardinal nodes -->
+                  <circle cx="170" cy="50" r="27" fill="#241a20" stroke="#c98a4a" stroke-width="2" /><text x="170" y="50" text-anchor="middle" dominant-baseline="central" fill="#f3ece2" font-size="21">2</text>
+                  <circle cx="170" cy="290" r="27" fill="#241a20" stroke="#c98a4a" stroke-width="2" /><text x="170" y="290" text-anchor="middle" dominant-baseline="central" fill="#f3ece2" font-size="21">16</text>
+                  <circle cx="50" cy="170" r="27" fill="#241a20" stroke="#c98a4a" stroke-width="2" /><text x="50" y="170" text-anchor="middle" dominant-baseline="central" fill="#f3ece2" font-size="21">12</text>
+                  <circle cx="290" cy="170" r="27" fill="#241a20" stroke="#c98a4a" stroke-width="2" /><text x="290" y="170" text-anchor="middle" dominant-baseline="central" fill="#f3ece2" font-size="21">2</text>
+
+                  <!-- inner nodes -->
+                  <circle cx="170" cy="110" r="18" fill="#3f7d74" /><text x="170" y="110" text-anchor="middle" dominant-baseline="central" fill="#f3ece2" font-size="15">7</text>
+                  <circle cx="110" cy="170" r="18" fill="#3f7d74" /><text x="110" y="170" text-anchor="middle" dominant-baseline="central" fill="#f3ece2" font-size="15">17</text>
+                  <circle cx="230" cy="170" r="18" fill="#a8582f" /><text x="230" y="170" text-anchor="middle" dominant-baseline="central" fill="#f7ece2" font-size="15">7</text>
+                  <circle cx="170" cy="230" r="18" fill="#a8582f" /><text x="170" y="230" text-anchor="middle" dominant-baseline="central" fill="#f7ece2" font-size="15">21</text>
+
+                  <!-- core -->
+                  <circle cx="170" cy="170" r="34" fill="url(#rsCore)" stroke="#c98a4a" stroke-width="3" />
+                  <text x="170" y="166" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="26" font-weight="800">5</text>
+                  <text x="170" y="188" text-anchor="middle" dominant-baseline="central" fill="#b79a8f" font-size="7" letter-spacing="1.5">ЛИЧНОСТЬ</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- READING -->
+          <div style="padding: 8px 26px 4px;">
+            <div style="font-size: 13px; font-weight: 700; letter-spacing: 2.5px; color: #7c2b3b; text-transform: uppercase; line-height: 1.4; margin-bottom: 14px;">Какую судьбу тебе передали мать и бабка</div>
+            <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.55; color: #3a2c2e;">Ты ответила, что женщины твоего рода были сильными и одинокими, всё тянули на себе. Матрица подтверждает это напрямую: по женской линии у тебя число 21 — из линии силы и одиночества. Бабка тащила семью одна, мать тащила, и никто ни разу не спросил, а каково им. Тебя собрали как опору для всех, а не как женщину, которую берегут.</p>
+
+            <div style="font-size: 13px; font-weight: 700; letter-spacing: 2.5px; color: #7c2b3b; text-transform: uppercase; line-height: 1.4; margin-bottom: 14px;">Где ты уже повторяешь их слово в слово</div>
+            <p style="margin: 0 0 34px; font-size: 16px; line-height: 1.55; color: #3a2c2e;">Ты привыкла не просить и всё решать сама — и потому рядом не задерживается тот, кто хотел бы о тебе позаботиться. Силу ты носишь как броню, и за ней тебя не видно.</p>
+          </div>
+
+          <!-- FOLLOW-UPS -->
+          <div style="padding: 4px 26px 8px; display: flex; flex-direction: column; gap: 26px;">
+            <div>
+              <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #6b5d5f; text-transform: uppercase; line-height: 1.4; margin-bottom: 12px;">Почему в вашем роду мужчины не остаются</div>
+              <button style="border: none; cursor: pointer; background: #7c2b3b; color: #f7f0ea; font-family: inherit; font-size: 15px; font-weight: 700; padding: 12px 26px; border-radius: 999px;">Узнать</button>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #6b5d5f; text-transform: uppercase; line-height: 1.4; margin-bottom: 12px;">На ком круг замкнётся: на тебе или на дочери</div>
+              <button style="border: none; cursor: pointer; background: #7c2b3b; color: #f7f0ea; font-family: inherit; font-size: 15px; font-weight: 700; padding: 12px 26px; border-radius: 999px;">Узнать</button>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #6b5d5f; text-transform: uppercase; line-height: 1.4; margin-bottom: 12px;">Что сделать, чтобы не отдать это дочери</div>
+              <button style="border: none; cursor: pointer; background: #7c2b3b; color: #f7f0ea; font-family: inherit; font-size: 15px; font-weight: 700; padding: 12px 26px; border-radius: 999px;">Узнать</button>
+            </div>
+          </div>
+
+          <div style="padding: 30px 26px 40px; text-align: center;">
+            <button onClick="{{ goLanding }}" style="border: none; background: transparent; cursor: pointer; font-family: inherit; font-size: 13px; letter-spacing: 0.5px; color: #a08a86;">← В начало</button>
+          </div>
+
+        </div>
+        </sc-if>
+
+      </x-import>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { screen: 'landing', choice: null, dd: '', mm: '', yyyy: '', name: '', loadStep: 0 };
+
+  loadMsgs = [
+    { t: 'Собираю числа твоей даты…', s: 'Секунду, считаю ядро матрицы' },
+    { t: 'Смотрю, что повторяется из поколения в поколение…', s: '{n}, круг почти виден…' },
+    { t: 'Свожу мужскую и женскую линию рода…', s: 'Ещё пара секунд' },
+    { t: 'Готовлю твой родовой сценарий…', s: '{n}, почти всё' },
+  ];
+
+  set(k) { return (e) => this.setState({ [k]: e.target.value }); }
+
+  startLoading() {
+    this.setState({ screen: 'loading', loadStep: 0 });
+    clearInterval(this._t);
+    this._t = setInterval(() => {
+      this.setState((s) => {
+        const next = s.loadStep + 1;
+        if (next >= this.loadMsgs.length) {
+          clearInterval(this._t);
+          setTimeout(() => this.setState({ screen: 'matrix' }), 1200);
+          return { loadStep: this.loadMsgs.length - 1 };
+        }
+        return { loadStep: next };
+      });
+    }, 1500);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+
+  renderVals() {
+    const titles = [
+      'Сильные и одинокие, всё тянули на себе',
+      'Терпели ради семьи и гасили себя',
+      'Замужем, но несчастливы, или не сложилось',
+      'Рано остались без мужчин: развод, вдовство, ушли',
+    ];
+    const options = titles.map((title, i) => {
+      const sel = this.state.choice === i;
+      return {
+        title,
+        on: () => this.setState({ choice: i }),
+        style: [
+          'display: flex', 'align-items: flex-start', 'gap: 14px',
+          'width: 100%', 'text-align: left', 'cursor: pointer',
+          'padding: 18px 18px', 'border-radius: 16px',
+          'font-family: inherit',
+          'background: ' + (sel ? 'rgba(124,43,59,0.08)' : 'rgba(36,26,28,0.03)'),
+          'border: 1.5px solid ' + (sel ? '#7c2b3b' : 'rgba(36,26,28,0.1)'),
+          'transition: border-color .15s, background .15s',
+        ].join(';'),
+        dot: [
+          'flex-shrink: 0', 'width: 22px', 'height: 22px', 'border-radius: 50%',
+          'margin-top: 1px',
+          'border: 2px solid ' + (sel ? '#7c2b3b' : '#b7a29d'),
+          'background: ' + (sel
+            ? 'radial-gradient(circle, #7c2b3b 0 5px, transparent 6px)'
+            : 'transparent'),
+        ].join(';'),
+      };
+    });
+    const nm = this.state.name.trim() || 'Алена';
+    const dateReady = this.state.dd && this.state.mm && this.state.yyyy;
+    const msg = this.loadMsgs[this.state.loadStep] || this.loadMsgs[0];
+    return {
+      isLanding: this.state.screen === 'landing',
+      isQuiz: this.state.screen === 'quiz',
+      isDate: this.state.screen === 'date',
+      isName: this.state.screen === 'name',
+      isLoading: this.state.screen === 'loading',
+      isMatrix: this.state.screen === 'matrix',
+      goQuiz: () => this.setState({ screen: 'quiz' }),
+      goLanding: () => this.setState({ screen: 'landing' }),
+      goDate: () => this.setState({ screen: 'date' }),
+      goName: () => this.setState({ screen: 'name' }),
+      startLoading: () => this.startLoading(),
+      options,
+      nextBg: this.state.choice === null ? '#c3aca0' : '#7c2b3b',
+      dd: this.state.dd, mm: this.state.mm, yyyy: this.state.yyyy, name: this.state.name,
+      setDd: this.set('dd'), setMm: this.set('mm'), setYyyy: this.set('yyyy'), setName: this.set('name'),
+      days: Array.from({ length: 31 }, (_, i) => i + 1),
+      months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+      years: Array.from({ length: 71 }, (_, i) => 2010 - i),
+      dateNextBg: dateReady ? '#7c2b3b' : '#c3aca0',
+      loadStep: this.state.loadStep,
+      loadTitle: msg.t,
+      loadSub: msg.s.replace('{n}', nm),
+      userName: nm,
+    };
+  }
+}
+</script>
+</body>
+</html>

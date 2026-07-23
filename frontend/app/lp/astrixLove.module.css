@@ -1,0 +1,672 @@
+/* =====================================================================
+   Лендинг «Astrix Love» (движок horo-love). Тема astrix по дизайн-системе
+   design-reference/landings/horoscope/design_handoff_astrix_love.
+   Тёмно-фиолетовый космос. Всё скоуплено на .root, поверх общего фона /lp.
+
+   Экраны: intro (развилка) → вопросы квиза → dob → name/его знак →
+   loading (орбиты планет) → result (кольцо score + прогноз + тизеры + пейвол).
+
+   Шрифты:
+     --display  Unbounded (self-host, полная кириллица) — заголовки/кикеры/кнопки
+     --ui       Golos Text (self-host) — тело, инпуты, опции
+   ===================================================================== */
+
+.root {
+  /* Палитра (скоуплена на .root, наружу не течёт). */
+  --bg: #0a0714;
+  --panel: #08050f;
+  --deep: #120d26;
+  --deep-2: #17102e;
+  --violet: #8b7cf0;
+  --violet-l: #a996ff;
+  --violet-br: #c4b7ff;
+  --text: #f4f1ff;
+  --text-2: #f1eefb;
+  --body: #d6cfe8;
+  --body-2: #d8d0ef;
+  --muted: #8b84a8;
+  --muted-2: #8079a4;
+  --faint: #7b7498;
+  --line: rgba(150, 130, 240, .2);
+  --line-2: rgba(160, 140, 255, .3);
+  --line-3: rgba(160, 140, 255, .4);
+  --fill: rgba(255, 255, 255, .03);
+  --fill-v: rgba(139, 124, 240, .14);
+
+  --display: var(--font-unbounded), 'Unbounded', system-ui, sans-serif;
+  --ui: var(--font-sans), 'Golos Text', system-ui, sans-serif;
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--ui);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Фон: непрозрачное фиксированное небо (перекрывает золотой Backdrop /lp) ── */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+.glowTop {
+  position: absolute;
+  top: -260px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1100px;
+  height: 820px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 124, 240, .4), rgba(139, 124, 240, 0) 66%);
+  filter: blur(10px);
+}
+.glowBottom {
+  position: absolute;
+  bottom: -300px;
+  right: -160px;
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(94, 74, 190, .28), rgba(94, 74, 190, 0) 68%);
+  filter: blur(10px);
+}
+.twinkle {
+  position: absolute;
+  border-radius: 50%;
+  background: #cdbfff;
+  animation: astrixTwinkle 4s ease-in-out infinite;
+}
+
+/* ── Каркас ── */
+.shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 20px 4px;
+}
+.brand {
+  display: none;
+  align-items: center;
+  gap: 11px;
+}
+.brandStar { color: var(--violet-l); font-size: 20px; }
+.brandName {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: .28em;
+  color: #ece9f7;
+}
+.pills { display: flex; align-items: center; gap: 8px; }
+.pill,
+.pillOn {
+  width: 22px;
+  height: 4px;
+  border-radius: 2px;
+  transition: background .3s ease;
+}
+.pill { background: rgba(150, 130, 240, .2); }
+.pillOn { background: var(--violet-l); }
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Общие текстовые примитивы ── */
+.kicker {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: .4em;
+  color: var(--muted-2);
+  margin-top: 24px;
+  text-transform: uppercase;
+}
+.h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 27px;
+  line-height: 1.3;
+  color: var(--text-2);
+  margin: 18px 0 0;
+  text-wrap: balance;
+}
+.h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--text-2);
+  margin: 26px 0 0;
+  text-wrap: balance;
+}
+.sub {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 10px 0 0;
+}
+
+/* ── Экран-контейнеры ── */
+.screen {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+  text-align: center;
+  animation: astrixFade .4s ease both;
+}
+.screenIntro {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 36px 24px 64px;
+  text-align: center;
+  animation: astrixFade .4s ease both;
+}
+
+/* ── Орб / кольцо-глиф ── */
+.orb {
+  width: 86px;
+  height: 86px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: rgba(139, 124, 240, .18);
+  border: 1px solid var(--line-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  color: var(--violet-br);
+  box-shadow: 0 0 40px rgba(139, 124, 240, .5);
+}
+.ring {
+  width: 74px;
+  height: 74px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid var(--line-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: var(--violet-br);
+  box-shadow: 0 0 34px rgba(139, 124, 240, .4);
+  animation: astrixPulse 4s ease-in-out infinite;
+}
+
+/* ── Опции (intro + choice-шаги) ── */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 40px;
+  text-align: left;
+}
+.optionCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 21px 22px;
+  border-radius: 22px;
+  background: var(--fill);
+  border: 1px solid rgba(150, 130, 240, .16);
+  cursor: pointer;
+  color: var(--text-2);
+  text-align: left;
+  font-family: var(--ui);
+  transition: border-color .18s, background .18s, transform .12s;
+}
+.optionCard:hover {
+  border-color: var(--violet-l);
+  background: rgba(139, 124, 240, .12);
+}
+.optionCard:active { transform: scale(.99); }
+.radio {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid #6f6a8f;
+}
+.optText { display: flex; flex-direction: column; gap: 6px; }
+.optTitle { font-size: 17px; font-weight: 500; color: #ebe7f6; }
+.optSub { display: none; }
+
+/* ── Инпуты ── */
+.inp::placeholder { color: #6b6489; }
+.inp:focus { outline: none; border-color: var(--violet-l); }
+.dobRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 40px;
+}
+.inpDay,
+.inpYear {
+  text-align: center;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 0;
+  color: var(--text-2);
+  font-size: 19px;
+  font-family: var(--ui);
+}
+.inpDay { width: 76px; }
+.inpYear { width: 92px; }
+.inpMonth {
+  flex: 1;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 14px;
+  color: var(--text-2);
+  font-size: 17px;
+  font-family: var(--ui);
+  appearance: none;
+}
+.inpMonth option { color: #000; }
+.textInput {
+  width: 100%;
+  margin-top: 40px;
+  text-align: center;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 14px;
+  color: var(--text-2);
+  font-size: 19px;
+  font-family: var(--ui);
+}
+
+/* ── Живой чип знака ── */
+.chipSlot {
+  min-height: 64px;
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.zodChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  border-radius: 100px;
+  background: var(--fill-v);
+  border: 1px solid var(--line-2);
+}
+.zodGlyph { font-size: 22px; color: var(--violet-br); }
+.zodText { color: var(--body-2); font-size: 16px; }
+
+/* ── Кнопки ── */
+.btn,
+.btnOff {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  text-align: center;
+  padding: 18px;
+  border-radius: 16px;
+  color: #0a0714;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  border: 0;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.btn { background: var(--violet); }
+.btnOff { background: rgba(139, 124, 240, .3); cursor: default; }
+.btnName { margin-top: 40px; }
+
+/* ── Loading ── */
+.loadingScreen {
+  flex: 1;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  animation: astrixFade .4s ease both;
+}
+.loader {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aura {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 124, 240, .28), rgba(139, 124, 240, 0) 68%);
+  animation: astrixPulse 5s ease-in-out infinite;
+}
+.zodiacRing {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px solid rgba(160, 140, 255, .28);
+  animation: astrixSpin 26s linear infinite;
+}
+.zSign { position: absolute; color: var(--violet-br); font-size: 14px; }
+.zTop { top: -10px; left: 50%; transform: translateX(-50%); }
+.zTR { top: 26px; right: 26px; }
+.zR { top: 50%; right: -8px; transform: translateY(-50%); }
+.zBR { bottom: 26px; right: 26px; }
+.zB { bottom: -10px; left: 50%; transform: translateX(-50%); }
+.zBL { bottom: 26px; left: 26px; }
+.zL { top: 50%; left: -8px; transform: translateY(-50%); }
+.zTL { top: 26px; left: 26px; }
+.dashRing {
+  position: absolute;
+  width: 196px;
+  height: 196px;
+  border-radius: 50%;
+  border: 1px dashed rgba(160, 140, 255, .4);
+  animation: astrixSpinRev 18s linear infinite;
+}
+.orbit7 {
+  position: absolute;
+  width: 224px;
+  height: 224px;
+  animation: astrixOrbit 7s linear infinite;
+}
+.orbit45 {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  animation: astrixOrbit 4.5s linear infinite reverse;
+}
+.planet1 {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e6ddff;
+  box-shadow: 0 0 14px 3px rgba(199, 183, 255, .9);
+}
+.planet2 {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 10px 2px rgba(139, 124, 240, .9);
+}
+.core {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #2a2150, #120d26);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: astrixGlow 4s ease-in-out infinite;
+}
+.corePct { font-family: var(--display); font-size: 32px; color: var(--text); }
+.corePct i { font-style: normal; font-size: 16px; color: var(--violet-l); }
+.loadingMsg {
+  font-family: var(--display);
+  font-size: 18px;
+  color: var(--text-2);
+  margin-top: 48px;
+  min-height: 24px;
+}
+.loadingSub { color: var(--muted); font-size: 14px; margin-top: 12px; }
+
+/* ── Result ── */
+.result {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 24px 64px;
+  animation: astrixFade .4s ease both;
+}
+.resultHero {
+  text-align: center;
+  padding: 30px 24px;
+  border-radius: 28px;
+  background: linear-gradient(165deg, rgba(139, 124, 240, .16), rgba(139, 124, 240, .04));
+  border: 1px solid rgba(160, 140, 255, .24);
+  margin-bottom: 30px;
+}
+.heroKicker {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: .4em;
+  color: var(--muted-2);
+  text-transform: uppercase;
+}
+.heroChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 9px 18px;
+  border-radius: 100px;
+  background: rgba(139, 124, 240, .16);
+  border: 1px solid var(--line-2);
+}
+.heroChip .zodGlyph { font-size: 20px; }
+.heroChip .zodText { font-size: 15px; }
+.scoreRing {
+  position: relative;
+  width: 172px;
+  height: 172px;
+  margin: 26px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scoreTrack { position: absolute; inset: 0; border-radius: 50%; background: rgba(255, 255, 255, .05); }
+.scoreArc { position: absolute; inset: 0; border-radius: 50%; }
+.scoreHole {
+  position: relative;
+  width: 126px;
+  height: 126px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #17102e, #08050f);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 22px rgba(139, 124, 240, .35);
+}
+.heart { font-size: 16px; color: var(--violet-br); line-height: 1; }
+.scoreNum {
+  font-family: var(--display);
+  font-size: 36px;
+  color: var(--text);
+  margin-top: 5px;
+  line-height: 1;
+}
+.scoreNum i { font-style: normal; font-size: 16px; color: var(--violet-l); }
+.scoreCap { color: var(--muted); font-size: 11.5px; margin-top: 6px; letter-spacing: .02em; }
+.restartBtn {
+  display: block;
+  width: 100%;
+  margin-top: 32px;
+  text-align: center;
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid rgba(160, 140, 255, .24);
+  background: transparent;
+  color: var(--violet-br);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.readingBlock + .readingBlock { margin-top: 24px; }
+.sectionLabel {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: .26em;
+  color: var(--violet-l);
+  text-transform: uppercase;
+}
+.readingText {
+  color: var(--body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin: 10px 0 0;
+  max-width: 600px;
+}
+
+.teasers {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.teaserLabel {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: .22em;
+  color: var(--faint);
+  text-transform: uppercase;
+}
+.teaserBtn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 22px;
+  border-radius: 100px;
+  background: var(--fill-v);
+  border: 1px solid var(--line-2);
+  color: var(--violet-br);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: .02em;
+  cursor: pointer;
+}
+
+/* ── Keyframes ── */
+@keyframes astrixSpin { to { transform: rotate(360deg); } }
+@keyframes astrixSpinRev { to { transform: rotate(-360deg); } }
+@keyframes astrixOrbit { to { transform: rotate(360deg); } }
+@keyframes astrixPulse {
+  0%, 100% { transform: scale(1); opacity: .9; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+@keyframes astrixGlow {
+  0%, 100% { box-shadow: 0 0 30px rgba(139, 124, 240, .4), inset 0 0 20px rgba(139, 124, 240, .3); }
+  50% { box-shadow: 0 0 60px rgba(139, 124, 240, .75), inset 0 0 34px rgba(139, 124, 240, .5); }
+}
+@keyframes astrixTwinkle {
+  0%, 100% { opacity: .25; }
+  50% { opacity: 1; }
+}
+@keyframes astrixFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Десктоп (>=1000px) ── */
+@media (min-width: 1000px) {
+  .topbar { justify-content: space-between; padding: 30px 56px; }
+  .brand { display: flex; }
+  .pill, .pillOn { width: 30px; }
+
+  .kicker { letter-spacing: .44em; }
+  .h1 { font-size: 46px; line-height: 1.2; margin-top: 22px; }
+  .h2 { font-size: 32px; margin-top: 30px; }
+  .sub { font-size: 15.5px; margin-top: 12px; }
+
+  .orb { width: 96px; height: 96px; font-size: 40px; box-shadow: 0 0 50px rgba(139, 124, 240, .5); }
+  .ring { width: 84px; height: 84px; font-size: 34px; box-shadow: 0 0 40px rgba(139, 124, 240, .4); }
+
+  /* intro: 3-колоночная сетка карточек */
+  .optionsIntro { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
+  .optionsIntro .optionCard { flex-direction: column; align-items: flex-start; gap: 10px; padding: 36px 32px; border-radius: 26px; }
+  .optionsIntro .radio { display: none; }
+  .optionsIntro .optTitle { font-size: 22px; }
+  .optionsIntro .optSub { display: block; font-size: 15px; color: var(--muted-2); }
+
+  .dobRow { gap: 12px; margin-top: 44px; }
+  .inpDay { width: 96px; }
+  .inpYear { width: 116px; }
+  .inpDay, .inpYear { padding: 18px 0; font-size: 20px; }
+  .inpMonth { padding: 18px 16px; font-size: 18px; }
+  .textInput { margin-top: 44px; padding: 20px 16px; font-size: 20px; }
+  .chipSlot { margin-top: 28px; }
+  .zodText { font-size: 16.5px; }
+  .zodGlyph { font-size: 23px; }
+  .btn, .btnOff { padding: 19px; font-size: 16px; }
+  .btnName { margin-top: 44px; }
+
+  .loader { width: 320px; height: 320px; }
+  .zodiacRing { width: 308px; height: 308px; }
+  .zSign { font-size: 16px; }
+  .zTop { top: -11px; }
+  .zTR { top: 32px; right: 32px; }
+  .zR { right: -9px; }
+  .zBR { bottom: 32px; right: 32px; }
+  .zB { bottom: -11px; }
+  .zBL { bottom: 32px; left: 32px; }
+  .zL { left: -9px; }
+  .zTL { top: 32px; left: 32px; }
+  .dashRing { width: 242px; height: 242px; }
+  .orbit7 { width: 276px; height: 276px; }
+  .orbit45 { width: 186px; height: 186px; }
+  .planet1 { top: -6px; width: 14px; height: 14px; box-shadow: 0 0 16px 4px rgba(199, 183, 255, .9); }
+  .planet2 { top: -4px; width: 9px; height: 9px; box-shadow: 0 0 12px 3px rgba(139, 124, 240, .9); }
+  .core { width: 150px; height: 150px; }
+  .corePct { font-size: 40px; }
+  .corePct i { font-size: 20px; }
+  .loadingMsg { font-size: 22px; margin-top: 54px; min-height: 28px; }
+  .loadingSub { font-size: 16px; margin-top: 14px; }
+
+  /* result: 2 колонки, левый герой sticky */
+  .result { display: grid; grid-template-columns: 360px 1fr; gap: 56px; align-items: start; padding: 34px 40px 90px; }
+  .resultHero { position: sticky; top: 34px; padding: 38px 32px; margin-bottom: 0; }
+  .scoreRing { width: 190px; height: 190px; margin-top: 30px; }
+  .scoreHole { width: 138px; height: 138px; box-shadow: inset 0 0 24px rgba(139, 124, 240, .35); }
+  .heart { font-size: 17px; }
+  .scoreNum { font-size: 40px; }
+  .scoreNum i { font-size: 18px; }
+
+  .readingBlock + .readingBlock { margin-top: 30px; }
+  .sectionLabel { font-size: 13px; }
+  .readingText { font-size: 17px; line-height: 1.62; margin-top: 12px; }
+
+  .teasers { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 40px; }
+  .teaserLabel { font-size: 12.5px; letter-spacing: .2em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring, .aura, .zodiacRing, .dashRing, .orbit7, .orbit45, .core, .twinkle,
+  .screen, .screenIntro, .loadingScreen, .result { animation: none !important; }
+}

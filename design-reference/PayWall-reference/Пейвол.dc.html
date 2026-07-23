@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#D8CEB9;-webkit-font-smoothing:antialiased;font-family:'Golos Text',system-ui,sans-serif}
+@keyframes sheetUp{from{transform:translateY(102%)}to{transform:translateY(0)}}
+@keyframes modalIn{from{transform:translateY(14px) scale(.97);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+@keyframes scrimIn{from{opacity:0}to{opacity:1}}
+@keyframes twinkle{0%,100%{opacity:.35}50%{opacity:1}}
+</style>
+</helmet>
+
+<section style="padding:40px 44px 46px">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">1</span>
+    <span style="font:600 13px/1.2 'Golos Text',system-ui,sans-serif;color:#1B1A30">Пейвол поверх продукта — мистический оверлей</span>
+  </div>
+  <p style="margin:0 0 30px;font:400 12.5px/1.6 'Golos Text',sans-serif;color:rgba(30,29,52,.58);max-width:76ch">Продукт приглушён и заблюрен, поверх — светлая карточка Astrix с тонким золотым созвездием. На мобайле пейвол приходит нижним шитом, на десктопе — центрированной модалкой. Крестик есть, но композиция ведёт к оформлению подписки.</p>
+
+  <div id="1a" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:#B9954F;color:#fff;border-radius:5px;text-decoration:none">1a</a>
+      <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Мобайл — bottom sheet · Десктоп — центр-модалка</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+      <!-- ============ МОБАЙЛ · BOTTOM SHEET ============ -->
+      <div style="--serif:'Source Serif 4',Georgia,serif;--sans:'Golos Text',system-ui,sans-serif;position:relative;width:390px;height:812px;border-radius:44px;overflow:hidden;background:#DACFB8;box-shadow:0 40px 80px -34px rgba(43,38,24,.5),0 8px 18px rgba(43,38,24,.18);border:1px solid rgba(30,29,52,.1)">
+
+        <!-- заблюренный продукт под шитом -->
+        <div style="position:absolute;inset:0;background:radial-gradient(130% 90% at 50% -8%,#F2EBDB 0%,#E7DDC7 48%,#DACFB8 100%)"></div>
+        <div style="position:absolute;inset:0;filter:{{ blurCss }};opacity:.9">
+          <div style="position:absolute;top:118px;left:22px;right:22px;height:150px;border-radius:22px;background:#FBF7EE;border:1px solid rgba(30,29,52,.06)"></div>
+          <div style="position:absolute;top:288px;left:22px;right:22px;height:96px;border-radius:18px;background:#FBF7EE;opacity:.9"></div>
+          <div style="position:absolute;top:398px;left:22px;width:150px;height:80px;border-radius:16px;background:#EFE7D6;opacity:.85"></div>
+          <div style="position:absolute;top:398px;right:22px;width:150px;height:80px;border-radius:16px;background:#EFE7D6;opacity:.85"></div>
+        </div>
+        <svg viewBox="0 0 390 470" style="position:absolute;top:0;left:0;width:100%;height:470px;opacity:.5;pointer-events:none">
+          <circle cx="300" cy="120" r="70" fill="none" stroke="#B9954F" stroke-width="1" opacity=".2"/>
+          <circle cx="300" cy="120" r="46" fill="none" stroke="#B9954F" stroke-width="1" opacity=".26"/>
+          <ellipse cx="180" cy="150" rx="200" ry="72" transform="rotate(-18 180 150)" fill="none" stroke="#8578A8" stroke-width="1" opacity=".16"/>
+          <circle cx="72" cy="86" r="1.6" fill="#B9954F"/>
+          <circle cx="128" cy="196" r="1.4" fill="#B9954F" opacity=".7"/>
+          <circle cx="336" cy="228" r="1.8" fill="#B9954F"/>
+        </svg>
+        <!-- скрим -->
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,38,24,.14) 0%,rgba(43,38,24,.24) 44%,rgba(43,38,24,.4) 100%)"></div>
+
+        <!-- статус-бар -->
+        <div style="position:absolute;top:0;left:0;right:0;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;color:#26243A;z-index:5">
+          <span style="font-weight:600;letter-spacing:.02em">9:41</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:7px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:9px;background:#26243A;border-radius:1px"></div><div style="width:3px;height:11px;background:#26243A;border-radius:1px"></div></div>
+            <div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #26243A;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#26243A;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#26243A;border-radius:1px"></div></div>
+          </div>
+        </div>
+
+        <!-- ШИТ -->
+        <div style="position:absolute;left:0;right:0;bottom:0">
+          <div style="position:relative;background:#EAE0CE;border-top-left-radius:30px;border-top-right-radius:30px;border-top:1px solid rgba(30,29,52,.06);box-shadow:0 -22px 50px -18px rgba(27,26,48,.35);padding:12px 22px 30px;overflow:hidden">
+
+            <!-- созвездие в шапке шита -->
+            <svg viewBox="0 0 346 190" style="position:absolute;top:-8px;right:-30px;width:280px;height:190px;opacity:.55;pointer-events:none">
+              <g fill="none" stroke="#B9954F" stroke-width="1" opacity=".38">
+                <path d="M60 40 L120 22 L182 54 L250 30 L300 70"/>
+              </g>
+              <circle cx="60" cy="40" r="1.8" fill="#B9954F" style="animation:twinkle 3.4s ease-in-out infinite"/>
+              <circle cx="120" cy="22" r="2.4" fill="#B9954F"/>
+              <circle cx="182" cy="54" r="1.6" fill="#B9954F" style="animation:twinkle 2.8s ease-in-out .6s infinite"/>
+              <circle cx="250" cy="30" r="2" fill="#B9954F"/>
+              <circle cx="300" cy="70" r="1.5" fill="#B9954F" style="animation:twinkle 3.8s ease-in-out 1.1s infinite"/>
+              <path d="M285 96 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5 z" fill="#B9954F" opacity=".8"/>
+            </svg>
+
+            <!-- грабер -->
+            <div style="width:40px;height:4px;border-radius:99px;background:rgba(30,29,52,.18);margin:0 auto 16px"></div>
+
+            <!-- крестик -->
+            <div style="display:{{ closeDisplay }};position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;background:rgba(27,26,48,.05);border:1px solid rgba(30,29,52,.12);align-items:center;justify-content:center;cursor:pointer;z-index:4">
+              <svg width="13" height="13" viewBox="0 0 13 13"><path d="M1 1 L12 12 M12 1 L1 12" stroke="#6E6551" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+
+            <div style="position:relative">
+              <div style="font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B9954F;margin-bottom:12px">Подписка Astrix</div>
+              <h1 style="font-family:var(--serif);font-weight:500;font-size:31px;line-height:1.08;letter-spacing:-.01em;margin:0 0 10px;color:#211F30">Открой полный доступ</h1>
+              <p style="margin:0 0 22px;font-size:14.5px;line-height:1.55;color:#6E6551;max-width:32ch">Демо — только начало. Подписка раскрывает полные разборы во всех сервисах и обновляется каждую неделю.</p>
+
+              <!-- тарифная карточка -->
+              <div style="background:#FBF7EF;border:1px solid rgba(185,149,79,.4);border-radius:22px;padding:20px">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px">
+                  <div style="display:flex;align-items:baseline;gap:6px">
+                    <span style="font-family:var(--serif);font-size:40px;font-weight:500;color:#211F30;line-height:1">399 ₽</span>
+                    <span style="font-size:14px;color:#9A8D72">/ мес</span>
+                  </div>
+                  <span style="display:{{ trialDisplay }};align-items:center;font-size:11px;font-weight:600;letter-spacing:.06em;color:#8A544C;background:#E8CFC9;border-radius:999px;padding:7px 13px">7 дней бесплатно</span>
+                </div>
+                <div style="height:1px;background:rgba(30,29,52,.09);margin-bottom:16px"></div>
+                <div style="display:flex;flex-direction:column;gap:13px">
+                  <div style="display:flex;align-items:center;gap:12px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:14.5px;color:#3A3550">Полные разборы во всех сервисах</span></div>
+                  <div style="display:flex;align-items:center;gap:12px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:14.5px;color:#3A3550">Матрица, Таро, гороскоп и нумерология</span></div>
+                  <div style="display:flex;align-items:center;gap:12px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:14.5px;color:#3A3550">Новые расклады каждую неделю</span></div>
+                  <div style="display:flex;align-items:center;gap:12px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:14.5px;color:#3A3550">Без рекламы и ограничений</span></div>
+                </div>
+              </div>
+
+              <a style="margin-top:18px;height:56px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer">Оформить подписку <span style="font-size:18px">→</span></a>
+              <div style="margin-top:12px;text-align:center;font-size:12.5px;color:#9A8D72">Отмена в любой момент · без скрытых платежей</div>
+              <div style="margin-top:14px;text-align:center;font-size:13.5px;color:#9A8D72;cursor:pointer">Продолжить с демо</div>
+            </div>
+
+            <!-- home indicator -->
+            <div style="width:130px;height:5px;border-radius:99px;background:rgba(30,29,52,.22);margin:22px auto 0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ ДЕСКТОП · ЦЕНТР-МОДАЛКА ============ -->
+      <div style="--serif:'Source Serif 4',Georgia,serif;--sans:'Golos Text',system-ui,sans-serif;position:relative;width:1280px;height:812px;border-radius:16px;overflow:hidden;background:#DACFB8;box-shadow:0 40px 90px -40px rgba(43,38,24,.5),0 8px 20px rgba(43,38,24,.16);border:1px solid rgba(30,29,52,.1);color:#26243A">
+
+        <!-- браузер-чром -->
+        <div style="position:relative;z-index:6;height:46px;background:#E4DAC6;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid rgba(30,29,52,.08)">
+          <div style="display:flex;gap:8px;width:130px"><span style="width:12px;height:12px;border-radius:50%;background:#D0A9A3"></span><span style="width:12px;height:12px;border-radius:50%;background:#D8B884"></span><span style="width:12px;height:12px;border-radius:50%;background:#A7B49B"></span></div>
+          <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:8px;height:28px;padding:0 18px;background:#F3ECDD;border:1px solid rgba(30,29,52,.08);border-radius:999px;font-size:12.5px;color:#6E6551"><svg width="10" height="11" viewBox="0 0 11 12" style="display:block"><rect x="1.5" y="5" width="8" height="6" rx="1.4" style="fill:none;stroke:#9A8D72;stroke-width:1.1"/><path d="M3.2 5 V3.4 a2.3 2.3 0 0 1 4.6 0 V5" style="fill:none;stroke:#9A8D72;stroke-width:1.1"/></svg>astrix.app/matrica/demo</div></div>
+          <div style="width:130px"></div>
+        </div>
+
+        <!-- заблюренный продукт под модалкой -->
+        <div style="position:absolute;top:46px;left:0;right:0;bottom:0;overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%,#F2EBDB 0%,#E7DDC7 52%,#DACFB8 100%)"></div>
+          <div style="position:absolute;inset:0;filter:{{ blurCss }};opacity:.9">
+            <div style="position:absolute;top:40px;left:120px;width:520px;height:56px;border-radius:14px;background:#FBF7EE"></div>
+            <div style="position:absolute;top:118px;left:120px;width:640px;height:200px;border-radius:22px;background:#FBF7EE"></div>
+            <div style="position:absolute;top:340px;left:120px;width:310px;height:120px;border-radius:18px;background:#EFE7D6;opacity:.92"></div>
+            <div style="position:absolute;top:340px;left:450px;width:310px;height:120px;border-radius:18px;background:#EFE7D6;opacity:.92"></div>
+            <div style="position:absolute;top:118px;right:120px;width:360px;height:342px;border-radius:24px;background:#F4EDDE"></div>
+          </div>
+          <svg viewBox="0 0 1280 720" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none">
+            <circle cx="1050" cy="150" r="150" fill="none" stroke="#B9954F" stroke-width="1" opacity=".18"/>
+            <circle cx="1050" cy="150" r="96" fill="none" stroke="#B9954F" stroke-width="1" opacity=".24"/>
+            <ellipse cx="640" cy="200" rx="520" ry="150" transform="rotate(-14 640 200)" fill="none" stroke="#8578A8" stroke-width="1" opacity=".14"/>
+            <circle cx="180" cy="120" r="2" fill="#B9954F"/>
+            <circle cx="920" cy="470" r="1.8" fill="#B9954F" opacity=".7"/>
+            <circle cx="360" cy="520" r="1.6" fill="#B9954F"/>
+          </svg>
+          <div style="position:absolute;inset:0;background:rgba(43,38,24,.3)"></div>
+        </div>
+
+        <!-- МОДАЛКА -->
+        <div style="position:absolute;top:46px;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;z-index:5">
+          <div style="position:relative;width:940px;display:grid;grid-template-columns:1.05fr .95fr;background:#EAE0CE;border:1px solid rgba(30,29,52,.08);border-radius:26px;overflow:hidden;box-shadow:0 44px 90px -30px rgba(27,26,48,.5)">
+
+            <!-- крестик -->
+            <div style="display:{{ closeDisplay }};position:absolute;top:20px;right:20px;width:38px;height:38px;border-radius:50%;background:rgba(27,26,48,.05);border:1px solid rgba(30,29,52,.12);align-items:center;justify-content:center;cursor:pointer;z-index:4">
+              <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#6E6551" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+
+            <!-- левая колонка — мистика -->
+            <div style="position:relative;padding:46px 40px 46px 46px;overflow:hidden">
+              <svg viewBox="0 0 480 300" style="position:absolute;top:-10px;left:0;width:100%;height:300px;opacity:.55;pointer-events:none">
+                <g fill="none" stroke="#B9954F" stroke-width="1" opacity=".34">
+                  <path d="M40 70 L120 40 L210 96 L300 52 L392 104 L360 180"/>
+                </g>
+                <circle cx="40" cy="70" r="2" fill="#B9954F" style="animation:twinkle 3.4s ease-in-out infinite"/>
+                <circle cx="120" cy="40" r="2.6" fill="#B9954F"/>
+                <circle cx="210" cy="96" r="1.7" fill="#B9954F" style="animation:twinkle 2.8s ease-in-out .5s infinite"/>
+                <circle cx="300" cy="52" r="2.2" fill="#B9954F"/>
+                <circle cx="392" cy="104" r="1.6" fill="#B9954F" style="animation:twinkle 3.6s ease-in-out 1s infinite"/>
+                <circle cx="360" cy="180" r="2" fill="#B9954F"/>
+                <path d="M150 200 l1.8 4.8 4.8 1.8 -4.8 1.8 -1.8 4.8 -1.8 -4.8 -4.8 -1.8 4.8 -1.8 z" fill="#B9954F" opacity=".75"/>
+              </svg>
+              <div style="position:relative">
+                <div style="font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:#B9954F;margin-bottom:16px">Подписка Astrix</div>
+                <h1 style="font-family:var(--serif);font-weight:500;font-size:44px;line-height:1.05;letter-spacing:-.02em;margin:0 0 16px;color:#211F30">Открой полный доступ</h1>
+                <p style="margin:0 0 30px;font-size:16px;line-height:1.6;color:#6E6551;max-width:34ch">Демо — только начало. Подписка раскрывает полные разборы во всех сервисах Astrix и обновляется каждую неделю.</p>
+                <div style="display:flex;flex-direction:column;gap:15px">
+                  <div style="display:flex;align-items:center;gap:13px"><svg width="20" height="20" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:15.5px;color:#3A3550">Полные разборы во всех сервисах</span></div>
+                  <div style="display:flex;align-items:center;gap:13px"><svg width="20" height="20" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:15.5px;color:#3A3550">Матрица, Таро, гороскоп и нумерология</span></div>
+                  <div style="display:flex;align-items:center;gap:13px"><svg width="20" height="20" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:15.5px;color:#3A3550">Новые расклады каждую неделю</span></div>
+                  <div style="display:flex;align-items:center;gap:13px"><svg width="20" height="20" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:15.5px;color:#3A3550">Без рекламы и ограничений</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- правая колонка — тариф -->
+            <div style="position:relative;margin:22px 22px 22px 0;background:#FBF7EF;border:1px solid rgba(185,149,79,.4);border-radius:20px;padding:34px 32px;display:flex;flex-direction:column">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
+                <div style="display:flex;align-items:baseline;gap:6px">
+                  <span style="font-family:var(--serif);font-size:48px;font-weight:500;color:#211F30;line-height:1">399 ₽</span>
+                  <span style="font-size:15px;color:#9A8D72">/ мес</span>
+                </div>
+                <span style="display:{{ trialDisplay }};align-items:center;font-size:11.5px;font-weight:600;letter-spacing:.06em;color:#8A544C;background:#E8CFC9;border-radius:999px;padding:8px 14px">7 дней бесплатно</span>
+              </div>
+              <div style="height:1px;background:rgba(30,29,52,.09);margin-bottom:20px"></div>
+              <div style="display:flex;flex-direction:column;gap:15px;margin-bottom:26px">
+                <div style="display:flex;align-items:center;gap:12px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:15px;color:#3A3550">Доступ ко всем сервисам сразу</span></div>
+                <div style="display:flex;align-items:center;gap:12px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:15px;color:#3A3550">Разбор сохраняется в профиле</span></div>
+                <div style="display:flex;align-items:center;gap:12px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="9" fill="#B9954F" fill-opacity=".14"/><path d="M5 9.2 l2.6 2.6 5.2-5.7" fill="none" stroke="#B9954F" stroke-width="1.7"/></svg><span style="font-size:15px;color:#3A3550">Первые 7 дней — бесплатно</span></div>
+              </div>
+              <a style="margin-top:auto;height:58px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer">Оформить подписку <span style="font-size:18px">→</span></a>
+              <div style="margin-top:14px;text-align:center;font-size:12.5px;color:#9A8D72">Отмена в любой момент · без скрытых платежей</div>
+              <div style="margin-top:12px;text-align:center;font-size:13.5px;color:#6E6551">Уже оформили? <span style="font-weight:600;color:#B9954F;cursor:pointer">Войти</span></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1780, &quot;height&quot;: 900 },
+  &quot;backdropBlur&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 9, &quot;min&quot;: 0, &quot;max&quot;: 18, &quot;step&quot;: 1, &quot;unit&quot;: &quot;px&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Фон&quot; },
+  &quot;showClose&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Поведение&quot; },
+  &quot;showTrial&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Содержимое&quot; }
+}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props || {};
+    const n = p.backdropBlur ?? 9;
+    return {
+      blurCss: `blur(${n}px)`,
+      closeDisplay: (p.showClose ?? true) ? 'flex' : 'none',
+      trialDisplay: (p.showTrial ?? true) ? 'inline-flex' : 'none',
+    };
+  }
+}
+</script>
+</body>
+</html>

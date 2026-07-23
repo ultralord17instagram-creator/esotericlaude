@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #201b11; -webkit-font-smoothing: antialiased; }
+  a { color: var(--lock); }
+  a:hover { color: var(--accent-d); }
+  @keyframes caret { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes flick { 0%,100%{opacity:1} 92%{opacity:1} 94%{opacity:.9} 96%{opacity:1} }
+  @keyframes shuffleone { 0%,5%{transform:translate(0,0) rotate(0deg)} 11%,16%{transform:translate(5px,-70px) rotate(-3deg)} 23%{transform:translate(0,0) rotate(0deg)} 100%{transform:translate(0,0) rotate(0deg)} }
+  @keyframes lockpulse { 0%,100%{transform:scale(1);opacity:.9} 50%{transform:scale(1.09);opacity:1} }
+  @media (prefers-reduced-motion: reduce){ .anim{animation:none !important} }
+</style>
+</helmet>
+
+<div style="--screen:#e7d6ac;--screen-2:#ddca9c;--ink:#332e1c;--ink-soft:#5f5029;--muted:#9c8656;--line:#c3ac7a;--accent:#7c8a56;--accent-d:#5c6d40;--accent-l:#9aa675;--glow:#d59a5a;--lock:#bd6335;--wood:#8f7647;--wood-d:#5f4e2d;background-color:#201b11;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 7px),radial-gradient(130% 100% at 50% -12%,#3a2d1580,transparent 55%);padding:56px 60px 96px;font-family:'IBM Plex Mono',monospace;display:flex;flex-direction:column;gap:64px;">
+
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="font-family:'Handjet',monospace;font-weight:800;font-size:44px;color:#efe4c8;letter-spacing:1px;text-shadow:0 0 18px var(--glow);">ТАРО ТЕРМИНАЛ · ПК-ВЕРСИЯ</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#c9a35a;letter-spacing:2px;">DESKTOP · все 9 экранов · 1120×640 · пиксельный стиль</div>
+  </div>
+
+  <!-- ===== 01 BOOT ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">01 · BOOT</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div class="anim" style="height:640px;border-radius:20px;padding:44px 56px;display:flex;flex-direction:column;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 50% 26%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);animation:flick 6s linear infinite;">
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);">TAROT SYSTEM: ONLINE</div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+          <div style="font-family:'Handjet',monospace;font-weight:800;font-size:104px;line-height:.84;color:var(--ink);letter-spacing:2px;text-shadow:0 0 22px var(--glow),0 0 2px #ffffff88;">ТАРО<br>ТЕРМИНАЛ</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;line-height:1.6;color:var(--ink-soft);margin-top:26px;">мини-игра с картой и вопросами к себе<span class="anim" style="animation:blink 1s step-end infinite;color:var(--lock);">▊</span></div>
+          <div style="background:var(--accent);color:#f7efd8;padding:16px 52px;font-family:'Handjet',monospace;font-weight:700;font-size:30px;letter-spacing:1px;box-shadow:inset -4px -4px 0 var(--accent-d),inset 4px 4px 0 var(--accent-l),0 0 0 3px var(--wood-d),0 0 20px #d59a5a66;margin-top:40px;">▶ НАЧАТЬ</div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);text-align:center;">LEVEL 01 · STEP 00-08 · STATUS: READY</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 02 SELECT ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">02 · SELECT</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div style="height:640px;border-radius:20px;padding:44px 56px;display:flex;gap:56px;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 26% 20%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);">
+        <div style="width:340px;display:flex;flex-direction:column;justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);">SELECT MODE · STEP 00-08</div>
+          <div style="font-family:'Handjet',monospace;font-weight:800;font-size:56px;line-height:.94;color:var(--ink);letter-spacing:1px;text-shadow:0 0 14px var(--glow);margin-top:18px;">ВЫБЕРИ СОСТОЯНИЕ</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;line-height:1.8;color:var(--ink-soft);margin-top:22px;">С чем ты сейчас? Выбери одно — терминал подберёт карту под твоё состояние.</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--muted);margin-top:26px;">CHOOSE 1 OF 8</div>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:center;">
+          <div style="background:linear-gradient(180deg,var(--screen),var(--screen-2));border:1.5px solid var(--line);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Тревога <span style="color:var(--muted);">›</span></div>
+          <div style="background:var(--accent);border:1.5px solid var(--accent-d);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:#f7efd8;display:flex;justify-content:space-between;align-items:center;box-shadow:inset -3px -3px 0 var(--accent-d),inset 3px 3px 0 #b6c290,0 0 14px #d59a5a66;">Усталость <span>▶</span></div>
+          <div style="background:linear-gradient(180deg,var(--screen),var(--screen-2));border:1.5px solid var(--line);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Гнев <span style="color:var(--muted);">›</span></div>
+          <div style="background:linear-gradient(180deg,var(--screen),var(--screen-2));border:1.5px solid var(--line);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Пустота <span style="color:var(--muted);">›</span></div>
+          <div style="background:linear-gradient(180deg,var(--screen),var(--screen-2));border:1.5px solid var(--line);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Радость <span style="color:var(--muted);">›</span></div>
+          <div style="background:linear-gradient(180deg,var(--screen),var(--screen-2));border:1.5px solid var(--line);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Спокойствие <span style="color:var(--muted);">›</span></div>
+          <div style="background:linear-gradient(180deg,var(--screen),var(--screen-2));border:1.5px solid var(--line);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Растерянность <span style="color:var(--muted);">›</span></div>
+          <div style="background:linear-gradient(180deg,var(--screen),var(--screen-2));border:1.5px solid var(--line);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Надежда <span style="color:var(--muted);">›</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 03 INTRO ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">03 · INTRO</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div style="height:640px;border-radius:20px;padding:48px 60px;display:flex;flex-direction:column;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 30% 20%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);">
+        <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);"><span>LEVEL START</span><span>STEP 01-08</span></div>
+        <div style="display:flex;gap:6px;margin-top:18px;"><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--line);"></span><span style="flex:1;height:5px;background:var(--line);"></span><span style="flex:1;height:5px;background:var(--line);"></span><span style="flex:1;height:5px;background:var(--line);"></span><span style="flex:1;height:5px;background:var(--line);"></span><span style="flex:1;height:5px;background:var(--line);"></span><span style="flex:1;height:5px;background:var(--line);"></span></div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;max-width:720px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:2px;color:var(--muted);">СОСТОЯНИЕ //</div>
+          <div style="font-family:'Handjet',monospace;font-weight:800;font-size:88px;line-height:.86;color:var(--ink);letter-spacing:1px;text-shadow:0 0 16px var(--glow);margin-top:10px;">УСТАЛОСТЬ</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:18px;line-height:1.85;color:var(--ink);margin-top:30px;">Ты давно на автопилоте. Прежде чем тянуть карту — просто заметь: ты устал не потому, что слаб, а потому что долго нёс.</div>
+        </div>
+        <div style="background:var(--accent);color:#f7efd8;padding:15px 40px;font-family:'Handjet',monospace;font-weight:700;font-size:26px;letter-spacing:1px;box-shadow:inset -4px -4px 0 var(--accent-d),inset 4px 4px 0 var(--accent-l),0 0 0 3px var(--wood-d);width:fit-content;">Далее ▶</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 04 PAUSE ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">04 · PAUSE</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div style="height:640px;border-radius:20px;padding:48px 60px;display:flex;flex-direction:column;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 50% 20%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);">
+        <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);"><span>SELF-CHECK</span><span>STEP 02-08 · STATUS: PAUSE</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:32px;max-width:640px;margin:0 auto;">
+          <div style="width:96px;height:96px;border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px var(--glow);"><span style="width:9px;height:34px;background:var(--accent);margin:0 5px;"></span><span style="width:9px;height:34px;background:var(--accent);margin:0 5px;"></span></div>
+          <div style="font-family:'Handjet',monospace;font-weight:800;font-size:64px;color:var(--ink);letter-spacing:1px;text-shadow:0 0 14px var(--glow);">СДЕЛАЙ ПАУЗУ</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:18px;line-height:1.85;color:var(--ink);">Сделай один медленный вдох. Скажи себе: «Сейчас я разрешаю себе просто быть».</div>
+          <div style="background:var(--accent);color:#f7efd8;padding:15px 44px;font-family:'Handjet',monospace;font-weight:700;font-size:26px;letter-spacing:1px;box-shadow:inset -4px -4px 0 var(--accent-d),inset 4px 4px 0 var(--accent-l),0 0 0 3px var(--wood-d);">Я готов ▶</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 05 DRAW ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">05 · DRAW</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div style="height:640px;border-radius:20px;padding:48px 60px;display:flex;gap:64px;align-items:center;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 30% 20%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);">
+        <div style="width:420px;display:flex;align-items:center;justify-content:center;">
+          <div style="position:relative;width:230px;height:360px;">
+            <div style="position:absolute;left:20px;top:60px;width:190px;aspect-ratio:350/470;background:repeating-linear-gradient(0deg,#00000022 0 6px,transparent 6px 12px),repeating-linear-gradient(90deg,#00000022 0 6px,transparent 6px 12px),linear-gradient(160deg,var(--wood-d),var(--accent-d));box-shadow:inset 0 0 0 3px var(--glow),inset 0 0 0 6px var(--wood-d),inset -5px -5px 0 #00000044;"></div>
+            <div style="position:absolute;left:23px;top:56px;width:190px;aspect-ratio:350/470;background:repeating-linear-gradient(0deg,#00000022 0 6px,transparent 6px 12px),repeating-linear-gradient(90deg,#00000022 0 6px,transparent 6px 12px),linear-gradient(160deg,var(--wood-d),var(--accent-d));box-shadow:inset 0 0 0 3px var(--glow),inset 0 0 0 6px var(--wood-d),inset -5px -5px 0 #00000044;"></div>
+            <div class="anim" style="position:absolute;left:26px;top:52px;width:190px;aspect-ratio:350/470;background:repeating-linear-gradient(0deg,#00000022 0 6px,transparent 6px 12px),repeating-linear-gradient(90deg,#00000022 0 6px,transparent 6px 12px),linear-gradient(160deg,var(--wood-d),var(--accent-d));box-shadow:inset 0 0 0 3px var(--glow),inset 0 0 0 6px var(--wood-d),inset -5px -5px 0 #00000044;display:flex;align-items:center;justify-content:center;animation:shuffleone 4s steps(5) infinite;"><svg width="76" height="76" viewBox="0 0 12 12" style="shape-rendering:crispEdges;"><g fill="var(--glow)"><rect x="5" y="0" width="2" height="12"/><rect x="0" y="5" width="12" height="2"/><rect x="2" y="2" width="2" height="2"/><rect x="8" y="2" width="2" height="2"/><rect x="2" y="8" width="2" height="2"/><rect x="8" y="8" width="2" height="2"/></g></svg></div>
+            <div class="anim" style="position:absolute;left:26px;top:52px;width:190px;aspect-ratio:350/470;background:repeating-linear-gradient(0deg,#00000022 0 6px,transparent 6px 12px),repeating-linear-gradient(90deg,#00000022 0 6px,transparent 6px 12px),linear-gradient(160deg,var(--wood-d),var(--accent-d));box-shadow:inset 0 0 0 3px var(--glow),inset 0 0 0 6px var(--wood-d),inset -5px -5px 0 #00000044;display:flex;align-items:center;justify-content:center;animation:shuffleone 4s steps(5) infinite -2s;"><svg width="76" height="76" viewBox="0 0 12 12" style="shape-rendering:crispEdges;"><g fill="var(--glow)"><rect x="5" y="0" width="2" height="12"/><rect x="0" y="5" width="12" height="2"/><rect x="2" y="2" width="2" height="2"/><rect x="8" y="2" width="2" height="2"/><rect x="2" y="8" width="2" height="2"/><rect x="8" y="8" width="2" height="2"/></g></svg></div>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);max-width:420px;"><span>SHUFFLING…</span><span>CARD: HIDDEN</span></div>
+          <div style="font-family:'Handjet',monospace;font-weight:800;font-size:52px;line-height:.9;color:var(--ink);letter-spacing:1px;text-shadow:0 0 14px var(--glow);margin-top:20px;">КОЛОДА<br>ПЕРЕМЕШИВАЕТСЯ</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:18px;line-height:1.85;color:var(--ink);margin-top:22px;max-width:420px;">Карты тасуются по одной. Когда почувствуешь, что готов — тяни свою.</div>
+          <div style="background:var(--accent);color:#f7efd8;padding:15px 44px;font-family:'Handjet',monospace;font-weight:700;font-size:26px;letter-spacing:1px;box-shadow:inset -4px -4px 0 var(--accent-d),inset 4px 4px 0 var(--accent-l),0 0 0 3px var(--wood-d),0 0 18px #d59a5a55;width:fit-content;margin-top:32px;">Вытянуть ▶</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 06 REVEAL ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">06 · REVEAL</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div style="height:640px;border-radius:20px;padding:48px 60px;display:flex;gap:64px;align-items:center;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 30% 20%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <div style="height:480px;aspect-ratio:164/262;overflow:hidden;box-shadow:0 0 0 3px var(--glow),0 0 0 6px var(--wood-d),0 0 30px #d59a5a77,0 12px 0 #00000022;"><img src="assets/card-moon-art.png" style="width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated;" alt="Аркан Луна"></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--muted);">XVIII · ЛУНА</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);max-width:440px;"><span>CARD: REVEAL</span><span>◷ 10s · Пропустить ⏭</span></div>
+          <div style="font-family:'Handjet',monospace;font-weight:800;font-size:72px;line-height:.88;color:var(--ink);letter-spacing:1px;text-shadow:0 0 16px var(--glow);margin-top:22px;">ЛУНА</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:18px;line-height:1.85;color:var(--ink);margin-top:22px;max-width:440px;">Посмотри на изображение. Что зацепило первым — свет луны или фигура у воды? Задержись на этом ощущении.</div>
+          <div style="background:var(--accent);color:#f7efd8;padding:15px 44px;font-family:'Handjet',monospace;font-weight:700;font-size:26px;letter-spacing:1px;box-shadow:inset -4px -4px 0 var(--accent-d),inset 4px 4px 0 var(--accent-l),0 0 0 3px var(--wood-d);width:fit-content;margin-top:34px;">Далее ▶</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 07 QUESTION ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">07 · QUESTION</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div style="height:640px;border-radius:20px;padding:44px 56px;display:flex;gap:56px;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 26% 20%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);">
+        <div style="width:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+          <div style="height:340px;aspect-ratio:164/262;overflow:hidden;box-shadow:0 0 0 3px var(--glow),0 0 0 6px var(--wood-d),0 0 22px #d59a5a66,0 10px 0 #00000022;"><img src="assets/card-moon-art.png" style="width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated;" alt="Аркан Луна"></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--muted);">XVIII · ЛУНА · закреплена</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="width:38px;height:38px;flex-shrink:0;border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--ink-soft);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">‹</div>
+            <div style="flex:1;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);"><span>QUESTION MODE</span><span>STEP 05-08</span></div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--muted);margin-top:24px;">ВОПРОС 1 / 3 //</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:24px;line-height:1.4;color:var(--ink);margin-top:10px;max-width:520px;">Какая деталь на карте ощущается как знак для тебя? Что откликается первым?</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px;">
+            <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:18px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Фигура</div>
+            <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:18px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Свет</div>
+            <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:18px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Символ</div>
+            <div style="border:1.5px solid var(--line);background:linear-gradient(180deg,var(--screen),var(--screen-2));padding:18px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink);box-shadow:inset -2px -2px 0 #0000000f,inset 2px 2px 0 #ffffff88;">Общее настроение</div>
+          </div>
+          <div style="margin-top:14px;border:1.5px dashed var(--line);padding:18px 16px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--muted);background:#00000008;">Опиши своими словами (по желанию)</div>
+          <div style="flex:1;"></div>
+          <div style="background:#c9be9c;color:#8f8768;padding:15px 44px;font-family:'Handjet',monospace;font-weight:700;font-size:26px;letter-spacing:1px;box-shadow:0 0 0 3px #a49a78;opacity:.75;width:fit-content;">ДАЛЕЕ ▶</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 08 READING ===== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a35a;letter-spacing:2px;">08 · READING</div>
+    <div style="width:1120px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:30px;padding:16px;box-shadow:inset 0 2px 4px #ffffff33,inset 0 -8px 14px #00000055,0 18px 40px #00000077;">
+      <div style="height:640px;border-radius:20px;padding:44px 56px;display:flex;gap:56px;position:relative;overflow:hidden;background:repeating-linear-gradient(#00000010 0 1px,transparent 1px 3px),radial-gradient(120% 120% at 26% 20%,var(--screen),var(--screen-2));box-shadow:inset 0 0 90px #4a2f1840,inset 0 0 0 2px var(--wood-d);">
+        <div style="width:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+          <div style="height:390px;aspect-ratio:164/262;overflow:hidden;box-shadow:0 0 0 3px var(--glow),0 0 0 6px var(--wood-d),0 0 26px #d59a5a77,0 12px 0 #00000022;"><img src="assets/card-moon-art.png" style="width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated;" alt="Аркан Луна"></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--muted);">XVIII · ЛУНА</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;">
+          <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--accent-d);text-shadow:0 0 6px var(--glow);"><span>TERMINAL READS…</span><span>STATUS: DONE · STEP 07-08</span></div>
+          <div style="display:flex;gap:6px;margin-top:16px;"><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span><span style="flex:1;height:5px;background:var(--accent);box-shadow:0 0 10px var(--glow);"></span></div>
+          <div style="font-family:'Handjet',monospace;font-weight:800;font-size:52px;color:var(--ink);letter-spacing:1px;text-shadow:0 0 14px var(--glow);margin-top:20px;">ТВОЙ ВЫВОД</div>
+          <div style="margin-top:20px;border:2px solid var(--line);background:linear-gradient(180deg,#f0e6cc,#e8dcbf);box-shadow:inset 0 1px 0 #ffffff88,inset 0 0 24px #d59a5a1f;padding:24px 22px;display:flex;flex-direction:column;gap:14px;max-width:560px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.65;color:var(--ink);">Свою привязанность ты назвала <span style="color:var(--accent-d);font-weight:600;">«Ожидание»</span>. А не хватает тебе <span style="color:var(--accent-d);font-weight:600;">«Свободы»</span>.</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.65;color:var(--ink);">Карта «Луна» показывает: дело не в нём, а в том, что ты сама себя держишь. Её ключ — это <span style="color:var(--lock);font-weight:600;">«Иллюзии»</span>.</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.65;color:var(--ink);font-style:italic;">Иногда мы скучаем не по человеку, а по той версии себя, которая рядом с ним оживала.<span class="anim" style="animation:caret 1s step-end infinite;color:var(--lock);font-style:normal;">▊</span></div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);margin-top:26px;">ЧТО ОТКРОЕТСЯ В ПОЛНОМ РАЗБОРЕ</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;margin-top:14px;max-width:560px;">
+            <div style="display:flex;gap:11px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Полное значение твоей карты</div>
+            <div style="display:flex;gap:11px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Что делать с этим состоянием</div>
+            <div style="display:flex;gap:11px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Личный вывод и шаг на сегодня</div>
+            <div style="display:flex;gap:11px;align-items:flex-start;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink);"><span style="color:var(--accent-d);">✦</span>Доступ ко всем 22 картам</div>
+          </div>
+          <div style="flex:1;"></div>
+          <div style="background:var(--lock);color:#f7efd8;padding:15px 44px;font-family:'Handjet',monospace;font-weight:700;font-size:26px;letter-spacing:1px;box-shadow:inset -4px -4px 0 #8f4a28,inset 4px 4px 0 #d98a63,0 0 0 3px var(--wood-d);width:fit-content;margin-top:20px;">Что с этим делать →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

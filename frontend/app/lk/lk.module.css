@@ -1,62 +1,165 @@
-.page { padding: 48px 24px; min-height: 100vh; background: var(--color-surface); }
-.container { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-.title { font-size: var(--font-size-2xl); font-weight: 700; margin-bottom: 8px; }
-.section { display: flex; flex-direction: column; gap: 12px; }
-.sectionTitle { font-size: var(--font-size-lg); font-weight: 600; }
-.email { color: var(--color-text-secondary); }
-.statusActive { color: var(--color-success); font-weight: 500; }
-.statusInactive { color: var(--color-text-secondary); }
-.error { color: var(--color-error); font-size: var(--font-size-sm); }
-.actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+/* ── Оболочка страницы ──────────────────────────────────────────────────── */
+.page { padding: 40px 24px 72px; min-height: 100vh; background: var(--bg-base); }
+.container { max-width: 1160px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
 
-.productsGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-@media (min-width: 500px) { .productsGrid { grid-template-columns: repeat(4, 1fr); } }
-.productCard {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  padding: 16px; border: 1px solid var(--color-border);
-  border-radius: var(--radius-md); background: var(--color-bg);
-  color: var(--color-text-primary); transition: box-shadow 0.15s;
+.pageHeader { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: var(--text-sm); font-weight: 600; color: var(--accent); }
+.title { font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); }
+
+/* Двухколоночный макет: слева дашборд, справа сайдбар. Мобайл — в стопку. */
+.layout { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: start; }
+@media (min-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr) 360px; gap: 26px; } }
+
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Тёмный герой «Твой день» ───────────────────────────────────────────── */
+.hero {
+  position: relative; overflow: hidden;
+  background: var(--bg-deep); border-radius: 24px;
+  padding: 34px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 28px;
+  margin: 0 0 22px;
 }
-.productCard:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-decoration: none; }
-.productIcon { font-size: 32px; }
-.productName { font-size: var(--font-size-xs); font-weight: 500; text-align: center; }
+.heroSky { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.9; pointer-events: none; }
+.heroBody { position: relative; flex: 1; min-width: 0; }
+.heroEyebrow {
+  font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+}
+.heroDate {
+  font-family: var(--font-heading); font-weight: 600; font-size: 34px;
+  line-height: 1.06; letter-spacing: -0.01em; color: #F7F1E4; margin: 0 0 8px;
+}
+.heroSubtitle { font-size: var(--text-base); line-height: 1.55; color: rgba(243, 236, 219, 0.62); max-width: 44ch; margin: 0; }
 
-.profileForm { display: flex; flex-direction: column; gap: 16px; }
-.label { font-size: var(--font-size-sm); font-weight: 500; display: block; margin-bottom: 6px; }
-.select {
-  width: 100%; padding: 12px 16px;
-  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
-  font-family: var(--font-sans); font-size: var(--font-size-base);
-  background: var(--color-bg); color: var(--color-text-primary);
+/* Линейная шкала прогресса — мобайл/планшет */
+.heroProgress { position: relative; margin: 20px 0 0; }
+.progressTop { display: flex; align-items: center; justify-content: space-between; font-size: var(--text-sm); color: rgba(243, 236, 219, 0.72); margin: 0 0 9px; }
+.progressCount { font-weight: 600; color: #F7F1E4; }
+.progressBar { height: 7px; border-radius: 4px; background: rgba(243, 236, 219, 0.16); overflow: hidden; }
+.progressFill { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.4s var(--ease-out); }
+.progressDone { margin: 10px 0 0; font-size: var(--text-sm); color: var(--accent-glow); }
+
+/* Кольцо прогресса — десктоп */
+.heroRing { position: relative; width: 132px; height: 132px; flex: none; display: none; }
+.heroRingTrack { fill: none; stroke: rgba(243, 236, 219, 0.16); stroke-width: 10; }
+.heroRingFill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; transition: stroke-dasharray 0.5s var(--ease-out); }
+.heroRingCenter { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #F7F1E4; }
+.heroRingValue { font-family: var(--font-heading); font-size: 30px; font-weight: 600; line-height: 1; }
+.heroRingLabel { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243, 236, 219, 0.6); margin-top: 4px; }
+
+@media (min-width: 960px) {
+  .hero { padding: 38px 42px; }
+  .heroRing { display: block; }
+  .heroProgress { display: none; }
+  .heroDate { font-size: 38px; }
 }
 
-/* ── Дашборд дня ─────────────────────────────────────────────────────────── */
-.dashHeader { display: flex; flex-direction: column; gap: 2px; }
-.dashGreeting { font-size: var(--font-size-lg); font-weight: 600; }
-.dashDate { color: var(--color-text-secondary); font-size: var(--font-size-sm); text-transform: capitalize; }
-
-.progressWrap { display: flex; flex-direction: column; gap: 6px; }
-.progressLabel { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
-.progressBar { height: 8px; border-radius: 999px; background: var(--color-border); overflow: hidden; }
-.progressFill { height: 100%; border-radius: 999px; background: var(--accent); transition: width 0.3s var(--ease-out); }
-.progressDone { font-size: var(--font-size-sm); color: var(--accent); }
-
-.dashGrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-@media (min-width: 500px) { .dashGrid { grid-template-columns: repeat(2, 1fr); } }
+/* ── Сетка карточек дня 2×2 ─────────────────────────────────────────────── */
+.dashGrid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+@media (min-width: 560px) { .dashGrid { grid-template-columns: repeat(2, 1fr); } }
 
 .dashCard {
-  display: flex; flex-direction: column; gap: 10px;
-  padding: 16px; border: 1px dashed var(--color-border);
-  border-radius: var(--radius-md); background: var(--color-bg);
+  display: flex; flex-direction: column;
+  padding: 26px; border: 1px solid var(--border);
+  border-radius: 22px; background: var(--bg-raised);
 }
-.dashCardOpen { border-style: solid; border-color: var(--border-accent); background: var(--bg-raised); }
-.dashCardLocked { opacity: 0.85; }
-.dashCardHead { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.dashCardTitle { font-weight: 600; }
-.dashStatusOpen { font-size: var(--font-size-xs); color: var(--accent); white-space: nowrap; }
-.dashStatusClosed { font-size: var(--font-size-xs); color: var(--color-text-muted); white-space: nowrap; }
-.dashCardText { color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.6; }
-.dashCardBody { display: flex; flex-direction: column; gap: 8px; }
-.dashCardValue { font-weight: 600; }
-.dashProductLink { color: var(--accent); font-size: var(--font-size-sm); font-weight: 500; }
-.dashProfileLink { color: var(--accent); font-size: var(--font-size-sm); font-weight: 500; align-self: flex-start; }
+.dashCardLocked { background: #E3D8C1; border-color: transparent; }
+
+.dashCardHead { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 12px; }
+.dashCardTitle { font-size: var(--text-base); font-weight: 600; color: var(--text-primary); }
+.dashCardTitleMuted { color: var(--text-secondary); }
+
+.badgeOpen {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: var(--text-xs); font-weight: 600; color: var(--accent);
+  background: rgba(185, 149, 79, 0.14); padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+}
+.lockRow { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+
+.dashCardValue { font-family: var(--font-heading); font-size: 21px; font-weight: 600; color: var(--text-primary); margin: 0 0 12px; }
+.dashCardValueMuted { color: var(--text-muted); }
+
+/* Число дня: кружок с цифрой */
+.numRow { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; }
+.numCircle {
+  width: 54px; height: 54px; flex: none; border-radius: 50%;
+  border: 1.5px solid var(--accent); display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading); font-size: 26px; font-weight: 600; color: var(--accent);
+}
+
+/* Лунный день: глиф луны */
+.lunarRow { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+.lunarValue { font-family: var(--font-heading); font-size: 18px; font-weight: 600; color: var(--text-primary); }
+
+.dashCardText { color: var(--text-secondary); font-size: 14.5px; line-height: 1.65; margin: 0 0 16px; }
+
+.dashProductLink { font-size: var(--text-sm); font-weight: 600; color: var(--accent); margin-top: auto; }
+.dashProfileLink { font-size: var(--text-sm); font-weight: 600; color: var(--accent); align-self: flex-start; }
+.openBtn {
+  margin-top: auto; align-self: flex-start;
+  height: 44px; padding: 0 22px; border-radius: 999px;
+  background: transparent; border: 1px solid var(--border-accent);
+  color: var(--text-primary); font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600;
+  cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.openBtn:hover { background: var(--accent-dim); }
+
+/* ── Сайдбар: карточки Профиль / Подписка / Аккаунт ─────────────────────── */
+.card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 22px; padding: 28px; }
+.cardTitle { font-family: var(--font-heading); font-size: 21px; font-weight: 600; color: var(--text-primary); margin: 0 0 18px; }
+
+.profileForm { display: flex; flex-direction: column; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.label { font-size: 12.5px; font-weight: 500; color: var(--text-secondary); }
+.input {
+  width: 100%; height: 50px; border-radius: 13px;
+  border: 1px solid rgba(30, 29, 52, 0.14); background: #fff;
+  padding: 0 16px; font-family: var(--font-body); font-size: var(--text-base);
+  color: var(--text-primary); outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+.selectWrap { position: relative; }
+.select {
+  width: 100%; height: 50px; border-radius: 13px;
+  border: 1px solid rgba(30, 29, 52, 0.14); background: #fff;
+  padding: 0 16px; font-family: var(--font-body); font-size: var(--text-base);
+  color: var(--text-primary); appearance: none; outline: none;
+}
+.select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+.chevron { position: absolute; right: 16px; top: 18px; pointer-events: none; }
+
+.saveBtn {
+  width: 100%; height: 52px; border-radius: 999px;
+  background: var(--bg-deep); color: var(--text-on-dark);
+  font-family: var(--font-body); font-size: var(--text-base); font-weight: 600;
+  border: none; cursor: pointer; margin-top: 4px; transition: opacity 0.2s;
+}
+.saveBtn:hover:not(:disabled) { opacity: 0.9; }
+.saveBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.outlineBtn {
+  width: 100%; height: 50px; border-radius: 999px;
+  background: transparent; color: var(--text-primary);
+  font-family: var(--font-body); font-size: 14.5px; font-weight: 600;
+  border: 1px solid rgba(30, 29, 52, 0.26); cursor: pointer; transition: background 0.2s;
+}
+.outlineBtn:hover:not(:disabled) { background: var(--accent-dim); }
+.outlineBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.unlockBtn {
+  width: 100%; height: 52px; border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent-light), var(--accent)); color: var(--bg-deep);
+  font-family: var(--font-body); font-size: var(--text-base); font-weight: 600;
+  border: none; cursor: pointer; transition: opacity 0.2s;
+}
+.unlockBtn:hover:not(:disabled) { opacity: 0.92; }
+.unlockBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.subStatus { display: inline-flex; align-items: center; gap: 7px; font-size: var(--text-sm); font-weight: 600; color: var(--color-success); margin: 0 0 20px; }
+.subDot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-success); }
+.subInactive { font-size: var(--text-sm); color: var(--text-secondary); margin: 0 0 20px; }
+.error { color: var(--color-error); font-size: var(--text-sm); margin: 0 0 14px; }
+
+.accEmail { font-size: var(--text-sm); color: var(--accent); margin: 0 0 20px; }

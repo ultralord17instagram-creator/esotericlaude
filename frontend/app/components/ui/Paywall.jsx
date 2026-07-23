@@ -29,16 +29,14 @@ export default function Paywall() {
       <div className={styles.eyebrow}>Подписка Astrix</div>
       <h2 className={styles.title}>Открой полный доступ</h2>
       <p className={styles.sub}>
-        Демо — только начало. Подписка раскрывает полные разборы во всех сервисах и обновляется каждую неделю.
+        Он раскрывает полные разборы во всех сервисах.
       </p>
 
       <div className={styles.plan}>
         <div className={styles.planHead}>
           <div className={styles.price}>
-            <span className={styles.priceNum}>399 ₽</span>
-            <span className={styles.priceUnit}>/ мес</span>
+            <span className={styles.priceNum}>7 ₽</span>
           </div>
-          <span className={styles.trial}>7 дней бесплатно</span>
         </div>
         <div className={styles.planDivider} />
         <ul className={styles.features}>
@@ -55,7 +53,7 @@ export default function Paywall() {
       </div>
 
       <button className={styles.cta} onClick={() => router.push(user ? '/lk' : '/register')}>
-        Оформить подписку <span aria-hidden>→</span>
+        Оформить <span aria-hidden>→</span>
       </button>
       <p className={styles.fine}>Отмена в любой момент · без скрытых платежей</p>
       {!user && (

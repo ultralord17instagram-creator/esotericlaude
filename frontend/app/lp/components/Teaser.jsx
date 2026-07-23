@@ -4,7 +4,7 @@ import { resolveCopy, LOCKED_QUESTIONS_TAIL } from '../../content/landings/love-
 import { relationshipPoint } from '../logic/compat.js'
 import styles from '../lp.module.css'
 
-export default function Teaser({ landing, matrixData, onRestart }) {
+export default function Teaser({ landing, matrixData }) {
   const center = matrixData.nodes.center
   const copy = resolveCopy(center)
   const point = relationshipPoint(matrixData.nodes)
@@ -38,7 +38,7 @@ export default function Teaser({ landing, matrixData, onRestart }) {
           Ответы уже рассчитаны по твоей дате. Осталось их открыть.
         </div>
 
-        <Paywall slug={landing.slug} heading={landing.paywall.heading} payoffs={landing.paywall.payoffs} onRestart={onRestart} />
+        <Paywall slug={landing.slug} ctaOnly />
       </div>
     </section>
   )

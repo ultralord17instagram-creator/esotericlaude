@@ -61,7 +61,8 @@ export default function LandingClient({ landing }) {
   }
 
   if (phase === 'hero') return <Hero hero={landing.hero} onStart={handleStart} />
-  if (phase === 'quiz') return <Quiz steps={landing.quiz.steps} onComplete={handleComplete} />
+  if (phase === 'quiz')
+    return <Quiz steps={landing.quiz.steps} onComplete={handleComplete} onBack={() => setPhase('hero')} />
   if (phase === 'calculating') return <Calculating onDone={handleCalculated} />
   if (phase === 'verdict')
     return <Verdict answers={answers} matrixData={matrixData} onNext={handleVerdictNext} />

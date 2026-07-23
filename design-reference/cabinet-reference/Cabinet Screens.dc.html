@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#D8CEB9;-webkit-font-smoothing:antialiased;font-family:'Golos Text',system-ui,sans-serif}
+.optw:target [data-badge]{background:#B9954F!important;color:#fff!important}
+input,button,select,textarea{font-family:'Golos Text',system-ui,sans-serif}
+input::placeholder{color:#A99E86}
+a{color:#B9954F;text-decoration:none}
+a:hover{color:#9E7E3E}
+</style>
+</helmet>
+
+<section style="padding:44px 48px 60px;--serif:'Source Serif 4',Georgia,serif;--sans:'Golos Text',system-ui,sans-serif">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">3</span>
+    <span style="font:600 13px/1.2 'Golos Text',system-ui,sans-serif;color:#1B1A30">Личный кабинет — ПК-версия (по мотивам 1b)</span>
+  </div>
+  <p style="margin:0 0 34px;font:400 12.5px/1.6 'Golos Text',sans-serif;color:rgba(30,29,52,.58);max-width:82ch">Десктоп 1440px. Тёмный «небесный» блок «Твой день» с кольцом прогресса вверху, ниже — сетка карточек дня 2×2, справа — сайдбар: профиль, подписка, аккаунт. Открытое состояние (профиль заполнен).</p>
+
+  <div class="optw" id="3a" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <a data-badge href="#3a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px">3a</a>
+      <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">ПК · дашборд-сетка + сайдбар настроек</span>
+    </div>
+
+    <div data-screen-label="Кабинет · ПК (3a)" style="width:1440px;background:#EFE7D6;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(27,26,48,.55),0 8px 20px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.08);color:#26243A;font-family:var(--sans)">
+      <!-- browser chrome -->
+      <div style="height:46px;background:#E4DAC6;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid rgba(30,29,52,.08)">
+        <div style="display:flex;gap:8px;width:130px"><span style="width:12px;height:12px;border-radius:50%;background:#D0A9A3"></span><span style="width:12px;height:12px;border-radius:50%;background:#D8B884"></span><span style="width:12px;height:12px;border-radius:50%;background:#A7B49B"></span></div>
+        <div style="flex:1;display:flex;justify-content:center"><div style="display:flex;align-items:center;gap:8px;height:28px;padding:0 18px;background:#F3ECDD;border:1px solid rgba(30,29,52,.08);border-radius:999px;font-size:12.5px;color:#6E6551">astrix.app/cabinet</div></div>
+        <div style="width:130px"></div>
+      </div>
+
+      <!-- app header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 44px;border-bottom:1px solid rgba(30,29,52,.08)">
+        <div style="display:flex;align-items:center;gap:11px"><svg width="30" height="30" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#EFE7D6"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg><span style="font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#211F30">Astrix</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-size:15px;font-weight:600;color:#26243A">Астра</span><div style="width:40px;height:40px;border-radius:50%;background:#1B1A30;display:flex;align-items:center;justify-content:center;color:#F3ECDB;font-size:15px;font-weight:600">А</div></div>
+      </div>
+
+      <!-- content -->
+      <div style="max-width:1200px;margin:0 auto;padding:40px 44px 56px">
+        <div style="margin:0 0 28px">
+          <div style="font-size:13.5px;font-weight:600;color:#B9954F;margin:0 0 6px">С возвращением, Астра</div>
+          <h1 style="font-family:var(--serif);font-weight:600;font-size:44px;line-height:1.04;letter-spacing:-.01em;margin:0;color:#211F30">Личный кабинет</h1>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:26px;align-items:start">
+
+          <!-- MAIN -->
+          <div>
+            <!-- Твой день hero -->
+            <div style="background:#1B1A30;border-radius:24px;position:relative;overflow:hidden;padding:38px 42px;display:flex;align-items:center;justify-content:space-between;gap:30px;margin:0 0 24px">
+              <svg viewBox="0 0 760 220" width="760" height="220" style="position:absolute;inset:0;opacity:.9"><circle cx="80" cy="50" r="1.4" fill="#F3ECDB" opacity=".7"></circle><circle cx="220" cy="34" r="1.8" fill="#F3ECDB" opacity=".9"></circle><circle cx="520" cy="46" r="1.5" fill="#F3ECDB" opacity=".6"></circle><circle cx="660" cy="120" r="1.7" fill="#F3ECDB" opacity=".8"></circle><circle cx="120" cy="150" r="1.4" fill="#F3ECDB" opacity=".6"></circle><circle cx="600" cy="180" r="1.4" fill="#F3ECDB" opacity=".5"></circle><path d="M220 34 L320 90 L430 72 L520 46" style="fill:none;stroke:#B9954F;stroke-width:.9;opacity:.5"></path><circle cx="320" cy="90" r="2.6" fill="#B9954F"></circle><circle cx="430" cy="72" r="2.2" fill="#B9954F"></circle><path d="M560 90 l1.3 5.4 5.4 1.3 -5.4 1.3 -1.3 5.4 -1.3 -5.4 -5.4 -1.3 5.4 -1.3 z" fill="#F3ECDB" opacity=".85"></path></svg>
+              <div style="position:relative">
+                <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#B9954F;margin:0 0 10px">Твой день</div>
+                <h2 style="font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.06;letter-spacing:-.01em;margin:0 0 8px;color:#F7F1E4">Суббота, 11 Июля</h2>
+                <p style="margin:0;font-size:15px;line-height:1.55;color:rgba(243,236,219,.62);max-width:44ch">Небо уже сверило твой маршрут. Осталась одна карточка — заполни профиль, чтобы открыть.</p>
+              </div>
+              <div style="position:relative;width:132px;height:132px;flex:none">
+                <svg width="132" height="132" viewBox="0 0 132 132"><circle cx="66" cy="66" r="52" fill="none" stroke="rgba(243,236,219,.16)" stroke-width="10"></circle><circle cx="66" cy="66" r="52" fill="none" stroke="#B9954F" stroke-width="10" stroke-linecap="round" stroke-dasharray="245 327" transform="rotate(-90 66 66)"></circle></svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F7F1E4"><span style="font-family:var(--serif);font-size:30px;font-weight:600;line-height:1">3/4</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(243,236,219,.6);margin-top:4px">открыто</span></div>
+              </div>
+            </div>
+
+            <!-- day cards 2x2 -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <!-- Карта дня -->
+              <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:22px;padding:28px;display:flex;flex-direction:column">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px"><span style="font-size:16px;font-weight:600;color:#211F30">Карта дня</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+                <div style="font-family:var(--serif);font-size:22px;font-weight:600;color:#211F30;margin:0 0 12px">Отшельник</div>
+                <p style="margin:0 0 18px;font-size:14.5px;line-height:1.65;color:#8C8069">Сегодня хорошо побыть с собой. Отшельник зовёт сбавить шум, отойти в сторону и услышать собственный голос. Ответы, которые ищешь снаружи, чаще находятся в тишине внутри.</p>
+                <a href="#" style="font-size:14px;font-weight:600;margin-top:auto">Открыть полностью в «Таро» →</a>
+              </div>
+              <!-- Число дня -->
+              <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:22px;padding:28px;display:flex;flex-direction:column">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px"><span style="font-size:16px;font-weight:600;color:#211F30">Число дня</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+                <div style="display:flex;align-items:center;gap:14px;margin:0 0 14px"><div style="width:54px;height:54px;flex:none;border-radius:50%;border:1.5px solid #B9954F;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:28px;font-weight:600;color:#B9954F">7</div><div style="font-family:var(--serif);font-size:19px;font-weight:600;color:#211F30;line-height:1.2">Семёрка ·<br>Наблюдатель</div></div>
+                <p style="margin:0 0 18px;font-size:14.5px;line-height:1.65;color:#8C8069">Семёрка зовёт сбавить темп и присмотреться. Сегодня важнее понять, чем сделать — ответы приходят через наблюдение и тишину. Доверься деталям, в них подсказка.</p>
+                <a href="#" style="font-size:14px;font-weight:600;margin-top:auto">Открыть полностью в «Нумерология» →</a>
+              </div>
+              <!-- Настрой дня (закрыто — референс закрытого состояния) -->
+              <div style="background:#E3D8C1;border-radius:22px;padding:28px;display:flex;flex-direction:column">
+                <div style="display:flex;align-items:center;gap:8px;margin:0 0 14px"><svg width="16" height="16" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.6" style="fill:none;stroke:#8C8069;stroke-width:1.4"></rect><path d="M5 7 V5.2 a3 3 0 0 1 6 0 V7" style="fill:none;stroke:#8C8069;stroke-width:1.4"></path></svg><span style="font-size:16px;font-weight:600;color:#6E6551">Настрой дня</span></div>
+                <div style="font-family:var(--serif);font-size:21px;font-weight:600;color:#9A8D72;margin:0 0 12px">Пока закрыто</div>
+                <p style="margin:0 0 18px;font-size:14.5px;line-height:1.65;color:#9A8D72">Укажи дату рождения в профиле, чтобы открыть настрой дня.</p>
+                <a href="#" style="font-size:14px;font-weight:600;margin-top:auto">Заполнить профиль →</a>
+              </div>
+              <!-- Лунный день -->
+              <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:22px;padding:28px;display:flex;flex-direction:column">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px"><span style="font-size:16px;font-weight:600;color:#211F30">Лунный день</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+                <div style="display:flex;align-items:center;gap:10px;margin:0 0 14px"><svg width="24" height="24" viewBox="0 0 22 22"><circle cx="10" cy="11" r="7.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="13.4" cy="9" r="7.5" style="fill:#FBF7EF"></circle></svg><span style="font-family:var(--serif);font-size:18px;font-weight:600;color:#211F30">Лунный день 27 · Старая Луна</span></div>
+                <p style="margin:0 0 18px;font-size:14.5px;line-height:1.65;color:#8C8069">Двадцать седьмой день про интуицию и тонкое чутьё. Хорошо довериться внутреннему знанию, заняться тем, что требует чуткости. День, в котором стоит слушать себя глубже обычного.</p>
+                <a href="#" style="font-size:14px;font-weight:600;margin-top:auto">Открыть полностью в «Гороскоп» →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIDEBAR -->
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <!-- Профиль -->
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:22px;padding:28px">
+              <div style="font-family:var(--serif);font-size:21px;font-weight:600;color:#211F30;margin:0 0 20px">Профиль</div>
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Имя</label>
+              <input type="text" value="Астра" style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;margin:0 0 16px">
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Дата рождения</label>
+              <input type="text" value="11.07.1994" style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;margin:0 0 16px">
+              <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Пол</label>
+              <div style="position:relative;margin:0 0 22px"><select style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;appearance:none"><option>Женский</option><option>Мужской</option><option>Не указан</option></select><svg width="14" height="14" viewBox="0 0 14 14" style="position:absolute;right:16px;top:18px;pointer-events:none"><path d="M3 5 L7 9 L11 5" style="fill:none;stroke:#8C8069;stroke-width:1.4;stroke-linecap:round"></path></svg></div>
+              <button style="width:100%;height:52px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15px;font-weight:600;border:none;cursor:pointer">Сохранить</button>
+            </div>
+            <!-- Подписка -->
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:22px;padding:28px">
+              <div style="font-family:var(--serif);font-size:21px;font-weight:600;color:#211F30;margin:0 0 12px">Подписка</div>
+              <div style="display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:#4F8163;margin:0 0 20px"><span style="width:8px;height:8px;border-radius:50%;background:#4F8163"></span>Активна до 31.12.2099</div>
+              <button style="width:100%;height:50px;border-radius:999px;background:transparent;color:#26243A;font-size:14.5px;font-weight:600;border:1px solid rgba(30,29,52,.26);cursor:pointer">Отменить подписку</button>
+            </div>
+            <!-- Аккаунт -->
+            <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:22px;padding:28px">
+              <div style="font-family:var(--serif);font-size:21px;font-weight:600;color:#211F30;margin:0 0 8px">Аккаунт</div>
+              <div style="font-size:14px;color:#B9954F;margin:0 0 20px">dev@local</div>
+              <button style="width:100%;height:50px;border-radius:999px;background:transparent;color:#26243A;font-size:14.5px;font-weight:600;border:1px solid rgba(30,29,52,.26);cursor:pointer">Выйти</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <span style="font:400 11.5px 'Golos Text';color:rgba(30,29,52,.5)">ПК · 1440px</span>
+  </div>
+</section>
+
+<section style="padding:44px 48px 60px;--serif:'Source Serif 4',Georgia,serif;--sans:'Golos Text',system-ui,sans-serif">
+  <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 8px">
+    <span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1B1A30;color:#fff;border-radius:4px">2</span>
+    <span style="font:600 13px/1.2 'Golos Text',system-ui,sans-serif;color:#1B1A30">Личный кабинет — дашборд (1b), доработка</span>
+  </div>
+  <p style="margin:0 0 34px;font:400 12.5px/1.6 'Golos Text',sans-serif;color:rgba(30,29,52,.58);max-width:82ch">Два состояния одного экрана. Слева — <b>закрытое</b>: профиль ещё не заполнен, «Число дня» и «Настрой дня» под замком (2 из 4). Справа — <b>открытое</b>: дата рождения указана, все карточки раскрыты (4 из 4). Блок «Продукты» убран.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+    <!-- ============================ ЗАКРЫТОЕ СОСТОЯНИЕ ============================ -->
+    <div class="optw" id="1a" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px">1a</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Закрытое · профиль не заполнен (2 из 4)</span>
+      </div>
+
+      <div data-screen-label="Кабинет · Закрытое (1a)" style="width:390px;background:#EFE7D6;border-radius:44px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);color:#26243A;font-family:var(--sans)">
+        <!-- dark hero -->
+        <div style="background:#1B1A30;position:relative;overflow:hidden;border-radius:0 0 34px 34px;padding-bottom:30px">
+          <svg viewBox="0 0 390 320" width="390" height="320" style="position:absolute;inset:0;opacity:.9"><circle cx="52" cy="80" r="1.3" fill="#F3ECDB" opacity=".7"></circle><circle cx="130" cy="58" r="1.7" fill="#F3ECDB" opacity=".9"></circle><circle cx="310" cy="70" r="1.4" fill="#F3ECDB" opacity=".6"></circle><circle cx="348" cy="150" r="1.7" fill="#F3ECDB" opacity=".8"></circle><circle cx="44" cy="180" r="1.4" fill="#F3ECDB" opacity=".6"></circle><circle cx="330" cy="250" r="1.4" fill="#F3ECDB" opacity=".6"></circle><path d="M130 58 L190 100 L250 86 L310 70" style="fill:none;stroke:#B9954F;stroke-width:.8;opacity:.5"></path><circle cx="190" cy="100" r="2.4" fill="#B9954F"></circle><circle cx="250" cy="86" r="2" fill="#B9954F"></circle><path d="M300 130 l1.2 5 5 1.2 -5 1.2 -1.2 5 -1.2 -5 -5 -1.2 5 -1.2 z" fill="#F3ECDB" opacity=".85"></path></svg>
+          <!-- status bar -->
+          <div style="position:relative;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;color:#F3ECDB"><span style="font-weight:600;letter-spacing:.02em">9:41</span><div style="display:flex;align-items:center;gap:7px"><div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:7px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:9px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:11px;background:#F3ECDB;border-radius:1px"></div></div><div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #F3ECDB;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#F3ECDB;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#F3ECDB;border-radius:1px"></div></div></div></div>
+          <!-- header -->
+          <div style="position:relative;display:flex;align-items:center;justify-content:space-between;padding:8px 24px 0"><div style="display:flex;align-items:center;gap:9px"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#1B1A30"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg><span style="font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.02em;color:#F7F1E4">Astrix</span></div><span style="font-size:13.5px;font-weight:600;color:rgba(243,236,219,.6)">Кабинет</span></div>
+          <!-- hero content -->
+          <div style="position:relative;padding:26px 26px 0">
+            <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#B9954F;margin:0 0 10px">Твой день</div>
+            <h1 style="font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#F7F1E4">Суббота,<br>11 Июля</h1>
+            <p style="margin:0 0 22px;font-size:14px;line-height:1.55;color:rgba(243,236,219,.6)">Небо уже сверило твой маршрут.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(243,236,219,.72);margin:0 0 9px"><span>Открыто</span><span style="font-weight:600;color:#F7F1E4">2 из 4</span></div>
+            <div style="height:7px;border-radius:4px;background:rgba(243,236,219,.16);overflow:hidden"><div style="width:50%;height:100%;background:#B9954F;border-radius:4px"></div></div>
+          </div>
+        </div>
+
+        <div style="padding:26px 24px">
+          <!-- Карта дня (открыто) -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:22px;margin:0 0 14px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 10px"><span style="font-size:16px;font-weight:600;color:#211F30">Карта дня</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 10px">Отшельник</div>
+            <p style="margin:0 0 16px;font-size:14px;line-height:1.65;color:#8C8069">Сегодня хорошо побыть с собой. Отшельник зовёт сбавить шум, отойти в сторону и услышать собственный голос. Ответы, которые ищешь снаружи, чаще находятся в тишине внутри.</p>
+            <a href="#" style="font-size:14px;font-weight:600">Открыть полностью в «Таро» →</a>
+          </div>
+
+          <!-- Число дня (закрыто) -->
+          <div style="background:#E3D8C1;border-radius:20px;padding:22px;margin:0 0 14px">
+            <div style="display:flex;align-items:center;gap:8px;margin:0 0 8px"><svg width="15" height="15" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.6" style="fill:none;stroke:#8C8069;stroke-width:1.4"></rect><path d="M5 7 V5.2 a3 3 0 0 1 6 0 V7" style="fill:none;stroke:#8C8069;stroke-width:1.4"></path></svg><span style="font-size:16px;font-weight:600;color:#6E6551">Число дня</span></div>
+            <p style="margin:0 0 12px;font-size:14px;line-height:1.6;color:#9A8D72">Укажи дату рождения, чтобы открыть.</p>
+            <a href="#profile-1a" style="font-size:14px;font-weight:600">Заполнить профиль →</a>
+          </div>
+
+          <!-- Настрой дня (закрыто) -->
+          <div style="background:#E3D8C1;border-radius:20px;padding:22px;margin:0 0 14px">
+            <div style="display:flex;align-items:center;gap:8px;margin:0 0 8px"><svg width="15" height="15" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.6" style="fill:none;stroke:#8C8069;stroke-width:1.4"></rect><path d="M5 7 V5.2 a3 3 0 0 1 6 0 V7" style="fill:none;stroke:#8C8069;stroke-width:1.4"></path></svg><span style="font-size:16px;font-weight:600;color:#6E6551">Настрой дня</span></div>
+            <p style="margin:0 0 12px;font-size:14px;line-height:1.6;color:#9A8D72">Укажи дату рождения, чтобы открыть.</p>
+            <a href="#profile-1a" style="font-size:14px;font-weight:600">Заполнить профиль →</a>
+          </div>
+
+          <!-- Лунный день (открыто) -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:22px;margin:0 0 30px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px"><span style="font-size:16px;font-weight:600;color:#211F30">Лунный день</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+            <div style="display:flex;align-items:center;gap:9px;margin:0 0 10px"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="10" cy="11" r="7.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="13.4" cy="9" r="7.5" style="fill:#FBF7EF"></circle></svg><span style="font-family:var(--serif);font-size:17px;font-weight:600;color:#211F30">Лунный день 27 · Старая Луна</span></div>
+            <p style="margin:0 0 16px;font-size:14px;line-height:1.65;color:#8C8069">Двадцать седьмой день про интуицию и тонкое чутьё. Хорошо довериться внутреннему знанию, заняться тем, что требует чуткости. День, в котором стоит слушать себя глубже обычного.</p>
+            <a href="#" style="font-size:14px;font-weight:600">Открыть полностью в «Гороскоп» →</a>
+          </div>
+
+          <!-- Профиль (пустой) -->
+          <div id="profile-1a" style="scroll-margin-top:20px;background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:24px;margin:0 0 14px">
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 18px">Профиль</div>
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Имя</label>
+            <input type="text" style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;margin:0 0 16px">
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Дата рождения</label>
+            <input type="text" placeholder="дд.мм.гггг" style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;margin:0 0 16px">
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Пол</label>
+            <div style="position:relative;margin:0 0 22px"><select style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;appearance:none"><option>Не указан</option><option>Женский</option><option>Мужской</option></select><svg width="14" height="14" viewBox="0 0 14 14" style="position:absolute;right:16px;top:18px;pointer-events:none"><path d="M3 5 L7 9 L11 5" style="fill:none;stroke:#8C8069;stroke-width:1.4;stroke-linecap:round"></path></svg></div>
+            <button style="width:100%;height:52px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15px;font-weight:600;border:none;cursor:pointer">Сохранить</button>
+          </div>
+
+          <!-- Подписка + Аккаунт -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:24px;margin:0 0 14px">
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 10px">Подписка</div>
+            <div style="display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:#4F8163;margin:0 0 18px"><span style="width:8px;height:8px;border-radius:50%;background:#4F8163"></span>Активна до 31.12.2099</div>
+            <button style="height:48px;padding:0 22px;border-radius:999px;background:transparent;color:#26243A;font-size:14.5px;font-weight:600;border:1px solid rgba(30,29,52,.26);cursor:pointer">Отменить подписку</button>
+          </div>
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:24px">
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 8px">Аккаунт</div>
+            <div style="font-size:14px;color:#B9954F;margin:0 0 18px">dev@local</div>
+            <button style="height:46px;padding:0 24px;border-radius:999px;background:transparent;color:#26243A;font-size:14.5px;font-weight:600;border:1px solid rgba(30,29,52,.26);cursor:pointer">Выйти</button>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:center;padding:14px 0 12px"><div style="width:128px;height:5px;border-radius:3px;background:rgba(30,29,52,.22)"></div></div>
+      </div>
+    </div>
+
+    <!-- ============================ ОТКРЫТОЕ СОСТОЯНИЕ ============================ -->
+    <div class="optw" id="1b" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <a data-badge href="#1b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(30,29,52,.1);color:#1B1A30;border-radius:5px">1b</a>
+        <span style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(30,29,52,.62)">Открытое · профиль заполнен (4 из 4)</span>
+      </div>
+
+      <div data-screen-label="Кабинет · Дашборд (1b)" style="width:390px;background:#EFE7D6;border-radius:44px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(27,26,48,.5),0 6px 16px rgba(27,26,48,.08);border:1px solid rgba(30,29,52,.06);color:#26243A;font-family:var(--sans)">
+        <!-- dark hero -->
+        <div style="background:#1B1A30;position:relative;overflow:hidden;border-radius:0 0 34px 34px;padding-bottom:30px">
+          <svg viewBox="0 0 390 320" width="390" height="320" style="position:absolute;inset:0;opacity:.9"><circle cx="52" cy="80" r="1.3" fill="#F3ECDB" opacity=".7"></circle><circle cx="130" cy="58" r="1.7" fill="#F3ECDB" opacity=".9"></circle><circle cx="310" cy="70" r="1.4" fill="#F3ECDB" opacity=".6"></circle><circle cx="348" cy="150" r="1.7" fill="#F3ECDB" opacity=".8"></circle><circle cx="44" cy="180" r="1.4" fill="#F3ECDB" opacity=".6"></circle><circle cx="330" cy="250" r="1.4" fill="#F3ECDB" opacity=".6"></circle><path d="M130 58 L190 100 L250 86 L310 70" style="fill:none;stroke:#B9954F;stroke-width:.8;opacity:.5"></path><circle cx="190" cy="100" r="2.4" fill="#B9954F"></circle><circle cx="250" cy="86" r="2" fill="#B9954F"></circle><path d="M300 130 l1.2 5 5 1.2 -5 1.2 -1.2 5 -1.2 -5 -5 -1.2 5 -1.2 z" fill="#F3ECDB" opacity=".85"></path></svg>
+          <!-- status bar -->
+          <div style="position:relative;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;color:#F3ECDB"><span style="font-weight:600;letter-spacing:.02em">9:41</span><div style="display:flex;align-items:center;gap:7px"><div style="display:flex;align-items:flex-end;gap:2px;height:11px"><div style="width:3px;height:5px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:7px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:9px;background:#F3ECDB;border-radius:1px"></div><div style="width:3px;height:11px;background:#F3ECDB;border-radius:1px"></div></div><div style="display:flex;align-items:center;gap:2px"><div style="width:22px;height:11px;border:1px solid #F3ECDB;border-radius:3px;padding:1.5px"><div style="width:72%;height:100%;background:#F3ECDB;border-radius:1px"></div></div><div style="width:1.5px;height:4px;background:#F3ECDB;border-radius:1px"></div></div></div></div>
+          <!-- header -->
+          <div style="position:relative;display:flex;align-items:center;justify-content:space-between;padding:8px 24px 0"><div style="display:flex;align-items:center;gap:9px"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="12" cy="13" r="8.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="15.5" cy="11" r="8.5" style="fill:#1B1A30"></circle><path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" style="fill:#B9954F"></path></svg><span style="font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.02em;color:#F7F1E4">Astrix</span></div><span style="font-size:13.5px;font-weight:600;color:rgba(243,236,219,.6)">Кабинет</span></div>
+          <!-- hero content -->
+          <div style="position:relative;padding:26px 26px 0">
+            <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#B9954F;margin:0 0 10px">Твой день</div>
+            <h1 style="font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.08;letter-spacing:-.01em;margin:0 0 6px;color:#F7F1E4">Суббота,<br>11 Июля</h1>
+            <p style="margin:0 0 22px;font-size:14px;line-height:1.55;color:rgba(243,236,219,.6)">Небо уже сверило твой маршрут.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(243,236,219,.72);margin:0 0 9px"><span>Открыто</span><span style="font-weight:600;color:#F7F1E4">4 из 4</span></div>
+            <div style="height:7px;border-radius:4px;background:rgba(243,236,219,.16);overflow:hidden"><div style="width:100%;height:100%;background:#B9954F;border-radius:4px"></div></div>
+          </div>
+        </div>
+
+        <div style="padding:26px 24px">
+          <!-- Карта дня -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:22px;margin:0 0 14px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 10px"><span style="font-size:16px;font-weight:600;color:#211F30">Карта дня</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 10px">Отшельник</div>
+            <p style="margin:0 0 16px;font-size:14px;line-height:1.65;color:#8C8069">Сегодня хорошо побыть с собой. Отшельник зовёт сбавить шум, отойти в сторону и услышать собственный голос. Ответы, которые ищешь снаружи, чаще находятся в тишине внутри.</p>
+            <a href="#" style="font-size:14px;font-weight:600">Открыть полностью в «Таро» →</a>
+          </div>
+
+          <!-- Число дня (открыто) -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:22px;margin:0 0 14px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px"><span style="font-size:16px;font-weight:600;color:#211F30">Число дня</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+            <div style="display:flex;align-items:center;gap:14px;margin:0 0 12px"><div style="width:52px;height:52px;flex:none;border-radius:50%;border:1.5px solid #B9954F;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:26px;font-weight:600;color:#B9954F">7</div><div style="font-family:var(--serif);font-size:18px;font-weight:600;color:#211F30;line-height:1.2">Семёрка ·<br>Наблюдатель</div></div>
+            <p style="margin:0 0 16px;font-size:14px;line-height:1.65;color:#8C8069">Семёрка зовёт сбавить темп и присмотреться. Сегодня важнее понять, чем сделать — ответы приходят через наблюдение и тишину. Доверься деталям, в них подсказка.</p>
+            <a href="#" style="font-size:14px;font-weight:600">Открыть полностью в «Нумерология» →</a>
+          </div>
+
+          <!-- Настрой дня (открыто) -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:22px;margin:0 0 14px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px"><span style="font-size:16px;font-weight:600;color:#211F30">Настрой дня</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+            <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:#211F30;margin:0 0 12px">Тихая ясность</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px"><span style="font-size:12px;font-weight:600;color:#6E6551;background:#E9DEC7;padding:5px 12px;border-radius:999px">Спокойствие</span><span style="font-size:12px;font-weight:600;color:#6E6551;background:#E9DEC7;padding:5px 12px;border-radius:999px">Интуиция</span><span style="font-size:12px;font-weight:600;color:#6E6551;background:#E9DEC7;padding:5px 12px;border-radius:999px">Внимание</span></div>
+            <p style="margin:0;font-size:14px;line-height:1.65;color:#8C8069">День располагает к спокойной сосредоточенности. Меньше суеты — больше глубины. Хорошее время для дел, что требуют внимания и чуткости к себе.</p>
+          </div>
+
+          <!-- Лунный день -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:22px;margin:0 0 30px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 12px"><span style="font-size:16px;font-weight:600;color:#211F30">Лунный день</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#B9954F;background:rgba(185,149,79,.14);padding:4px 9px;border-radius:999px"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M2 6.5 L5 9 L10 3" style="fill:none;stroke:#B9954F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"></path></svg>открыто</span></div>
+            <div style="display:flex;align-items:center;gap:9px;margin:0 0 10px"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="10" cy="11" r="7.5" style="fill:none;stroke:#B9954F;stroke-width:1.3"></circle><circle cx="13.4" cy="9" r="7.5" style="fill:#FBF7EF"></circle></svg><span style="font-family:var(--serif);font-size:17px;font-weight:600;color:#211F30">Лунный день 27 · Старая Луна</span></div>
+            <p style="margin:0 0 16px;font-size:14px;line-height:1.65;color:#8C8069">Двадцать седьмой день про интуицию и тонкое чутьё. Хорошо довериться внутреннему знанию, заняться тем, что требует чуткости. День, в котором стоит слушать себя глубже обычного.</p>
+            <a href="#" style="font-size:14px;font-weight:600">Открыть полностью в «Гороскоп» →</a>
+          </div>
+
+          <!-- Профиль -->
+          <div id="profile-1b" style="scroll-margin-top:20px;background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:24px;margin:0 0 14px">
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 18px">Профиль</div>
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Имя</label>
+            <input type="text" value="Астра" style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;margin:0 0 16px">
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Дата рождения</label>
+            <input type="text" value="11.07.1994" style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;margin:0 0 16px">
+            <label style="display:block;font:500 12.5px 'Golos Text';color:#6E6551;margin:0 0 8px">Пол</label>
+            <div style="position:relative;margin:0 0 22px"><select style="width:100%;height:50px;border-radius:13px;border:1px solid rgba(30,29,52,.14);background:#fff;padding:0 16px;font-size:15px;color:#26243A;appearance:none"><option>Женский</option><option>Мужской</option><option>Не указан</option></select><svg width="14" height="14" viewBox="0 0 14 14" style="position:absolute;right:16px;top:18px;pointer-events:none"><path d="M3 5 L7 9 L11 5" style="fill:none;stroke:#8C8069;stroke-width:1.4;stroke-linecap:round"></path></svg></div>
+            <button style="width:100%;height:52px;border-radius:999px;background:#1B1A30;color:#F3ECDB;font-size:15px;font-weight:600;border:none;cursor:pointer">Сохранить</button>
+          </div>
+
+          <!-- Подписка + Аккаунт -->
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:24px;margin:0 0 14px">
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 10px">Подписка</div>
+            <div style="display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:#4F8163;margin:0 0 18px"><span style="width:8px;height:8px;border-radius:50%;background:#4F8163"></span>Активна до 31.12.2099</div>
+            <button style="height:48px;padding:0 22px;border-radius:999px;background:transparent;color:#26243A;font-size:14.5px;font-weight:600;border:1px solid rgba(30,29,52,.26);cursor:pointer">Отменить подписку</button>
+          </div>
+          <div style="background:#FBF7EF;border:1px solid rgba(30,29,52,.1);border-radius:20px;padding:24px">
+            <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#211F30;margin:0 0 8px">Аккаунт</div>
+            <div style="font-size:14px;color:#B9954F;margin:0 0 18px">dev@local</div>
+            <button style="height:46px;padding:0 24px;border-radius:999px;background:transparent;color:#26243A;font-size:14.5px;font-weight:600;border:1px solid rgba(30,29,52,.26);cursor:pointer">Выйти</button>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:center;padding:14px 0 12px"><div style="width:128px;height:5px;border-radius:3px;background:rgba(30,29,52,.22)"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+</body>
+</html>
