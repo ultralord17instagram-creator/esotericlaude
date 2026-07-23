@@ -71,3 +71,14 @@ test('getLanding отдаёт конфиг rod на движке rod', () => {
   assert.ok(ids.includes('name'))
   assert.equal(l.revealFields.length, 5)
 })
+
+test('getLanding отдаёт конфиг dar на движке dar', () => {
+  const l = getLanding('dar')
+  assert.equal(l.slug, 'dar')
+  assert.equal(l.engine, 'dar')
+  assert.equal(l.product, 'matrix')
+  const ids = l.quiz.steps.map(s => s.id)
+  assert.equal(ids.at(-2), 'birth_date')
+  assert.equal(ids.at(-1), 'name')
+  assert.equal(l.revealFields.length, 5)
+})
