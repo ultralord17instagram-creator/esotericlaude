@@ -7,6 +7,7 @@ import TerminalClient from './TerminalClient'
 import HoroLoveClient from './HoroLoveClient'
 import DiagnosticClient from './DiagnosticClient'
 import RodClient from './RodClient'
+import DarClient from './DarClient'
 
 export function generateMetadata({ params }) {
   const l = getLanding(params.slug)
@@ -23,6 +24,7 @@ export default function LandingPage({ params }) {
     landing.engine === 'terminal' ? TerminalClient :
     landing.engine === 'horo-love' ? HoroLoveClient :
     landing.engine === 'diagnostic' ? DiagnosticClient :
+    landing.engine === 'dar' ? DarClient :
     landing.engine === 'rod' ? RodClient :
     LandingClient
   return <Client landing={landing} />
