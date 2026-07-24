@@ -10,7 +10,11 @@ const FEATURES = [
   'Без рекламы и ограничений',
 ]
 
-export default function Paywall() {
+// subscribeHref — необязательный override пути по кнопке CTA. По умолчанию
+// (на продуктовых страницах) залогиненного ведём в /lk, гостя — на регистрацию.
+// Post-registration пейволл (/subscribe) передаёт '/checkout', чтобы сразу вести
+// на оплату и сохранить возврат на лендинг (post_checkout_return читает /checkout).
+export default function Paywall({ subscribeHref }) {
   const { user } = useAuth()
   const router = useRouter()
 
@@ -52,7 +56,7 @@ export default function Paywall() {
         </ul>
       </div>
 
-      <button className={styles.cta} onClick={() => router.push(user ? '/lk' : '/register')}>
+      <button className={styles.cta} onClick={() => router.push(subscribeHref ?? (user ? '/lk' : '/register'))}>
         Оформить <span aria-hidden>→</span>
       </button>
       <p className={styles.fine}>Отмена в любой момент · без скрытых платежей</p>

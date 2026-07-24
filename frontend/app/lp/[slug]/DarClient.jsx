@@ -7,7 +7,7 @@ import { loadQuiz, saveQuiz } from '../logic/quizStorage.js'
 import { initQuiz, currentStep, setAnswer, advance, back, isComplete } from '../logic/quizMachine.js'
 import { calculateMatrix } from '../../content/matrix.js'
 import { buildReveal, arcanaFromMatrix } from '../../content/landings/dar-copy.js'
-import RodOctagram from '../components/RodOctagram.jsx'
+import DarOctagram from '../components/DarOctagram.jsx'
 import styles from '../dar.module.css'
 
 const MONTHS_SELECT = [
@@ -189,7 +189,7 @@ export default function DarClient({ landing }) {
               <div className={styles.heroTeaser}>
                 <div className={styles.teaserCard}>
                   <div className={styles.teaserLabel}>{landing.result.caption}</div>
-                  <RodOctagram nodes={calculateMatrix('1990-01-01').nodes} />
+                  <DarOctagram nodes={calculateMatrix('1990-01-01').nodes} />
                 </div>
               </div>
             </section>
@@ -363,7 +363,7 @@ export default function DarClient({ landing }) {
                   {/* Октаграмма */}
                   <aside className={styles.matrixCard}>
                     <div className={styles.matrixLabel}>{landing.result.kicker}</div>
-                    <RodOctagram nodes={matrix.nodes} />
+                    <DarOctagram nodes={matrix.nodes} />
                   </aside>
 
                   {/* Разбор */}

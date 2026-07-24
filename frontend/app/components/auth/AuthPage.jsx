@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import StarField from './StarField'
 import AuthForm from './AuthForm'
+import { safeReturnPath } from '../../lp/logic/returnPath.js'
 import styles from './auth.module.css'
 
 // Полноэкранная страница входа/регистрации (split-screen).
@@ -32,6 +33,18 @@ export default function AuthPage({ mode }) {
   const router = useRouter()
   const c = COPY[mode]
   const goto = (m) => router.push(m === 'login' ? '/login' : '/register')
+
+  // После регистрации с лендинга (в localStorage лежит post_checkout_return,
+  // который ставят все /lp/*) показываем пейволл /subscribe. Обычная регистрация
+  // и любой логин ведут в личный кабинет, как раньше.
+  const onSuccess = () => {
+    if (mode === 'register') {
+      let fromLanding = null
+      try { fromLanding = safeReturnPath(localStorage.getItem('post_checkout_return')) } catch {}
+      if (fromLanding) { router.push('/subscribe'); return }
+    }
+    router.push('/lk')
+  }
 
   return (
     <div className={styles.page}>
@@ -98,7 +111,7 @@ export default function AuthPage({ mode }) {
             mode={mode}
             switchDisplay="mobileOnly"
             onSwitch={goto}
-            onSuccess={() => router.push('/lk')}
+            onSuccess={onSuccess}
           />
         </div>
       </main>
