@@ -7,6 +7,26 @@
 
 ---
 
+## 0. Блокирующее: выключить имитацию авторизации
+
+### 0.1 `frontend/app/devConfig.js`, строка 16
+
+```js
+export const DEV_SESSION = 'free'   // ← сейчас так
+export const DEV_SESSION = 'real'   // ← должно быть на проде
+```
+
+Пока стоит любое значение кроме `'real'`, `AuthContext` (строка 97) вообще не
+ходит на бэкенд: он подставляет фейкового пользователя и сразу выходит. То есть
+на боевом сайте **вход, регистрация и проверка подписки работать не будут**, а
+все посетители будут считаться залогиненными без подписки. То же самое ломает
+лимиты Таро (`frontend/app/content/tarot/api.js`, строка 34).
+
+Это единственная правка в коде, без которой выкатывать нельзя. Остальное ниже
+про конфиги и тексты.
+
+---
+
 ## 1. Домен и инфраструктура
 
 ### 1.1 `nginx/prod.conf` — заменить `YOUR_DOMAIN` в четырёх местах
@@ -32,28 +52,48 @@
 
 ### 1.3 `.env` в корне репозитория
 
-Скопировать из `.env.example` и заполнить:
+Скопировать из `.env.example` (`cp .env.example .env`) и заполнить.
+
+Важно: **все `NEXT_PUBLIC_*` живут именно здесь, а не в `frontend/.env`.**
+`docker-compose.prod.yml` подставляет их в сборку фронта как build args и берёт
+из корневого `.env`. Положить их в `frontend/.env` бесполезно: `env_file` задаёт
+окружение уже запущенного контейнера, а `NEXT_PUBLIC_*` вшиваются в JS-бандл на
+этапе сборки, то есть раньше.
 
 | Переменная | Значение |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://ваш-домен.ru`, **с протоколом и без слэша на конце** |
 | `DATABASE_URL` | реальный PostgreSQL |
 | `AUTH_SERVICE_URL`, `AUTH_SERVICE_API_KEY` | у команды партнёрки |
 | `OFFER_ID` | у команды партнёрки |
 | `PAYMENT_SERVICE_URL`, `PAY_FORM_URL` | у команды партнёрки |
 | `DEBUG` | **`false`**. При `true` наружу открыт `/docs` со схемой API |
+| `NEXT_PUBLIC_SITE_URL` | `https://ваш-домен.ru`, **с протоколом и без слэша на конце** |
+| `NEXT_PUBLIC_OFFER_ID` | ID оффера, то же значение что и `OFFER_ID` |
+| `NEXT_PUBLIC_REF_TTL_DAYS` | срок жизни реф-кода, по умолчанию `7` |
+| `NEXT_PUBLIC_CP_PUBLIC_ID` | Public ID из кабинета CloudPayments (Variant B) |
+| `NEXT_PUBLIC_PAYMENT_BACK_URL` | `https://ваш-домен.ru/lk` |
 | `NEXT_PUBLIC_YANDEX_VERIFICATION`, `NEXT_PUBLIC_GOOGLE_VERIFICATION` | коды из вебмастеров, см. раздел 4 |
 
-### 1.4 `frontend/.env`
+### 1.4 `frontend/.env` — файла нет, его нужно создать
+
+`docker-compose.prod.yml` объявляет `env_file: ./frontend/.env`. Такого файла в
+репозитории нет и быть не может (`.env*` в `.gitignore`), а без него
+`docker compose up` падает ещё до сборки. Создать на сервере:
+
+```bash
+cp frontend/.env.example frontend/.env
+```
+
+Заполнить только серверные ключи, которые не должны попасть в браузер:
 
 | Переменная | Значение |
 |---|---|
-| `NEXT_PUBLIC_OFFER_ID` | ID оффера |
-| `NEXT_PUBLIC_PAYMENT_BACK_URL` | `https://ваш-домен.ru/lk` |
-| `NEXT_PUBLIC_CP_PUBLIC_ID` | Public ID из кабинета CloudPayments |
 | `PS_URL`, `PS_API_KEY` | Payment Service партнёрки |
 | `TS_URL`, `TS_API_KEY` | Tracking Service партнёрки |
 | `ADMIN_PASSWORD` | свой пароль для `/admin` |
+
+`NEXT_PUBLIC_*` строки из этого файла на прод не влияют, они нужны только для
+локального `npm run dev`. Боевые значения берутся из корневого `.env` (см. 1.3).
 
 `BACKEND_URL` руками не трогать: в проде его задаёт `docker-compose.prod.yml`
 как `http://backend:8000`.
@@ -213,6 +253,10 @@ curl https://ваш-домен.ru/api/v1/subscriptions/tariff
 
 Отдельно: убедиться, что `https://ваш-домен.ru/docs` **не открывается**. Если
 открывается, в `.env` остался `DEBUG=true`.
+
+И главное: открыть сайт в режиме инкогнито и убедиться, что в шапке видно
+«Войти», а не «Кабинет». Если сайт сразу считает вас залогиненным, в
+`devConfig.js` остался не `'real'` (см. раздел 0).
 
 ---
 
