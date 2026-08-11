@@ -71,8 +71,20 @@ export default function ThreeClient() {
 
   const Back = () => <Link href="/tarot" className={styles.backLink}>‹ Все расклады</Link>
 
+  // Пока тянется сессия, отдаём заголовок экрана выбора темы, а не голое
+  // «Загрузка…»: именно эта ветка попадает в серверный HTML, и без текста
+  // страница уходила краулеру без h1 и без описания расклада.
   if (loading) {
-    return <div className={styles.page}><Back /><p className={styles.notice}>Загрузка…</p></div>
+    return (
+      <div className={styles.page}>
+        <Back />
+        <div className={styles.head}>
+          <h1 className={styles.title}>На что гадаем?</h1>
+          <p className={styles.subtitle}>Выберите сферу — под неё подберём вопрос и колоду.</p>
+        </div>
+        <p className={styles.notice}>Загрузка…</p>
+      </div>
+    )
   }
 
   if (step === 'limit') {

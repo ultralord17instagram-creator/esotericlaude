@@ -47,7 +47,23 @@ export default function HoroscopeClient() {
   const switchTab = (t) => { setDetail(null); setTab(t) }
 
   // Экран ввода (память пуста или нажали «Ввести другую»).
-  if (!ready) return <div className={styles.page} />
+  // До того как прочитана память, показываем ту же шапку, что и на экране
+  // ввода, только без формы. Раньше здесь отдавался пустой div, и это уходило
+  // в серверный HTML: краулер видел страницу без h1 и без единого слова текста.
+  if (!ready) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.formWrap}>
+          <div className={styles.formCard}>
+            <h1 className={styles.formTitle}>Гороскоп на сегодня</h1>
+            <p className={styles.formSub}>
+              Введи дату рождения, определим твой знак и покажем небо на сегодня, портрет знака и лунный календарь.
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
   if (!birth) {
     return (
       <div className={styles.page}>

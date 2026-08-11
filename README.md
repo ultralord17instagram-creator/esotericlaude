@@ -118,6 +118,62 @@ CloudPayments виджет прямо на сайте.
 | `PS_API_KEY` | API-ключ Payment Service (Variant B) | Команда партнёрки |
 | `NEXT_PUBLIC_CP_PUBLIC_ID` | CloudPayments Public ID (Variant B) | Кабинет CloudPayments |
 | `NEXT_PUBLIC_PAYMENT_BACK_URL` | Редирект после оплаты (Variant B) | Сам настраиваешь |
+| `NEXT_PUBLIC_SITE_URL` | Канонический адрес сайта для SEO | Твой домен, без слэша на конце |
+| `NEXT_PUBLIC_YANDEX_VERIFICATION` | Код Яндекс.Вебмастера | Кабинет Яндекс.Вебмастера |
+| `NEXT_PUBLIC_GOOGLE_VERIFICATION` | Код Google Search Console | Кабинет Search Console |
+
+---
+
+## SEO
+
+Вся SEO-обвязка собрана в `frontend/app/seo.config.js`. Страницы не пишут
+объект `metadata` руками, а зовут `buildMetadata()` — так canonical, og:url и
+robots не разъезжаются между страницами.
+
+**Что генерируется автоматически**
+
+| URL | Откуда | Что внутри |
+|---|---|---|
+| `/robots.txt` | `app/robots.js` | Allow/Disallow, `Host`, ссылка на sitemap |
+| `/sitemap.xml` | `app/sitemap.js` | 11 страниц сайта + все лендинги `/lp/*` |
+| `/manifest.webmanifest` | `app/manifest.js` | PWA-манифест, иконки, цвета темы |
+
+**Правила индексации**
+
+- Индексируются: главная, `/matrix`, `/numerology/*`, `/tarot/*`, `/horoscope`,
+  все `/lp/*`.
+- `noindex, follow`: `/login`, `/register`, `/subscribe`, 404.
+- `noindex, nofollow` + `Disallow` в robots.txt: `/lk`, `/checkout`, `/admin`,
+  `/maintenance`, `/api/`.
+- Страницы с `noindex` намеренно **не** закрыты в `robots.txt` (кроме приватных):
+  закрытую в robots страницу бот не скачает и тега `noindex` не увидит, из-за
+  чего URL останется в выдаче «без описания».
+
+**Structured data (Schema.org)**
+
+`Organization` + `WebSite` на всех страницах, `ItemList` сервисов на главной,
+`BreadcrumbList` на внутренних, `Service` на четырёх продуктовых разделах.
+Разметку отзывов (`AggregateRating`) намеренно не ставим: отзывы на главной
+не подтверждены реальными оценками, а фиктивные оценки Google санкционирует.
+
+**Домен.** Берётся из `NEXT_PUBLIC_SITE_URL`. Это `NEXT_PUBLIC_*`-переменная,
+она вшивается в бандл **на сборке**, поэтому `docker-compose.prod.yml` передаёт
+её как build arg. Поменял домен — пересобери фронт:
+
+```bash
+docker compose -f docker-compose.prod.yml build frontend
+```
+
+**Картинка для соцсетей.** `frontend/public/og.png` (1200×630) — временная
+заглушка с фирменным полумесяцем, без текста. Заменяется простой подменой файла,
+править код не нужно; размеры в метатегах уже прописаны.
+
+**После первого деплоя на реальный домен**
+
+1. Проверить `https://домен/robots.txt` и `https://домен/sitemap.xml`.
+2. Добавить сайт в Яндекс.Вебмастер и Google Search Console, вписать коды
+   подтверждения в `NEXT_PUBLIC_*_VERIFICATION`, пересобрать фронт.
+3. Отправить sitemap в обоих кабинетах.
 
 ---
 

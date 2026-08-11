@@ -1,0 +1,40 @@
+/* Подвал сайта. Правила перенесены из landing.module.css (там он жил, пока был
+   частью только главной) и дополнены третьей колонкой с документами. */
+
+.footer { background: var(--bg-deep); color: #D9CFB9; padding: 40px 0 30px; position: relative; overflow: hidden; }
+.inner { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; position: relative; }
+.brand { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+.brandName { font-family: var(--font-heading); font-size: 22px; font-weight: 600; color: var(--text-on-dark); }
+.text { font-size: 13.5px; line-height: 1.6; color: #948A73; max-width: 42ch; margin: 0 0 24px; }
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 22px 24px;
+  margin-bottom: 24px;
+  max-width: 640px;
+}
+
+.colTitle { font-size: 10.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.links { display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: #C6BCA6; }
+.links a { color: #C6BCA6; }
+.links a:hover { color: var(--accent-light); }
+
+.rule { height: 1px; background: rgba(198,166,103,.2); margin-bottom: 16px; }
+
+.bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Реквизиты в подвале: их ищут глазами, поэтому строкой, а не в колонке ссылок */
+.legal { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: #7C725D; }
+.copy { color: #7C725D; }
+.entity { color: #7C725D; }
+.mail { color: #948A73; }
+.mail:hover { color: var(--accent-light); }
+
+.socials { display: flex; gap: 8px; }
+.social {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid rgba(198,166,103,.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #C6BCA6;
+}

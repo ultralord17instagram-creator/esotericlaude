@@ -1,7 +1,13 @@
-export const metadata = {
+import { buildMetadata } from '../seo.config'
+
+// noindex, nofollow — заглушка техработ. Также закрыта в robots.txt.
+export const metadata = buildMetadata({
   title: 'Технические работы',
-  robots: { index: false, follow: false },
-}
+  description: 'Сайт временно недоступен, мы скоро вернёмся.',
+  path: '/maintenance',
+  noindex: true,
+  nofollow: true,
+})
 
 export default function MaintenancePage() {
   return (

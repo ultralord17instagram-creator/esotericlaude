@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../../context/AuthContext'
+import { TARIFFS, rub } from '../../legal/tariffs'
 import styles from './Paywall.module.css'
 
 const FEATURES = [
@@ -39,7 +40,10 @@ export default function Paywall({ subscribeHref }) {
       <div className={styles.plan}>
         <div className={styles.planHead}>
           <div className={styles.price}>
-            <span className={styles.priceNum}>7 ₽</span>
+            {/* Цена берётся из тарифной политики: её же объявляют оферта,
+                условия предоставления услуг и страница /tariff. Хардкод здесь
+                означал бы четвёртую цифру, живущую своей жизнью. */}
+            <span className={styles.priceNum}>{rub(TARIFFS.trial.amount)}</span>
           </div>
         </div>
         <div className={styles.planDivider} />

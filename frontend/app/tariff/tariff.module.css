@@ -1,0 +1,175 @@
+/* Тарифный план: та же колонка и типографика, что у юридических страниц,
+   плюс карточка с ценой. */
+
+.page {
+  background: var(--bg-base);
+  padding: 56px 20px 96px;
+}
+
+.doc {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.head {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.intro {
+  margin-top: 12px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ── Карточка тарифа ─────────────────────────────────────── */
+
+.card {
+  margin-top: 32px;
+  padding: 26px 24px 24px;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raised);
+}
+
+.cardHead { margin-bottom: 18px; }
+
+.planName {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Строка тарифа: слева название и когда он действует, справа цена за период */
+.planRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.planRow:last-of-type { border-bottom: none; }
+
+.planMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1 1 200px;
+}
+
+.planTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.planWhen {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.priceValue {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pricePeriod {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.rule {
+  height: 1px;
+  background: var(--border);
+  margin: 18px 0;
+}
+
+.includedTitle {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.included { list-style: none; }
+
+.included li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 9px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.check {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.cta {
+  display: block;
+  margin-top: 22px;
+  padding: 15px 20px;
+  border-radius: 999px;
+  background: var(--bg-deep);
+  color: var(--text-on-dark);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  transition: transform .15s;
+}
+.cta:hover { transform: translateY(-1px); }
+
+/* ── Текстовые блоки ─────────────────────────────────────── */
+
+.block { margin-top: 36px; }
+
+.h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(19px, 2.6vw, 23px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.p a { text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 560px) {
+  .page { padding: 36px 16px 72px; }
+  .card { padding: 22px 18px 20px; }
+  .priceValue { font-size: 23px; }
+}

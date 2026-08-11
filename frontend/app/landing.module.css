@@ -71,7 +71,7 @@
 /* ── Product cards (variant 2a) ─────────────────────────── */
 .productsGrid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media (min-width: 640px) { .productsGrid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 980px) { .productsGrid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 980px) { .productsGrid { grid-template-columns: repeat(3, 1fr); } }
 
 .productCard {
   position: relative; display: flex; flex-direction: column; gap: 15px;
@@ -117,20 +117,8 @@
 .dotActive { width: 20px; background: var(--accent); }
 
 /* ── Footer (dark graphite) ─────────────────────────────── */
-.footer { background: var(--bg-deep); color: #D9CFB9; padding: 40px 0 30px; position: relative; overflow: hidden; }
-.footerInner { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; position: relative; }
-.footerBrand { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
-.footerBrandName { font-family: var(--font-heading); font-size: 22px; font-weight: 600; color: var(--text-on-dark); }
-.footerText { font-size: 13.5px; line-height: 1.6; color: #948A73; max-width: 42ch; margin: 0 0 24px; }
-.footerCols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 16px; margin-bottom: 24px; max-width: 420px; }
-.footerColTitle { font-size: 10.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-.footerLinks { display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: #C6BCA6; }
-.footerLinks a { color: #C6BCA6; }
-.footerRule { height: 1px; background: rgba(198,166,103,.2); margin-bottom: 16px; }
-.footerBottom { display: flex; align-items: center; justify-content: space-between; }
-.footerCopy { font-size: 11.5px; color: #7C725D; }
-.footerSocials { display: flex; gap: 8px; }
-.footerSocial { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(198,166,103,.35); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #C6BCA6; }
+/* Стили подвала переехали в components/Footer.module.css вместе с самим
+   подвалом: он больше не принадлежит главной, а рендерится из layout. */
 
 /* ── Desktop refinements ────────────────────────────────── */
 @media (min-width: 768px) {

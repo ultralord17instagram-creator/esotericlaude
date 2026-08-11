@@ -1,4 +1,6 @@
 // Registry of all esoteric products. Add a new product = add one object here.
+// hidden: true — продукт работает и доступен по прямой ссылке (и из кабинета),
+// но не показывается в витрине на главной. Списки главной берут VISIBLE_PRODUCTS.
 export const PRODUCTS = [
   {
     id: 'matrix',
@@ -29,6 +31,7 @@ export const PRODUCTS = [
     description: 'Карта дня, три карты, да/нет',
     inputs: [],
     extraInputs: [],
+    hidden: true,
   },
   {
     id: 'horoscope',
@@ -41,6 +44,9 @@ export const PRODUCTS = [
     extraInputs: [],
   },
 ]
+
+// Продукты для публичной витрины главной: карточки, футер, JSON-LD.
+export const VISIBLE_PRODUCTS = PRODUCTS.filter(p => !p.hidden)
 
 export function getProduct(slug) {
   return PRODUCTS.find(p => p.slug === slug) ?? null

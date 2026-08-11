@@ -1,12 +1,33 @@
 import Link from 'next/link'
-import { PRODUCTS } from './products.config'
+import { VISIBLE_PRODUCTS } from './products.config'
 import ProductCards from './components/ui/ProductCards'
 import Reviews from './components/ui/Reviews'
+import JsonLd from './components/JsonLd'
+import { buildMetadata, absoluteUrl } from './seo.config'
 import styles from './landing.module.css'
 
-export const metadata = {
-  title: 'Astrix — матрица судьбы, нумерология, таро и гороскоп',
-  description: 'Древняя мудрость для современных вопросов. Попробуй каждый сервис бесплатно, прежде чем открыть полный разбор.',
+// Свой title вместо DEFAULT_TITLE: главная не рекламирует Таро, оно живёт
+// на /tarot и в кабинете. absoluteTitle — чтобы не приклеивался шаблон бренда.
+export const metadata = buildMetadata({
+  title: 'Astrix — матрица судьбы, нумерология и гороскоп',
+  absoluteTitle: true,
+  description: 'Древняя мудрость для современных вопросов. Матрица судьбы, нумерология и гороскоп. Попробуйте каждый сервис бесплатно, прежде чем открыть полный разбор.',
+  path: '/',
+})
+
+// Список сервисов для поисковика. Дублирует то, что видно в блоке «Сервисы»,
+// иначе разметка считается несоответствующей контенту.
+const servicesListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Сервисы Astrix',
+  itemListElement: VISIBLE_PRODUCTS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.name,
+    description: p.description,
+    url: absoluteUrl(`/${p.slug}`),
+  })),
 }
 
 const STEPS = [
@@ -18,12 +39,14 @@ const STEPS = [
 const REVIEWS = [
   { text: 'Демо Матрицы попало прямо в точку. Оформила подписку в тот же вечер и не жалею.', name: 'Алина',  meta: '29 лет · Матрица судьбы' },
   { text: 'Утренний гороскоп стал ритуалом. Коротко, тепло и по делу — без пугающих прогнозов.', name: 'Марина', meta: '34 года · Гороскоп' },
-  { text: 'Расклад Таро помог решиться на переезд. Формулировки бережные, без давления.',      name: 'Ксения', meta: '41 год · Таро' },
+  { text: 'Разбор по числу судьбы объяснил, почему я снова и снова выбираю одно и то же.',     name: 'Ксения', meta: '41 год · Нумерология' },
 ]
 
 export default function HomePage() {
   return (
     <main>
+      <JsonLd data={servicesListSchema} />
+
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
@@ -31,7 +54,7 @@ export default function HomePage() {
             <p className={styles.heroEyebrow}>Эзотерический хаб</p>
             <h1 className={styles.heroTitle}>Древняя мудрость для современных вопросов</h1>
             <p className={styles.heroSub}>
-              Матрица судьбы, Таро, гороскоп и нумерология под одной луной. Попробуй бесплатно, прежде чем открыть полный разбор.
+              Матрица судьбы, гороскоп и нумерология под одной луной. Попробуй бесплатно, прежде чем открыть полный разбор.
             </p>
             <div className={styles.heroActions}>
               <Link href="#products" className={styles.heroCta}>Попробовать бесплатно <span>→</span></Link>
@@ -85,9 +108,9 @@ export default function HomePage() {
         <div className={styles.container}>
           <div className={styles.divider} />
           <p className={styles.eyebrow}>Сервисы</p>
-          <h2 className={styles.sectionTitle}>Четыре пути к себе</h2>
+          <h2 className={styles.sectionTitle}>Три пути к себе</h2>
           <p className={styles.sectionLead}>Начни с бесплатного демо — подписка открывает полный разбор.</p>
-          <ProductCards products={PRODUCTS} />
+          <ProductCards products={VISIBLE_PRODUCTS} />
         </div>
       </section>
 
@@ -124,45 +147,8 @@ export default function HomePage() {
         <Reviews items={REVIEWS} />
       </section>
 
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerInner}>
-          <div className={styles.footerBrand}>
-            <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
-              <circle cx="12" cy="13" r="8.5" fill="none" stroke="#D8B884" strokeWidth="1.3"/>
-              <circle cx="15.5" cy="11" r="8.5" fill="#1B1A30"/>
-              <path d="M18.7 15 l.7 1.9 1.9 .7 -1.9 .7 -.7 1.9 -.7 -1.9 -1.9 -.7 1.9 -.7 z" fill="#D8B884"/>
-            </svg>
-            <span className={styles.footerBrandName}>Astrix</span>
-          </div>
-          <p className={styles.footerText}>Древние практики простым языком. Пробуй бесплатно — открывай полный разбор по подписке.</p>
-          <div className={styles.footerCols}>
-            <div>
-              <div className={styles.footerColTitle}>Сервисы</div>
-              <div className={styles.footerLinks}>
-                {PRODUCTS.map((p) => <Link key={p.id} href={`/${p.slug}`}>{p.name}</Link>)}
-              </div>
-            </div>
-            <div>
-              <div className={styles.footerColTitle}>Компания</div>
-              <div className={styles.footerLinks}>
-                <Link href="#how">Как это работает</Link>
-                <Link href="/login">Войти</Link>
-                <Link href="/register">Регистрация</Link>
-              </div>
-            </div>
-          </div>
-          <div className={styles.footerRule} />
-          <div className={styles.footerBottom}>
-            <span className={styles.footerCopy}>© 2026 Astrix</span>
-            <div className={styles.footerSocials}>
-              <span className={styles.footerSocial}>TG</span>
-              <span className={styles.footerSocial}>VK</span>
-              <span className={styles.footerSocial}>YT</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/* Подвал вынесен в components/Footer.jsx и подключён в layout: документы
+          и контакты нужны на всех страницах, а не только на главной. */}
     </main>
   )
 }

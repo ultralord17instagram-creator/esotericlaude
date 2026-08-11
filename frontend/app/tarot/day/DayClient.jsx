@@ -74,7 +74,10 @@ export default function DayClient() {
       <Link href="/tarot" className={styles.backLink}>‹ Все расклады</Link>
       <div className={styles.stage}>
         <div className={styles.eyebrowCenter}>Карта дня</div>
-        <p className={styles.questionEcho}>Послание на сегодня</p>
+        {/* h1, а не p: до раскрытия карты это единственный заголовок страницы,
+            и именно он уходит в серверный HTML. Класс задаёт размер, шрифт и
+            отступы явно, поэтому смена тега вид не меняет. */}
+        <h1 className={styles.questionEcho}>Послание на сегодня</h1>
         <div className={styles.drawGlow}>
           <TarotCard hero />
         </div>

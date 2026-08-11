@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Astrix">
+  <title>Astrix</title>
+  <!-- Знак Astrix: золотой полумесяц и искра на графитовой плашке.
+       Полумесяц собран маской: круг минус смещённый круг. -->
+  <defs>
+    <mask id="astrix-crescent">
+      <circle cx="29" cy="35" r="20" fill="#fff"/>
+      <circle cx="39" cy="27" r="19" fill="#000"/>
+    </mask>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#1B1A30"/>
+  <circle cx="29" cy="35" r="20" fill="#D8B884" mask="url(#astrix-crescent)"/>
+  <path d="M45 28 l2.3 6.2 6.2 2.3 -6.2 2.3 -2.3 6.2 -2.3 -6.2 -6.2 -2.3 6.2 -2.3 z" fill="#E4CB98"/>
+</svg>

@@ -45,8 +45,19 @@ export default function YesNoClient() {
 
   const Back = () => <Link href="/tarot" className={styles.backLink}>‹ Все расклады</Link>
 
+  // См. комментарий в ThreeClient: эта ветка рендерится на сервере, поэтому
+  // здесь нужен реальный заголовок, а не только индикатор загрузки.
   if (loading) {
-    return <div className={styles.page}><Back /><p className={styles.notice}>Загрузка…</p></div>
+    return (
+      <div className={styles.page}>
+        <Back />
+        <div className={styles.head}>
+          <h1 className={styles.title}>Сформулируйте вопрос</h1>
+          <p className={styles.subtitle}>Чёткий вопрос — точный ответ. Спросите о том, что действительно волнует.</p>
+        </div>
+        <p className={styles.notice}>Загрузка…</p>
+      </div>
+    )
   }
 
   if (step === 'limit') {

@@ -98,22 +98,30 @@ export default function AuthForm({ mode, onSuccess, onSwitch, switchDisplay = 'm
         </div>
 
         {!isLogin && (
-          <label className={styles.consent}>
+          // Контейнер намеренно div, а не label: внутри текста живёт ссылка на
+          // /terms, а клик по ссылке внутри label браузер переадресует чекбоксу.
+          // Роль label играет сам квадратик, доступное имя даёт aria-label инпута.
+          <div className={styles.consent}>
             <input
+              id={`${uid}-consent`}
               type="checkbox"
               className={styles.consentInput}
               checked={accepted}
               onChange={(e) => setAccepted(e.target.checked)}
+              aria-label="Принимаю условия пользовательского соглашения и политику конфиденциальности"
             />
-            <span className={styles.consentBox} aria-hidden="true">
+            <label htmlFor={`${uid}-consent`} className={styles.consentBox} aria-hidden="true">
               <svg width="11" height="11" viewBox="0 0 12 12">
                 <path d="M2 6.5 L5 9 L10 3" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </span>
+            </label>
             <span className={styles.consentText}>
-              Принимаю <b>условия</b> и <b>политику конфиденциальности</b>
+              Принимаю{' '}
+              <a href="/terms" target="_blank" rel="noopener noreferrer">условия</a>
+              {' '}и{' '}
+              <a href="/privacy" target="_blank" rel="noopener noreferrer">политику конфиденциальности</a>
             </span>
-          </label>
+          </div>
         )}
 
         {error && <p className={styles.error} role="alert">{error}</p>}

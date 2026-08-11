@@ -1,9 +1,13 @@
 import CheckoutClient from './CheckoutClient'
+import { buildMetadata } from '../seo.config'
 
-export const metadata = {
+// noindex, nofollow — платёжный шаг воронки. Также закрыт в robots.txt.
+export const metadata = buildMetadata({
   title: 'Оформление подписки',
-  robots: { index: false },
-}
+  path: '/checkout',
+  noindex: true,
+  nofollow: true,
+})
 
 export default function CheckoutPage() {
   return <CheckoutClient />

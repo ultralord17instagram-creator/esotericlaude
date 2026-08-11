@@ -86,12 +86,87 @@ const oswald = localFont({
 import RefTracker from './components/RefTracker'
 import AffiliateTracker from './components/AffiliateTracker'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
+import JsonLd from './components/JsonLd'
+import {
+  SITE_URL, SITE_NAME, LOCALE, DEFAULT_TITLE, TITLE_TEMPLATE, DEFAULT_DESCRIPTION,
+  OG_IMAGE, VERIFICATION, organizationSchema, webSiteSchema,
+} from './seo.config'
 
+// Дефолты для всего сайта. Страницы переопределяют их через buildMetadata():
+// title подставляется в шаблон, description/openGraph/twitter перезаписываются
+// целиком, а всё, что страница не тронула (icons, verification, metadataBase),
+// наследуется отсюда.
 export const metadata = {
-  // Переопределяется на каждой странице через generateMetadata или export metadata
-  title: 'Offer Name',
-  description: 'Описание оффера',
-  robots: { index: true, follow: true },
+  // Базовый URL, относительно которого Next разворачивает canonical и og:image
+  // в абсолютные ссылки. Без него Next кидает предупреждение и подставляет
+  // localhost, что ломает превью в соцсетях.
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: TITLE_TEMPLATE,
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  referrer: 'origin-when-cross-origin',
+  // Отключаем автолинковку телефонов/адресов в Safari: она портит вёрстку
+  // и подсовывает в разметку служебные <a>.
+  formatDetection: { telephone: false, address: false, email: false },
+  // alternates.canonical здесь НЕ задаём. Метаданные в App Router наследуются,
+  // и canonical '/' протёк бы на каждую страницу, которая не переопределила
+  // его явно (например на noindex-страницы вроде /login), объявляя их копией
+  // главной. Canonical выдаёт buildMetadata() индивидуально для каждой страницы.
+  openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    locale: LOCALE,
+    url: `${SITE_URL}/`,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE.url],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+    },
+  },
+  icons: {
+    // SVG — основная иконка (масштабируется без потерь), PNG 180x180 нужен
+    // отдельно: iOS не умеет SVG в apple-touch-icon.
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+    ],
+    shortcut: ['/icon.svg'],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+  manifest: '/manifest.webmanifest',
+  verification: VERIFICATION,
+}
+
+// В Next 14 themeColor и viewport вынесены из metadata в отдельный экспорт:
+// в metadata они игнорируются и роняют предупреждение при сборке.
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#EAE0CE' },
+    { media: '(prefers-color-scheme: dark)', color: '#1B1A30' },
+  ],
+  colorScheme: 'light',
 }
 
 export default function RootLayout({ children }) {
@@ -100,6 +175,9 @@ export default function RootLayout({ children }) {
       {/* suppressHydrationWarning: расширения браузера (менеджеры паролей,
           Grammarly и т.п.) добавляют атрибуты на body — гасим рассинхрон. */}
       <body suppressHydrationWarning>
+        {/* Общесайтовая разметка Schema.org: издатель + сам сайт.
+            Страницы добавляют к ней свои BreadcrumbList/Service. */}
+        <JsonLd data={[organizationSchema(), webSiteSchema()]} />
         <AuthProvider>
           <AuthModalProvider>
             {/* RefTracker и AffiliateTracker нужны в Suspense из-за useSearchParams */}
@@ -109,6 +187,7 @@ export default function RootLayout({ children }) {
             </Suspense>
             <Nav />
             {children}
+            <Footer />
           </AuthModalProvider>
         </AuthProvider>
       </body>

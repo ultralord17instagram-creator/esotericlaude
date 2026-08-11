@@ -6,6 +6,7 @@ import ProtectedRoute from '../components/ProtectedRoute'
 import DayDashboard from './components/DayDashboard'
 import { saveBirthLocal } from '../content/horoscope'
 import { saveProfile } from '../content/numerology'
+import { TARIFFS, rub } from '../legal/tariffs'
 import styles from './lk.module.css'
 
 function SelectChevron() {
@@ -153,7 +154,9 @@ function LKContent() {
               {error && <p className={styles.error}>{error}</p>}
               {!user?.subscribed ? (
                 <button className={styles.unlockBtn} onClick={handlePayment} disabled={payLoading}>
-                  {payLoading ? 'Переходим...' : 'Оформить за 9 ₽'}
+                  {/* Была зашита цифра 9 ₽, расходившаяся и с пейволлом, и с
+                      документами. Источник цены один — тарифная политика. */}
+                  {payLoading ? 'Переходим...' : `Оформить за ${rub(TARIFFS.trial.amount)}`}
                 </button>
               ) : (
                 <button className={styles.outlineBtn} onClick={handleCancel} disabled={cancelLoading}>

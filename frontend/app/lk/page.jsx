@@ -1,10 +1,13 @@
 import LKClient from './LKClient'
+import { buildMetadata } from '../seo.config'
 
-// robots noindex — ЛК не индексируется
-export const metadata = {
+// noindex, nofollow — приватный раздел. Также закрыт в robots.txt.
+export const metadata = buildMetadata({
   title: 'Личный кабинет',
-  robots: { index: false },
-}
+  path: '/lk',
+  noindex: true,
+  nofollow: true,
+})
 
 export default function LKPage() {
   return <LKClient />
